@@ -8,6 +8,7 @@ import { RequesterSidebarComponent } from './Component/Requester/requester-sideb
 import { RequesterHomeComponent } from './Component/Requester/requester-home/requester-home.component';
 import { LoginComponent } from './Component/login/login.component';
 import { RegistrationComponent } from './Component/registration/registration.component';
+import { ForgotPasswordComponent } from './Component/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { RegistrationComponent } from './Component/registration/registration.com
     RequesterSidebarComponent,
     RequesterHomeComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
