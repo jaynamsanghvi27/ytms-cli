@@ -13,5 +13,37 @@ height: calc(100% - 73px);
 height: 100%;
 }
 }
+.topnav {
+    background-color:  #005ba3;
+    
+    text-align: left;
+    padding: 10px 10px;
+    text-decoration: none;
+    font-size: 17px;
+    color: white;
+    
+  }
 
+ 
+  .button
+  {
+    background-color:  #005ba3;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    cursor: pointer;
+  } 
 
+  .ytms-logo img {
+    width: 150px;
+    height: 50px;
+  }
+
+  .form-control
+  {
+    font-size: medium;
+  }
