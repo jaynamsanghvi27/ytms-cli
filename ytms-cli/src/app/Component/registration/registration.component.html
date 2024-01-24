@@ -10,7 +10,7 @@
              class="img-fluid" src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp">
       </div>
       <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-        <form (ngSubmit)="submit()" [formGroup]="signUpForm">
+        <form [formGroup]="signUpForm">
           <div>
             <p><strong>WELCOME TO YASH TECHNOLOGIES !!!</strong></p>
           </div>
@@ -44,20 +44,20 @@
             <label>Email Address</label>
             <input
               class="form-control form-control-lg"
-              formControlName="emailId"
+              formControlName="emailAdd"
               type="email"
             />
             <div
               *ngIf="
-                signUpForm.controls['emailId'].touched &&
-                signUpForm.controls['emailId'].invalid
+                signUpForm.controls['emailAdd'].touched &&
+                signUpForm.controls['emailAdd'].invalid
                 "
               style="color: red;font-size: small;"
             >
-        <span *ngIf="signUpForm.controls['emailId'].hasError('required')"
+        <span *ngIf="signUpForm.controls['emailAdd'].hasError('required')"
         >Email ID is required</span
         >
-              <span *ngIf="signUpForm.controls['emailId'].hasError('pattern')"
+              <span *ngIf="signUpForm.controls['emailAdd'].hasError('pattern')"
               >Email ID is not valid</span
               >
             </div>
@@ -113,7 +113,7 @@
             </div>
           </div>
           <div class="text-center text-lg-start mt-4 pt-2">
-            <button class="button" type="button">Sign up</button>
+            <button (click)="submit()" class="button" type="button">Sign up</button>
 
           </div>
         </form>

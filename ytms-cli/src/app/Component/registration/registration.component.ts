@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {LoginService} from "../../Core/services/login.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-registration',
@@ -9,11 +10,10 @@ import {LoginService} from "../../Core/services/login.service";
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent {
-  //reg!: User[];
   signUpForm: FormGroup = this.formBuilder.group(
     {
       fullName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]],
-      emailId: ['', [Validators.required, Validators.pattern(/^[^\s@]+@yash\.com$/)]],
+      emailAdd: ['', [Validators.required, Validators.pattern(/^[^\s@]+@yash\.com$/)]],
       password: ['', [Validators.required, Validators.pattern(
         /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{8,}/
       )]],
@@ -31,8 +31,20 @@ export class RegistrationComponent {
 
   submit(): void {
     if (this.signUpForm.valid) {
-      this.router.navigate(['/register']);
-      console.log(this.signUpForm.value);
+      let user = {
+        fullName: this.signUpForm.value.fullName,
+        emailAdd: this.signUpForm.value.emailAdd,
+        password: this.signUpForm.value.password,
+        confirmPassword: this.signUpForm.value.confirmPassword,
+      }
+
+      this.loginService.register(user).subscribe(res => {
+        if (res != null) {
+          Swal.fire('Success', 'Request Successfully submitted to Admin for Approval', 'success');
+          this.router.navigate(['']);
+        } else
+          Swal.fire('Error', 'Registration failed', 'error');
+      })
     } else {
       this.signUpForm.markAllAsTouched();
     }
