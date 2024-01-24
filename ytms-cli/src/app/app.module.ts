@@ -12,6 +12,7 @@ import { ForgotPasswordComponent } from './Component/forgot-password/forgot-pass
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { HttpClientModule} from '@angular/common/http'
 
 
 @NgModule({
@@ -22,7 +23,7 @@ import { ToastrModule } from 'ngx-toastr';
     RequesterHomeComponent,
     LoginComponent,
     RegistrationComponent,
-    ForgotPasswordComponent,
+    ForgotPasswordComponent
 
   ],
   imports: [
@@ -32,6 +33,7 @@ import { ToastrModule } from 'ngx-toastr';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    HttpClientModule,
 
   ],
   providers: [],

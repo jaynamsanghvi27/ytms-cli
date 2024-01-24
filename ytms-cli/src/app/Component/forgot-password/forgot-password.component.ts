@@ -3,6 +3,7 @@ import * as Constants from '../../Core/application_constant/constant';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Messages } from '../../Core/application_constant/message_constants';
+import { ApiService } from 'src/app/Core/services/api.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -16,7 +17,8 @@ export class ForgotPasswordComponent implements OnInit {
     email: ['', [Validators.required, Validators.pattern(Constants.EMAIL_PATTERN)]]
   });
 
-  constructor(private fb: FormBuilder, public toastr: ToastrService) {
+  constructor(private fb: FormBuilder,
+    public toastr: ToastrService, public apiservice: ApiService) {
 
   }
   ngOnInit(): void {
@@ -35,9 +37,18 @@ export class ForgotPasswordComponent implements OnInit {
       return;
     }
     else {
-      this.resetPasswordForm.reset();
-      this.showSuccess('We have send password reset link successfully.');
-      this.submitted = false;
+      let formdata = new FormData();
+      formdata.set("email", this.f['email'].value);
+      this.apiservice.putapi(formdata,"dashboard/forgetPassword").subscribe({
+        next: (data: any) => {
+          this.resetPasswordForm.reset();
+          this.showSuccess(data.msg);
+          this.submitted = false;
+          console.log(data)
+        },
+        error: (e) => console.error(e),
+        complete: () => console.info('complete')
+      });
     }
   }
 
