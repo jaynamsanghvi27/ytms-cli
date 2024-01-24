@@ -7,7 +7,6 @@ import {RequesterHeaderComponent} from './Component/Requester/requester-header/r
 import {RequesterSidebarComponent} from './Component/Requester/requester-sidebar/requester-sidebar.component';
 import {RequesterHomeComponent} from './Component/Requester/requester-home/requester-home.component';
 import {LoginComponent} from './Component/login/login.component';
-import {RegistrationComponent} from './Component/registration/registration.component';
 import {ForgotPasswordComponent} from './Component/forgot-password/forgot-password.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -15,6 +14,10 @@ import {ToastrModule} from 'ngx-toastr';
 import {authInterceptorProviders} from "./Core/interceptor/auth.interceptor";
 import {MAT_DATE_LOCALE} from "@angular/material/core";
 import {HttpClientModule} from "@angular/common/http";
+import {TmHomeComponent} from './Component/Technical-Manager/tm-home/tm-home.component';
+import {TmHeaderComponent} from './Component/Technical-Manager/tm-header/tm-header.component';
+import {TmSidebarComponent} from './Component/Technical-Manager/tm-sidebar/tm-sidebar.component';
+import {RegistrationComponent} from "./Component/registration/registration.component";
 
 
 @NgModule({
@@ -26,6 +29,9 @@ import {HttpClientModule} from "@angular/common/http";
     LoginComponent,
     RegistrationComponent,
     ForgotPasswordComponent,
+    TmHomeComponent,
+    TmHeaderComponent,
+    TmSidebarComponent,
   ],
   imports: [
     BrowserModule,

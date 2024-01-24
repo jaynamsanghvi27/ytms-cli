@@ -26,12 +26,12 @@ export class AdminGuard implements CanActivate {
         //get roles from token
         const role = this.jwtService.getRoleFromToken(token);
         // Check if route is restricted by role
-        if (role === 'ROLE_ADMIN_USER' && role != undefined || null) {
+        if (role === 'ROLE_TECHNICAL_MANAGER' && role != undefined || null) {
           // Role not authorized, redirect to home page
           return true;
         } else {
           // Not authenticated, redirect to user dashboard or handle accordingly
-          if (role === 'ROLE_NORMAL_USER') {
+          if (role === 'ROLE_REQUESTER') {
             Swal.fire('Error', 'Unauthorized', 'error');
             this.router.navigate(['requester-home']);
           } else {
