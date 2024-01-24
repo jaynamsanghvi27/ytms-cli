@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -8,6 +9,7 @@ import { RequesterSidebarComponent } from './Component/Requester/requester-sideb
 import { RequesterHomeComponent } from './Component/Requester/requester-home/requester-home.component';
 import { LoginComponent } from './Component/login/login.component';
 import { RegistrationComponent } from './Component/registration/registration.component';
+import { ResetPasswordComponent } from './Component/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -16,11 +18,14 @@ import { RegistrationComponent } from './Component/registration/registration.com
     RequesterSidebarComponent,
     RequesterHomeComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
