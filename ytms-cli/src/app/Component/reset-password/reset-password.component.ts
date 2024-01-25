@@ -10,6 +10,7 @@ export class ResetPasswordComponent {
   //reg!: User[];
   resetPasswordForm!: FormGroup;
   emailpattern = "^(.+)@(.+)$";
+  message = "";
  
   constructor(private formBuilder: FormBuilder){
  
@@ -18,7 +19,7 @@ export class ResetPasswordComponent {
   ngOnInit(): void {
     this.resetPasswordForm = this.formBuilder.group(
       {
-        emailId: ['', [Validators.required, Validators.pattern(/^[^\s@]+@yash\.com$/)]],
+        // emailId: ['', [Validators.required, Validators.pattern(/^[^\s@]+@yash\.com$/)]],
         password: ['', [Validators.required]],
         confirmPassword: ['', [Validators.required]],
       })
@@ -26,6 +27,9 @@ export class ResetPasswordComponent {
  
   submit(): void {
     if (this.resetPasswordForm.valid) {
+      if((this.resetPasswordForm.value.password != this.resetPasswordForm.value.confirmPassword)){
+        this.message = "Password and Confirm Password not matched";
+      }
       console.log(this.resetPasswordForm.value);
     } else {
       this.resetPasswordForm.markAllAsTouched();
