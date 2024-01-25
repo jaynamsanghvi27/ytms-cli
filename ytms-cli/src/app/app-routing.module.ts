@@ -7,6 +7,8 @@ import {AuthGuard} from "./Core/guard/auth.guard";
 import {TmHomeComponent} from "./Component/Technical-Manager/tm-home/tm-home.component";
 import {AdminGuard} from "./Core/guard/admin.guard";
 import {RegistrationComponent} from "./Component/registration/registration.component";
+import { ResetPasswordComponent } from './Component/reset-password/reset-password.component';
+import { ChangePasswordComponent } from './Component/change-password/change-password.component';
 
 const routes: Routes = [
   {
@@ -35,7 +37,14 @@ const routes: Routes = [
   {
     path: "forgotPassword",
     component: ForgotPasswordComponent
+  },  
+  {
+    path:"reset-password",
+    component:ResetPasswordComponent
   },
+  {
+    path:"change-password",
+    component:ChangePasswordComponent},
   {
     path: '**',
     component: LoginComponent

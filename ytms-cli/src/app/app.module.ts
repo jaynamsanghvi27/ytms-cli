@@ -18,6 +18,8 @@ import {TmHomeComponent} from './Component/Technical-Manager/tm-home/tm-home.com
 import {TmHeaderComponent} from './Component/Technical-Manager/tm-header/tm-header.component';
 import {TmSidebarComponent} from './Component/Technical-Manager/tm-sidebar/tm-sidebar.component';
 import {RegistrationComponent} from "./Component/registration/registration.component";
+import { ResetPasswordComponent } from './Component/reset-password/reset-password.component';
+import { ChangePasswordComponent } from './Component/change-password/change-password.component';
 
 
 @NgModule({
@@ -32,6 +34,8 @@ import {RegistrationComponent} from "./Component/registration/registration.compo
     TmHomeComponent,
     TmHeaderComponent,
     TmSidebarComponent,
+    ResetPasswordComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,
