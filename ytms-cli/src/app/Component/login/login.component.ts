@@ -71,6 +71,5 @@ export class LoginComponent {
     if (role == 'ROLE_REQUESTER')
       this.router.navigateByUrl('/requester-home');
   }
-
 }
 

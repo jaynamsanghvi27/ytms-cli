@@ -43,4 +43,19 @@ export class UsersService {
       }
     );
   }
+
+  declinePendingUser(emailAdd: string): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    const params = new HttpParams()
+      .set('emailAdd', emailAdd);
+
+    return this.http.post(environment.baseUrl
+      + environment.contextUrl
+      + this.usersUrl
+      + `/decline`, {}, {
+        headers: headers,
+        params: params
+      }
+    );
+  }
 }
