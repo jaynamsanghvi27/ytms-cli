@@ -58,6 +58,7 @@ export class LoginComponent {
       },
       err => {
         this.authService.removeToken();
+        Swal.fire('Error', err.error, 'error');
       });
   }
 
