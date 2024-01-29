@@ -22,7 +22,7 @@ export class ResetPasswordComponent {
   }
 
   ngOnInit(): void {
-    this.email = this.route.snapshot.queryParamMap.get('email');
+    this.email = this.route.snapshot.queryParamMap.get('session');
     this.password = "";
     //const secondParam: string = this.route.snapshot.queryParamMap.get('secondParamKey');
     this.resetPasswordForm = this.formbuilder.group(
