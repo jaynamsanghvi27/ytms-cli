@@ -16,8 +16,8 @@ export class ApiService {
     return this.http.put(this.baseurl + endPoint, body);
   }
 
-  public changePassword() {
-
+  public changePassword(body: any) {
+    return this.http.post(this.baseurl + environment.contextUrl + '/users/changePassword', body);
   }
 
   public resetPassword(body: any) {
