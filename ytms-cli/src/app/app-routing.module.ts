@@ -9,6 +9,7 @@ import {AdminGuard} from "./Core/guard/admin.guard";
 import {RegistrationComponent} from "./Component/registration/registration.component";
 import { ResetPasswordComponent } from './Component/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './Component/change-password/change-password.component';
+import {CalenderComponent} from './Component/calender/calender.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,11 @@ const routes: Routes = [
   {
     path: "login",
     component: LoginComponent
+  },
+
+  {
+    path:"book-calendar",component:CalenderComponent
+
   },
   {
     path: 'register',
