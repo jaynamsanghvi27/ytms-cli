@@ -8,28 +8,34 @@ import { environment } from '../application_constant/environment';
   providedIn: 'root'
 })
 export class CalendarService {
-  baseurl: string = environment.baseUrl+environment.contextUrl+'/api/events';
-  constructor(private modal: NgbModal, private http: HttpClient) { }
-
-  public createEvent(event: any): Observable<any> {
-    console.log("Event trying to post in calendar service is : ",event);
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
+  baseurl: string = environment.baseUrl + environment.contextUrl + '/api/events';
  
-    return this.http.post<any>(this.baseurl, event, httpOptions);
+  constructor(private modal: NgbModal, private http: HttpClient) {}
+ 
+  public createEvent(event: any): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+return this.http.post<any>(this.baseurl, event, httpOptions);
   }
-
-  deleteEvent(eventId: any): Observable<any> { 
-    const httpOptions = { headers: new HttpHeaders({ 
-      'Content-Type': 'application/json' 
-    }) 
-    }; 
-    const deleteUrl = `${this.baseurl}/${eventId}`; 
-    return this.http.delete<any>(deleteUrl, httpOptions); 
+ 
+  public getAllEvents(): Observable<any> {
+    return this.http.get<any>(this.baseurl);
   }
-
-
+ 
+  public updateEvent(eventId: any, updatedEvent: any): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+    const updateUrl = `${this.baseurl}/${eventId}`;
+    return this.http.put<any>(updateUrl, updatedEvent, httpOptions);
+  }
+ 
+  public deleteEvent(eventId: any): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+    const deleteUrl = `${this.baseurl}/${eventId}`;
+    return this.http.delete<any>(deleteUrl, httpOptions);
+  }
 }

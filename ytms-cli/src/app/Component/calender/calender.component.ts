@@ -138,6 +138,20 @@ getSecondaryTextColor(event :CalendarEvent):string{
   activeDayIsOpen: boolean = true;
 
   constructor(private modal: NgbModal, private calendarService:CalendarService) {}
+  ngOnInit(){
+this.fetchAllEvents();
+  }
+  fetchAllEvents(){
+    this.calendarService.getAllEvents().subscribe(
+      (events)=>{
+        this.events=events;
+        console.log('events fetched from database ',this.events);
+      },
+      (error)=>{
+        console.log('Error Fetching Events',error);
+      }
+    )
+  }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -224,10 +238,7 @@ getSecondaryTextColor(event :CalendarEvent):string{
         title: newEventForm.value.title,
         start: parseISO(newEventForm.value.startDate),
         end: parseISO(newEventForm.value.endDate),
-        color: {
-          primary: newEventForm.value.primaryColor,
-          secondary: newEventForm.value.secondaryColor
-        }
+        color: newEventForm.value.primaryColor,
       };
  
 this.events = [...this.events, newEvent];
