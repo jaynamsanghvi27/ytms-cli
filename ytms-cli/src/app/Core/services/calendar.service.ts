@@ -8,7 +8,7 @@ import { environment } from '../application_constant/environment';
   providedIn: 'root'
 })
 export class CalendarService {
-  baseurl: string = environment.baseUrl+'/api/events';
+  baseurl: string = environment.baseUrl+environment.contextUrl+'/api/events';
   constructor(private modal: NgbModal, private http: HttpClient) { }
 
   public createEvent(event: any): Observable<any> {
