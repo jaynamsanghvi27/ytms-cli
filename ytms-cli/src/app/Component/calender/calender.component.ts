@@ -15,7 +15,7 @@ import {
   isSameMonth,
   addHours,
 } from 'date-fns';
-import { Subject } from 'rxjs';
+import { Subject, debounce, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
   CalendarEvent,
@@ -27,6 +27,8 @@ import { EventColor } from 'calendar-utils';
 import { NgForm, NgModel } from '@angular/forms';
 import { FlatPickrOutputOptions } from 'angularx-flatpickr/lib/flatpickr.directive';
 import { CalendarService } from 'src/app/Core/services/calendar.service';
+import { UsersService } from 'src/app/Core/services/users.service';
+import { User } from 'src/app/Model/User';
 const colors: Record<string, EventColor> = {
   red: {
     primary: '#ad2121',
@@ -50,7 +52,11 @@ const colors: Record<string, EventColor> = {
 export class CalenderComponent {
 
   @ViewChild('modalContent', { static: true }) modalContent!: TemplateRef<any>;
-
+  trainerSearchTerm:string='';
+  selectedTrainer!:string;
+  allTrainers: any = [];
+  private searchTerms= new Subject<string>();
+  
   view: CalendarView = CalendarView.Month;
 
   CalendarView = CalendarView;
@@ -137,9 +143,27 @@ getSecondaryTextColor(event :CalendarEvent):string{
 
   activeDayIsOpen: boolean = true;
 
-  constructor(private modal: NgbModal, private calendarService:CalendarService) {}
+  constructor(private modal: NgbModal, private calendarService:CalendarService,private userService:UsersService) {}
   ngOnInit(){
 this.fetchAllEvents();
+
+this.fetchAllTrainers();
+console.log(" this.fetchAllTrainers(): ",JSON.stringify(this.fetchAllTrainers()));
+this.searchTerms.pipe(
+  debounceTime(300),
+  distinctUntilChanged(),
+  switchMap((term:string)=>this.calendarService.searchByTrainer(term))
+)
+.subscribe((events)=>{
+  this.events=events;
+})
+  }
+
+  onTrainerSearchChange():void{
+    this.searchTerms.next(this.trainerSearchTerm);
+  }
+  ngOnDestroy(){
+    this.searchTerms.unsubscribe();
   }
   fetchAllEvents(){
     this.calendarService.getAllEvents().subscribe(
@@ -212,11 +236,22 @@ this.fetchAllEvents();
       this.events = this.events.filter((event) => event !== eventToDelete);
       this.calendarService.deleteEvent(eventToDelete).subscribe(
         (res)=>{
-  
+          console.log('event deleted successfully !')
+        },(error)=>{
+          console.error('Error deliting event ',error);
         }
       )
     }
  
+  }
+  searchEventsByTrainer(trainer:string):void{
+    this.calendarService.searchByTrainer(trainer).subscribe(
+      (res)=>{
+        this.events=res.data;
+      },(error)=>{
+        console.error('Error searching events ',error);
+      }
+    )
   }
 
   setView(view: CalendarView) {
@@ -240,10 +275,14 @@ this.fetchAllEvents();
         end: parseISO(newEventForm.value.endDate),
         color: newEventForm.value.primaryColor,
       };
+      const newEventDto: EventDto={
+        event: newEvent,
+        trainerEmail: newEventForm.value.trainer
+      }
  
 this.events = [...this.events, newEvent];
 
-this.calendarService.createEvent(newEvent).subscribe(
+this.calendarService.createEvent(newEventDto).subscribe(
   (res)=>{
     this.events = [
       ...this.events,res];
@@ -257,6 +296,21 @@ this.calendarService.createEvent(newEvent).subscribe(
       this.modal.dismissAll();
     }
   }
+  fetchAllTrainers() {
+    this.userService.getAllTrainers().subscribe(
+      (trainers) => {
+        this.allTrainers = trainers;
+        console.log("this.allTrainers : ",this.allTrainers);
+      },
+      (error) => {
+        console.error('Error fetching trainers', error);
+      }
+    );
+  }
 
 }
 
+export interface EventDto {
+  event:CalendarEvent;
+  trainerEmail:string;
+}

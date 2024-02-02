@@ -1,3 +1,18 @@
+<div class="search-container">
+  <label for="trainerSearch">Search by Trainer: </label>
+  <input type="text" id="trainerSearch" [(ngModel)]="trainerSearchTerm" (input)="onTrainerSearchChange()" placeholder="Enter Trainer name" />
+</div>
+<div>
+  <button (click)="fetchAllTrainers()">all Trainers</button>
+</div>
+ 
+<!-- Add the dropdown for trainer selection -->
+<div class="form-group">
+  <label for="trainerSelect">Select Trainer:</label>
+  <select id="trainerSelect" [(ngModel)]="selectedTrainer">
+    <option *ngFor="let trainer of allTrainers" [value]="trainer">{{ trainer.fullName }}</option>
+  </select>
+</div>
 <div class="row text-center">
     <div class="col-md-4">
       <div class="btn-group">
@@ -227,6 +242,10 @@
         <div class="form-group">
           <label for="title">Title:</label>
           <input type="text" id="title" name="title" ngModel required class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="trainer">Trainer:</label>
+          <input type="text" id="trainer" name="trainer" ngModel required class="form-control">
         </div>
    
         <!-- Start Date and Time -->
