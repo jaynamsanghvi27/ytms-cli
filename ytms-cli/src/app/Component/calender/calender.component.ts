@@ -55,6 +55,7 @@ export class CalenderComponent {
   trainerSearchTerm:string='';
   selectedTrainer!:string;
   allTrainers: any = [];
+  event!: CalendarEvent;
   private searchTerms= new Subject<string>();
   
   view: CalendarView = CalendarView.Month;
@@ -88,6 +89,18 @@ export class CalenderComponent {
 
   refresh = new Subject<void>();
 selectedDate:string='';
+editedEvent: CalendarEvent<any> = {
+  title: '',
+  start: new Date(),
+  end: new Date(),
+  color: colors['blue'], // You can adjust this based on your default color
+  draggable: false,
+  resizable: {
+    beforeStart: false,
+    afterEnd: false,
+  },
+};
+
 onDateSelect(date:string){
   this.selectedDate=date;
 }
@@ -101,7 +114,7 @@ getSecondaryTextColor(event :CalendarEvent):string{
   return event.color?.secondaryText|| '#1e90ff';
 }
   events: CalendarEvent[] = [
-    {
+ /*    {
       start: subDays(startOfDay(new Date()), 1),
       end: addDays(new Date(), 1),
       title: 'A 3 day event',
@@ -138,15 +151,15 @@ getSecondaryTextColor(event :CalendarEvent):string{
         afterEnd: true,
       },
       draggable: true,
-    },
+    }, */
   ];
 
   activeDayIsOpen: boolean = true;
 
   constructor(private modal: NgbModal, private calendarService:CalendarService,private userService:UsersService) {}
   ngOnInit(){
-this.fetchAllEvents();
-
+    console.log("Fetching all events")
+ this.fetchAllEvents();
 this.fetchAllTrainers();
 console.log(" this.fetchAllTrainers(): ",JSON.stringify(this.fetchAllTrainers()));
 this.searchTerms.pipe(
@@ -214,7 +227,7 @@ this.searchTerms.pipe(
     this.modal.open(this.modalContent, { size: 'lg' });
   }
 
-  addEvent(): void {
+/*   addEvent(): void {
     this.events = [
       ...this.events,
       {
@@ -229,12 +242,35 @@ this.searchTerms.pipe(
         },
       },
     ];
+  } */
+ updateEvent(newEventForm: NgForm){
+  
+
+ }
+ eventModal(content: any,eventToEdit: CalendarEvent) {
+  this.calendarService.getEventById(eventToEdit.id).subscribe(
+    (previousEvent:CalendarEvent)=>{
+      this.editedEvent={...previousEvent};
+      console.log("edited event ",this.editEvent);
+      this.modal.open('editEventModal',{size:'lg'});
+    },(error)=>{
+      console.error("error fetching previous event details",error);
+    }
+  )
+  this.modal.open(content, { size: 'lg' });
+}
+  editEvent(eventToEdit: CalendarEvent): void {
+    
+      console.log("edited event id is :",eventToEdit.id);
+      // Implement the logic to save edited event
+     
+  
   }
 
   deleteEvent(eventToDelete: CalendarEvent) {
     if(eventToDelete!==undefined){
       this.events = this.events.filter((event) => event !== eventToDelete);
-      this.calendarService.deleteEvent(eventToDelete).subscribe(
+      this.calendarService.deleteEvent(eventToDelete.id).subscribe(
         (res)=>{
           console.log('event deleted successfully !')
         },(error)=>{
@@ -244,8 +280,8 @@ this.searchTerms.pipe(
     }
  
   }
-  searchEventsByTrainer(trainer:string):void{
-    this.calendarService.searchByTrainer(trainer).subscribe(
+  searchEventsByTrainer(trainerEmail:string):void{
+    this.calendarService.searchByTrainer(trainerEmail).subscribe(
       (res)=>{
         this.events=res.data;
       },(error)=>{
@@ -271,22 +307,22 @@ this.searchTerms.pipe(
     if (newEventForm.valid) {
       const newEvent: CalendarEvent = {
         title: newEventForm.value.title,
-        start: parseISO(newEventForm.value.startDate),
-        end: parseISO(newEventForm.value.endDate),
+        start: new Date(newEventForm.value.startDate),
+        end: new Date(newEventForm.value.endDate),
         color: newEventForm.value.primaryColor,
       };
       const newEventDto: EventDto={
         event: newEvent,
         trainerEmail: newEventForm.value.trainer
       }
- 
-this.events = [...this.events, newEvent];
+
+//this.events = [...this.events, newEvent];
 
 this.calendarService.createEvent(newEventDto).subscribe(
   (res)=>{
     this.events = [
       ...this.events,res];
-    console.log('Event created successfully! ',res);
+    console.log('Event created successfully! ',this.events);
   },(error)=>{
     console.error('Error createing event ',error);
   }
@@ -307,6 +343,7 @@ this.calendarService.createEvent(newEventDto).subscribe(
       }
     );
   }
+  
 
 }
 

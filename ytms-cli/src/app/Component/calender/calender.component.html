@@ -1,13 +1,13 @@
-<div class="search-container">
+<!-- <div class="search-container">
   <label for="trainerSearch">Search by Trainer: </label>
   <input type="text" id="trainerSearch" [(ngModel)]="trainerSearchTerm" (input)="onTrainerSearchChange()" placeholder="Enter Trainer name" />
-</div>
-<div>
-  <button (click)="fetchAllTrainers()">all Trainers</button>
-</div>
+</div> -->
  
 <!-- Add the dropdown for trainer selection -->
-<div class="form-group">
+<div class="calendar-container">
+
+  
+<div class="search-box">
   <label for="trainerSelect">Select Trainer:</label>
   <select id="trainerSelect" [(ngModel)]="selectedTrainer">
     <option *ngFor="let trainer of allTrainers" [value]="trainer">{{ trainer.fullName }}</option>
@@ -111,9 +111,9 @@
   
   <h3>
     Edit events
-    <button class="btn btn-primary float-end" (click)="addEvent()">
+<!--     <button class="btn btn-primary float-end" (click)="addEvent()">
       Add new
-    </button>
+    </button> -->
     <div class="clearfix"></div>
   </h3>
   
@@ -190,7 +190,7 @@
             />
           </td>
           <td>
-            <button class="btn btn-danger">
+            <button class="btn btn-danger" (click)="eventModal(editEventModal,event)">
               Edit
             </button>
             <button class="btn btn-danger" (click)="deleteEvent(event)">
@@ -244,7 +244,7 @@
           <input type="text" id="title" name="title" ngModel required class="form-control">
         </div>
         <div class="form-group">
-          <label for="trainer">Trainer:</label>
+          <label for="trainer">Trainer Email :</label>
           <input type="text" id="trainer" name="trainer" ngModel required class="form-control">
         </div>
    
@@ -276,3 +276,35 @@
       </form>
     </div>
   </ng-template>
+
+
+  <ng-template #editEventModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Update Event</h4>
+      <button type="button" class="close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <!-- Your form to collect new event details -->
+      <form #editEventForm="ngForm" (ngSubmit)="updateEvent(editEventForm)">
+        <div class="form-group">
+          <label for="editedTitle">Title:</label>
+          <input type="text" id="editedTitle" name="editedTitle" [(ngModel)]="editedEvent.title" class="form-control" required>
+        </div>
+        <!-- Add other form fields for editing as needed -->
+        <div class="form-group">
+          <label for="editedStart">Start Date and Time:</label>
+          <input type="datetime-local" id="editedStart" name="editedStart" [(ngModel)]="editedEvent.start" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="editedEnd">End Date and Time:</label>
+          <input type="datetime-local" id="editedEnd" name="editedEnd" [(ngModel)]="editedEvent.end" class="form-control" required>
+        </div>
+        <!-- Add other form fields as needed -->
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+      </form>
+    </div>
+  </ng-template>
+
+</div>
