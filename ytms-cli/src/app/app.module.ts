@@ -20,6 +20,11 @@ import {TmSidebarComponent} from './Component/Technical-Manager/tm-sidebar/tm-si
 import {RegistrationComponent} from "./Component/registration/registration.component";
 import { ResetPasswordComponent } from './Component/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './Component/change-password/change-password.component';
+import { CalenderComponent } from './Component/calender/calender.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FlatpickrModule } from 'angularx-flatpickr';
 
 
 @NgModule({
@@ -36,6 +41,7 @@ import { ChangePasswordComponent } from './Component/change-password/change-pass
     TmSidebarComponent,
     ResetPasswordComponent,
     ChangePasswordComponent,
+    CalenderComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +50,13 @@ import { ChangePasswordComponent } from './Component/change-password/change-pass
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    HttpClientModule
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
+    HttpClientModule,
+    FlatpickrModule.forRoot(),
+    NgbModule,NgbModalModule
   ],
   providers: [
     authInterceptorProviders,

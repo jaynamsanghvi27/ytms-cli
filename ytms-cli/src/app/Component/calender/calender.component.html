@@ -1,0 +1,310 @@
+<!-- <div class="search-container">
+  <label for="trainerSearch">Search by Trainer: </label>
+  <input type="text" id="trainerSearch" [(ngModel)]="trainerSearchTerm" (input)="onTrainerSearchChange()" placeholder="Enter Trainer name" />
+</div> -->
+ 
+<!-- Add the dropdown for trainer selection -->
+<div class="calendar-container">
+
+  
+<div class="search-box">
+  <label for="trainerSelect">Select Trainer:</label>
+  <select id="trainerSelect" [(ngModel)]="selectedTrainer">
+    <option *ngFor="let trainer of allTrainers" [value]="trainer">{{ trainer.fullName }}</option>
+  </select>
+</div>
+<div class="row text-center">
+    <div class="col-md-4">
+      <div class="btn-group">
+        <div
+          class="btn btn-primary"
+          mwlCalendarPreviousView
+          [view]="view"
+          [(viewDate)]="viewDate"
+          (viewDateChange)="closeOpenMonthViewDay()"
+        >
+          Previous
+        </div>
+        <div
+          class="btn btn-outline-secondary"
+          mwlCalendarToday
+          [(viewDate)]="viewDate"
+        >
+          Today
+        </div>
+        <div
+          class="btn btn-primary"
+          mwlCalendarNextView
+          [view]="view"
+          [(viewDate)]="viewDate"
+          (viewDateChange)="closeOpenMonthViewDay()"
+        >
+          Next
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+    </div>
+    <div class="col-md-4">
+      <div class="btn-group">
+        <div
+          class="btn btn-primary"
+          (click)="setView(CalendarView.Month)"
+          [class.active]="view === CalendarView.Month"
+        >
+          Month
+        </div>
+        <div
+          class="btn btn-primary"
+          (click)="setView(CalendarView.Week)"
+          [class.active]="view === CalendarView.Week"
+        >
+          Week
+        </div>
+        <div
+          class="btn btn-primary"
+          (click)="setView(CalendarView.Day)"
+          [class.active]="view === CalendarView.Day"
+        >
+          Day
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+  <div [ngSwitch]="view">
+    <mwl-calendar-month-view
+      *ngSwitchCase="CalendarView.Month"
+      [viewDate]="viewDate"
+      [events]="events"
+      [refresh]="refresh"
+      [activeDayIsOpen]="activeDayIsOpen"
+      (dayClicked)="dayClicked($event.day)"
+      (eventClicked)="handleEvent('Clicked', $event.event)"
+      (eventTimesChanged)="eventTimesChanged($event)"
+    >
+    </mwl-calendar-month-view>
+    <mwl-calendar-week-view
+      *ngSwitchCase="CalendarView.Week"
+      [viewDate]="viewDate"
+      [events]="events"
+      [refresh]="refresh"
+      (eventClicked)="handleEvent('Clicked', $event.event)"
+      (eventTimesChanged)="eventTimesChanged($event)"
+    >
+    </mwl-calendar-week-view>
+    <mwl-calendar-day-view
+      *ngSwitchCase="CalendarView.Day"
+      [viewDate]="viewDate"
+      [events]="events"
+      [refresh]="refresh"
+      (eventClicked)="handleEvent('Clicked', $event.event)"
+      (eventTimesChanged)="eventTimesChanged($event)"
+    >
+    </mwl-calendar-day-view>
+  </div>
+  
+  <!-- Everything you see below is just for the demo, you don't need to include it in your app -->
+  
+  <br /><br /><br />
+  
+  <h3>
+    Edit events
+<!--     <button class="btn btn-primary float-end" (click)="addEvent()">
+      Add new
+    </button> -->
+    <div class="clearfix"></div>
+  </h3>
+  
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Primary color</th>
+          <th>Secondary + text color</th>
+          <th>Starts at</th>
+          <th>Ends at</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+  
+      <tbody>
+        <tr *ngFor="let event of events">
+          <td>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="event.title"
+              (keyup)="refresh.next()"
+            />
+          </td>
+          <td>
+            <input
+              type="color"
+              [value]="getPrimaryColor(event)"
+              (change)="refresh.next()"
+            />
+          </td>
+          <td>
+            <input
+              type="color"
+              [value]="getSecondaryColor(event)"
+              (change)="refresh.next()"
+            />
+            <input
+              type="color"
+              [value]="getSecondaryTextColor(event)"
+              (change)="refresh.next() "
+            />
+          </td>
+          <td>
+            <input
+              class="form-control"
+              type="text"
+              mwlFlatpickr
+              [(ngModel)]="event.start"
+              (ngModelChange)="refresh.next()"
+              [altInput]="true"
+              [convertModelValue]="true"
+              [enableTime]="true"
+              dateFormat="Y-m-dTH:i"
+              altFormat="F j, Y H:i"
+              placeholder="Not set"
+            />
+          </td>
+          <td>
+            <input
+              class="form-control"
+              type="text"
+              mwlFlatpickr
+              [(ngModel)]="event.end"
+              (ngModelChange)="refresh.next()"
+              [altInput]="true"
+              [convertModelValue]="true"
+              [enableTime]="true"
+              dateFormat="Y-m-dTH:i"
+              altFormat="F j, Y H:i"
+              placeholder="Not set"
+            />
+          </td>
+          <td>
+            <button class="btn btn-danger" (click)="eventModal(editEventModal,event)">
+              Edit
+            </button>
+            <button class="btn btn-danger" (click)="deleteEvent(event)">
+                Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <ng-template #modalContent let-close="close">
+    <div class="modal-header">
+      <h5 class="modal-title">Event action occurred</h5>
+      <button type="button" class="close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div>v
+        Action:
+        <pre>{{ modalData!.action }}</pre>
+      </div>
+      <div>
+        Event:
+        <pre>{{ modalData!.event | json }}</pre>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-secondary" (click)="close()">
+        OK
+      </button>
+    </div>
+  </ng-template>
+  <button class="btn btn-primary" (click)="openModal(newEventModal)">Add new Event</button>
+  <!-- Add the modal template at the end of your HTML -->
+<!-- Add the modal template at the end of your HTML -->
+<ng-template #newEventModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Add New Event</h4>
+      <button type="button" class="close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <!-- Your form to collect new event details -->
+      <form #newEventForm="ngForm" (ngSubmit)="addNewEvent(newEventForm)">
+        <!-- Title -->
+        <div class="form-group">
+          <label for="title">Title:</label>
+          <input type="text" id="title" name="title" ngModel required class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="trainer">Trainer Email :</label>
+          <input type="text" id="trainer" name="trainer" ngModel required class="form-control">
+        </div>
+   
+        <!-- Start Date and Time -->
+        <div class="form-group">
+          <label for="startDate">Start Date and Time:</label>
+          <input type="datetime-local" id="startDate" name="startDate" ngModel required class="form-control">
+        </div>
+   
+        <!-- End Date and Time -->
+        <div class="form-group">
+          <label for="endDate">End Date and Time:</label>
+          <input type="datetime-local" id="endDate" name="endDate" ngModel required class="form-control">
+        </div>
+   
+        <!-- Primary Color -->
+        <div class="form-group">
+          <label for="primaryColor">Primary Color:</label>
+          <input type="color" id="primaryColor" name="primaryColor" ngModel class="form-control">
+        </div>
+   
+        <!-- Secondary Color -->
+        <div class="form-group">
+          <label for="secondaryColor">Secondary Color:</label>
+          <input type="color" id="secondaryColor" name="secondaryColor" ngModel class="form-control">
+        </div>
+   
+        <button type="submit" class="btn btn-primary">Add Event</button>
+      </form>
+    </div>
+  </ng-template>
+
+
+  <ng-template #editEventModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Update Event</h4>
+      <button type="button" class="close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <!-- Your form to collect new event details -->
+      <form #editEventForm="ngForm" (ngSubmit)="updateEvent(editEventForm)">
+        <div class="form-group">
+          <label for="editedTitle">Title:</label>
+          <input type="text" id="editedTitle" name="editedTitle" [(ngModel)]="editedEvent.title" class="form-control" required>
+        </div>
+        <!-- Add other form fields for editing as needed -->
+        <div class="form-group">
+          <label for="editedStart">Start Date and Time:</label>
+          <input type="datetime-local" id="editedStart" name="editedStart" [(ngModel)]="editedEvent.start" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="editedEnd">End Date and Time:</label>
+          <input type="datetime-local" id="editedEnd" name="editedEnd" [(ngModel)]="editedEvent.end" class="form-control" required>
+        </div>
+        <!-- Add other form fields as needed -->
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+      </form>
+    </div>
+  </ng-template>
+
+</div>
