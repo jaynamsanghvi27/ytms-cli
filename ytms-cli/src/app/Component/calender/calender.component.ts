@@ -162,7 +162,7 @@ getSecondaryTextColor(event :CalendarEvent):string{
   constructor(private formBuilder: FormBuilder,private modal: NgbModal, private calendarService:CalendarService,private userService:UsersService) {}
   ngOnInit(){
     console.log("Fetching all events")
- this.fetchAllEvents();
+// this.fetchAllEvents();
 this.fetchAllTrainers();
 console.log(" this.fetchAllTrainers(): ",JSON.stringify(this.fetchAllTrainers()));
 this.searchTerms.pipe(
@@ -295,6 +295,7 @@ this.searchTerms.pipe(
         console.log("res ::",res);
         if(res.data=='Nil'){
           Swal.fire('info','No Events found for this Trainer','info');
+          this.events=[];
         } else{
           this.events=res.data;
         }
@@ -328,20 +329,18 @@ this.searchTerms.pipe(
   addNewEvent(newEventForm: NgForm) {
     // Validate and add the new event to the events array
     if (newEventForm.valid) {
-      const newEvent: CalendarEvent = {
+      const newEvent: any = {
         title: newEventForm.value.title,
         start: new Date(newEventForm.value.startDate),
         end: new Date(newEventForm.value.endDate),
         color: newEventForm.value.primaryColor,
-      };
-      const newEventDto: EventDto={
-        event: newEvent,
         trainerEmail: newEventForm.value.trainerEmail
-      }
+        
+      };
 
 //this.events = [...this.events, newEvent];
 
-this.calendarService.createEvent(newEventDto).subscribe(
+this.calendarService.createEvent(newEvent).subscribe(
   (res)=>{
     this.events = [
       ...this.events,res];

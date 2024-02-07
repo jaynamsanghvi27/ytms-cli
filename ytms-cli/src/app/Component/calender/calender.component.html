@@ -122,54 +122,56 @@
   <!-- Everything you see below is just for the demo, you don't need to include it in your app -->
   
   <br /><br /><br />
+  <div *ngIf="events.length>0">
+    <h3>
+      Edit events
+  <!--     <button class="btn btn-primary float-end" (click)="addEvent()">
+        Add new
+      </button> -->
+      <div class="clearfix"></div>
+    </h3>
+    
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Primary color</th>
+            <th>Secondary + text color</th>
+            <th>Starts at</th>
+            <th>Ends at</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let event of events">
+            <td>
+              <p>{{event.title}}</p>
+            </td>
+            <td>
   
-  <h3>
-    Edit events
-<!--     <button class="btn btn-primary float-end" (click)="addEvent()">
-      Add new
-    </button> -->
-    <div class="clearfix"></div>
-  </h3>
-  
-  <div class="table-responsive">
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Primary color</th>
-          <th>Secondary + text color</th>
-          <th>Starts at</th>
-          <th>Ends at</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let event of events">
-          <td>
-            <p>{{event.title}}</p>
-          </td>
-          <td>
-
-            <input type="color" [value]="getPrimaryColor(event)" (change)="refresh.next()" />
-          </td>
-          <td>
-            <input type="color" [value]="getSecondaryColor(event)" (change)="refresh.next()" />
-            <input type="color" [value]="getSecondaryTextColor(event)" (change)="refresh.next()" />
-          </td>
-          <td>
-            <p>{{event.start | dateFormat}}</p>
-          </td>
-          <td>
-            <p>{{event.end | dateFormat}}</p>
-          </td>
-          <td>
-            <button class="btn btn-danger" (click)="eventModal(editEventModal,event)">Edit</button>
-            <button class="btn btn-danger" (click)="deleteEvent(event)">Delete</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+              <input type="color" [value]="getPrimaryColor(event)" (change)="refresh.next()" />
+            </td>
+            <td>
+              <input type="color" [value]="getSecondaryColor(event)" (change)="refresh.next()" />
+              <input type="color" [value]="getSecondaryTextColor(event)" (change)="refresh.next()" />
+            </td>
+            <td>
+              <p>{{event.start | dateFormat}}</p>
+            </td>
+            <td>
+              <p>{{event.end | dateFormat}}</p>
+            </td>
+            <td>
+              <button class="btn btn-danger" (click)="eventModal(editEventModal,event)">Edit</button>
+              <button class="btn btn-danger" (click)="deleteEvent(event)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
+  
   
   <ng-template #modalContent let-close="close">
     <div class="modal-header">
