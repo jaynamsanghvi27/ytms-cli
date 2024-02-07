@@ -23,7 +23,8 @@ const routes: Routes = [
   },
 
   {
-    path:"book-calendar",component:CalenderComponent
+    path:"book-calendar",component:CalenderComponent,
+    canActivate: [AuthGuard]
 
   },
   {

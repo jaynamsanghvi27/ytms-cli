@@ -24,11 +24,12 @@ import {
   CalendarView,
 } from 'angular-calendar';
 import { EventColor } from 'calendar-utils';
-import { NgForm, NgModel } from '@angular/forms';
+import { FormBuilder, NgForm, NgModel, Validators } from '@angular/forms';
 import { FlatPickrOutputOptions } from 'angularx-flatpickr/lib/flatpickr.directive';
 import { CalendarService } from 'src/app/Core/services/calendar.service';
 import { UsersService } from 'src/app/Core/services/users.service';
 import { User } from 'src/app/Model/User';
+import Swal from 'sweetalert2';
 const colors: Record<string, EventColor> = {
   red: {
     primary: '#ad2121',
@@ -53,8 +54,9 @@ export class CalenderComponent {
 
   @ViewChild('modalContent', { static: true }) modalContent!: TemplateRef<any>;
   trainerSearchTerm:string='';
-  selectedTrainer!:string;
+  selectedTrainer!:any;
   allTrainers: any = [];
+  emailpattern = /^[^\s@]+@yash\.com$/;
   event!: CalendarEvent;
   private searchTerms= new Subject<string>();
   
@@ -100,6 +102,7 @@ editedEvent: CalendarEvent<any> = {
     afterEnd: false,
   },
 };
+trainer: any;
 
 onDateSelect(date:string){
   this.selectedDate=date;
@@ -156,7 +159,7 @@ getSecondaryTextColor(event :CalendarEvent):string{
 
   activeDayIsOpen: boolean = true;
 
-  constructor(private modal: NgbModal, private calendarService:CalendarService,private userService:UsersService) {}
+  constructor(private formBuilder: FormBuilder,private modal: NgbModal, private calendarService:CalendarService,private userService:UsersService) {}
   ngOnInit(){
     console.log("Fetching all events")
  this.fetchAllEvents();
@@ -243,9 +246,13 @@ this.searchTerms.pipe(
       },
     ];
   } */
- updateEvent(newEventForm: NgForm){
-  
+ updateEvent(editedEvent:CalendarEvent){
+ 
+  this.calendarService.updateEvent(editedEvent.id,editedEvent).subscribe((res)=>{
+    console.log("Event updated successfully in update event");
 
+  })
+  this.modal.dismissAll();
  }
  eventModal(content: any,eventToEdit: CalendarEvent) {
   this.calendarService.getEventById(eventToEdit.id).subscribe(
@@ -280,10 +287,18 @@ this.searchTerms.pipe(
     }
  
   }
-  searchEventsByTrainer(trainerEmail:string):void{
-    this.calendarService.searchByTrainer(trainerEmail).subscribe(
+  searchEventsByTrainer(trainer:any):void{
+    console.log("TrainerEmail id is ::: ",JSON.stringify(trainer));
+    this.calendarService.searchByTrainer(trainer).subscribe(
+     
       (res)=>{
-        this.events=res.data;
+        console.log("res ::",res);
+        if(res.data=='Nil'){
+          Swal.fire('info','No Events found for this Trainer','info');
+        } else{
+          this.events=res.data;
+        }
+       
       },(error)=>{
         console.error('Error searching events ',error);
       }
@@ -301,6 +316,14 @@ this.searchTerms.pipe(
   openModal(content: any) {
     this.modal.open(content, { size: 'lg' });
   }
+  newEventForm = this.formBuilder.group(
+    {
+      title:['',[Validators.required]],
+      startDate:['',[Validators.required]],
+      endDate:['',[Validators.required]],
+      trainerEmail: ['', [Validators.required, Validators.pattern(this.emailpattern)]],
+    
+    })
 
   addNewEvent(newEventForm: NgForm) {
     // Validate and add the new event to the events array
@@ -313,7 +336,7 @@ this.searchTerms.pipe(
       };
       const newEventDto: EventDto={
         event: newEvent,
-        trainerEmail: newEventForm.value.trainer
+        trainerEmail: newEventForm.value.trainerEmail
       }
 
 //this.events = [...this.events, newEvent];

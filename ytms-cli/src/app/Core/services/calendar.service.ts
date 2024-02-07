@@ -46,8 +46,8 @@ return this.http.post<any>(this.baseurl, event, httpOptions);
     const updateUrl = `${this.baseurl}/${eventId}`;
     return this.http.get<CalendarEvent>(updateUrl);
   }
-public searchByTrainer(trainer:string):Observable<any>{
-return this.http.get<any>(this.baseurl+environment.contextUrl+'/searchbyTrainer?trainer=${trainer}')
+public searchByTrainer(trainerEmail:string):Observable<any>{
+return this.http.get<any>(this.baseurl+'/searchbyTrainer?trainerEmail='+trainerEmail);
 }
 
 }

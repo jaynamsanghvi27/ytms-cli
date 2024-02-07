@@ -1,3 +1,16 @@
+<section class="vh-100">
+  <div class="topnav">
+  <a href="#" class="ytms-logo">
+
+    <img src="../../../assets/img/YTMS_LOGO 1.png" ></a>
+
+  
+  </div>
+  <div class="container-fluid h-custom">
+  <div class="row d-flex justify-content-center align-items-center h-100">
+
+
+
 <!-- <div class="search-container">
   <label for="trainerSearch">Search by Trainer: </label>
   <input type="text" id="trainerSearch" [(ngModel)]="trainerSearchTerm" (input)="onTrainerSearchChange()" placeholder="Enter Trainer name" />
@@ -6,13 +19,14 @@
 <!-- Add the dropdown for trainer selection -->
 <div class="calendar-container">
 
-  
-<div class="search-box">
-  <label for="trainerSelect">Select Trainer:</label>
-  <select id="trainerSelect" [(ngModel)]="selectedTrainer">
-    <option *ngFor="let trainer of allTrainers" [value]="trainer">{{ trainer.fullName }}</option>
-  </select>
-</div>
+  <div class="search-box">
+    <label for="trainerSelect">Select Trainer:</label>
+    <select id="trainerSelect" [(ngModel)]="selectedTrainer">
+      <option value="0">Select</option>
+      <option *ngFor="let trainer of allTrainers" [value]="trainer.emailAdd">{{ trainer.fullName }}</option>
+    </select>
+    <button (click)="searchEventsByTrainer(selectedTrainer)">Search</button>
+  </div>
 <div class="row text-center">
     <div class="col-md-4">
       <div class="btn-group">
@@ -126,76 +140,31 @@
           <th>Secondary + text color</th>
           <th>Starts at</th>
           <th>Ends at</th>
-          <th>Remove</th>
+          <th>Actions</th>
         </tr>
       </thead>
-  
       <tbody>
         <tr *ngFor="let event of events">
           <td>
-            <input
-              type="text"
-              class="form-control"
-              [(ngModel)]="event.title"
-              (keyup)="refresh.next()"
-            />
+            <p>{{event.title}}</p>
           </td>
           <td>
-            <input
-              type="color"
-              [value]="getPrimaryColor(event)"
-              (change)="refresh.next()"
-            />
+
+            <input type="color" [value]="getPrimaryColor(event)" (change)="refresh.next()" />
           </td>
           <td>
-            <input
-              type="color"
-              [value]="getSecondaryColor(event)"
-              (change)="refresh.next()"
-            />
-            <input
-              type="color"
-              [value]="getSecondaryTextColor(event)"
-              (change)="refresh.next() "
-            />
+            <input type="color" [value]="getSecondaryColor(event)" (change)="refresh.next()" />
+            <input type="color" [value]="getSecondaryTextColor(event)" (change)="refresh.next()" />
           </td>
           <td>
-            <input
-              class="form-control"
-              type="text"
-              mwlFlatpickr
-              [(ngModel)]="event.start"
-              (ngModelChange)="refresh.next()"
-              [altInput]="true"
-              [convertModelValue]="true"
-              [enableTime]="true"
-              dateFormat="Y-m-dTH:i"
-              altFormat="F j, Y H:i"
-              placeholder="Not set"
-            />
+            <p>{{event.start | dateFormat}}</p>
           </td>
           <td>
-            <input
-              class="form-control"
-              type="text"
-              mwlFlatpickr
-              [(ngModel)]="event.end"
-              (ngModelChange)="refresh.next()"
-              [altInput]="true"
-              [convertModelValue]="true"
-              [enableTime]="true"
-              dateFormat="Y-m-dTH:i"
-              altFormat="F j, Y H:i"
-              placeholder="Not set"
-            />
+            <p>{{event.end | dateFormat}}</p>
           </td>
           <td>
-            <button class="btn btn-danger" (click)="eventModal(editEventModal,event)">
-              Edit
-            </button>
-            <button class="btn btn-danger" (click)="deleteEvent(event)">
-                Delete
-            </button>
+            <button class="btn btn-danger" (click)="eventModal(editEventModal,event)">Edit</button>
+            <button class="btn btn-danger" (click)="deleteEvent(event)">Delete</button>
           </td>
         </tr>
       </tbody>
@@ -242,22 +211,69 @@
         <div class="form-group">
           <label for="title">Title:</label>
           <input type="text" id="title" name="title" ngModel required class="form-control">
+          <div
+          *ngIf="
+        newEventForm.controls['title']?.touched &&
+        newEventForm.controls['title']?.invalid
+      "
+          style="color: red;font-size: small;"
+        >
+          <span *ngIf="newEventForm.controls['title'].hasError('required')">
+            Event Title is required
+          </span>
+        </div>
         </div>
         <div class="form-group">
-          <label for="trainer">Trainer Email :</label>
-          <input type="text" id="trainer" name="trainer" ngModel required class="form-control">
+          <label for="trainerEmail">Trainer Email :</label>
+          <input  [pattern]="emailpattern" type="text" id="trainerEmail" name="trainerEmail" ngModel required class="form-control">
+          <div
+          *ngIf="
+        newEventForm.controls['trainerEmail']?.touched &&
+        newEventForm.controls['trainerEmail']?.invalid
+      "
+          style="color: red;font-size: small;"
+        >
+          <span *ngIf="newEventForm.controls['trainerEmail'].hasError('required')">
+            EmailID is required
+          </span>
+          <span *ngIf="newEventForm.controls['trainerEmail'].hasError('pattern')"
+          >Trainer EmailID is not valid</span
+          >
+        </div>
         </div>
    
         <!-- Start Date and Time -->
         <div class="form-group">
           <label for="startDate">Start Date and Time:</label>
           <input type="datetime-local" id="startDate" name="startDate" ngModel required class="form-control">
+          <div
+          *ngIf="
+        newEventForm.controls['startDate']?.touched &&
+        newEventForm.controls['startDate']?.invalid
+      "
+          style="color: red;font-size: small;"
+        >
+          <span *ngIf="newEventForm.controls['startDate'].hasError('required')">
+            Start date is required
+          </span>
+        </div>
         </div>
    
         <!-- End Date and Time -->
         <div class="form-group">
           <label for="endDate">End Date and Time:</label>
           <input type="datetime-local" id="endDate" name="endDate" ngModel required class="form-control">
+          <div
+          *ngIf="
+        newEventForm.controls['endDate']?.touched &&
+        newEventForm.controls['endDate']?.invalid
+      "
+          style="color: red;font-size: small;"
+        >
+          <span *ngIf="newEventForm.controls['endDate'].hasError('required')">
+            Start date is required
+          </span>
+        </div>
         </div>
    
         <!-- Primary Color -->
@@ -272,7 +288,7 @@
           <input type="color" id="secondaryColor" name="secondaryColor" ngModel class="form-control">
         </div>
    
-        <button type="submit" class="btn btn-primary">Add Event</button>
+        <button type="submit" class="btn btn-primary" [disabled]="newEventForm.invalid">Add Event</button>
       </form>
     </div>
   </ng-template>
@@ -287,7 +303,7 @@
     </div>
     <div class="modal-body">
       <!-- Your form to collect new event details -->
-      <form #editEventForm="ngForm" (ngSubmit)="updateEvent(editEventForm)">
+      <form #editEventForm="ngForm" (ngSubmit)="updateEvent(editedEvent)">
         <div class="form-group">
           <label for="editedTitle">Title:</label>
           <input type="text" id="editedTitle" name="editedTitle" [(ngModel)]="editedEvent.title" class="form-control" required>
@@ -308,3 +324,4 @@
   </ng-template>
 
 </div>
+  </div></div></section>
