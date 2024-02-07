@@ -116,8 +116,9 @@ getSecondaryColor(event :CalendarEvent):string{
 getSecondaryTextColor(event :CalendarEvent):string{
   return event.color?.secondaryText|| '#1e90ff';
 }
-  events: CalendarEvent[] = [
- /*    {
+events: CalendarEvent[] = [];
+ /*  events: CalendarEvent[] = [
+     {
       start: subDays(startOfDay(new Date()), 1),
       end: addDays(new Date(), 1),
       title: 'A 3 day event',
@@ -154,14 +155,14 @@ getSecondaryTextColor(event :CalendarEvent):string{
         afterEnd: true,
       },
       draggable: true,
-    }, */
-  ];
+    }, 
+  ]; */
 
   activeDayIsOpen: boolean = true;
 
   constructor(private formBuilder: FormBuilder,private modal: NgbModal, private calendarService:CalendarService,private userService:UsersService) {}
   ngOnInit(){
-    console.log("Fetching all events")
+    console.log("Fetching all events");
 // this.fetchAllEvents();
 this.fetchAllTrainers();
 console.log(" this.fetchAllTrainers(): ",JSON.stringify(this.fetchAllTrainers()));
@@ -292,12 +293,27 @@ this.searchTerms.pipe(
     this.calendarService.searchByTrainer(trainer).subscribe(
      
       (res)=>{
-        console.log("res ::",res);
+        console.log("res :",res);
         if(res.data=='Nil'){
           Swal.fire('info','No Events found for this Trainer','info');
           this.events=[];
         } else{
-          this.events=res.data;
+          const eventsWithoutYtmSUSer=res.data.map((event:any)=>{
+       const {ytmsUser, title,start,end,color, ...rest}=event;
+        return {
+          title,
+          start:new Date(start[0],start[1]-1,start[2],start[3],start[4]),
+          end:new Date(end[0],end[1]-1,end[2],end[3],end[4]),
+          color,
+          draggable:true,
+          resizable:{beforeStart:true,afterEnd:true},
+          ...rest
+        }
+
+          });
+          this.events=eventsWithoutYtmSUSer;
+          console.log("this.events eventsWithoutYtmSUSer",this.events);
+          console.log("this.events :::",this.events);
         }
        
       },(error)=>{
@@ -342,6 +358,8 @@ this.searchTerms.pipe(
 
 this.calendarService.createEvent(newEvent).subscribe(
   (res)=>{
+    Swal.fire('Info',"Event Created Successfully",'success');
+    console.log("res in create ",res);
     this.events = [
       ...this.events,res];
     console.log('Event created successfully! ',this.events);
