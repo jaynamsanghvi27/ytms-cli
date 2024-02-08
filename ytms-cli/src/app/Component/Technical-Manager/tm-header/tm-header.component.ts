@@ -1,18 +1,20 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {AuthService} from "../../../Core/services/auth.service";
 import {JwtService} from "../../../Core/services/jwt.service";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-requester-home',
-  templateUrl: './requester-home.component.html',
-  styleUrls: ['./requester-home.component.css']
+  selector: 'app-tm-header',
+  templateUrl: './tm-header.component.html',
+  styleUrls: ['./tm-header.component.css']
 })
-export class RequesterHomeComponent {
+export class TmHeaderComponent {
 
-  sideNavStatus: boolean = false;
-  username: string = '';
   isLoggedIn = false;
+  username: string = '';
+
+  @Output() sideNavToggled = new EventEmitter<boolean>();
+  menuStatus: boolean = false;
 
   constructor(public authService: AuthService,
               private jwtService: JwtService,
@@ -26,5 +28,16 @@ export class RequesterHomeComponent {
       const token = this.authService.getToken();
       this.username = this.jwtService.getFullNameFromToken(token);
     }
+  }
+
+  sideNavToggle() {
+    this.menuStatus = !this.menuStatus;
+    this.sideNavToggled.emit(this.menuStatus);
+  }
+
+  logout() {
+    this.authService.removeToken();
+    this.isLoggedIn = false;
+    this.router.navigate(['']);
   }
 }

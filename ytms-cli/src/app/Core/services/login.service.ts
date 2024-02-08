@@ -42,9 +42,9 @@ export class LoginService {
     if (token) {
       // Check if route is restricted by role
       const role = this.jwtService.getRoleFromToken(token);
-      if (role === 'ROLE_ADMIN_USER') {
-        this.router.navigate(['adminDashboard']);
-      } else if (role === 'ROLE_NORMAL_USER') {
+      if (role === 'ROLE_TECHNICAL_MANAGER') {
+        this.router.navigate(['tm-dashboard']);
+      } else if (role === 'ROLE_REQUESTER') {
         this.router.navigate(['requester-home']);
       } else {
         this.router.navigate(['']);
