@@ -213,25 +213,7 @@
           </span>
         </div>
         </div>
-        <div class="form-group">
-          <label for="trainerEmail">Trainer Email :</label>
-          <input  [pattern]="emailpattern" type="text" id="trainerEmail" name="trainerEmail" ngModel required class="form-control">
-          <div
-          *ngIf="
-        newEventForm.controls['trainerEmail']?.touched &&
-        newEventForm.controls['trainerEmail']?.invalid
-      "
-          style="color: red;font-size: small;"
-        >
-          <span *ngIf="newEventForm.controls['trainerEmail'].hasError('required')">
-            EmailID is required
-          </span>
-          <span *ngIf="newEventForm.controls['trainerEmail'].hasError('pattern')"
-          >Trainer EmailID is not valid</span
-          >
-        </div>
-        </div>
-   
+        
         <!-- Start Date and Time -->
         <div class="form-group">
           <label for="startDate">Start Date and Time:</label>
