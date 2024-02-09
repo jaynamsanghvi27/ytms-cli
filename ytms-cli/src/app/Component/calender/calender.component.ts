@@ -30,6 +30,7 @@ import { CalendarService } from 'src/app/Core/services/calendar.service';
 import { UsersService } from 'src/app/Core/services/users.service';
 import { User } from 'src/app/Model/User';
 import Swal from 'sweetalert2';
+import { AuthService } from 'src/app/Core/services/auth.service';
 const colors: Record<string, EventColor> = {
   red: {
     primary: '#ad2121',
@@ -91,16 +92,11 @@ export class CalenderComponent {
 
   refresh = new Subject<void>();
 selectedDate:string='';
-editedEvent: CalendarEvent<any> = {
+editedEvent: any = {
   title: '',
   start: new Date(),
   end: new Date(),
-  color: colors['blue'], // You can adjust this based on your default color
-  draggable: false,
-  resizable: {
-    beforeStart: false,
-    afterEnd: false,
-  },
+  color: colors['']
 };
 trainer: any;
 
@@ -108,13 +104,13 @@ onDateSelect(date:string){
   this.selectedDate=date;
 }
 getPrimaryColor(event :CalendarEvent):string{
-  return event.color?.primary|| '#1e90ff';
+  return event?.color?.primary|| '#1e90ff';
 }
 getSecondaryColor(event :CalendarEvent):string{
-  return event.color?.secondary|| '#1e90ff';
+  return event?.color?.secondary|| '#1e90ff';
 }
 getSecondaryTextColor(event :CalendarEvent):string{
-  return event.color?.secondaryText|| '#1e90ff';
+  return event?.color?.secondaryText|| '#1e90ff';
 }
 events: CalendarEvent[] = [];
  /*  events: CalendarEvent[] = [
@@ -160,10 +156,10 @@ events: CalendarEvent[] = [];
 
   activeDayIsOpen: boolean = true;
 
-  constructor(private formBuilder: FormBuilder,private modal: NgbModal, private calendarService:CalendarService,private userService:UsersService) {}
+  constructor(private authService : AuthService, private formBuilder: FormBuilder,private modal: NgbModal, private calendarService:CalendarService,private userService:UsersService) {}
   ngOnInit(){
     console.log("Fetching all events");
-// this.fetchAllEvents();
+ this.fetchAllEvents();
 this.fetchAllTrainers();
 console.log(" this.fetchAllTrainers(): ",JSON.stringify(this.fetchAllTrainers()));
 this.searchTerms.pipe(
@@ -182,16 +178,26 @@ this.searchTerms.pipe(
   ngOnDestroy(){
     this.searchTerms.unsubscribe();
   }
-  fetchAllEvents(){
+  fetchAllEvents() {
+    console.log("Fetching all events");
     this.calendarService.getAllEvents().subscribe(
-      (events)=>{
-        this.events=events;
-        console.log('events fetched from database ',this.events);
+      (response: any) => {
+        console.log("Response from server:", response);
+        if (response) {
+  this.events = response.map((event: any) => ({
+            ...event,
+            start: new Date(event.start[0], event.start[1] - 1, event.start[2], event.start[3], event.start[4]),
+            end: new Date(event.end[0], event.end[1] - 1, event.end[2], event.end[3], event.end[4])
+          }));
+          console.log("this events from server ",JSON.stringify(this.events))
+        } else {
+          console.error('Invalid response format:', response);
+        }
       },
-      (error)=>{
-        console.log('Error Fetching Events',error);
+      (error) => {
+        console.error('Error fetching events:', error);
       }
-    )
+    );
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -247,38 +253,53 @@ this.searchTerms.pipe(
       },
     ];
   } */
- updateEvent(editedEvent:CalendarEvent){
+ updateEvent(editedEvent:any){
  
-  this.calendarService.updateEvent(editedEvent.id,editedEvent).subscribe((res)=>{
+  this.calendarService.updateEvent(editedEvent.eventId,editedEvent).subscribe((res)=>{
+    
+    Swal.fire('SUCESS',"Event Updated Successfully",'success');
     console.log("Event updated successfully in update event");
 
   })
   this.modal.dismissAll();
  }
- eventModal(content: any,eventToEdit: CalendarEvent) {
-  this.calendarService.getEventById(eventToEdit.id).subscribe(
-    (previousEvent:CalendarEvent)=>{
-      this.editedEvent={...previousEvent};
-      console.log("edited event ",this.editEvent);
+ eventModal(content: any,eventToEdit: any) {
+  this.calendarService.getEventById(eventToEdit.eventId).subscribe(
+    (previousEvent:any)=>{
+      this.editedEvent={...previousEvent,trainerEmail:previousEvent.scheduleUser.emailAdd,start:previousEvent.start,end:previousEvent.end};
       this.modal.open('editEventModal',{size:'lg'});
+      console.log("start date value ",JSON.stringify(this.editedEvent));
     },(error)=>{
       console.error("error fetching previous event details",error);
     }
   )
   this.modal.open(content, { size: 'lg' });
 }
-  editEvent(eventToEdit: CalendarEvent): void {
-    
-      console.log("edited event id is :",eventToEdit.id);
-      // Implement the logic to save edited event
-     
-  
+formatDate(date: string): string {
+  // Check if the date string is valid
+  if (!date || isNaN(Date.parse(date))) {
+    return '';
   }
+  
+  // Convert the date string to a Date object
+  const parsedDate = new Date(date);
+ console.log(" Date modified",parsedDate);
+  // Check if the date object is valid
+  if (isNaN(parsedDate.getTime())) {
+    return '';
+  }
+ 
+  // Format the date to ISO string format suitable for datetime-local input
+  const isoString = parsedDate.toISOString();
+ 
+  // Remove milliseconds and the 'Z' (indicating UTC time)
+  return isoString.slice(0, 16); // Slice to remove the seconds and milliseconds
+}
 
-  deleteEvent(eventToDelete: CalendarEvent) {
+  deleteEvent(eventToDelete: any) {
     if(eventToDelete!==undefined){
       this.events = this.events.filter((event) => event !== eventToDelete);
-      this.calendarService.deleteEvent(eventToDelete.id).subscribe(
+      this.calendarService.deleteEvent(eventToDelete.eventId).subscribe(
         (res)=>{
           console.log('event deleted successfully !')
         },(error)=>{
@@ -291,19 +312,36 @@ this.searchTerms.pipe(
   searchEventsByTrainer(trainer:any):void{
     console.log("TrainerEmail id is ::: ",JSON.stringify(trainer));
     this.calendarService.searchByTrainer(trainer).subscribe(
+      (response: any) => {
+        console.log("Response from server:", response);
+        if (response) {
+  this.events = response.data.map((event: any) => ({
+            ...event,
+            start: new Date(event.start[0], event.start[1] - 1, event.start[2], event.start[3], event.start[4]),
+            end: new Date(event.end[0], event.end[1] - 1, event.end[2], event.end[3], event.end[4])
+          }));
+          console.log("this events from server ",JSON.stringify(this.events))
+        } else {
+          console.error('Invalid response format:', response);
+        }
+      },
+      (error) => {
+        console.error('Error fetching events:', error);
+      }
+    
      
-      (res)=>{
-        console.log("res :",res);
+      /* (res)=>{
+        console.log("response in search events by Trainer  :",res);
         if(res.data=='Nil'){
           Swal.fire('info','No Events found for this Trainer','info');
           this.events=[];
         } else{
-          const eventsWithoutYtmSUSer=res.data.map((event:any)=>{
-       const {ytmsUser, title,start,end,color, ...rest}=event;
+          const eventsWithoutScheduleUser=res.data.map((event:any)=>{
+       const {scheduleUser, title,color, ...rest}=event;
         return {
           title,
-          start:new Date(start[0],start[1]-1,start[2],start[3],start[4]),
-          end:new Date(end[0],end[1]-1,end[2],end[3],end[4]),
+          start: new Date(event.start[0], event.start[1] - 1, event.start[2], event.start[3], event.start[4]),
+            end: new Date(event.end[0], event.end[1] - 1, event.end[2], event.end[3], event.end[4]),
           color,
           draggable:true,
           resizable:{beforeStart:true,afterEnd:true},
@@ -311,14 +349,14 @@ this.searchTerms.pipe(
         }
 
           });
-          this.events=eventsWithoutYtmSUSer;
-          console.log("this.events eventsWithoutYtmSUSer",this.events);
+          this.events=eventsWithoutScheduleUser;
+          console.log("this.events eventsWithoutScheduleUser",this.events);
           console.log("this.events :::",this.events);
         }
        
       },(error)=>{
         console.error('Error searching events ',error);
-      }
+      } */
     )
   }
 
@@ -349,11 +387,10 @@ this.searchTerms.pipe(
         title: newEventForm.value.title,
         start: new Date(newEventForm.value.startDate),
         end: new Date(newEventForm.value.endDate),
-        color: newEventForm.value.primaryColor,
-        trainerEmail: newEventForm.value.trainerEmail
+        color: newEventForm.value?.primaryColor,
+        trainerEmail: newEventForm.value?.trainerEmail
         
       };
-
 //this.events = [...this.events, newEvent];
 
 this.calendarService.createEvent(newEvent).subscribe(

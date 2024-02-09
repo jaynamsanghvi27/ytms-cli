@@ -130,7 +130,6 @@
           <tr>
             <th>Title</th>
             <th>Primary color</th>
-            <th>Secondary + text color</th>
             <th>Starts at</th>
             <th>Ends at</th>
             <th>Actions</th>
@@ -139,21 +138,17 @@
         <tbody>
           <tr *ngFor="let event of events">
             <td>
-              <p>{{event.title}}</p>
+              <p>{{event?.title}}</p>
             </td>
             <td>
   
               <input type="color" [value]="getPrimaryColor(event)" (change)="refresh.next()" />
             </td>
             <td>
-              <input type="color" [value]="getSecondaryColor(event)" (change)="refresh.next()" />
-              <input type="color" [value]="getSecondaryTextColor(event)" (change)="refresh.next()" />
+              <p>{{event?.start }}</p>
             </td>
             <td>
-              <p>{{event.start | dateFormat}}</p>
-            </td>
-            <td>
-              <p>{{event.end | dateFormat}}</p>
+              <p>{{event?.end }}</p>
             </td>
             <td>
               <button class="btn btn-danger" (click)="eventModal(editEventModal,event)">Edit</button>
