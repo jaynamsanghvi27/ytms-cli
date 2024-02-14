@@ -24,6 +24,10 @@ return this.http.post<any>(this.baseurl+"/create", event, httpOptions);
   public getAllEvents(): Observable<any> {
     return this.http.get<any>(this.baseurl+'/get/all');
   }
+
+  public getAllEventsForUser(formdata:any): Observable<any> {
+    return this.http.post<any>(this.baseurl+'/get/allEventsForUser',formdata);
+  }
  
   public updateEvent(eventId: any, updatedEvent: any): Observable<any> {
     const httpOptions = {
