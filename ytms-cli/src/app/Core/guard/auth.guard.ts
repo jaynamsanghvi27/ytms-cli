@@ -25,15 +25,22 @@ export class AuthGuard implements CanActivate {
     if (this.authService.isAuthenticated()) {
       const token = this.authService.getToken();
       if (token != undefined) {
-        //get roles from token
-        const role = this.jwtService.getRoleFromToken(token);
-        // Check if route is restricted by role
-        if (role === 'ROLE_REQUESTER') {
-          // Role not authorized, redirect to home page
-          return true;
+        if (!this.jwtService.isTokenExpired(token)) {
+          //get roles from token
+          const role = this.jwtService.getRoleFromToken(token);
+          // Check if route is restricted by role
+          if (role === 'ROLE_REQUESTER' || role === 'ROLE_TRAINER') {
+            // Role not authorized, redirect to home page
+            return true;
+          } else {
+            // Not authenticated, redirect to user dashboard or handle accordingly
+            Swal.fire('Error', 'Unauthorized', 'error');
+            this.router.navigate(['']);
+            return false;
+          }
         } else {
-          // Not authenticated, redirect to user dashboard or handle accordingly
-          Swal.fire('Error', 'Unauthorized', 'error');
+          Swal.fire('Oops...', 'Token is expired, please re-login', 'error');
+          this.authService.removeToken();
           this.router.navigate(['']);
           return false;
         }

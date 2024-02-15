@@ -40,4 +40,21 @@ export class JwtService {
       return decodedToken.roles;
     }
   }
+
+  getExpirationTimeFromToken(token: string): any {
+    const decryptedToken = this.encryptService.getDecryption(token);
+    const decodedToken = this.decodeToken(decryptedToken);
+    if (decodedToken) {
+      return decodedToken.exp;
+    }
+  }
+
+  isTokenExpired(token: string): boolean {
+    const expDate = this.getExpirationTimeFromToken(token);
+    const floorDate = Math.floor(Date.now() / 1000);
+    if (expDate) {
+      return expDate < floorDate;
+    } else
+      return false;
+  }
 }

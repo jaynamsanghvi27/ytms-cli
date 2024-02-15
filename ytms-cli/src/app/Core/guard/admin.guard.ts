@@ -23,21 +23,31 @@ export class AdminGuard implements CanActivate {
     if (this.authService.isAuthenticated()) {
       const token = this.authService.getToken();
       if (token != undefined) {
-        //get roles from token
-        const role = this.jwtService.getRoleFromToken(token);
-        // Check if route is restricted by role
-        if (role === 'ROLE_TECHNICAL_MANAGER' && role != undefined || null) {
-          // Role not authorized, redirect to home page
-          return true;
-        } else {
-          // Not authenticated, redirect to user dashboard or handle accordingly
-          if (role === 'ROLE_REQUESTER') {
-            Swal.fire('Error', 'Unauthorized', 'error');
-            this.router.navigate(['requester-home']);
+        if (!this.jwtService.isTokenExpired(token)) {
+          //get roles from token
+          const role = this.jwtService.getRoleFromToken(token);
+          // Check if route is restricted by role
+          if (role === 'ROLE_TECHNICAL_MANAGER' && role != undefined || null) {
+            // Role not authorized, redirect to home page
+            return true;
           } else {
-            Swal.fire('Error', 'Unauthorized', 'error');
-            this.router.navigate(['']);
+            // Not authenticated, redirect to user dashboard or handle accordingly
+            if (role === 'ROLE_REQUESTER') {
+              Swal.fire('Error', 'Unauthorized', 'error');
+              this.router.navigate(['requester-home']);
+            } else if (role === 'ROLE_TRAINER') {
+              Swal.fire('Error', 'Unauthorized', 'error');
+              this.router.navigate(['trainer']);
+            } else {
+              Swal.fire('Error', 'Unauthorized', 'error');
+              this.router.navigate(['']);
+            }
+            return false;
           }
+        } else {
+          Swal.fire('Oops...', 'Token is expired, please re-login', 'error');
+          this.authService.removeToken();
+          this.router.navigate(['']);
           return false;
         }
       }

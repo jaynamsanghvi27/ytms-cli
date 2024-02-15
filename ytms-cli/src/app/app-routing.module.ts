@@ -1,15 +1,15 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { RequesterHomeComponent } from './Component/Requester/requester-home/requester-home.component';
-import { LoginComponent } from './Component/login/login.component';
-import { ForgotPasswordComponent } from './Component/forgot-password/forgot-password.component';
-import { AuthGuard } from "./Core/guard/auth.guard";
-import { TmHomeComponent } from "./Component/Technical-Manager/tm-home/tm-home.component";
-import { AdminGuard } from "./Core/guard/admin.guard";
-import { RegistrationComponent } from "./Component/registration/registration.component";
-import { ResetPasswordComponent } from './Component/reset-password/reset-password.component';
-import { ChangePasswordComponent } from './Component/change-password/change-password.component';
-import { CalenderComponent } from './Component/calender/calender.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {RequesterHomeComponent} from './Component/Requester/requester-home/requester-home.component';
+import {LoginComponent} from './Component/login/login.component';
+import {ForgotPasswordComponent} from './Component/forgot-password/forgot-password.component';
+import {AuthGuard} from "./Core/guard/auth.guard";
+import {TmHomeComponent} from "./Component/Technical-Manager/tm-home/tm-home.component";
+import {AdminGuard} from "./Core/guard/admin.guard";
+import {RegistrationComponent} from "./Component/registration/registration.component";
+import {ResetPasswordComponent} from './Component/reset-password/reset-password.component';
+import {ChangePasswordComponent} from './Component/change-password/change-password.component';
+import {CalenderComponent} from './Component/calender/calender.component';
 
 const routes: Routes = [
   {
