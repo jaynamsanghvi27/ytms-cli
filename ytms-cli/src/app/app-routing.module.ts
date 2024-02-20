@@ -10,6 +10,8 @@ import {RegistrationComponent} from "./Component/registration/registration.compo
 import {ResetPasswordComponent} from './Component/reset-password/reset-password.component';
 import {ChangePasswordComponent} from './Component/change-password/change-password.component';
 import {CalenderComponent} from './Component/calender/calender.component';
+import { TrainingReqComponent } from './Component/Requester/training-req/training-req.component';
+import { NominationReqComponent } from './Component/Requester/nomination-req/nomination-req.component';
 
 const routes: Routes = [
   {
@@ -62,6 +64,15 @@ const routes: Routes = [
   {
     path: 'trainer',
     loadChildren: () => import('./Component/Trainer/trainer.module').then(m => m.TrainerModule)
+  },
+
+  {
+    path:'training-req',
+    component: TrainingReqComponent
+  },
+  {
+    path:'nomination-req',
+    component: NominationReqComponent
   },
 
   {

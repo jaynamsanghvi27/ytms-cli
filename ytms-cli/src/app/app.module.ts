@@ -27,6 +27,8 @@ import { NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { DateFormatPipe } from './pipes/date-format.pipe';
 import { DatePipe } from '@angular/common';
+import { TrainingReqComponent } from './Component/Requester/training-req/training-req.component';
+import { NominationReqComponent } from './Component/Requester/nomination-req/nomination-req.component';
 
 
 
@@ -45,7 +47,9 @@ import { DatePipe } from '@angular/common';
     ResetPasswordComponent,
     ChangePasswordComponent,
     CalenderComponent,
-    DateFormatPipe
+    DateFormatPipe,
+    TrainingReqComponent,
+    NominationReqComponent
   ],
   imports: [
     BrowserModule,
