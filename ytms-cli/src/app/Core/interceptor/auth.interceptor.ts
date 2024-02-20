@@ -34,7 +34,6 @@ export class AuthInterceptor implements HttpInterceptor {
           Authorization: `Bearer ${decryptedToken}`
         },
       });
-      console.log(authRequest.url + " " + authRequest.params)
       return next.handle(authRequest).pipe(
         catchError((err: HttpErrorResponse) => {
           if (err) {

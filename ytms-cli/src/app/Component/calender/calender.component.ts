@@ -8,7 +8,6 @@ import {FormBuilder, NgForm, Validators} from '@angular/forms';
 import {CalendarService} from 'src/app/Core/services/calendar.service';
 import {UsersService} from 'src/app/Core/services/users.service';
 import Swal from 'sweetalert2';
-import {AuthService} from 'src/app/Core/services/auth.service';
 
 const colors: Record<string, EventColor> = {
   red: {
@@ -82,8 +81,7 @@ export class CalenderComponent {
     })
   private searchTerms = new Subject<string>();
 
-  constructor(private authService: AuthService,
-              private formBuilder: FormBuilder,
+  constructor(private formBuilder: FormBuilder,
               private modal: NgbModal,
               private calendarService: CalendarService,
               private userService: UsersService) {

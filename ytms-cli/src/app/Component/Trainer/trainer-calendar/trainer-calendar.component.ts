@@ -4,13 +4,10 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView} from 'angular-calendar';
 import {EventColor} from 'calendar-utils';
 import {debounceTime, distinctUntilChanged, Subject, switchMap} from 'rxjs';
-import {AuthService} from 'src/app/Core/services/auth.service';
 import {CalendarService} from 'src/app/Core/services/calendar.service';
-import {UsersService} from 'src/app/Core/services/users.service';
 import Swal from 'sweetalert2';
 import {DatePipe} from '@angular/common'
 import {isSameDay, isSameMonth} from 'date-fns';
-import {JwtService} from 'src/app/Core/services/jwt.service';
 
 
 const colors: Record<string, EventColor> = {
@@ -41,8 +38,6 @@ export class TrainerCalendarComponent {
   view: CalendarView = CalendarView.Month;
   CalendarView = CalendarView;
   viewDate: Date = new Date();
-  lastViewDate: any = null;
-  nextViewDate: any = null;
 
   modalData!: {
     action: string;
@@ -86,13 +81,10 @@ export class TrainerCalendarComponent {
     })
   private searchTerms = new Subject<string>();
 
-  constructor(private authService: AuthService,
-              private formBuilder: FormBuilder,
+  constructor(private formBuilder: FormBuilder,
               private modal: NgbModal,
               private calendarService: CalendarService,
-              private userService: UsersService,
-              public datepipe: DatePipe,
-              private jwtservice: JwtService) {
+              public datepipe: DatePipe) {
   }
 
   onDateSelect(date: string) {
@@ -112,9 +104,6 @@ export class TrainerCalendarComponent {
   }
 
   ngOnInit() {
-    let month = this.viewDate.getMonth();
-    this.lastViewDate.setMonth(month - 1);
-    console.log(this.lastViewDate)
     console.log("Fetching all events");
     this.fetchAllEvents();
     // this.fetchAllTrainers();
