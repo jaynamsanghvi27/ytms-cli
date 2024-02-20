@@ -25,6 +25,8 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FlatpickrModule } from 'angularx-flatpickr';
+import { DateFormatPipe } from './pipes/date-format.pipe';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -42,6 +44,7 @@ import { FlatpickrModule } from 'angularx-flatpickr';
     ResetPasswordComponent,
     ChangePasswordComponent,
     CalenderComponent,
+    DateFormatPipe
   ],
   imports: [
     BrowserModule,
@@ -64,6 +67,7 @@ import { FlatpickrModule } from 'angularx-flatpickr';
       provide: MAT_DATE_LOCALE,
       useValue: 'en-GB',
     },
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

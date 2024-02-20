@@ -46,6 +46,8 @@ export class LoginService {
         this.router.navigate(['tm-dashboard']);
       } else if (role === 'ROLE_REQUESTER') {
         this.router.navigate(['requester-home']);
+      } else if (role === 'ROLE_TRAINER') {
+        this.router.navigate(['trainer/dashboard']);
       } else {
         this.router.navigate(['']);
       }

@@ -1,13 +1,14 @@
 import {Component, TemplateRef, ViewChild} from '@angular/core';
-import {isSameDay, isSameMonth} from 'date-fns';
-import {debounceTime, distinctUntilChanged, Subject, switchMap} from 'rxjs';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView,} from 'angular-calendar';
-import {EventColor} from 'calendar-utils';
 import {FormBuilder, NgForm, Validators} from '@angular/forms';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView} from 'angular-calendar';
+import {EventColor} from 'calendar-utils';
+import {debounceTime, distinctUntilChanged, Subject, switchMap} from 'rxjs';
 import {CalendarService} from 'src/app/Core/services/calendar.service';
-import {UsersService} from 'src/app/Core/services/users.service';
 import Swal from 'sweetalert2';
+import {DatePipe} from '@angular/common'
+import {isSameDay, isSameMonth} from 'date-fns';
+
 
 const colors: Record<string, EventColor> = {
   red: {
@@ -22,24 +23,22 @@ const colors: Record<string, EventColor> = {
     primary: '#e3bc08',
     secondary: '#FDF1BA',
   },
-};
+}
 
 @Component({
-  selector: 'app-calender',
-  templateUrl: './calender.component.html',
-  styleUrls: ['./calender.component.css']
+  selector: 'app-trainer-calendar',
+  templateUrl: './trainer-calendar.component.html',
+  styleUrls: ['./trainer-calendar.component.css']
 })
-export class CalenderComponent {
-
+export class TrainerCalendarComponent {
   @ViewChild('modalContent', {static: true}) modalContent!: TemplateRef<any>;
   trainerSearchTerm: string = '';
-  selectedTrainer!: any;
-  allTrainers: any = [];
   emailpattern = /^[^\s@]+@yash\.com$/;
   event!: CalendarEvent;
   view: CalendarView = CalendarView.Month;
   CalendarView = CalendarView;
   viewDate: Date = new Date();
+
   modalData!: {
     action: string;
     event: CalendarEvent;
@@ -78,13 +77,14 @@ export class CalenderComponent {
       startDate: ['', [Validators.required]],
       endDate: ['', [Validators.required]],
       trainerEmail: ['', [Validators.required, Validators.pattern(this.emailpattern)]],
+
     })
   private searchTerms = new Subject<string>();
 
   constructor(private formBuilder: FormBuilder,
               private modal: NgbModal,
               private calendarService: CalendarService,
-              private userService: UsersService) {
+              public datepipe: DatePipe) {
   }
 
   onDateSelect(date: string) {
@@ -106,8 +106,8 @@ export class CalenderComponent {
   ngOnInit() {
     console.log("Fetching all events");
     this.fetchAllEvents();
-    this.fetchAllTrainers();
-    console.log(" this.fetchAllTrainers(): ", JSON.stringify(this.fetchAllTrainers()));
+    // this.fetchAllTrainers();
+    // console.log(" this.fetchAllTrainers(): ", JSON.stringify(this.fetchAllTrainers()));
     this.searchTerms.pipe(
       debounceTime(300),
       distinctUntilChanged(),
@@ -126,26 +126,31 @@ export class CalenderComponent {
     this.searchTerms.unsubscribe();
   }
 
+  //THIS METHOD IS USED TO FETCH ALL THE EVENT FOR THE CURREN LOGGEND IN USER FOR SPECIFIC TIME PERIOD
   fetchAllEvents() {
-    console.log("Fetching all events");
-    this.calendarService.getAllEvents().subscribe(
+    //Reset Events TO BLANK BEFORE FETCHING EVENTS FROM DATABASE
+    this.events = [];
+    console.log(this.viewDate)
+    let date = this.datepipe.transform(this.viewDate, 'dd-MMM-yyyy')!;
+    console.log(date)
+    this.calendarService.getAllEventsForUser(date).subscribe(
       (response: any) => {
         console.log("Response from server:", response);
         if (response) {
           this.events = response.map((event: any) => ({
             ...event,
             start: new Date(event.start[0], event.start[1] - 1, event.start[2], event.start[3], event.start[4]),
-            end: new Date(event.end[0], event.end[1] - 1, event.end[2], event.end[3], event.end[4])
+            end: new Date(event.end[0], event.end[1] - 1, event.end[2], event.end[3], event.end[4]),
           }));
-          console.log("this events from server ", JSON.stringify(this.events))
+          console.log('response from server', this.events);
         } else {
           console.error('Invalid response format:', response);
         }
       },
       (error) => {
         console.error('Error fetching events:', error);
-      }
-    );
+      });
+
   }
 
   dayClicked({date, events}: { date: Date; events: CalendarEvent[] }): void {
@@ -186,9 +191,7 @@ export class CalenderComponent {
   }
 
   updateEvent(editedEvent: any) {
-
     this.calendarService.updateEvent(editedEvent.eventId, editedEvent).subscribe((res) => {
-
       Swal.fire('SUCESS', "Event Updated Successfully", 'success');
       console.log("Event updated successfully in update event");
 
@@ -276,7 +279,13 @@ export class CalenderComponent {
   }
 
   closeOpenMonthViewDay() {
+    console.log('closeOpenMonthViewDay method called')
     this.activeDayIsOpen = false;
+  }
+
+  checkdatetime() {
+    console.log('checkdatetime method called')
+    this.fetchAllEvents();
   }
 
   openModal(content: any) {
@@ -288,12 +297,13 @@ export class CalenderComponent {
     if (newEventForm.valid) {
       const newEvent: any = {
         title: newEventForm.value.title,
-        start: new Date(newEventForm.value.startDate),
-        end: new Date(newEventForm.value.endDate),
+        start: newEventForm.value.startDate,
+        end: newEventForm.value.endDate,
         color: newEventForm.value?.primaryColor,
         trainerEmail: newEventForm.value?.trainerEmail
 
       };
+      //this.events = [...this.events, newEvent];
 
       this.calendarService.createEvent(newEvent).subscribe(
         (res) => {
@@ -311,16 +321,5 @@ export class CalenderComponent {
       this.modal.dismissAll();
     }
   }
-
-  fetchAllTrainers() {
-    this.userService.getAllTrainers().subscribe(
-      (trainers) => {
-        this.allTrainers = trainers;
-        console.log("this.allTrainers : ", this.allTrainers);
-      },
-      (error) => {
-        console.error('Error fetching trainers', error);
-      }
-    );
-  }
 }
+
