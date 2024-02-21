@@ -11,6 +11,9 @@ import {ChangePasswordComponent} from './Component/change-password/change-passwo
 import {CalenderComponent} from './Component/calender/calender.component';
 import {TrainerGuard} from "./Core/guard/trainer.guard";
 import {RequesterHomeComponent} from "./Component/Requester/requester-home/requester-home.component";
+import {
+  RequesterDashboardComponent
+} from "./Component/RequesterModule/requester-dashboard/requester-dashboard.component";
 
 const routes: Routes = [
   {
@@ -26,8 +29,7 @@ const routes: Routes = [
   {
     path: "book-calendar",
     component: CalenderComponent,
-    canActivate: [AuthGuard]
-
+    canActivate: [AdminGuard]
   },
   {
     path: 'register',
@@ -41,6 +43,11 @@ const routes: Routes = [
   {
     path: "requester/home",
     component: RequesterHomeComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "requester/dashboard",
+    component: RequesterDashboardComponent,
     canActivate: [AuthGuard]
   },
   /*{

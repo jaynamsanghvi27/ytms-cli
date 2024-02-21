@@ -69,7 +69,7 @@ export class LoginComponent {
     if (role == 'ROLE_TECHNICAL_MANAGER')
       this.router.navigateByUrl('/tm-dashboard');
     if (role == 'ROLE_REQUESTER')
-      this.router.navigateByUrl('/requester');
+      this.router.navigateByUrl('/requester/dashboard');
     if (role == 'ROLE_TRAINER')
       this.router.navigateByUrl('/trainer/dashboard');
   }

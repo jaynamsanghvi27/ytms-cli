@@ -49,6 +49,12 @@
   font-size: medium;
 }
 
+.add-button {
+  position: fixed;
+  top: 89px; /* Adjust this value according to your header's height */
+  right: 20px; /* Adjust this value for the desired distance from the right edge */
+}
+
 .calendar-container {
   padding-top: 10px;
 }
