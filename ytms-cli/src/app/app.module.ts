@@ -18,16 +18,15 @@ import {TmHomeComponent} from './Component/Technical-Manager/tm-home/tm-home.com
 import {TmHeaderComponent} from './Component/Technical-Manager/tm-header/tm-header.component';
 import {TmSidebarComponent} from './Component/Technical-Manager/tm-sidebar/tm-sidebar.component';
 import {RegistrationComponent} from "./Component/registration/registration.component";
-import { ResetPasswordComponent } from './Component/reset-password/reset-password.component';
-import { ChangePasswordComponent } from './Component/change-password/change-password.component';
-import { CalenderComponent } from './Component/calender/calender.component';
-import { CalendarModule, DateAdapter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FlatpickrModule } from 'angularx-flatpickr';
-import { DateFormatPipe } from './pipes/date-format.pipe';
-import { DatePipe } from '@angular/common';
-
+import {ResetPasswordComponent} from './Component/reset-password/reset-password.component';
+import {ChangePasswordComponent} from './Component/change-password/change-password.component';
+import {CalenderComponent} from './Component/calender/calender.component';
+import {CalendarModule, DateAdapter} from 'angular-calendar';
+import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
+import {NgbModalModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {FlatpickrModule} from 'angularx-flatpickr';
+import {DateFormatPipe} from './pipes/date-format.pipe';
+import {DatePipe} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -59,7 +58,7 @@ import { DatePipe } from '@angular/common';
     }),
     HttpClientModule,
     FlatpickrModule.forRoot(),
-    NgbModule,NgbModalModule
+    NgbModule, NgbModalModule
   ],
   providers: [
     authInterceptorProviders,

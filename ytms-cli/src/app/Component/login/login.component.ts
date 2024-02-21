@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { User } from 'src/app/Model/User';
-import { AuthService } from "../../Core/services/auth.service";
-import { JwtService } from "../../Core/services/jwt.service";
-import { Router } from "@angular/router";
-import { LoginService } from "../../Core/services/login.service";
+import {Component} from '@angular/core';
+import {FormBuilder, Validators} from '@angular/forms';
+import {User} from 'src/app/Model/User';
+import {AuthService} from "../../Core/services/auth.service";
+import {JwtService} from "../../Core/services/jwt.service";
+import {Router} from "@angular/router";
+import {LoginService} from "../../Core/services/login.service";
 import Swal from "sweetalert2";
 
 @Component({
@@ -26,15 +26,15 @@ export class LoginComponent {
 
 
   constructor(private formBuilder: FormBuilder,
-    private router: Router,
-    private authService: AuthService,
-    private jwtService: JwtService,
-    private loginService: LoginService) {
+              private router: Router,
+              private authService: AuthService,
+              private jwtService: JwtService,
+              private loginService: LoginService) {
   }
 
   ngOnInit(): void {
     if (this.authService.isAuthenticated())
-      this.loginService.navigateByRoles();
+      this.routeUserDashboard();
   }
 
   submit(): void {
@@ -49,13 +49,13 @@ export class LoginComponent {
     }
     this.loginService.login(user).subscribe(res => {
 
-      if (res.status === 'SUCCESS') {
-        this.authService.storeToken(res.token);
-        this.routeUserDashboard();
-      } else {
-        Swal.fire('Error', res.message, 'error');
-      }
-    },
+        if (res.status === 'SUCCESS') {
+          this.authService.storeToken(res.token);
+          this.routeUserDashboard();
+        } else {
+          Swal.fire('Error', res.message, 'error');
+        }
+      },
       err => {
         this.authService.removeToken();
         Swal.fire('Error', err.error, 'error');
@@ -65,10 +65,11 @@ export class LoginComponent {
   private routeUserDashboard() {
     const token = this.authService.getToken();
     const role = this.jwtService.getRoleFromToken(token);
+    console.log(role)
     if (role == 'ROLE_TECHNICAL_MANAGER')
       this.router.navigateByUrl('/tm-dashboard');
     if (role == 'ROLE_REQUESTER')
-      this.router.navigateByUrl('/requester-home');
+      this.router.navigateByUrl('/requester');
     if (role == 'ROLE_TRAINER')
       this.router.navigateByUrl('/trainer/dashboard');
   }

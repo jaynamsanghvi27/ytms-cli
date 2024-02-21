@@ -8,14 +8,17 @@ import {JwtService} from "../services/jwt.service";
 @Injectable({
   providedIn: 'root'
 })
-export class AdminGuard implements CanActivate {
+export class TrainerGuard implements CanActivate {
+
   constructor(private authService: AuthService,
               private jwtService: JwtService,
               private router: Router) {
   }
 
-  canActivate(route: ActivatedRouteSnapshot,
-              state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     return this.checkAuthentication(route, state);
   }
 
@@ -27,21 +30,13 @@ export class AdminGuard implements CanActivate {
           //get roles from token
           const role = this.jwtService.getRoleFromToken(token);
           // Check if route is restricted by role
-          if (role === 'ROLE_TECHNICAL_MANAGER' && role != undefined || null) {
+          if (role === 'ROLE_TRAINER') {
             // Role not authorized, redirect to home page
             return true;
           } else {
             // Not authenticated, redirect to user dashboard or handle accordingly
-            if (role === 'ROLE_REQUESTER') {
-              Swal.fire('Error', 'Unauthorized', 'error');
-              this.router.navigate(['requester/dashboard']);
-            } else if (role === 'ROLE_TRAINER') {
-              Swal.fire('Error', 'Unauthorized', 'error');
-              this.router.navigate(['trainer/dashboard']);
-            } else {
-              Swal.fire('Error', 'Unauthorized', 'error');
-              this.router.navigate(['']);
-            }
+            Swal.fire('Error', 'Unauthorized', 'error');
+            this.router.navigate(['']);
             return false;
           }
         } else {
@@ -51,6 +46,7 @@ export class AdminGuard implements CanActivate {
           return false;
         }
       }
+      // User details not available, handle accordingly
     } else {
       // Not authenticated, redirect to user dashboard or handle accordingly
       this.router.navigate(['']);
