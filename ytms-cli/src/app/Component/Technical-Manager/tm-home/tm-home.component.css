@@ -1,4 +1,4 @@
-app-requester-header {
+app-tm-header {
   position: fixed;
   width: 100%;
   top: 0px;
@@ -13,7 +13,7 @@ main {
   z-index: 1;
 }
 
-app-requester-sidebar {
+app-tm-sidebar {
 
   position: absolute;
   left: 0rem;

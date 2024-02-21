@@ -16,49 +16,54 @@ export class RequesterSidebarComponent {
     let r1= jwtserv.getRoleFromToken(token);
     console.log(this.role);
     this.list = [
-      {
-        number: 1,
-        name: 'home',
-        icon: 'fa-solid fa-house',
-        link: ''
-      },
+      // {
+      //   number: 1,
+      //   name: 'My Schedule',
+      //   icon: 'fa-solid fa-calendar',
+      //   routing: '/requester/calendar'
+  
+      // },
       {
         number: 2,
         name: 'Training Request',
         icon: 'fa-solid fa-chart-line',
-        link: '/training-req'
+        routing: '/training-req'
       },
       {
         number: 3,
         name: 'View Training Request',
         icon: 'fa-solid fa-box',
-        link: '/view-trf'
+        routing: '/view-trf'
       },
       {
         number: 4,
         name: 'Order  ',
         icon: 'fa-solid fa-cart-shopping',
-        link: ''
+        routing: '/requester/calendar'
+  
       },
       {
         number: 5,
         name: 'Settings',
         icon: 'fa-solid fa-gear',
-        link: ''
+        routing: '/requester/calendar'
+  
       },
       {
         number: 6,
         name: 'About',
         icon: 'fa-solid fa-circle-info',
-        link: ''
+        routing: '/requester/calendar'
+  
       },
       {
         number: 7,
         name: 'Contact',
         icon: 'fa-solid fa-phone',
-        link: ''
+        routing: '/requester/calendar'
       },
     ]
   }
   
+
 }

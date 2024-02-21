@@ -32,9 +32,6 @@ import { NominationReqComponent } from './Component/Requester/nomination-req/nom
 import { ViewTrfComponent } from './Component/Requester/view-trf/view-trf.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
-
-
-
 @NgModule({
   declarations: [
     AppComponent,

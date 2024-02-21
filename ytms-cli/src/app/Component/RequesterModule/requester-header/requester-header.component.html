@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand  navbar-custom px-2">
 
-  <a [routerLink]="['']" class="navbar-brand px-4" href="#" style="color: white;">YTMS</a>
+  <a class="navbar-brand px-4" href="#" style="color: white;">YTMS</a>
   <div (click)="sideNavToggle()" class="side-nav-button p-2 me-3">
     <i class="fa-solid fa-bars" style="color: white;"></i>
   </div>
@@ -13,7 +13,7 @@
 
   <div class="profile-logo dropstart">
     <button class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown">
-      {{ this.username }}<br><span style="font-size: 10px;">{{this.userRole}}</span>
+      {{ this.username }}
     </button>
 
     <ul class="dropdown-menu dropdown-menu-dark">

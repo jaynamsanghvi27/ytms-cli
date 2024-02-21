@@ -1,17 +1,16 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {Router} from '@angular/router';
-import {AuthService} from 'src/app/Core/services/auth.service';
-import {JwtService} from 'src/app/Core/services/jwt.service';
+import {AuthService} from "../../../Core/services/auth.service";
+import {JwtService} from "../../../Core/services/jwt.service";
+import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-trainer-header',
-  templateUrl: './trainer-header.component.html',
-  styleUrls: ['./trainer-header.component.css']
+  selector: 'app-requester-header',
+  templateUrl: './requester-header.component.html',
+  styleUrls: ['./requester-header.component.css']
 })
-export class TrainerHeaderComponent {
+export class RequesterHeaderComponent {
   isLoggedIn = false;
   username: string = '';
-  role: string = '';
   userRole:String ="";
 
   @Output() sideNavToggled = new EventEmitter<boolean>();
@@ -28,7 +27,6 @@ export class TrainerHeaderComponent {
     if (this.isLoggedIn) {
       const token = this.authService.getToken();
       this.username = this.jwtService.getFullNameFromToken(token);
-      this.role = this.jwtService.getRoleFromToken(token).substring(5);
       this.userRole = this.jwtService.getRoleFromToken(token).substring(5).replace("_"," ");
     }
   }
