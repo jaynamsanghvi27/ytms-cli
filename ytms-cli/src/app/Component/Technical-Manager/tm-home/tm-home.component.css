@@ -44,3 +44,7 @@ app-requester-sidebar {
   width: calc(100% - 250px);
   transition: width 1s linear, left 1s linear;;
 }
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}

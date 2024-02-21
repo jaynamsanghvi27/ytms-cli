@@ -12,6 +12,7 @@ import {ChangePasswordComponent} from './Component/change-password/change-passwo
 import {CalenderComponent} from './Component/calender/calender.component';
 import { TrainingReqComponent } from './Component/Requester/training-req/training-req.component';
 import { NominationReqComponent } from './Component/Requester/nomination-req/nomination-req.component';
+import { ViewTrfComponent } from './Component/Requester/view-trf/view-trf.component';
 
 const routes: Routes = [
   {
@@ -74,7 +75,10 @@ const routes: Routes = [
     path:'nomination-req',
     component: NominationReqComponent
   },
-
+  { 
+    path: "view-trf", 
+    component: ViewTrfComponent
+  },
   {
     path: '**',
     component: LoginComponent

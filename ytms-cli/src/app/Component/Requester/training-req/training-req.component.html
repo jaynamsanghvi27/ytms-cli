@@ -68,7 +68,8 @@
                           type="month"
                           formControlName="monthAndYear"
                           placeholder="Month & Year"
-                          class="form-control"
+                          class="form-control" forma
+                          (change)="onMonthYearchange($event)" data-month-format="MMM-YYYY"
                         />
                         </div>
                         <div class="col-2"><label>Training Name</label></div>
@@ -104,6 +105,12 @@
 
 
                     <div class="row">
+                      <div class="col-2">No. of Participant</div>
+                      <div class="col-4">
+                        <input type="number" formControlName="noOfParticipant"
+                        placeholder="Tentative no. of Participant"
+                        class="form-control">
+                      </div>
                       <div class="col-2">Purpose Of Training</div>
                         <div class="col-4">
                         <textarea formControlName="trainingDescription"
@@ -112,7 +119,7 @@
                         </div>
                         
                     </div>
-                    
+                    <input type="hidden" formControlName="userName" [(ngModel)]="userName" >
                   </div>
                   
                   <div class="center">

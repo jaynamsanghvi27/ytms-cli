@@ -1,0 +1,97 @@
+<div class="container-fluid g-0">
+    <app-requester-header (sideNavToggled)="sideNavStatus=$event;">
+    </app-requester-header>
+
+    <main>
+        <app-requester-sidebar [sideNavStatus]="sideNavStatus" [ngClass]="{'app-side-nav-open':sideNavStatus}"
+            class="black-border"> </app-requester-sidebar>
+        <div class="display-area p-3" [ngClass]="{'display-area-shrink':sideNavStatus}">
+            <!-- Main Content    -->
+            <div class="training-request-form">
+                <form>
+                <div class="form-header">
+                    <h5 class="heading-color">Training Request List</h5>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <td><b>Training Id</b></td>
+                            <td><b>Training Name</b></td>
+                            <td><b>Training Status</b></td>
+                            <td><b>Training Created At</b></td>
+                            <td><b>Planned Start Date</b></td>
+                            <td><b>Planned End Date</b></td>
+                            <td><b>Actual Start Date</b></td>
+                            <td><b>Actual End Date</b></td>
+                            <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER'"><b>Action</b></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let training of trainingReqForms">
+                            <td>{{training.id}}</td>
+                            <td>{{training.trainingName}}</td>
+                            <td>{{training.status==true?"approved":"pending"}}</td>
+                            <td>{{training.createdAt}}</td>
+                            <td>{{training.startDate}}</td>
+                            <td>{{training.endDate}}</td>
+                            <td>{{training.actualStartDate}}</td>
+                            <td>{{training.actualEndDate}}</td>
+                            <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER'" style="text-align: center;">
+                                <button *ngIf="training.actualStartDate == null" class="btn btn-primary btn-sm" (click)="openDialog(template);setId(training.id)">Accept</button>
+                                <button *ngIf="training.actualStartDate == null" class="btn btn-danger  btn-sm">Reject</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+            </form>
+        </div>
+        <!-- Main Content Closed -->
+
+        <ng-template #template>
+         <form style="padding: 20px;" [formGroup]="trainingReqForm" (ngSubmit)="submit()">
+            <div mat-dialog-title>
+                <!-- <h2 class="dialog-title">dialog title</h2> -->
+                <a (click)="closeDialog()"><span class="icon-close"></span></a></div>
+            
+            <div class="form-header">
+                <h5 class="heading-color">Set Actual Start and End Date</h5>
+              </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-2">Actual Start Date</div>
+                    <div class="col-4"><input
+                      type="date"
+                      formControlName="actualStartDate"
+                      placeholder="Actual Start Date"
+                      class="form-control"
+                    />
+                    </div>
+                    <div class="col-2"><label>Actual End Date</label></div>
+                    <div class="col-4">
+                        <input
+                      type="date"
+                      formControlName="actualEndDate"
+                      placeholder="Actual End Date"
+                      class="form-control"
+                    />
+                       
+                  </div>
+                </div><br>
+                <input type="hidden" formControlName="id" [(ngModel)]="this.id">
+                <div class="center">
+                    <button
+                      type="submit" 
+                      class="btn btn-primary btn-block btn-lg"
+                    >
+                      Submit
+                    </button>
+                  </div>
+            </div>
+         </form>
+        </ng-template>
+
+        </div>
+    </main>
+
+</div>

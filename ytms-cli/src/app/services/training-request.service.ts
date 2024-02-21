@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject} from 'rxjs'
+import { BehaviorSubject, Observable} from 'rxjs'
 import { TrainingReqForm } from '../Model/TrainingRequestForm';
 
 @Injectable({
@@ -26,4 +26,12 @@ export class TrainingRequestService {
     console.log("on service"+ JSON.stringify(trf));
     return this.http.post<any>(this.url+"/register/saveTrainingRequestForm",trf);
   }
+  updateTraining(trf:TrainingReqForm){
+    console.log("on service"+ JSON.stringify(trf));
+    return this.http.put<any>(this.url+"/register/updateTrainingRequestForm",trf);
+  }
+
+  getTraining(): Observable<any[]> {
+    return this.http.get<TrainingReqForm[]>(this.url+"/register/getTrainingRequestForm"); 
+    }
 }

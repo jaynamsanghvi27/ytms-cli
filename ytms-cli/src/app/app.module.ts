@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import { NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -29,6 +29,9 @@ import { DateFormatPipe } from './pipes/date-format.pipe';
 import { DatePipe } from '@angular/common';
 import { TrainingReqComponent } from './Component/Requester/training-req/training-req.component';
 import { NominationReqComponent } from './Component/Requester/nomination-req/nomination-req.component';
+import { ViewTrfComponent } from './Component/Requester/view-trf/view-trf.component';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+
 
 
 
@@ -49,7 +52,8 @@ import { NominationReqComponent } from './Component/Requester/nomination-req/nom
     CalenderComponent,
     DateFormatPipe,
     TrainingReqComponent,
-    NominationReqComponent
+    NominationReqComponent,
+    ViewTrfComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +68,8 @@ import { NominationReqComponent } from './Component/Requester/nomination-req/nom
     }),
     HttpClientModule,
     FlatpickrModule.forRoot(),
-    NgbModule,NgbModalModule
+    NgbModule,NgbModalModule,
+    MatDialogModule
   ],
   providers: [
     authInterceptorProviders,
