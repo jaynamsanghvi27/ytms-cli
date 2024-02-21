@@ -12,37 +12,44 @@ export class RequesterSidebarComponent {
     {
       number: 1,
       name: 'home',
-      icon: 'fa-solid fa-house'
+      icon: 'fa-solid fa-house',
+      link: ''
     },
     {
       number: 2,
-      name: 'Analytics',
-      icon: 'fa-solid fa-chart-line'
+      name: 'Training Request',
+      icon: 'fa-solid fa-chart-line',
+      link: '/training-req'
     },
     {
       number: 3,
       name: 'Products',
-      icon: 'fa-solid fa-box'
+      icon: 'fa-solid fa-box',
+      link: ''
     },
     {
       number: 4,
       name: 'Order  ',
-      icon: 'fa-solid fa-cart-shopping'
+      icon: 'fa-solid fa-cart-shopping',
+      link: ''
     },
     {
       number: 5,
       name: 'Settings',
-      icon: 'fa-solid fa-gear'
+      icon: 'fa-solid fa-gear',
+      link: ''
     },
     {
       number: 6,
       name: 'About',
-      icon: 'fa-solid fa-circle-info'
+      icon: 'fa-solid fa-circle-info',
+      link: ''
     },
     {
       number: 7,
       name: 'Contact',
-      icon: 'fa-solid fa-phone'
+      icon: 'fa-solid fa-phone',
+      link: ''
     },
   ]
 }
