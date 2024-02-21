@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { AuthService } from 'src/app/Core/services/auth.service';
+import { JwtService } from 'src/app/Core/services/jwt.service';
 
 @Component({
   selector: 'app-requester-sidebar',
@@ -7,42 +9,61 @@ import { Component, Input } from '@angular/core';
 })
 export class RequesterSidebarComponent {
   @Input() sideNavStatus: boolean = false;
+  role:any;
+  list:any;
+  constructor(private auth:AuthService, private jwtserv:JwtService){
+    let token = auth.getToken();
+    let r1= jwtserv.getRoleFromToken(token);
+    console.log(this.role);
+    this.list = [
+      // {
+      //   number: 1,
+      //   name: 'My Schedule',
+      //   icon: 'fa-solid fa-calendar',
+      //   routing: '/requester/calendar'
+  
+      // },
+      {
+        number: 2,
+        name: 'Training Request',
+        icon: 'fa-solid fa-chart-line',
+        routing: '/training-req'
+      },
+      {
+        number: 3,
+        name: 'View Training Request',
+        icon: 'fa-solid fa-box',
+        routing: '/view-trf'
+      },
+      {
+        number: 4,
+        name: 'Order  ',
+        icon: 'fa-solid fa-cart-shopping',
+        routing: '/requester/calendar'
+  
+      },
+      {
+        number: 5,
+        name: 'Settings',
+        icon: 'fa-solid fa-gear',
+        routing: '/requester/calendar'
+  
+      },
+      {
+        number: 6,
+        name: 'About',
+        icon: 'fa-solid fa-circle-info',
+        routing: '/requester/calendar'
+  
+      },
+      {
+        number: 7,
+        name: 'Contact',
+        icon: 'fa-solid fa-phone',
+        routing: '/requester/calendar'
+      },
+    ]
+  }
+  
 
-  list = [
-    {
-      number: 1,
-      name: 'home',
-      icon: 'fa-solid fa-house'
-    },
-    {
-      number: 2,
-      name: 'Analytics',
-      icon: 'fa-solid fa-chart-line'
-    },
-    {
-      number: 3,
-      name: 'Products',
-      icon: 'fa-solid fa-box'
-    },
-    {
-      number: 4,
-      name: 'Order  ',
-      icon: 'fa-solid fa-cart-shopping'
-    },
-    {
-      number: 5,
-      name: 'Settings',
-      icon: 'fa-solid fa-gear'
-    },
-    {
-      number: 6,
-      name: 'About',
-      icon: 'fa-solid fa-circle-info'
-    },
-    {
-      number: 7,
-      name: 'Contact',
-      icon: 'fa-solid fa-phone'
-    },
-  ]
 }

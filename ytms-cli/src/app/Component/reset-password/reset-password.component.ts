@@ -1,3 +1,4 @@
+
 import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -10,6 +11,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./reset-password.component.css']
 })
 export class ResetPasswordComponent {
+
   resetPasswordForm!: FormGroup;
   email!: any;
   password?: any = "";

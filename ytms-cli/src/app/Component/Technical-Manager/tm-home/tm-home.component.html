@@ -1,10 +1,10 @@
 <div class="container-fluid g-0">
-  <app-requester-header (sideNavToggled)="sideNavStatus=$event;">
-  </app-requester-header>
+  <app-tm-header (sideNavToggled)="sideNavStatus=$event;">
+  </app-tm-header>
 
   <main>
-    <app-requester-sidebar [ngClass]="{'app-side-nav-open':sideNavStatus}" [sideNavStatus]="sideNavStatus"
-                           class="black-border"></app-requester-sidebar>
+    <app-tm-sidebar [ngClass]="{'app-side-nav-open':sideNavStatus}" [sideNavStatus]="sideNavStatus"
+                    class="black-border"></app-tm-sidebar>
     <div [ngClass]="{'display-area-shrink':sideNavStatus}" class="display-area p-3">
       <p class="fs-1 fw-bold fst-italic text-center">List of Requesters</p>
       <table style="width:100%">

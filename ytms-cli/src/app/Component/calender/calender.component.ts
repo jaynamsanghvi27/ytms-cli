@@ -1,4 +1,4 @@
-import {Component, TemplateRef, ViewChild} from '@angular/core';
+import {Component, Input, TemplateRef, ViewChild} from '@angular/core';
 import {isSameDay, isSameMonth} from 'date-fns';
 import {debounceTime, distinctUntilChanged, Subject, switchMap} from 'rxjs';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -8,6 +8,8 @@ import {FormBuilder, NgForm, Validators} from '@angular/forms';
 import {CalendarService} from 'src/app/Core/services/calendar.service';
 import {UsersService} from 'src/app/Core/services/users.service';
 import Swal from 'sweetalert2';
+import {AuthService} from "../../Core/services/auth.service";
+import {JwtService} from "../../Core/services/jwt.service";
 
 const colors: Record<string, EventColor> = {
   red: {
@@ -30,10 +32,12 @@ const colors: Record<string, EventColor> = {
   styleUrls: ['./calender.component.css']
 })
 export class CalenderComponent {
-
+  @Input() sideNavStatus: boolean = false;
   @ViewChild('modalContent', {static: true}) modalContent!: TemplateRef<any>;
   trainerSearchTerm: string = '';
   selectedTrainer!: any;
+  name: string = '';
+  userName: string = '';
   allTrainers: any = [];
   emailpattern = /^[^\s@]+@yash\.com$/;
   event!: CalendarEvent;
@@ -84,6 +88,8 @@ export class CalenderComponent {
   constructor(private formBuilder: FormBuilder,
               private modal: NgbModal,
               private calendarService: CalendarService,
+              private authService: AuthService,
+              private jwtService: JwtService,
               private userService: UsersService) {
   }
 
@@ -105,6 +111,9 @@ export class CalenderComponent {
 
   ngOnInit() {
     console.log("Fetching all events");
+    let token = this.authService.getToken();
+    this.name = this.jwtService.getFullNameFromToken(token);
+    this.userName = this.jwtService.getUserNameFromToken(token);
     this.fetchAllEvents();
     this.fetchAllTrainers();
     console.log(" this.fetchAllTrainers(): ", JSON.stringify(this.fetchAllTrainers()));
@@ -251,24 +260,25 @@ export class CalenderComponent {
 
   searchEventsByTrainer(trainer: any): void {
     console.log("TrainerEmail id is ::: ", JSON.stringify(trainer));
-    this.calendarService.searchByTrainer(trainer).subscribe(
-      (response: any) => {
-        console.log("Response from server:", response);
-        if (response) {
-          this.events = response.data.map((event: any) => ({
-            ...event,
-            start: new Date(event.start[0], event.start[1] - 1, event.start[2], event.start[3], event.start[4]),
-            end: new Date(event.end[0], event.end[1] - 1, event.end[2], event.end[3], event.end[4])
-          }));
-          console.log("this events from server ", JSON.stringify(this.events))
-        } else {
-          console.error('Invalid response format:', response);
+    trainer === "0" ? this.fetchAllEvents() :
+      this.calendarService.searchByTrainer(trainer).subscribe(
+        (response: any) => {
+          console.log("Response from server:", response);
+          if (response.data !== 'Nil') {
+            this.events = response.data.map((event: any) => ({
+              ...event,
+              start: new Date(event.start[0], event.start[1] - 1, event.start[2], event.start[3], event.start[4]),
+              end: new Date(event.end[0], event.end[1] - 1, event.end[2], event.end[3], event.end[4])
+            }));
+            console.log("this events from server ", JSON.stringify(this.events))
+          } else {
+            Swal.fire('Oops..', response.message, 'info');
+          }
+        },
+        (error) => {
+          console.error('Error fetching events:', error);
         }
-      },
-      (error) => {
-        console.error('Error fetching events:', error);
-      }
-    )
+      )
   }
 
   setView(view: CalendarView) {

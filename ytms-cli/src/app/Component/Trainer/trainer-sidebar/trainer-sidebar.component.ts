@@ -18,45 +18,42 @@ export class TrainerSidebarComponent {
     },
     {
       number: 2,
-      name: 'Analytics',
+      name: 'Training Request',
       icon: 'fa-solid fa-chart-line',
-      routing:'trainer/trainer-calendar'
-
+      routing: '/training-req'
     },
     {
       number: 3,
-      name: 'Products',
+      name: 'View Training Request',
       icon: 'fa-solid fa-box',
-      routing:'trainer/trainer-calendar'
-
+      routing: '/view-trf'
     },
     {
       number: 4,
       name: 'Order  ',
       icon: 'fa-solid fa-cart-shopping',
-      routing:'trainer/trainer-calendar'
+      routing: '/requester/calendar'
 
     },
     {
       number: 5,
       name: 'Settings',
       icon: 'fa-solid fa-gear',
-      routing:'trainer/trainer-calendar'
+      routing: '/requester/calendar'
 
     },
     {
       number: 6,
       name: 'About',
       icon: 'fa-solid fa-circle-info',
-      routing:'trainer/trainer-calendar'
+      routing: '/requester/calendar'
 
     },
     {
       number: 7,
       name: 'Contact',
       icon: 'fa-solid fa-phone',
-      routing:'trainer/trainer-calendar'
-
+      routing: '/requester/calendar'
     },
   ]
 }

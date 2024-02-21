@@ -29,7 +29,7 @@ export class AuthGuard implements CanActivate {
           //get roles from token
           const role = this.jwtService.getRoleFromToken(token);
           // Check if route is restricted by role
-          if (role === 'ROLE_REQUESTER' || role === 'ROLE_TRAINER') {
+          if (role === 'ROLE_REQUESTER') {
             // Role not authorized, redirect to home page
             return true;
           } else {

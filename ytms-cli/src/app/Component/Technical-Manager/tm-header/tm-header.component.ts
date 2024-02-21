@@ -12,6 +12,7 @@ export class TmHeaderComponent {
 
   isLoggedIn = false;
   username: string = '';
+  userRole:String ="";
 
   @Output() sideNavToggled = new EventEmitter<boolean>();
   menuStatus: boolean = false;
@@ -27,6 +28,7 @@ export class TmHeaderComponent {
     if (this.isLoggedIn) {
       const token = this.authService.getToken();
       this.username = this.jwtService.getFullNameFromToken(token);
+      this.userRole = this.jwtService.getRoleFromToken(token).substring(5).replace("_"," ");
     }
   }
 

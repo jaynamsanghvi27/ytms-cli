@@ -11,38 +11,49 @@ export class TmSidebarComponent {
   list = [
     {
       number: 1,
-      name: 'home',
-      icon: 'fa-solid fa-house'
+      name: 'Schedule',
+      icon: 'fa-solid fa-calendar',
+      routing: '/book-calendar'
+
     },
     {
       number: 2,
-      name: 'Analytics',
-      icon: 'fa-solid fa-chart-line'
+      name: 'Training Request',
+      icon: 'fa-solid fa-chart-line',
+      routing: '/training-req'
     },
     {
       number: 3,
-      name: 'Products',
-      icon: 'fa-solid fa-box'
+      name: 'View Training Request',
+      icon: 'fa-solid fa-box',
+      routing: '/view-trf'
     },
     {
       number: 4,
       name: 'Order  ',
-      icon: 'fa-solid fa-cart-shopping'
+      icon: 'fa-solid fa-cart-shopping',
+      routing: '/requester/calendar'
+
     },
     {
       number: 5,
       name: 'Settings',
-      icon: 'fa-solid fa-gear'
+      icon: 'fa-solid fa-gear',
+      routing: '/requester/calendar'
+
     },
     {
       number: 6,
       name: 'About',
-      icon: 'fa-solid fa-circle-info'
+      icon: 'fa-solid fa-circle-info',
+      routing: '/requester/calendar'
+
     },
     {
       number: 7,
       name: 'Contact',
-      icon: 'fa-solid fa-phone'
+      icon: 'fa-solid fa-phone',
+      routing: '/requester/calendar'
     },
   ]
 }

@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {RequesterHomeComponent} from './Component/Requester/requester-home/requester-home.component';
 import {LoginComponent} from './Component/login/login.component';
 import {ForgotPasswordComponent} from './Component/forgot-password/forgot-password.component';
 import {AuthGuard} from "./Core/guard/auth.guard";
@@ -10,6 +9,14 @@ import {RegistrationComponent} from "./Component/registration/registration.compo
 import {ResetPasswordComponent} from './Component/reset-password/reset-password.component';
 import {ChangePasswordComponent} from './Component/change-password/change-password.component';
 import {CalenderComponent} from './Component/calender/calender.component';
+import { TrainingReqComponent } from './Component/Requester/training-req/training-req.component';
+import { NominationReqComponent } from './Component/Requester/nomination-req/nomination-req.component';
+import { ViewTrfComponent } from './Component/Requester/view-trf/view-trf.component';
+import {TrainerGuard} from "./Core/guard/trainer.guard";
+import {RequesterHomeComponent} from "./Component/Requester/requester-home/requester-home.component";
+import {
+  RequesterDashboardComponent
+} from "./Component/RequesterModule/requester-dashboard/requester-dashboard.component";
 
 const routes: Routes = [
   {
@@ -23,9 +30,9 @@ const routes: Routes = [
   },
 
   {
-    path: "book-calendar", component: CalenderComponent,
-    canActivate: [AuthGuard]
-
+    path: "book-calendar",
+    component: CalenderComponent,
+    canActivate: [AdminGuard]
   },
   {
     path: 'register',
@@ -37,13 +44,27 @@ const routes: Routes = [
     canActivate: [AdminGuard]
   },
   {
-    path: "requester-home",
+    path: "requester/home",
     component: RequesterHomeComponent,
     canActivate: [AuthGuard]
   },
   {
+    path: "requester/dashboard",
+    component: RequesterHomeComponent,
+    canActivate: [AuthGuard]
+  },
+  /*{
+    path: "requester/calendar",
+    component: RequesterCalendarComponent,
+    canActivate: [AuthGuard]
+  },*/
+  {
     path: "forgotPassword",
     component: ForgotPasswordComponent
+  },
+  { 
+    path: "reset-pwd", 
+    component: ResetPasswordComponent
   },
   {
     path: "reset-password",
@@ -57,13 +78,33 @@ const routes: Routes = [
   //#################### TRAINER ROLE ROUTES ###########################
   {
     path: 'trainer',
+    canActivate: [TrainerGuard],
     loadChildren: () => import('./Component/Trainer/trainer.module').then(m => m.TrainerModule)
   },
 
+//#################### REQUESTER ROLE ROUTES ###########################
   {
+    path:'training-req',
+    component: TrainingReqComponent
+  },
+  {
+    path:'nomination-req',
+    component: NominationReqComponent
+  },
+  { 
+    path: "view-trf", 
+    component: ViewTrfComponent
+  },
+  {
+    path: 'requester',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./Component/RequesterModule/requester.module').then(m => m.RequesterModule)
+  },
+
+  /*{
     path: '**',
     component: LoginComponent
-  }
+  }*/
 ];
 
 @NgModule({

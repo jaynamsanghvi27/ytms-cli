@@ -1,4 +1,4 @@
-app-requester-header {
+app-tm-header {
   position: fixed;
   width: 100%;
   top: 0px;
@@ -13,7 +13,7 @@ main {
   z-index: 1;
 }
 
-app-requester-sidebar {
+app-tm-sidebar {
 
   position: absolute;
   left: 0rem;
@@ -43,4 +43,8 @@ app-requester-sidebar {
   left: 250px;
   width: calc(100% - 250px);
   transition: width 1s linear, left 1s linear;;
+}
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
 }

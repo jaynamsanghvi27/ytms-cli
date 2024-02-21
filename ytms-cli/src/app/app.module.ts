@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import { NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -27,7 +27,10 @@ import { NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { DateFormatPipe } from './pipes/date-format.pipe';
 import { DatePipe } from '@angular/common';
-
+import { TrainingReqComponent } from './Component/Requester/training-req/training-req.component';
+import { NominationReqComponent } from './Component/Requester/nomination-req/nomination-req.component';
+import { ViewTrfComponent } from './Component/Requester/view-trf/view-trf.component';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,10 @@ import { DatePipe } from '@angular/common';
     ResetPasswordComponent,
     ChangePasswordComponent,
     CalenderComponent,
-    DateFormatPipe
+    DateFormatPipe,
+    TrainingReqComponent,
+    NominationReqComponent,
+    ViewTrfComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +65,8 @@ import { DatePipe } from '@angular/common';
     }),
     HttpClientModule,
     FlatpickrModule.forRoot(),
-    NgbModule,NgbModalModule
+    NgbModule,NgbModalModule,
+    MatDialogModule
   ],
   providers: [
     authInterceptorProviders,

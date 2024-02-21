@@ -34,10 +34,10 @@ export class AdminGuard implements CanActivate {
             // Not authenticated, redirect to user dashboard or handle accordingly
             if (role === 'ROLE_REQUESTER') {
               Swal.fire('Error', 'Unauthorized', 'error');
-              this.router.navigate(['requester-home']);
+              this.router.navigate(['requester/dashboard']);
             } else if (role === 'ROLE_TRAINER') {
               Swal.fire('Error', 'Unauthorized', 'error');
-              this.router.navigate(['trainer']);
+              this.router.navigate(['trainer/dashboard']);
             } else {
               Swal.fire('Error', 'Unauthorized', 'error');
               this.router.navigate(['']);
