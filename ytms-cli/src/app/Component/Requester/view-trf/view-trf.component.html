@@ -3,8 +3,8 @@
     </app-requester-header>
 
     <main>
-        <app-requester-sidebar [sideNavStatus]="sideNavStatus" [ngClass]="{'app-side-nav-open':sideNavStatus}"
-            class="black-border"> </app-requester-sidebar>
+         <app-requester-sidebar [sideNavStatus]="sideNavStatus" *ngIf="this.userRole != 'ROLE_TRAINER'" [ngClass]="{'app-side-nav-open':sideNavStatus}"
+            class="black-border"> </app-requester-sidebar> 
         <div class="display-area p-3" [ngClass]="{'display-area-shrink':sideNavStatus}">
             <!-- Main Content    -->
             <div class="training-request-form">
@@ -16,8 +16,9 @@
                     <thead>
                         <tr>
                             <td><b>Training Id</b></td>
+                            <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER'"><b>Training Requested by</b></td>
                             <td><b>Training Name</b></td>
-                            <td><b>Training Status</b></td>
+                            <td><b>Training Status(For declined,Click)</b></td>
                             <td><b>Training Created At</b></td>
                             <td><b>Planned Start Date</b></td>
                             <td><b>Planned End Date</b></td>
@@ -29,16 +30,17 @@
                     <tbody>
                         <tr *ngFor="let training of trainingReqForms">
                             <td>{{training.id}}</td>
+                            <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER'">{{training.userName}}</td>
                             <td>{{training.trainingName}}</td>
-                            <td>{{training.status==true?"approved":"pending"}}</td>
+                            <td > <a *ngIf="training.status=='DECLINED'" (click)="showMessage(training.declinedMessage)"> {{training.status}}</a> {{training.status!='DECLINED'?training.status:''}}</td>
                             <td>{{training.createdAt}}</td>
                             <td>{{training.startDate}}</td>
                             <td>{{training.endDate}}</td>
                             <td>{{training.actualStartDate}}</td>
                             <td>{{training.actualEndDate}}</td>
-                            <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER'" style="text-align: center;">
-                                <button *ngIf="training.actualStartDate == null" class="btn btn-primary btn-sm" (click)="openDialog(template);setId(training.id)">Accept</button>
-                                <button *ngIf="training.actualStartDate == null" class="btn btn-danger  btn-sm">Reject</button>
+                            <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' " style="text-align: center;">
+                                <button *ngIf="training.actualStartDate == null && training.status!='DECLINED'" class="btn btn-primary btn-sm" (click)="openDialog(template);setId(training.id)">Accept</button>
+                                <button *ngIf="training.actualStartDate == null && training.status!='DECLINED'" class="btn btn-danger  btn-sm" (click)="declineDialog(template1);setId(training.id)">Reject</button>
                             </td>
                         </tr>
                     </tbody>
@@ -90,7 +92,39 @@
             </div>
          </form>
         </ng-template>
-
+        <ng-template #template1>
+            <form style="padding: 20px;" [formGroup]="trainingReqForm1" (ngSubmit)="decline()">
+               <div mat-dialog-title>
+                   <!-- <h2 class="dialog-title">dialog title</h2> -->
+                   <a (click)="closeDialog()"><span class="icon-close"></span></a></div>
+               
+               <div class="form-header">
+                   <h5 class="heading-color">Write Reason for decline request</h5>
+                 </div>
+               <div class="form-group">
+                   <div class="row">
+                       <div class="col-2">Message</div>
+                       <div class="col-4"><input
+                         type="text"
+                         formControlName="declinedMessage"
+                         placeholder="Write the declined message"
+                         class="form-control"
+                       />
+                       </div>
+                       </div>
+                       
+                   <input type="hidden" formControlName="id" [(ngModel)]="this.id">
+                   <div class="center">
+                       <button
+                         type="submit" 
+                         class="btn btn-primary btn-block btn-lg"
+                       >
+                         Submit
+                       </button>
+                     </div>
+               </div>
+            </form>
+           </ng-template>
         </div>
     </main>
 

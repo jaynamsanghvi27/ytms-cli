@@ -16,24 +16,26 @@ export class RequesterSidebarComponent {
     let r1= jwtserv.getRoleFromToken(token);
     console.log(this.role);
     this.list = [
-      // {
-      //   number: 1,
-      //   name: 'My Schedule',
-      //   icon: 'fa-solid fa-calendar',
-      //   routing: '/requester/calendar'
+      {
+         number: 1,
+         name: 'My Schedule',
+        icon: 'fa-solid fa-calendar-days',
+        routing: (r1=='ROLE_TECHNICAL_MANAGER')?'/book-calendar':'/requester/calendar'
+        
   
-      // },
+       },
       {
         number: 2,
         name: 'Training Request',
-        icon: 'fa-solid fa-chart-line',
-        routing: '/training-req'
+        icon: 'fa-solid fa-person-chalkboard',
+        routing: (r1=='ROLE_TECHNICAL_MANAGER')?'/tm-training-req':'/re-training-req'
       },
       {
         number: 3,
         name: 'View Training Request',
-        icon: 'fa-solid fa-box',
-        routing: '/view-trf'
+        icon: 'fa-regular fa-rectangle-list',
+        routing: (r1=='ROLE_TECHNICAL_MANAGER')?'/tm-view-trf':'/re-view-trf'
+  
       },
       {
         number: 4,

@@ -12,21 +12,21 @@ export class RequesterSidebarComponent {
     {
       number: 1,
       name: 'My Schedule',
-      icon: 'fa-solid fa-calendar',
+      icon: 'fa-solid fa-calendar-days',
       routing: 'requester-calendar'
 
     },
     {
       number: 2,
       name: 'Analytics',
-      icon: 'fa-solid fa-chart-line',
+      icon: 'fa-solid fa-person-chalkboard',
       routing: 'requester/requester-calendar'
 
     },
     {
       number: 3,
       name: 'Products',
-      icon: 'fa-solid fa-box',
+      icon: 'fa-regular fa-rectangle-list',
       routing: 'requester/requester-calendar'
 
     },

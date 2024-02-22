@@ -200,6 +200,7 @@ export class TrainerCalendarComponent {
   }
 
   eventModal(content: any, eventToEdit: any) {
+    console.log(eventToEdit);
     this.calendarService.getEventById(eventToEdit.eventId).subscribe(
       (previousEvent: any) => {
         this.editedEvent = {

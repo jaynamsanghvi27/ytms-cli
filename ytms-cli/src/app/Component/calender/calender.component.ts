@@ -10,6 +10,7 @@ import {UsersService} from 'src/app/Core/services/users.service';
 import Swal from 'sweetalert2';
 import {AuthService} from "../../Core/services/auth.service";
 import {JwtService} from "../../Core/services/jwt.service";
+import { Router } from '@angular/router';
 
 const colors: Record<string, EventColor> = {
   red: {
@@ -90,7 +91,7 @@ export class CalenderComponent {
               private calendarService: CalendarService,
               private authService: AuthService,
               private jwtService: JwtService,
-              private userService: UsersService) {
+              private userService: UsersService,private router:Router) {
   }
 
   onDateSelect(date: string) {
@@ -312,6 +313,7 @@ export class CalenderComponent {
           this.events = [
             ...this.events, res];
           console.log('Event created successfully! ', this.events);
+            window.location.reload();
         }, (error) => {
           console.error('Error createing event ', error);
         }

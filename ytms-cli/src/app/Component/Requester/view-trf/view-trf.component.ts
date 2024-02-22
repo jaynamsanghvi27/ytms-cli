@@ -18,6 +18,7 @@ export class ViewTrfComponent {
   sideNavStatus: boolean = false;
   trainingReqForms : TrainingReqForm[]=[];
   trainingReqForm!: FormGroup;
+  trainingReqForm1!: FormGroup;
   userRole:string="";
   
   constructor(private ser:TrainingRequestService,private auth:AuthService, 
@@ -32,10 +33,24 @@ export class ViewTrfComponent {
       id:['', [Validators.required]],
       actualStartDate: ['', [Validators.required]],
       actualEndDate: ['', [Validators.required]]});
+
+  
+  this.trainingReqForm1 = this.formBuilder.group({
+    id:['', [Validators.required]],
+    declinedMessage:['', [Validators.required]],
+
+});
   }
 
   loadList(){
     this.ser.getTraining().subscribe((resp:any)=>{(this.trainingReqForms=resp)});
+  }
+  declineDialog(templateRef1:any)
+  {
+    let dialogRef = this.dialog.open(templateRef1, {
+      width: '80%',
+      height: '50%'
+    });
   }
   openDialog(templateRef:any) {
     let dialogRef = this.dialog.open(templateRef, {
@@ -50,6 +65,22 @@ export class ViewTrfComponent {
     this.dialog.closeAll();
     // this.matDialogReference.close([]);
 }
+decline()
+{
+  if (this.trainingReqForm1.valid) {
+    console.log("befor service "+JSON.stringify(this.trainingReqForm1.value));
+    let obj:any=this.trainingReqForm1.value;
+    this.ser.declinetrf(obj).subscribe();
+    Swal.fire('Success', 'Training Declined', 'success');
+    this.trainingReqForm1.reset();
+    this.closeDialog();
+    this.loadList();
+    window.location.reload();
+  } else {
+    this.trainingReqForm1.markAllAsTouched();
+  }
+}
+
   submit(): void {
     if (this.trainingReqForm.valid) {
       console.log("befor service "+JSON.stringify(this.trainingReqForm.value));
@@ -59,9 +90,14 @@ export class ViewTrfComponent {
       this.trainingReqForm.reset();
       this.closeDialog();
       this.loadList();
+      window.location.reload();
     } else {
       this.trainingReqForm.markAllAsTouched();
     }
+  }
+
+  showMessage(message:any){
+    Swal.fire('Reason for Decline',message, 'error');
   }
 
 }
