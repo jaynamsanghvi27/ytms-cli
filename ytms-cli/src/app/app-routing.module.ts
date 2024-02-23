@@ -53,11 +53,11 @@ const routes: Routes = [
     component: RequesterHomeComponent,
     canActivate: [AuthGuard]
   },
-  /*{
-    path: "requester/calendar",
-    component: RequesterCalendarComponent,
-    canActivate: [AuthGuard]
-  },*/
+ {
+    path: "requester/calendar",pathMatch:'full',
+    component: CalenderComponent,
+    canActivate: [AdminGuard,AuthGuard,TrainerGuard]
+  },
   {
     path: "forgotPassword",
     component: ForgotPasswordComponent
@@ -85,6 +85,12 @@ const routes: Routes = [
 //#################### REQUESTER ROLE ROUTES ###########################
   {
     path:'training-req',
+    canActivate: [AdminGuard,AuthGuard],
+    component: TrainingReqComponent
+  },
+  {
+    path:'re-training-req',
+    canActivate: [AuthGuard],
     component: TrainingReqComponent
   },
   {
@@ -92,8 +98,24 @@ const routes: Routes = [
     component: NominationReqComponent
   },
   { 
-    path: "view-trf", 
+    path: "view-trf",
+    canActivate: [AdminGuard,AuthGuard], 
     component: ViewTrfComponent
+  },
+  { 
+    path: "re-view-trf",
+    canActivate: [AuthGuard], 
+    component: ViewTrfComponent
+  },
+  { 
+    path: "tm-view-trf",
+    canActivate: [AdminGuard], 
+    component: ViewTrfComponent
+  },
+  {
+    path:'tm-training-req',
+    canActivate: [AdminGuard],
+    component: TrainingReqComponent
   },
   {
     path: 'requester',

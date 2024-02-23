@@ -84,7 +84,7 @@
               </td>
               <td>
 
-                <input (change)="refresh.next()" [value]="getPrimaryColor(eventdata)" type="color"/>
+                <input (change)="refresh.next()" value="{{eventdata?.color}}" type="color"/>
               </td>
               <td>
                 <p>{{ datepipe.transform(eventdata.start, 'dd-MM-yyyy hh:mm') }}</p>
@@ -93,8 +93,8 @@
                 <p>{{ datepipe.transform(eventdata.end, 'dd-MM-yyyy hh:mm') }}</p>
               </td>
               <td>
-                <button (click)="eventModal(editEventModal,event)" class="btn btn-danger">Edit</button>
-                <button (click)="deleteEvent(event)" class="btn btn-danger">Delete</button>
+                <button (click)="eventModal(editEventModal,eventdata)" class="btn btn-danger">Edit</button>
+                <button (click)="deleteEvent(eventdata)" class="btn btn-danger">Delete</button>
               </td>
             </tr>
             </tbody>

@@ -142,7 +142,7 @@
                     </td>
                     <td>
 
-                      <input (change)="refresh.next()" [value]="getPrimaryColor(event)" type="color"/>
+                      <input (change)="refresh.next()" value="{{event?.color}}" type="color"/>
                     </td>
                     <td>
                       <p>{{ event?.start }}</p>
@@ -175,7 +175,8 @@
                 </div>
                 <div>
                   Event:
-                  <pre>{{ modalData!.event | json }}</pre>
+                  <pre>{{ modalData!.event.start }}</pre>
+                  <pre>{{ modalData!.event.end }}</pre>
                 </div>
               </div>
               <div class="modal-footer">

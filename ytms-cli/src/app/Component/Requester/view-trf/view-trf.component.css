@@ -138,7 +138,19 @@ app-requester-sidebar {
     text-align: center;
 }
 
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-  }
+table {  
+    font-family: arial, sans-serif;
+    font-style: normal;
+    border-collapse: collapse;  
+    width: 100%; 
+    color:black 
+  }  
+    
+  td, th {  
+    border: 2px solid gray;  
+    text-align: left;  
+    padding: 8px;  
+  }  
+  tr:nth-child(even) {  
+    background-color: white;  
+  } 

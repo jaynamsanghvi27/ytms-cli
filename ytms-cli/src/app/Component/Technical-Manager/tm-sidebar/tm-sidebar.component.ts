@@ -12,21 +12,21 @@ export class TmSidebarComponent {
     {
       number: 1,
       name: 'Schedule',
-      icon: 'fa-solid fa-calendar',
+      icon: 'fa-solid fa-calendar-days',
       routing: '/book-calendar'
 
     },
     {
       number: 2,
       name: 'Training Request',
-      icon: 'fa-solid fa-chart-line',
-      routing: '/training-req'
+      icon: 'fa-solid fa-person-chalkboard',
+      routing: '/tm-training-req'
     },
     {
       number: 3,
       name: 'View Training Request',
-      icon: 'fa-solid fa-box',
-      routing: '/view-trf'
+      icon: 'fa-regular fa-rectangle-list',
+      routing: '/tm-view-trf'
     },
     {
       number: 4,

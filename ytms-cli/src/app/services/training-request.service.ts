@@ -30,7 +30,10 @@ export class TrainingRequestService {
     console.log("on service"+ JSON.stringify(trf));
     return this.http.put<any>(this.url+"/register/updateTrainingRequestForm",trf);
   }
-
+  declinetrf(trf:TrainingReqForm){
+    console.log("on service"+ JSON.stringify(trf));
+    return this.http.put<any>(this.url+"/register/decline-trf",trf);
+  }
   getTraining(): Observable<any[]> {
     return this.http.get<TrainingReqForm[]>(this.url+"/register/getTrainingRequestForm"); 
     }

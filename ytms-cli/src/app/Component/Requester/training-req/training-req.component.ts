@@ -27,6 +27,7 @@ export class TrainingReqComponent {
   trainingTypes: string[] = ["On-Demand", "On-Bench", "Fresher"];
 
   monthYr:any;
+  userRole: any;
   
   
  
@@ -34,6 +35,7 @@ export class TrainingReqComponent {
     private auth:AuthService, private jwtServ:JwtService, private datepipe: DatePipe){
       let token = auth.getToken();
       this.userName = jwtServ.getUserNameFromToken(token);
+      this.userRole = this.jwtServ.getRoleFromToken(token);
     
   }
  

@@ -12,21 +12,21 @@ export class TrainerSidebarComponent {
     {
       number: 1,
       name: 'My Schedule',
-      icon: 'fa-solid fa-calendar',
-      routing:'trainer-calendar'
+      icon: 'fa-solid fa-calendar-days',
+      routing:'/trainer/trainer-calendar'
 
     },
     {
       number: 2,
       name: 'Training Request',
-      icon: 'fa-solid fa-chart-line',
-      routing: '/training-req'
+      icon: 'fa-solid fa-person-chalkboard',
+      routing: '/trainer/training-req'
     },
     {
       number: 3,
       name: 'View Training Request',
-      icon: 'fa-solid fa-box',
-      routing: '/view-trf'
+      icon: 'fa-regular fa-rectangle-list',
+      routing: '/trainer/view-trf'
     },
     {
       number: 4,

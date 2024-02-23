@@ -9,10 +9,11 @@ export class TrainingReqForm{
     startDate!: Date;
     endDate!: Date;
     trainingDescription!: String;
-    status?:Boolean;
+    status?:string;
     actualStartDate!: Date;
 	actualEndDate!: Date;
     createdAt !: Date;
     userName!:String;
     noOfParticipant!:number;
+    declinedMessage!:string;
 }
