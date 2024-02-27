@@ -24,7 +24,8 @@
                             <td><b>Planned End Date</b></td>
                             <td><b>Actual Start Date</b></td>
                             <td><b>Actual End Date</b></td>
-                            <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER'"><b>Action</b></td>
+                            <td><b>Action</b></td>
+                            <!-- <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER'"><b>Action</b></td> -->
                         </tr>
                     </thead>
                     <tbody>
@@ -38,9 +39,11 @@
                             <td>{{training.endDate}}</td>
                             <td>{{training.actualStartDate}}</td>
                             <td>{{training.actualEndDate}}</td>
-                            <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' " style="text-align: center;">
-                                <button *ngIf="training.actualStartDate == null && training.status!='DECLINED'" class="btn btn-primary btn-sm" (click)="openDialog(template);setId(training.id)">Accept</button>
-                                <button *ngIf="training.actualStartDate == null && training.status!='DECLINED'" class="btn btn-danger  btn-sm" (click)="declineDialog(template1);setId(training.id)">Reject</button>
+                            <!-- <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' " style="text-align: center;"> -->
+                              <td style="text-align: center;">
+                                <button *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' && training.actualStartDate == null && training.status!='DECLINED'" class="btn btn-primary btn-sm" (click)="openDialog(template);setId(training.id)">Accept</button>
+                                <button *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' && training.actualStartDate == null && training.status!='DECLINED'" class="btn btn-danger  btn-sm" (click)="declineDialog(template1);setId(training.id)">Reject</button>
+                                <button *ngIf="training.status=='DECLINED'" class="btn btn-warning btn-sm" (click)="editTrf(training.id)">Edit</button>
                             </td>
                         </tr>
                     </tbody>

@@ -94,6 +94,11 @@ const routes: Routes = [
     component: TrainingReqComponent
   },
   {
+    path:'re-training-req/:id',
+    canActivate: [AuthGuard],
+    component: TrainingReqComponent
+  },
+  {
     path:'nomination-req',
     component: NominationReqComponent
   },

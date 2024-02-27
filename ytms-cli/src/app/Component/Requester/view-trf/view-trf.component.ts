@@ -6,6 +6,7 @@ import { TrainingRequestService } from 'src/app/services/training-request.servic
 import {MatDialog} from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-view-trf',
@@ -22,7 +23,7 @@ export class ViewTrfComponent {
   userRole:string="";
   
   constructor(private ser:TrainingRequestService,private auth:AuthService, 
-    private jwtServ:JwtService,public dialog: MatDialog,private formBuilder: FormBuilder,
+    private jwtServ:JwtService,public dialog: MatDialog,private formBuilder: FormBuilder,private router: Router
     ){
     let token = auth.getToken();
     this.userRole = jwtServ.getRoleFromToken(token);
@@ -98,6 +99,10 @@ decline()
 
   showMessage(message:any){
     Swal.fire('Reason for Decline',message, 'error');
+  }
+
+  editTrf(trainingId:any){
+    this.router.navigate(['/re-training-req',trainingId]);
   }
 
 }
