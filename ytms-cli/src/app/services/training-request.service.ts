@@ -45,4 +45,17 @@ export class TrainingRequestService {
   getTrainingById(trainingId:any){
     return this.http.get<TrainingReqForm>(this.url+"/register/getTrainingRequestFormById/"+trainingId); 
   }
+
+  getCompetencyMasterList(): Observable<any[]> {
+    return this.http.get<any[]>(this.url+"/getCompetencyMasterList"); 
+  }
+  getTechnologyMasterList(): Observable<any[]> {
+    return this.http.get<any[]>(this.url+"/getTechnologyMasterList"); 
+  }
+  getUnitMasterList(): Observable<any[]> {
+    return this.http.get<any[]>(this.url+"/getUnitMasterList"); 
+  }
+  getTrainingTypesMasterList(): Observable<any[]> {
+    return this.http.get<any[]>(this.url+"/getTrainingTypesMasterList"); 
+  }
 }

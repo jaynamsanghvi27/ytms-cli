@@ -19,8 +19,8 @@
                           <div class="col-4">
                               <select #teams class="request-drop-down" formControlName="unit" (change)="onUnitChange(teams.value)">
                                <option [ngValue]="0" disabled >-- Select --</option>
-                                  <option *ngFor="let unit of units" value="{{unit}}">
-                                    {{unit}}
+                                  <option *ngFor="let unit of units" value="{{unit.name}}">
+                                    {{unit.name}}
                                   </option>
                               </select>
                               
@@ -30,8 +30,8 @@
                         <div class="col-4">
                           <select class="request-drop-down" formControlName="competency" (change)="onCompetencyChange($event)">
                             <option [ngValue]="0" disabled [selected]>-- Select --</option>
-                              <option *ngFor="let competency of competencies" value="{{competency}}">
-                                {{competency}}
+                              <option *ngFor="let competency of competencies" value="{{competency.name}}">
+                                {{competency.name}}
                               </option>
                           </select>  
                         </div>
@@ -44,8 +44,8 @@
                         <div class="col-4">
                           <select class="request-drop-down" formControlName="trainingType" (change)="onTrainingChange($event)">
                             <option [ngValue]="0" disabled [selected]>-- Select --</option>
-                              <option *ngFor="let trainingType of trainingTypes" value="{{trainingType}}">
-                                {{trainingType}}
+                              <option *ngFor="let trainingType of trainingTypes" value="{{trainingType.name}}">
+                                {{trainingType.name}}
                               </option>
                           </select>
 
