@@ -102,7 +102,12 @@ decline()
   }
 
   editTrf(trainingId:any){
-    this.router.navigate(['/re-training-req',trainingId]);
+    if(this.userRole == 'ROLE_TECHNICAL_MANAGER')
+      this.router.navigate(['/tm-training-req',trainingId]);
+    else if(this.userRole == 'ROLE_TRAINER')
+      this.router.navigate(['/trainer/training-req',trainingId]);
+    else
+      this.router.navigate(['/training-req',trainingId]);
   }
 
 }
