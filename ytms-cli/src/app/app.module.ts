@@ -31,6 +31,7 @@ import { TrainingReqComponent } from './Component/Requester/training-req/trainin
 import { NominationReqComponent } from './Component/Requester/nomination-req/nomination-req.component';
 import { ViewTrfComponent } from './Component/Requester/view-trf/view-trf.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { UnitMasterComponent } from './Component/Requester/unit-master/unit-master.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
     DateFormatPipe,
     TrainingReqComponent,
     NominationReqComponent,
-    ViewTrfComponent
+    ViewTrfComponent,
+    UnitMasterComponent
   ],
   imports: [
     BrowserModule,

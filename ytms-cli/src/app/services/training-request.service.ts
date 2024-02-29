@@ -45,4 +45,9 @@ export class TrainingRequestService {
   getTrainingById(trainingId:any){
     return this.http.get<TrainingReqForm>(this.url+"/register/getTrainingRequestFormById/"+trainingId); 
   }
+
+  saveUnit(unit:any){
+    console.log("on service"+ JSON.stringify(unit));
+    return this.http.post<any>(this.url+"/add-unit",unit);
+  }
 }

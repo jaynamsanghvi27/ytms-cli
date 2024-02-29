@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/Core/services/auth.service';
 import { JwtService } from 'src/app/Core/services/jwt.service';
@@ -35,7 +36,8 @@ export class TrainingReqComponent {
   
  
   constructor(private formBuilder: FormBuilder,private router: Router, private ser:TrainingRequestService,
-    private auth:AuthService, private jwtServ:JwtService, private datepipe: DatePipe,private activatedRoute:ActivatedRoute){
+    private auth:AuthService, private jwtServ:JwtService, private datepipe: DatePipe,
+    private activatedRoute:ActivatedRoute,public dialog: MatDialog){
       let token = auth.getToken();
       this.userName = jwtServ.getUserNameFromToken(token);
       this.userRole = this.jwtServ.getRoleFromToken(token);
@@ -136,6 +138,13 @@ export class TrainingReqComponent {
 
   redirectComponent(){
     this.router.navigate(['/nomination-req']);
+  }
+
+  openDialog(templateRef:any) {
+    let dialogRef = this.dialog.open(templateRef, {
+     width: '50%',
+     height: '50%'
+   });
   }
 
   editTrainingForm(trainingId:any){

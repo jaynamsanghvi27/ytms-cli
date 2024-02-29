@@ -23,8 +23,7 @@
                                     {{unit}}
                                   </option>
                               </select>
-                              
-                           
+                              <span><i class="fa fa-plus" title="Click To Add Unit" (click)="openDialog(template)"></i></span>
                          </div>
                         <div class="col-2">Competency</div>
                         <div class="col-4">
@@ -34,6 +33,7 @@
                                 {{competency}}
                               </option>
                           </select>  
+                          <span><i class="fa fa-plus " title="Click To Add Competency"></i></span>
                         </div>
                           
                       </div>
@@ -48,7 +48,7 @@
                                 {{trainingType}}
                               </option>
                           </select>
-
+                          <span><i class="fa fa-plus" title="Click To Add Training Type"></i></span>
                         </div>
                         <div class="col-2"><label>Technology</label></div>
                           
@@ -59,7 +59,7 @@
                                   {{technology.name}}
                                 </option>
                             </select>  
-                           
+                            <span><i class="fa fa-plus" title="Click To Add Technology"></i></span>
                         </div>
                     </div>
 
@@ -143,5 +143,9 @@
             <!-- Main Content Closed -->
         </div>
     </main>
+
+    <ng-template #template>
+      <app-unit-master></app-unit-master>
+    </ng-template>
 
 </div>
