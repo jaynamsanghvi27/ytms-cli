@@ -89,6 +89,16 @@ const routes: Routes = [
     component: TrainingReqComponent
   },
   {
+    path:'training-req/:id',
+    canActivate: [AuthGuard],
+    component: TrainingReqComponent
+  },
+  {
+    path:'tm-training-req/:id',
+    canActivate: [AdminGuard],
+    component: TrainingReqComponent
+  },
+  {
     path:'re-training-req',
     canActivate: [AuthGuard],
     component: TrainingReqComponent

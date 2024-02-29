@@ -23,10 +23,10 @@ export class TrainingReqComponent {
   emailpattern = "^(.+)@(.+)$";
   trainingArray:any []=["","","",""];
   completeTrainingName:any ="";
-  units = ["BG4-BU5", "BG5-BU11"];
-  technologies: any[] = [{id:"1",name:"React"}, {id:"2",name:"Java"}, {id:"3",name:"Python"}];
-  competencies: string[] = ["JAVA", "REACT", "PYTHON"];
-  trainingTypes: string[] = ["On-Demand", "On-Bench", "Fresher"];
+  units?:any[];
+  technologies?: any[] ;
+  competencies?: any[] ;
+  trainingTypes?: any[] ;
   trainingRequestObject?:TrainingReqForm;
 
   monthYr:any;
@@ -46,6 +46,11 @@ export class TrainingReqComponent {
   }
  
   ngOnInit(): void {
+    this.ser.getTechnologyMasterList().subscribe((resp:any)=>{this.technologies=resp});
+    this.ser.getUnitMasterList().subscribe((resp:any)=>{this.units=resp});
+    this.ser.getCompetencyMasterList().subscribe((resp:any)=>{this.competencies=resp});
+    this.ser.getTrainingTypesMasterList().subscribe((resp:any)=>{this.trainingTypes=resp});
+    
     this.trainingReqForm = this.formBuilder.group(
       {
         id:[],
