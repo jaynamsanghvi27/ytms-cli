@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { TrainingRequestService } from 'src/app/services/training-request.service';
 import Swal from 'sweetalert2';
+import { TrainingReqComponent } from '../training-req/training-req.component';
 
 @Component({
   selector: 'app-unit-master',
@@ -12,7 +13,8 @@ import Swal from 'sweetalert2';
 export class UnitMasterComponent {
  
   unitMatserForm!: FormGroup;
-  constructor(private formBuilder: FormBuilder,public dialog: MatDialog,private ser:TrainingRequestService){
+  constructor(private formBuilder: FormBuilder,public dialog: MatDialog,private ser:TrainingRequestService,
+    private trfcomponent:TrainingReqComponent){
 
   }
   ngOnInit(): void {
@@ -27,6 +29,8 @@ export class UnitMasterComponent {
         Swal.fire('Success', 'Unit Added Successfully', 'success');
         this.unitMatserForm.reset();
         this.closeDialog();
+        //window.location.reload();
+        this.trfcomponent.loadUnit();
       }
   
     }
