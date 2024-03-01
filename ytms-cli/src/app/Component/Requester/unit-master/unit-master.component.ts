@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { TrainingRequestService } from 'src/app/services/training-request.service';
@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 export class UnitMasterComponent {
  
   unitMatserForm!: FormGroup;
+  @Output() dialogClosed = new EventEmitter<any>();
   constructor(private formBuilder: FormBuilder,public dialog: MatDialog,private ser:TrainingRequestService){
 
   }
@@ -32,6 +33,7 @@ export class UnitMasterComponent {
     }
 
     public closeDialog(): void {
+      this.dialogClosed.emit({ data: this.unitMatserForm.value });
       this.dialog.closeAll();
       // this.matDialogReference.close([]);
   }
