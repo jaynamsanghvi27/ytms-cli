@@ -166,9 +166,9 @@ export class TrainingReqComponent {
      height: '50%'
    });
 
-   dialogRef.afterClosed().subscribe(() => {
+  /* dialogRef.afterClosed().subscribe(() => {
     this.ser.getUnitMasterList().subscribe((resp:any)=>{this.units=resp});
-  });
+  }); */
   }
 
   editTrainingForm(trainingId:any){

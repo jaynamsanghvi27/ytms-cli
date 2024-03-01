@@ -50,6 +50,18 @@ export class TrainingRequestService {
     console.log("on service"+ JSON.stringify(unit));
     return this.http.post<any>(this.url+"/add-unit",unit);
   }
+  saveCompetency(competency:any){
+    console.log("on service"+ JSON.stringify(competency));
+    return this.http.post<any>(this.url+"/add-competency",competency);
+  }
+  saveTrainingType(training:any){
+    console.log("on service"+ JSON.stringify(training));
+    return this.http.post<any>(this.url+"/add-training-type",training);
+  }
+  saveTechnology(technology:any){
+    console.log("on service"+ JSON.stringify(technology));
+    return this.http.post<any>(this.url+"/add-technology",technology);
+  }
   getCompetencyMasterList(): Observable<any[]> {
     return this.http.get<any[]>(this.url+"/getCompetencyMasterList"); 
   }
