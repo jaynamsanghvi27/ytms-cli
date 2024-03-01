@@ -45,11 +45,26 @@ export class TrainingReqComponent {
       this.editTrainingForm(trainingId);
   }
  
-  ngOnInit(): void {
+  loadTechnology(){
     this.ser.getTechnologyMasterList().subscribe((resp:any)=>{this.technologies=resp});
+  }
+  loadUnit(){
     this.ser.getUnitMasterList().subscribe((resp:any)=>{this.units=resp});
+  }
+  loadCompetency(){
     this.ser.getCompetencyMasterList().subscribe((resp:any)=>{this.competencies=resp});
+  }
+  loadTrainingTypes(){
     this.ser.getTrainingTypesMasterList().subscribe((resp:any)=>{this.trainingTypes=resp});
+  }
+  ngOnInit(): void {
+    this.loadTechnology();
+    this.loadUnit();
+    this.loadCompetency();
+    this.loadTrainingTypes();
+    
+    
+    
     
     this.trainingReqForm = this.formBuilder.group(
       {
