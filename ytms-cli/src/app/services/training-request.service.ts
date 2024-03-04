@@ -26,6 +26,10 @@ export class TrainingRequestService {
     console.log("on service"+ JSON.stringify(trf));
     return this.http.post<any>(this.url+"/register/saveTrainingRequestForm",trf);
   }
+  editTraining(trf:TrainingReqForm){
+    console.log("on service"+ JSON.stringify(trf));
+    return this.http.put<any>(this.url+"/register/editTrainingRequestForm",trf);
+  }
   updateTraining(trf:TrainingReqForm){
     console.log("on service"+ JSON.stringify(trf));
     return this.http.put<any>(this.url+"/register/updateTrainingRequestForm",trf);
@@ -37,4 +41,25 @@ export class TrainingRequestService {
   getTraining(): Observable<any[]> {
     return this.http.get<TrainingReqForm[]>(this.url+"/register/getTrainingRequestForm"); 
     }
+
+  getTrainingById(trainingId:any){
+    return this.http.get<TrainingReqForm>(this.url+"/register/getTrainingRequestFormById/"+trainingId); 
+  }
+
+  saveUnit(unit:any){
+    console.log("on service"+ JSON.stringify(unit));
+    return this.http.post<any>(this.url+"/add-unit",unit);
+  }
+  getCompetencyMasterList(): Observable<any[]> {
+    return this.http.get<any[]>(this.url+"/getCompetencyMasterList"); 
+  }
+  getTechnologyMasterList(): Observable<any[]> {
+    return this.http.get<any[]>(this.url+"/getTechnologyMasterList"); 
+  }
+  getUnitMasterList(): Observable<any[]> {
+    return this.http.get<any[]>(this.url+"/getUnitMasterList"); 
+  }
+  getTrainingTypesMasterList(): Observable<any[]> {
+    return this.http.get<any[]>(this.url+"/getTrainingTypesMasterList"); 
+  }
 }

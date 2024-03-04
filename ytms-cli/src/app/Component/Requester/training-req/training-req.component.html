@@ -19,21 +19,21 @@
                           <div class="col-4">
                               <select #teams class="request-drop-down" formControlName="unit" (change)="onUnitChange(teams.value)">
                                <option [ngValue]="0" disabled >-- Select --</option>
-                                  <option *ngFor="let unit of units" value="{{unit}}">
-                                    {{unit}}
+                                  <option *ngFor="let unit of units" value="{{unit.name}}">
+                                    {{unit.name}}
                                   </option>
                               </select>
-                              
-                           
+                              <span><i class="fa fa-plus" title="Click To Add Unit" (click)="openDialog(template)"></i></span>
                          </div>
                         <div class="col-2">Competency</div>
                         <div class="col-4">
                           <select class="request-drop-down" formControlName="competency" (change)="onCompetencyChange($event)">
                             <option [ngValue]="0" disabled [selected]>-- Select --</option>
-                              <option *ngFor="let competency of competencies" value="{{competency}}">
-                                {{competency}}
+                              <option *ngFor="let competency of competencies" value="{{competency.name}}">
+                                {{competency.name}}
                               </option>
                           </select>  
+                          <span><i class="fa fa-plus " title="Click To Add Competency"></i></span>
                         </div>
                           
                       </div>
@@ -44,11 +44,11 @@
                         <div class="col-4">
                           <select class="request-drop-down" formControlName="trainingType" (change)="onTrainingChange($event)">
                             <option [ngValue]="0" disabled [selected]>-- Select --</option>
-                              <option *ngFor="let trainingType of trainingTypes" value="{{trainingType}}">
-                                {{trainingType}}
+                              <option *ngFor="let trainingType of trainingTypes" value="{{trainingType.name}}">
+                                {{trainingType.name}}
                               </option>
                           </select>
-
+                          <span><i class="fa fa-plus" title="Click To Add Training Type"></i></span>
                         </div>
                         <div class="col-2"><label>Technology</label></div>
                           
@@ -59,7 +59,7 @@
                                   {{technology.name}}
                                 </option>
                             </select>  
-                           
+                            <span><i class="fa fa-plus" title="Click To Add Technology"></i></span>
                         </div>
                     </div>
 
@@ -124,6 +124,7 @@
                   </div>
                   
                   <div class="center">
+                    <input type="hidden" formControlName="id">
                     <!-- <button
                       type="button" (click)="redirectComponent()"
                       class="btn btn-primary btn-block btn-lg"
@@ -142,5 +143,9 @@
             <!-- Main Content Closed -->
         </div>
     </main>
+
+    <ng-template #template>
+      <app-unit-master></app-unit-master>
+    </ng-template>
 
 </div>

@@ -27,6 +27,10 @@ const routes: Routes = [
         path:'training-req',
         component: TrainingReqComponent
       },
+      {
+        path:'training-req/:id',
+        component: TrainingReqComponent
+      },
     ]
   }
 ];
