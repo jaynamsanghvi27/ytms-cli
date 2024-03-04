@@ -1,0 +1,146 @@
+<div class="container-fluid g-0">
+    <app-requester-header (sideNavToggled)="sideNavStatus=$event;">
+    </app-requester-header>
+
+    <main>
+        <app-requester-sidebar [sideNavStatus]="sideNavStatus" *ngIf="this.userRole != 'ROLE_TRAINER'"  [ngClass]="{'app-side-nav-open':sideNavStatus}"
+            class="black-border"> </app-requester-sidebar>
+            
+        <div class="display-area p-3" [ngClass]="{'display-area-shrink':sideNavStatus}">
+            <!-- Main Content    -->
+            <div class="training-request-form">
+                <form [formGroup]="trainingReqForm" (ngSubmit)="submit()">
+                  <div class="form-header">
+                    <h5 class="heading-color">Training Request Form</h5>
+                  </div>
+                  <div class="form-group">
+                      <div class="row">
+                          <div class="col-2">Unit</div>
+                          <div class="col-4">
+                              <select #teams class="request-drop-down" formControlName="unit" (change)="onUnitChange(teams.value)">
+                               <option [ngValue]="0" disabled >-- Select --</option>
+                                  <option *ngFor="let unit of units" value="{{unit}}">
+                                    {{unit}}
+                                  </option>
+                              </select>
+                              
+                           
+                         </div>
+                        <div class="col-2">Competency</div>
+                        <div class="col-4">
+                          <select class="request-drop-down" formControlName="competency" (change)="onCompetencyChange($event)">
+                            <option [ngValue]="0" disabled [selected]>-- Select --</option>
+                              <option *ngFor="let competency of competencies" value="{{competency}}">
+                                {{competency}}
+                              </option>
+                          </select>  
+                        </div>
+                          
+                      </div>
+
+                      <div class="row">
+                        
+                        <div class="col-2"><label>Training Type</label></div>
+                        <div class="col-4">
+                          <select class="request-drop-down" formControlName="trainingType" (change)="onTrainingChange($event)">
+                            <option [ngValue]="0" disabled [selected]>-- Select --</option>
+                              <option *ngFor="let trainingType of trainingTypes" value="{{trainingType}}">
+                                {{trainingType}}
+                              </option>
+                          </select>
+
+                        </div>
+                        <div class="col-2"><label>Technology</label></div>
+                          
+                          <div class="col-4">
+                            <select multiple class="request-drop-down" [(ngModel)]="selectedTechnology" formControlName="technology" (change)="onTechnologychange($event)">
+                              <option [ngValue]="0" disabled [selected]>-- Select Technology --</option>
+                                <option *ngFor="let technology of technologies" [value]="technology.name" value="{{technology.name}}">
+                                  {{technology.name}}
+                                </option>
+                            </select>  
+                           
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-2">Month & Year</div>
+                        <div class="col-4"><input
+                          type="month"
+                          formControlName="monthAndYear"
+                          placeholder="Month & Year"
+                          class="form-control" forma
+                          (change)="onMonthYearchange($event)" data-month-format="MMM-YYYY"
+                        />
+                        </div>
+                        <div class="col-2"><label>Training Name</label></div>
+                        <div class="col-4">
+                          <input
+                          type="text" [(ngModel)]="completeTrainingName"
+                          formControlName="trainingName"
+                          placeholder="Training Name"
+                          class="form-control"
+                        />
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-2">Planned Start Date</div>
+                      <div class="col-4"><input
+                        type="date"
+                        formControlName="startDate"
+                        placeholder="Planed Start Date"
+                        class="form-control"
+                      />
+                      </div>
+                      <div class="col-2"><label>Planned End Date</label></div>
+                      <div class="col-4">
+                          <input
+                        type="date"
+                        formControlName="endDate"
+                        placeholder="Planed End Date"
+                        class="form-control"
+                      />
+                         
+                    </div>
+                  </div>
+
+
+                    <div class="row">
+                      <div class="col-2">No. of Participant</div>
+                      <div class="col-4">
+                        <input type="number" formControlName="noOfParticipant"
+                        placeholder="Tentative no. of Participant"
+                        class="form-control">
+                      </div>
+                      <div class="col-2">Purpose Of Training</div>
+                        <div class="col-4">
+                        <textarea formControlName="trainingDescription"
+                        placeholder=""
+                        class="form-control"></textarea>
+                        </div>
+                        
+                    </div>
+                    <input type="hidden" formControlName="userName" [(ngModel)]="userName" >
+                  </div>
+                  
+                  <div class="center">
+                    <!-- <button
+                      type="button" (click)="redirectComponent()"
+                      class="btn btn-primary btn-block btn-lg"
+                    >
+                      Next
+                    </button> -->
+                    <button
+                      type="submit" 
+                      class="btn btn-primary btn-block btn-lg"
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </form>
+              </div>
+            <!-- Main Content Closed -->
+        </div>
+    </main>
+
+</div>

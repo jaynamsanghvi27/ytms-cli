@@ -24,7 +24,7 @@ app-requester-sidebar {
     background-color: white;
     overflow-x: hidden;
     white-space: nowrap;
-    transition: width 250ms linear;
+    transition: width 1s linear;
 }
 
 .app-side-nav-open {
@@ -35,12 +35,12 @@ app-requester-sidebar {
     position: absolute;
     left: 60px;
     width: calc(100% - 60px);
-    transition: left 5S linear width 5s linear;
+    transition: width 1s linear, left 1s linear;;
 
 }
 
 .display-area-shrink {
     left: 250px;
     width: calc(100% - 250px);
-    transition: left 3s linear width 3s linear;
+    transition: width 1s linear, left 1s linear;;
 }

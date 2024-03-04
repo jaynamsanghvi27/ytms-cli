@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {AuthService} from "../../../Core/services/auth.service";
+import {JwtService} from "../../../Core/services/jwt.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-requester-home',
@@ -8,7 +11,20 @@ import { Component } from '@angular/core';
 export class RequesterHomeComponent {
 
   sideNavStatus: boolean = false;
-  ngOnInit(): void {
+  username: string = '';
+  isLoggedIn = false;
 
+  constructor(public authService: AuthService,
+              private jwtService: JwtService,
+              private router: Router) {
+
+  }
+
+  ngOnInit(): void {
+    this.isLoggedIn = this.authService.isAuthenticated();
+    if (this.isLoggedIn) {
+      const token = this.authService.getToken();
+      this.username = this.jwtService.getFullNameFromToken(token);
+    }
   }
 }

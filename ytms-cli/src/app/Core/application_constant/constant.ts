@@ -1,0 +1,1 @@
+export const EMAIL_PATTERN = "^[a-z0-9._]+@yash.com$";
