@@ -17,6 +17,7 @@ import {RequesterHomeComponent} from "./Component/Requester/requester-home/reque
 import {
   RequesterDashboardComponent
 } from "./Component/RequesterModule/requester-dashboard/requester-dashboard.component";
+import { UploadExcelComponent } from './Component/upload-excel/upload-excel.component';
 
 const routes: Routes = [
   {
@@ -123,6 +124,11 @@ const routes: Routes = [
     loadChildren: () => import('./Component/RequesterModule/requester.module').then(m => m.RequesterModule)
   },
 
+  {
+    path:'upload',
+    canActivate: [AdminGuard],
+    component: UploadExcelComponent
+  },
   /*{
     path: '**',
     component: LoginComponent

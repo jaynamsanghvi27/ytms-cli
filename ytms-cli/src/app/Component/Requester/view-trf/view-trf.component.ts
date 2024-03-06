@@ -20,6 +20,7 @@ export class ViewTrfComponent {
   trainingReqForm!: FormGroup;
   trainingReqForm1!: FormGroup;
   userRole:string="";
+  document: Document | undefined;
   
   constructor(private ser:TrainingRequestService,private auth:AuthService, 
     private jwtServ:JwtService,public dialog: MatDialog,private formBuilder: FormBuilder,
@@ -32,7 +33,8 @@ export class ViewTrfComponent {
     this.trainingReqForm = this.formBuilder.group({
       id:['', [Validators.required]],
       actualStartDate: ['', [Validators.required]],
-      actualEndDate: ['', [Validators.required]]});
+      actualEndDate: ['', [Validators.required]],
+      fileName: ['', [Validators.required]]});
 
   
   this.trainingReqForm1 = this.formBuilder.group({
@@ -99,5 +101,10 @@ decline()
   showMessage(message:any){
     Swal.fire('Reason for Decline',message, 'error');
   }
-
+  display = false;
+  onPress(){
+    console.log("clicked");
+    //document.querySelector('#comp-render').innerHTML='<object type="text/html" data="app-upload-excel.html" ></object>';
+    this.display = true;
+  }
 }

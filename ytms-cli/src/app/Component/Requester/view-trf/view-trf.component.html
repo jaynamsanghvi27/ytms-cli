@@ -79,17 +79,36 @@
                     />
                        
                   </div>
+                 
                 </div><br>
+                <!-- <select formControlName="fileName" class="form-control">   -->
+                  <!-- <option disabled>Select file to be attached</option>   -->
+                  <select class="request-drop-down" formControlName="fileName">
+                  <option [ngValue]="0" disabled [selected]> Select file to be attached </option>
+                  <option>Template</option>   
+                  <option>Template1</option>   
+                  <option>Template2</option>   
+                  <option>Template3</option>   
+                  <!-- <option *ngFor="let web of websiteList">{{web}}</option>   -->
+              </select>  
+            
                 <input type="hidden" formControlName="id" [(ngModel)]="this.id">
-                <div class="center">
-                    <button
-                      type="submit" 
-                      class="btn btn-primary btn-block btn-lg"
-                    >
-                      Submit
-                    </button>
-                  </div>
             </div>
+              <div class="center">
+                <button
+                  type="submit" 
+                  class="btn btn-primary btn-block btn-lg"
+                >
+                  Submit
+                </button>
+              </div>
+            <div class="btn btn-primary btn-block btn-lg" style="float: left;">
+              <button (click)="onPress()"></button>
+          </div>
+          
+          <div id="comp-render" *ngIf="display">
+              <app-upload-excel></app-upload-excel>
+          </div>
          </form>
         </ng-template>
         <ng-template #template1>
