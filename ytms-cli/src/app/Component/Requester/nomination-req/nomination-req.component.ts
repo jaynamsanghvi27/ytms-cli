@@ -15,9 +15,14 @@ export class NominationReqComponent {
   ngOnInit(): void {
     this.nominationReqForm = this.formBuilder.group(
       {
-        trainingName: ['', [Validators.required]],
-        employeeMailId: ['', [Validators.required]],
-        selectFileToUpload: ['', [Validators.required]]
+        employeeId: ['', [Validators.required]],
+        employeeName: ['', [Validators.required]],
+        employeeEmail: ['', [Validators.required]],
+        employeeGrade: ['', [Validators.required]],
+        skill: ['', [Validators.required]],
+        currentAllocation: ['', [Validators.required]],
+        project: ['', [Validators.required]],
+        currentlocation: ['', [Validators.required]]
       })
     
   }

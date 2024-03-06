@@ -122,7 +122,31 @@
                     </div>
                     <input type="hidden" formControlName="userName" [(ngModel)]="userName" >
                   </div>
-                  
+                  <hr>
+                  <!-- Nomination Upload Start -->
+                  <div class="row">
+                    <div class="col-2">Bulk Nomination</div>
+                    <div class="col-4">
+                      <input type="file" formControlName="bulkUploadFile"
+                      placeholder="Select Excel File"
+                      accept=".csv, .xlsx, .xls"
+                      class="form-control"
+                      (change)="bulkUploadNominationData($event)">
+                    </div>
+                    <!-- <input id="selectedFile" type="file" name="files[]" multiple id="jsonFile" accept=".xlsx" (change)="selectedFileChange($event)" /> -->
+                    <div class="col-2">Single Nomination</div>
+                      <div class="col-4">
+                        <a (click)="openDialog(nominationtemplate)"><span style="float: left;">Click To Add Nomination &nbsp; <i class="fa fa-plus"  title="Click To Add Nomination" ></i>
+                        
+                        </span>
+                      </a>
+                        
+                      </div>
+                      
+                  </div>
+                  <!-- Nomination Upload End -->
+
+                  <hr>
                   <div class="center">
                     <input type="hidden" formControlName="id">
                     <!-- <button
@@ -137,6 +161,16 @@
                     >
                       Submit
                     </button>
+                  </div>
+                  <div>
+                   <a (click)="hideShowNomination()"> NumberOfNomination : {{nomination.length}}</a>
+                    <table *ngIf="showNomination">
+                      <tbody>
+                        <tr *ngFor="let nomi of nomination">
+                          <td>{{nomi.emp_name}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </form>
               </div>
@@ -156,6 +190,8 @@
     <ng-template #technologytemplate>
       <app-technology-master></app-technology-master>
     </ng-template>
-
+    <ng-template #nominationtemplate>
+    <app-nomination-req></app-nomination-req>
+  </ng-template>
 
 </div>

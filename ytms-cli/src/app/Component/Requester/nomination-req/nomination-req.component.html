@@ -1,11 +1,7 @@
 <div class="container-fluid g-0">
-    <app-requester-header (sideNavToggled)="sideNavStatus=$event;">
-    </app-requester-header>
 
     <main>
-        <app-requester-sidebar [sideNavStatus]="sideNavStatus" [ngClass]="{'app-side-nav-open':sideNavStatus}"
-            class="black-border"> </app-requester-sidebar>
-        <div class="display-area p-3" [ngClass]="{'display-area-shrink':sideNavStatus}">
+        <div>
             <!-- Main Content    -->
             <div class="training-request-form">
                 <form [formGroup]="nominationReqForm" (ngSubmit)="submit()">
@@ -13,24 +9,17 @@
                     <h5 class="heading-color">Nomination Request Form</h5>
                   </div>
                   <div class="form-group">
-                    <button
-                      type="Add+"
-                      class="btn btn-primary btn-block btn-lg">
-                      Add+
-                    </button>
-                  </div>
-                  <div class="form-group">
                     <div class="row">
-                        <div class="col-2">Employee Id</div>
-                        <div class="col-4">
+                        <!-- <div class="col-2">Employee Id</div> -->
+                        <div class="col-6">
                             <input type="text"
                             formControlName="employeeId"
                             placeholder="Employee Id"
                             class="form-control">
                        </div>
-                        <div class="col-2"><label>Employee Name</label></div>
+                        <!-- <div class="col-2"><label>Employee Name</label></div> -->
                         
-                        <div class="col-4">
+                        <div class="col-6">
                           <input type="text"
                           formControlName="employeeName"
                           placeholder="Employee Name"
@@ -40,16 +29,16 @@
                 </div>
                 <div class="form-group">
                   <div class="row">
-                      <div class="col-2">Employee Email</div>
-                      <div class="col-4">
+                      <!-- <div class="col-2">Employee Email</div> -->
+                      <div class="col-6">
                           <input type="text"
                           formControlName="employeeEmail"
                           placeholder="Employee Email"
                           class="form-control">
                      </div>
-                      <div class="col-2"><label>Employee Grade</label></div>
+                      <!-- <div class="col-2"><label>Employee Grade</label></div> -->
                       
-                      <div class="col-4">
+                      <div class="col-6">
                         <input type="text"
                         formControlName="employeeGrade"
                         placeholder="Employee Grade"
@@ -59,16 +48,16 @@
               </div>
               <div class="form-group">
                 <div class="row">
-                    <div class="col-2">Skill</div>
-                    <div class="col-4">
+                    <!-- <div class="col-2">Skill</div> -->
+                    <div class="col-6">
                         <input type="text"
                         formControlName="skill"
                         placeholder="Skill"
                         class="form-control">
                    </div>
-                    <div class="col-2"><label>Current Allocation</label></div>
+                    <!-- <div class="col-2"><label>Current Allocation</label></div> -->
                     
-                    <div class="col-4">
+                    <div class="col-6">
                       <input type="text"
                       formControlName="currentAllocation"
                       placeholder="Current Allocation"
@@ -78,16 +67,16 @@
               </div>
               <div class="form-group">
                 <div class="row">
-                    <div class="col-2">Project</div>
-                    <div class="col-4">
+                    <!-- <div class="col-2">Project</div> -->
+                    <div class="col-6">
                         <input type="text"
                         formControlName="project"
                         placeholder="Project"
                         class="form-control">
                    </div>
-                    <div class="col-2"><label>Current location</label></div>
+                    <!-- <div class="col-2"><label>Current location</label></div> -->
                     
-                    <div class="col-4">
+                    <div class="col-6">
                       <input type="text"
                       formControlName="currentlocation"
                       placeholder="Current location"
@@ -97,20 +86,20 @@
               </div>
                   <div class="form-group">
                       <div class="row">
-                          <div class="col-2">Training Name</div>
-                          <div class="col-4">
+                          <!-- <div class="col-2">Training Name</div> -->
+                          <!-- <div class="col-6">
                               <input type="text" [(ngModel)]="trainingNm"
                               formControlName="trainingName"
                               placeholder="Training Name"
                               class="form-control">
                          </div>
                          <div class="col-2">Bulk Nomination</div>
-                         <div class="col-4">
+                         <div class="col-6">
                            <input type="file"
                            formControlName="selectFileToUpload"
                            placeholder="Select File To Upload"
                            class="form-control"/>
-                        </div>
+                        </div> -->
                       </div>
                   </div>
                   

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable} from 'rxjs'
+import { Nomination } from '../Model/Nomination';
 import { TrainingReqForm } from '../Model/TrainingRequestForm';
 
 @Injectable({
@@ -73,5 +74,11 @@ export class TrainingRequestService {
   }
   getTrainingTypesMasterList(): Observable<any[]> {
     return this.http.get<any[]>(this.url+"/getTrainingTypesMasterList"); 
+  }
+  saveNominationDataOnFrontend(file:File){
+    console.log("on service"+JSON.stringify(file.name) );
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post<Nomination[]>(this.url+"/register/upload",formData);
   }
 }

@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/Core/services/auth.service';
 import { JwtService } from 'src/app/Core/services/jwt.service';
+import { Nomination } from 'src/app/Model/Nomination';
 import { TrainingReqForm } from 'src/app/Model/TrainingRequestForm';
 import { TrainingRequestService } from 'src/app/services/training-request.service';
 import Swal from 'sweetalert2';
@@ -32,6 +33,10 @@ export class TrainingReqComponent {
   monthYr:any;
   userRole: any;
   id:any;
+  file!:File;
+  nomination!:Nomination[];
+  showNomination=false;
+
   
   
  
@@ -79,7 +84,8 @@ export class TrainingReqComponent {
         endDate: ['', [Validators.required]],
         trainingDescription: ['', [Validators.required]],
         userName: ['',[Validators.required]],
-        noOfParticipant : ['',[Validators.required]]
+        noOfParticipant : ['',[Validators.required]],
+        bulkUploadFile: []
       })
 
     this.trainingReqForm.controls['unit'].setValue(0,{onlySelf: true});
@@ -222,4 +228,15 @@ export class TrainingReqComponent {
         });
     }
   }
+
+  bulkUploadNominationData(event:any): void{
+    this.file=event.target.files[0]
+    console.log(this.file);
+    this.ser.saveNominationDataOnFrontend(this.file).subscribe((resp:any)=>{this.nomination=resp});
+  }
+
+  hideShowNomination(){
+    this.showNomination= (!this.showNomination);
+  }
+  
 }
