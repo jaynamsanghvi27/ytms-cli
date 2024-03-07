@@ -34,7 +34,7 @@ export class TrainingReqComponent {
   monthYr:any;
   userRole: any;
   id:any;
-  file!:File;
+file!:File;
   nomination:Nomination[]=[];
   showNomination=false;
 
@@ -156,7 +156,7 @@ export class TrainingReqComponent {
       else{
         let obj:any=this.trainingReqForm.value;
         this.ser.saveTraining(obj,this.nomination).subscribe();
-        this.nomination=[];
+this.nomination=[];
         Swal.fire('Success', 'Request has been submitted to admin for approval', 'success');
         this.trainingReqForm.reset();
       }   
@@ -175,16 +175,16 @@ export class TrainingReqComponent {
      height: '50%'
    });
 
-  /* dialogRef.afterClosed().subscribe(() => {
+   /* dialogRef.afterClosed().subscribe(() => {
     this.ser.getUnitMasterList().subscribe((resp:any)=>{this.units=resp});
-  }); */
+  }); */ 
   }
 
   editTrainingForm(trainingId:any){
     if(trainingId!=null){
       this.ser.getTrainingById(trainingId).subscribe((resp:any)=>{
         this.trainingRequestObject=resp;
-        this.id=trainingId;
+                this.id=trainingId;
         this.trainingReqForm.get('id')?.setValue(trainingId);
         let localTrainingArray:string[]|undefined=this.trainingRequestObject?.trainingName.split("-") as string [];
         let unit:string = localTrainingArray[0]+"-"+localTrainingArray[1];
@@ -229,7 +229,7 @@ export class TrainingReqComponent {
         
         });
     }
-    this.ser.getNominationListByTrainingId(trainingId).subscribe(resp=>{
+  this.ser.getNominationListByTrainingId(trainingId).subscribe(resp=>{
       this.nomination=resp;
     });
   }
@@ -262,7 +262,7 @@ export class TrainingReqComponent {
     this.nomination.push(nomination);
   }
 
-  setNominationId(nominationId:string){
+  setNominationId(nominationId:any){
     this.ser.setNominationId(nominationId);
     //this.nominationReq.nominationId=nominationId;
   }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { TrainingRequestService } from 'src/app/services/training-request.service';
@@ -27,17 +27,17 @@ export class CompetencyMasterComponent {
       if (this.competencyMatserForm.valid) {
         console.log("befor service "+JSON.stringify(this.competencyMatserForm.value));
         this.ser.saveCompetency(this.competencyMatserForm.value).subscribe();
+        
         Swal.fire('Success', 'Competency Added Successfully', 'success');
         this.competencyMatserForm.reset();
         this.closeDialog();
-        //window.location.reload();
-        this.trfcomponent.loadCompetency();
       }
   
     }
 
     public closeDialog(): void {
       //this.dialogClosed.emit({ data: this.competencyMatserForm.value });
+      this.trfcomponent.loadCompetency();
       this.dialog.closeAll();
       // this.matDialogReference.close([]);
   }

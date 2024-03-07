@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { TrainingRequestService } from 'src/app/services/training-request.service';
@@ -27,11 +27,10 @@ export class TrainingTypeMasterComponent {
       if (this.trainingMatserForm.valid) {
         console.log("befor service "+JSON.stringify(this.trainingMatserForm.value));
         this.ser.saveTrainingType(this.trainingMatserForm.value).subscribe();
+        this.trfcomponent.loadTrainingTypes();
         Swal.fire('Success', 'Training Type Added Successfully', 'success');
         this.trainingMatserForm.reset();
         this.closeDialog();
-        //window.location.reload();
-        this.trfcomponent.loadTrainingTypes();
       }
   
     }

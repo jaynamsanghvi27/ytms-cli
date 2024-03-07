@@ -35,9 +35,9 @@ export class NominationReqComponent {
 
   constructor(private formBuilder: FormBuilder, private ser: TrainingRequestService, private trf: TrainingReqComponent, public dialog: MatDialog) {
     // this.nominationReqForm.controls['trainingName']?.patchValue(this.service.trainingName$.subscribe());
-    console.log(this.ser.trainingName$.subscribe());
-    
-    console.log("$$$$$$$$$$$$$$$$$$$$$"+this.ser.nominationId$.subscribe());
+    this.ser.nominationId$.subscribe((resp: any) => {
+      console.log(resp)
+    });
     this.ser.trainingName$.subscribe((resp: any) => {
       this.trainingNm = resp;
     })

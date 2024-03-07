@@ -14,7 +14,7 @@ export class TechnologyMasterComponent {
   
  
   technologyMatserForm!: FormGroup;
-  //@Output() dialogClosed = new EventEmitter<any>();
+  @Output() dialogClosed = new EventEmitter<any>();
   constructor(private formBuilder: FormBuilder,public dialog: MatDialog,private ser:TrainingRequestService,
     private trfcomponent:TrainingReqComponent){
   }
@@ -27,17 +27,17 @@ export class TechnologyMasterComponent {
       if (this.technologyMatserForm.valid) {
         console.log("befor service "+JSON.stringify(this.technologyMatserForm.value));
         this.ser.saveTechnology(this.technologyMatserForm.value).subscribe();
+        this.trfcomponent.loadTechnology();
         Swal.fire('Success', 'Technology Added Successfully', 'success');
         this.technologyMatserForm.reset();
         this.closeDialog();
-        //window.location.reload();
-        this.trfcomponent.loadTechnology();
+        
       }
   
     }
 
     public closeDialog(): void {
-      //this.dialogClosed.emit({ data: this.technologyMatserForm.value });
+      this.dialogClosed.emit({ data: this.technologyMatserForm.value });
       this.dialog.closeAll();
       // this.matDialogReference.close([]);
   }
