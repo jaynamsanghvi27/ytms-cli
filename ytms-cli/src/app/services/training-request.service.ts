@@ -11,6 +11,9 @@ export class TrainingRequestService {
   private trainingDataSubject = new BehaviorSubject<String>(new String());
   trainingName$ = this.trainingDataSubject.asObservable();
 
+  private nominationDataSubject = new BehaviorSubject<String>(new String());
+  nominationId$ = this.nominationDataSubject.asObservable();
+
   url:string="http://localhost:8080/ytms";
 
   constructor(private http: HttpClient) { }
@@ -23,9 +26,19 @@ export class TrainingRequestService {
     this.trainingDataSubject.next(new String());
   }
 
-  saveTraining(trf:TrainingReqForm){
+  setNominationId(id: String): void {
+    this.nominationDataSubject.next(id);
+  }
+
+  // saveTraining(trf:TrainingReqForm){
+  //   console.log("on service"+ JSON.stringify(trf));
+  //   return this.http.post<any>(this.url+"/register/saveTrainingRequestForm",trf);
+  // }
+
+  saveTraining(trf:TrainingReqForm,nominationsData:Nomination[]){
     console.log("on service"+ JSON.stringify(trf));
-    return this.http.post<any>(this.url+"/register/saveTrainingRequestForm",trf);
+    // const url = '/your-springboot-endpoint?list=' + list.join(','); // Combine with list
+    return this.http.post<any>(this.url+"/register/saveTrainingRequestForm",{'trainingRequestFormDto':trf,'nominationList':nominationsData});
   }
   editTraining(trf:TrainingReqForm){
     console.log("on service"+ JSON.stringify(trf));
@@ -80,5 +93,9 @@ export class TrainingRequestService {
     const formData = new FormData();
     formData.append('file', file);
     return this.http.post<Nomination[]>(this.url+"/register/upload",formData);
+  }
+
+  getNominationListByTrainingId(trainingId:any): Observable<any[]> {
+    return this.http.get<any[]>(this.url+"/register/getNominationListByTrainingId/"+trainingId); 
   }
 }

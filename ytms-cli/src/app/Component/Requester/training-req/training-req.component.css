@@ -146,3 +146,9 @@ app-requester-sidebar {
     
     color: blue; /* Example hover color change */
 }
+td,th{
+    padding-right: 10px;
+}
+table,tr,th,td{
+    border: 1px solid;
+}

@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,6 +9,7 @@ import { Nomination } from 'src/app/Model/Nomination';
 import { TrainingReqForm } from 'src/app/Model/TrainingRequestForm';
 import { TrainingRequestService } from 'src/app/services/training-request.service';
 import Swal from 'sweetalert2';
+import { NominationReqComponent } from '../nomination-req/nomination-req.component';
 
 @Component({
   selector: 'app-training-req',
@@ -34,7 +35,7 @@ export class TrainingReqComponent {
   userRole: any;
   id:any;
   file!:File;
-  nomination!:Nomination[];
+  nomination:Nomination[]=[];
   showNomination=false;
 
   
@@ -48,6 +49,7 @@ export class TrainingReqComponent {
       this.userRole = this.jwtServ.getRoleFromToken(token);
       let trainingId=this.activatedRoute.snapshot.paramMap.get('id');
       this.editTrainingForm(trainingId);
+
   }
  
   loadTechnology(){
@@ -153,7 +155,8 @@ export class TrainingReqComponent {
       }
       else{
         let obj:any=this.trainingReqForm.value;
-        this.ser.saveTraining(obj).subscribe();
+        this.ser.saveTraining(obj,this.nomination).subscribe();
+        this.nomination=[];
         Swal.fire('Success', 'Request has been submitted to admin for approval', 'success');
         this.trainingReqForm.reset();
       }   
@@ -181,7 +184,6 @@ export class TrainingReqComponent {
     if(trainingId!=null){
       this.ser.getTrainingById(trainingId).subscribe((resp:any)=>{
         this.trainingRequestObject=resp;
-        alert(this.datepipe.transform(this.trainingRequestObject?.startDate,'dd-MM-yyyy'));
         this.id=trainingId;
         this.trainingReqForm.get('id')?.setValue(trainingId);
         let localTrainingArray:string[]|undefined=this.trainingRequestObject?.trainingName.split("-") as string [];
@@ -227,16 +229,41 @@ export class TrainingReqComponent {
         
         });
     }
+    this.ser.getNominationListByTrainingId(trainingId).subscribe(resp=>{
+      this.nomination=resp;
+    });
   }
+
 
   bulkUploadNominationData(event:any): void{
     this.file=event.target.files[0]
     console.log(this.file);
-    this.ser.saveNominationDataOnFrontend(this.file).subscribe((resp:any)=>{this.nomination=resp});
+    let nomData:Nomination[]=[];
+    this.ser.saveNominationDataOnFrontend(this.file).subscribe((resp:Nomination[])=>{
+      nomData=resp;
+      for (let i = 0; i < nomData.length; i++) {
+        this.nomination.push(nomData[i]);
+      }
+      if(this.nomination.length>0){
+        this.showNomination=true;
+      }
+    });
+  }
+
+  setNominationArray(nomData:Nomination){
+    this.nomination.push(nomData);
   }
 
   hideShowNomination(){
     this.showNomination= (!this.showNomination);
   }
   
+  addNominationData(nomination:any){
+    this.nomination.push(nomination);
+  }
+
+  setNominationId(nominationId:string){
+    this.ser.setNominationId(nominationId);
+    //this.nominationReq.nominationId=nominationId;
+  }
 }

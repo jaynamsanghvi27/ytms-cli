@@ -43,7 +43,7 @@
                               <td style="text-align: center;">
                                 <button *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' && training.actualStartDate == null && training.status!='DECLINED'" class="btn btn-primary btn-sm" (click)="openDialog(template);setId(training.id)">Accept</button>
                                 <button *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' && training.actualStartDate == null && training.status!='DECLINED'" class="btn btn-danger  btn-sm" (click)="declineDialog(template1);setId(training.id)">Reject</button>
-                                <button *ngIf="training.status=='DECLINED'" class="btn btn-warning btn-sm" (click)="editTrf(training.id)">Edit</button>
+                                <button *ngIf="training.status!='APPROVED'" class="btn btn-warning btn-sm" (click)="editTrf(training.id)">Edit</button>
                             </td>
                         </tr>
                     </tbody>
