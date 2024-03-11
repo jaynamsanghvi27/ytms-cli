@@ -11,7 +11,7 @@ export class TrainingRequestService {
   private trainingDataSubject = new BehaviorSubject<String>(new String());
   trainingName$ = this.trainingDataSubject.asObservable();
 
-  private nominationDataSubject = new BehaviorSubject<Number>(new Number());
+  public nominationDataSubject = new BehaviorSubject<Number>(new Number());
   nominationId$ = this.nominationDataSubject.asObservable();
 
   url:string="http://localhost:8080/ytms";
@@ -101,5 +101,14 @@ export class TrainingRequestService {
 
   getNominationById(nominationId:any): Observable<Nomination> {
     return this.http.get<Nomination>(this.url+"/register/getNominationById/"+nominationId); 
+  }
+  updateNominationById(nomination:any){
+    let nominationBody:any=nomination;
+    console.log("on service"+ JSON.stringify(nominationBody));
+    return this.http.put<any>(this.url+"/register/update-nomination",nominationBody);
+  }
+  saveNomination(nomination:any){
+    console.log("on service"+ JSON.stringify(nomination));
+    return this.http.post<any>(this.url+"/register/saveNomination",nomination);
   }
 }

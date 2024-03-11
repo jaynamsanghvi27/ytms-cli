@@ -1,8 +1,8 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, HostListener, Input, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
 import { Nomination } from 'src/app/Model/Nomination';
-import { TrainingReqForm } from 'src/app/Model/TrainingRequestForm';
 import { TrainingRequestService } from 'src/app/services/training-request.service';
 import { TrainingReqComponent } from '../training-req/training-req.component';
 
@@ -18,9 +18,12 @@ export class NominationReqComponent {
   trainingNm = "";
   nomination!: Nomination;
   nominationId:any;
-  ngOnInit(): void {
+  
+
+    ngOnInit(): void {
     this.nominationReqForm = this.formBuilder.group(
       {
+        id:[],
         emp_id: ['', [Validators.required]],
         emp_name: ['', [Validators.required]],
         emp_mail_id: ['', [Validators.required]],
@@ -29,15 +32,23 @@ export class NominationReqComponent {
         current_allocation: ['', [Validators.required]],
         project: ['', [Validators.required]],
         current_location: ['', [Validators.required]],
+        trainingId:[]
       })
 
   }
 
-  constructor(private formBuilder: FormBuilder, private ser: TrainingRequestService, private trf: TrainingReqComponent, public dialog: MatDialog) {
+  constructor(private formBuilder: FormBuilder, private ser: TrainingRequestService, private trf: TrainingReqComponent, public dialog: MatDialog,private activatedRoute: ActivatedRoute) {
     // this.nominationReqForm.controls['trainingName']?.patchValue(this.service.trainingName$.subscribe());
     this.ser.nominationId$.subscribe((resp: any) => {
+      this.nominationId=resp;
       console.log(resp)
     });
+    if(this.nominationId!=null){
+      this.ser.getNominationById(this.nominationId).subscribe((resp:any)=>{
+        this.nominationReqForm.patchValue(resp);
+        console.log("nomination_Data "+JSON.stringify(resp))
+      })
+    }
     this.ser.trainingName$.subscribe((resp: any) => {
       this.trainingNm = resp;
     })
@@ -45,19 +56,42 @@ export class NominationReqComponent {
 
 
   submit(): void {
+    let trainingId: any = this.activatedRoute.snapshot.paramMap.get('id');
+    
     if (this.nominationReqForm.valid) {
+
       console.log(this.nominationReqForm.value);
       this.nomination = this.nominationReqForm.value;
-      this.trf.addNominationData(this.nomination);
-      this.closeDialog();
+      if(this.nominationId>0){
+        this.updateNominationById();
+      }
+      else if(trainingId!=null && trainingId >0){
+        this.nominationReqForm.controls['trainingId'].setValue(trainingId);
+        this.ser.saveNomination(this.nominationReqForm.value).subscribe();
+        this.trf.reloadComponent();
+      }
+      else{
+        this.trf.addNominationData(this.nomination);
+      }
+      
+      this.closeDialogue();
       //this.trf.nomination.push(this.nomination);
     } else {
       this.nominationReqForm.markAllAsTouched();
     }
   }
 
-  public closeDialog(): void {
-    this.dialog.closeAll();
+  updateNominationById(){
+    if (this.nominationReqForm.valid) {
+      this.ser.updateNominationById(this.nominationReqForm.value).subscribe();
+      this.trf.reloadComponent();
+      //this.trf.getNominationListByTrainingId(this.nominationReqForm.value.trainingId);
+    }
   }
 
+  closeDialogue(){
+    this.ser.nominationDataSubject.next(new Number());
+    this.nominationReqForm.reset();
+    this.dialog.closeAll();
+  }
 }

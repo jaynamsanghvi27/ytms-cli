@@ -137,3 +137,15 @@ app-requester-sidebar {
 .center{
     text-align: center;
 }
+.closeIcon{
+    float: right;
+    position: absolute;
+    top: 0rem;
+    right: 1rem;
+    background: none;
+    order: none;
+    cursor: pointer;
+    z-index: 2; 
+    font-size:48px;
+    color:black
+}
