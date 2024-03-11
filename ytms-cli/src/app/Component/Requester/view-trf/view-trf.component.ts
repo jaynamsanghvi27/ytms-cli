@@ -6,6 +6,7 @@ import { TrainingRequestService } from 'src/app/services/training-request.servic
 import {MatDialog} from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-view-trf',
@@ -21,9 +22,9 @@ export class ViewTrfComponent {
   trainingReqForm1!: FormGroup;
   userRole:string="";
   document: Document | undefined;
-  
-  constructor(private ser:TrainingRequestService,private auth:AuthService, 
-    private jwtServ:JwtService,public dialog: MatDialog,private formBuilder: FormBuilder,
+
+  constructor(private ser:TrainingRequestService,private auth:AuthService,
+    private jwtServ:JwtService,public dialog: MatDialog,private formBuilder: FormBuilder,private router: Router
     ){
     let token = auth.getToken();
     this.userRole = jwtServ.getRoleFromToken(token);
@@ -36,7 +37,7 @@ export class ViewTrfComponent {
       actualEndDate: ['', [Validators.required]],
       fileName: ['', [Validators.required]]});
 
-  
+
   this.trainingReqForm1 = this.formBuilder.group({
     id:['', [Validators.required]],
     declinedMessage:['', [Validators.required]],
@@ -101,10 +102,19 @@ decline()
   showMessage(message:any){
     Swal.fire('Reason for Decline',message, 'error');
   }
-  display = false;
-  onPress(){
-    console.log("clicked");
-    //document.querySelector('#comp-render').innerHTML='<object type="text/html" data="app-upload-excel.html" ></object>';
-    this.display = true;
+
+  editTrf(trainingId:any){
+    if(this.userRole == 'ROLE_TECHNICAL_MANAGER')
+      this.router.navigate(['/tm-training-req',trainingId]);
+    else if(this.userRole == 'ROLE_TRAINER')
+      this.router.navigate(['/trainer/training-req',trainingId]);
+    else
+      this.router.navigate(['/training-req',trainingId]);
   }
+  display = false;
+    onPress(){
+      console.log("clicked");
+      //document.querySelector('#comp-render').innerHTML='<object type="text/html" data="app-upload-excel.html" ></object>';
+      this.display = true;
+    }
 }

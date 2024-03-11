@@ -14,7 +14,7 @@ export class RequesterSidebarComponent {
   constructor(private auth:AuthService, private jwtserv:JwtService){
     let token = auth.getToken();
     let r1= jwtserv.getRoleFromToken(token);
-    //console.log(this.role);
+    console.log(this.role);
     this.list = [
       {
          number: 1,

@@ -1,0 +1,29 @@
+<form style="padding-left: 20px;padding-right: 20px;" [formGroup]="unitMatserForm" (ngSubmit)="submit()">
+    <div mat-dialog-title>
+        <!-- <h2 class="dialog-title">dialog title</h2> -->
+        <a (click)="closeDialog()"><span class="icon-close"></span></a></div>
+    
+    <div class="form-header">
+        <h5 class="heading-color">Add Unit</h5>
+      </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-4">Unit Name</div>
+            <div class="col-7"><input
+              type="text"
+              formControlName="name"
+              placeholder="Unit Name"
+              class="form-control"
+            />
+            </div>
+        </div><br>
+        <div class="center">
+            <button
+              type="submit" 
+              class="btn btn-primary btn-block btn-lg"
+            >
+              Add
+            </button>
+          </div>
+    </div>
+ </form>

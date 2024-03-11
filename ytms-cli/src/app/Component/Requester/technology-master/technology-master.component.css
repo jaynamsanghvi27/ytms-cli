@@ -16,7 +16,7 @@ body {
     border-radius: 3px;
 }
 .form-header {
-    margin: -30px -30px 20px;
+    margin: -59px -30px 20px;
     padding: 30px 30px 10px;
     text-align: center;
     background: #005ba3;
@@ -145,10 +145,4 @@ app-requester-sidebar {
 .fa-plus:hover {
     
     color: blue; /* Example hover color change */
-}
-td,th{
-    padding-right: 10px;
-}
-table,tr,th,td{
-    border: 1px solid;
 }

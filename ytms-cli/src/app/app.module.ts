@@ -31,6 +31,10 @@ import { TrainingReqComponent } from './Component/Requester/training-req/trainin
 import { NominationReqComponent } from './Component/Requester/nomination-req/nomination-req.component';
 import { ViewTrfComponent } from './Component/Requester/view-trf/view-trf.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { UnitMasterComponent } from './Component/Requester/unit-master/unit-master.component';
+import { CompetencyMasterComponent } from './Component/Requester/competency-master/competency-master.component';
+import { TrainingTypeMasterComponent } from './Component/Requester/training-type-master/training-type-master.component';
+import { TechnologyMasterComponent } from './Component/Requester/technology-master/technology-master.component';
 import { UploadExcelComponent } from './Component/upload-excel/upload-excel.component';
 
 @NgModule({
@@ -52,6 +56,10 @@ import { UploadExcelComponent } from './Component/upload-excel/upload-excel.comp
     TrainingReqComponent,
     NominationReqComponent,
     ViewTrfComponent,
+    UnitMasterComponent,
+    CompetencyMasterComponent,
+    TrainingTypeMasterComponent,
+    TechnologyMasterComponent,
     UploadExcelComponent
   ],
   imports: [

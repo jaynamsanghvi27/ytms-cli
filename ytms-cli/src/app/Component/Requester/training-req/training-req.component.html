@@ -19,21 +19,21 @@
                           <div class="col-4">
                               <select #teams class="request-drop-down" formControlName="unit" (change)="onUnitChange(teams.value)">
                                <option [ngValue]="0" disabled >-- Select --</option>
-                                  <option *ngFor="let unit of units" value="{{unit}}">
-                                    {{unit}}
+                                  <option *ngFor="let unit of units" value="{{unit.name}}">
+                                    {{unit.name}}
                                   </option>
                               </select>
-                              
-                           
+                              <span><i class="fa fa-plus" title="Click To Add Unit" (click)="openDialog(unittemplate)"></i></span>
                          </div>
                         <div class="col-2">Competency</div>
                         <div class="col-4">
                           <select class="request-drop-down" formControlName="competency" (change)="onCompetencyChange($event)">
                             <option [ngValue]="0" disabled [selected]>-- Select --</option>
-                              <option *ngFor="let competency of competencies" value="{{competency}}">
-                                {{competency}}
+                              <option *ngFor="let competency of competencies" value="{{competency.name}}">
+                                {{competency.name}}
                               </option>
                           </select>  
+                          <span><i class="fa fa-plus " title="Click To Add Competency" (click)="openDialog(competencytemplate)"></i></span>
                         </div>
                           
                       </div>
@@ -44,11 +44,11 @@
                         <div class="col-4">
                           <select class="request-drop-down" formControlName="trainingType" (change)="onTrainingChange($event)">
                             <option [ngValue]="0" disabled [selected]>-- Select --</option>
-                              <option *ngFor="let trainingType of trainingTypes" value="{{trainingType}}">
-                                {{trainingType}}
+                              <option *ngFor="let trainingType of trainingTypes" value="{{trainingType.name}}">
+                                {{trainingType.name}}
                               </option>
                           </select>
-
+                          <span><i class="fa fa-plus" title="Click To Add Training Type" (click)="openDialog(trainingtemplate)"></i></span>
                         </div>
                         <div class="col-2"><label>Technology</label></div>
                           
@@ -59,7 +59,7 @@
                                   {{technology.name}}
                                 </option>
                             </select>  
-                           
+                            <span><i class="fa fa-plus" title="Click To Add Technology" (click)="openDialog(technologytemplate)"></i></span>
                         </div>
                     </div>
 
@@ -122,8 +122,33 @@
                     </div>
                     <input type="hidden" formControlName="userName" [(ngModel)]="userName" >
                   </div>
-                  
+                  <hr>
+                  <!-- Nomination Upload Start -->
+                  <div class="row">
+                    <div class="col-2">Bulk Nomination</div>
+                    <div class="col-4">
+                      <input type="file" formControlName="bulkUploadFile"
+                      placeholder="Select Excel File"
+                      accept=".csv, .xlsx, .xls"
+                      class="form-control"
+                      (change)="bulkUploadNominationData($event)">
+                    </div>
+                    <!-- <input id="selectedFile" type="file" name="files[]" multiple id="jsonFile" accept=".xlsx" (change)="selectedFileChange($event)" /> -->
+                    <div class="col-2">Single Nomination</div>
+                      <div class="col-4">
+                        <a (click)="openDialog(nominationtemplate)"><span style="float: left;">Click To Add Nomination &nbsp; <i class="fa fa-plus"  title="Click To Add Nomination" ></i>
+                        
+                        </span>
+                      </a>
+                        
+                      </div>
+                      
+                  </div>
+                  <!-- Nomination Upload End -->
+
+                  <hr>
                   <div class="center">
+                    <input type="hidden" formControlName="id">
                     <!-- <button
                       type="button" (click)="redirectComponent()"
                       class="btn btn-primary btn-block btn-lg"
@@ -137,10 +162,66 @@
                       Submit
                     </button>
                   </div>
+                  <div>
+                   <a *ngIf="this.nomination.length>0" (click)="hideShowNomination()"> Number Of Nomination : {{nomination.length}} {{this.showNomination==true?'hide':'show'}}</a>
+                    <table *ngIf="showNomination">
+                      <thead>
+                        <tr>
+                          <th>
+                            Emp-ID
+                          </th>
+                          <th>
+                            Name
+                          </th>
+                          <th>
+                            Email-ID
+                          </th>
+                          <th>
+                            Grade
+                          </th>
+                          <th>skill</th>
+                          <th>current_allocation</th>
+                          <th>project</th>
+                          <th>current_location</th>
+                          <th *ngIf="this.id!=null">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+
+                        <tr *ngFor="let nomi of nomination">
+                        <td>{{nomi.emp_id}}</td>
+                        <td>{{nomi.emp_name}}</td>
+                        <td>{{nomi.emp_mail_id}}</td>
+                        <td>{{nomi.grade}}</td>
+                        <td>{{nomi.skill}}</td>
+                        <td>{{nomi.current_allocation}}</td>
+                        <td>{{nomi.project}}</td>
+                        <td>{{nomi.current_location}}</td>
+                        <td *ngIf="this.id!=null"><a (click)="setNominationId(nomi.id); openDialog(nominationtemplate)">edit</a>/<a>delete</a></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </form>
               </div>
             <!-- Main Content Closed -->
         </div>
     </main>
+
+    <ng-template #unittemplate>
+      <app-unit-master></app-unit-master>
+    </ng-template>
+    <ng-template #competencytemplate>
+      <app-competency-master></app-competency-master>
+    </ng-template>
+    <ng-template #trainingtemplate>
+      <app-training-type-master></app-training-type-master>
+    </ng-template>
+    <ng-template #technologytemplate>
+      <app-technology-master></app-technology-master>
+    </ng-template>
+    <ng-template #nominationtemplate>
+    <app-nomination-req></app-nomination-req>
+  </ng-template>
 
 </div>

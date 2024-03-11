@@ -63,8 +63,8 @@ const routes: Routes = [
     path: "forgotPassword",
     component: ForgotPasswordComponent
   },
-  { 
-    path: "reset-pwd", 
+  {
+    path: "reset-pwd",
     component: ResetPasswordComponent
   },
   {
@@ -90,7 +90,22 @@ const routes: Routes = [
     component: TrainingReqComponent
   },
   {
+    path:'training-req/:id',
+    canActivate: [AuthGuard],
+    component: TrainingReqComponent
+  },
+  {
+    path:'tm-training-req/:id',
+    canActivate: [AdminGuard],
+    component: TrainingReqComponent
+  },
+  {
     path:'re-training-req',
+    canActivate: [AuthGuard],
+    component: TrainingReqComponent
+  },
+  {
+    path:'re-training-req/:id',
     canActivate: [AuthGuard],
     component: TrainingReqComponent
   },
@@ -98,19 +113,19 @@ const routes: Routes = [
     path:'nomination-req',
     component: NominationReqComponent
   },
-  { 
+  {
     path: "view-trf",
-    canActivate: [AdminGuard,AuthGuard], 
+    canActivate: [AdminGuard,AuthGuard],
     component: ViewTrfComponent
   },
-  { 
+  {
     path: "re-view-trf",
-    canActivate: [AuthGuard], 
+    canActivate: [AuthGuard],
     component: ViewTrfComponent
   },
-  { 
+  {
     path: "tm-view-trf",
-    canActivate: [AdminGuard], 
+    canActivate: [AdminGuard],
     component: ViewTrfComponent
   },
   {
