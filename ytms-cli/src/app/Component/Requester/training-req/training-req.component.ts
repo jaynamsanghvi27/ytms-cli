@@ -230,6 +230,7 @@ export class TrainingReqComponent {
   }
 
   getNominationListByTrainingId(trainingId:any){
+    if(trainingId != null && trainingId >0)
     this.ser.getNominationListByTrainingId(trainingId).subscribe(resp => {
       this.nomination = resp;
     });

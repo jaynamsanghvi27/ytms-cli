@@ -92,7 +92,7 @@ export class TrainingRequestService {
     console.log("on service"+JSON.stringify(file.name) );
     const formData = new FormData();
     formData.append('file', file);
-    return this.http.post<Nomination[]>(this.url+"/register/upload",formData);
+    return this.http.post<Nomination[]>(this.url+"/register/readExcel",formData);
   }
 
   getNominationListByTrainingId(trainingId:any): Observable<any[]> {
