@@ -1,7 +1,8 @@
 import { DatePipe } from '@angular/common';
-import { Component, Inject, Output } from '@angular/core';
+
+import { Component, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/Core/services/auth.service';
 import { JwtService } from 'src/app/Core/services/jwt.service';
@@ -70,10 +71,6 @@ export class TrainingReqComponent {
     this.loadUnit();
     this.loadCompetency();
     this.loadTrainingTypes();
-
-
-
-
     this.trainingReqForm = this.formBuilder.group(
       {
         id: [],
@@ -169,7 +166,6 @@ export class TrainingReqComponent {
   redirectComponent() {
     this.router.navigate(['/nomination-req']);
   }
-
   openDialog(templateRef: any) {
     let dialogRef = this.dialog.open(templateRef, {
       width: '50%',
@@ -254,7 +250,6 @@ export class TrainingReqComponent {
       }
     });
   }
-
   setNominationArray(nomData: Nomination) {
     this.nomination.push(nomData);
   }

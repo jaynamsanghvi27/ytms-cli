@@ -35,6 +35,7 @@ import { UnitMasterComponent } from './Component/Requester/unit-master/unit-mast
 import { CompetencyMasterComponent } from './Component/Requester/competency-master/competency-master.component';
 import { TrainingTypeMasterComponent } from './Component/Requester/training-type-master/training-type-master.component';
 import { TechnologyMasterComponent } from './Component/Requester/technology-master/technology-master.component';
+import { UploadExcelComponent } from './Component/upload-excel/upload-excel.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { TechnologyMasterComponent } from './Component/Requester/technology-mast
     UnitMasterComponent,
     CompetencyMasterComponent,
     TrainingTypeMasterComponent,
-    TechnologyMasterComponent
+    TechnologyMasterComponent,
+    UploadExcelComponent
   ],
   imports: [
     BrowserModule,

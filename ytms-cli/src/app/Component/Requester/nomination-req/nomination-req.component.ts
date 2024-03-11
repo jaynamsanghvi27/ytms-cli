@@ -1,7 +1,7 @@
-import { Component, HostListener, Input, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { Component} from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Nomination } from 'src/app/Model/Nomination';
 import { TrainingRequestService } from 'src/app/services/training-request.service';
 import { TrainingReqComponent } from '../training-req/training-req.component';
@@ -18,8 +18,6 @@ export class NominationReqComponent {
   trainingNm = "";
   nomination!: Nomination;
   nominationId:any;
-  
-
     ngOnInit(): void {
     this.nominationReqForm = this.formBuilder.group(
       {
@@ -36,7 +34,6 @@ export class NominationReqComponent {
       })
 
   }
-
   constructor(private formBuilder: FormBuilder, private ser: TrainingRequestService, private trf: TrainingReqComponent, public dialog: MatDialog,private activatedRoute: ActivatedRoute) {
     // this.nominationReqForm.controls['trainingName']?.patchValue(this.service.trainingName$.subscribe());
     this.ser.nominationId$.subscribe((resp: any) => {
@@ -80,7 +77,6 @@ export class NominationReqComponent {
       this.nominationReqForm.markAllAsTouched();
     }
   }
-
   updateNominationById(){
     if (this.nominationReqForm.valid) {
       this.ser.updateNominationById(this.nominationReqForm.value).subscribe();
