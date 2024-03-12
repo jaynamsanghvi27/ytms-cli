@@ -5,6 +5,7 @@ import {TrainerDashboardComponent} from './trainer-dashboard/trainer-dashboard.c
 import {TrainerCalendarComponent} from './trainer-calendar/trainer-calendar.component';
 import { ViewTrfComponent } from '../Requester/view-trf/view-trf.component';
 import { TrainingReqComponent } from '../Requester/training-req/training-req.component';
+import { ViewNominationComponent } from '../Requester/view-nomination/view-nomination.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,10 @@ const routes: Routes = [
       {
         path:'training-req/:id',
         component: TrainingReqComponent
+      },
+      {
+        path:'view-nomination/:id',
+        component: ViewNominationComponent
       },
     ]
   }

@@ -118,6 +118,12 @@ decline()
       this.display = true;
     }
     openNominationData(id:any){
+
+      if(this.userRole == 'ROLE_TECHNICAL_MANAGER')
       this.router.navigate(['/tm-view-nomination',id]);
+    else if(this.userRole == 'ROLE_TRAINER')
+      this.router.navigate(['/trainer/view-nomination',id]);
+    else
+      this.router.navigate(['/view-nomination',id]);
     }
 }

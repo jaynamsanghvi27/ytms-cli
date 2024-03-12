@@ -116,6 +116,11 @@ const routes: Routes = [
     component: ViewNominationComponent
   },
   {
+    path:'view-nomination/:id',
+    canActivate: [AuthGuard],
+    component: ViewNominationComponent
+  },
+  {
     path:'nomination-req',
     component: NominationReqComponent
   },

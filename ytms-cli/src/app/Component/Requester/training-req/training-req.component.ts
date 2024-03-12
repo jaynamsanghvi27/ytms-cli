@@ -50,9 +50,7 @@ export class TrainingReqComponent {
     this.userRole = this.jwtServ.getRoleFromToken(token);
     let trainingId = this.activatedRoute.snapshot.paramMap.get('id');
     
-    if(this.trainingReqForm!=null && this.trainingReqForm.get('id')!=undefined){
-    this.editTrainingForm(trainingId);
-    }
+   this.editTrainingForm(trainingId);
 
   }
 
@@ -150,13 +148,13 @@ export class TrainingReqComponent {
       console.log("Nomination Array : "+JSON.stringify(this.nomination));
       if (this.id != null) {
         let obj: any = this.trainingReqForm.value;
-       // this.ser.editTraining(obj).subscribe();
+        this.ser.editTraining(obj).subscribe();
         Swal.fire('Success', 'Request updated and submitted to admin for approval', 'success');
         this.trainingReqForm.reset();
       }
       else {
         let obj: any = this.trainingReqForm.value;
-       // this.ser.saveTraining(obj, this.nomination).subscribe();
+        this.ser.saveTraining(obj, this.nomination).subscribe();
         this.nomination = [];
         Swal.fire('Success', 'Request has been submitted to admin for approval', 'success');
         this.trainingReqForm.reset();
