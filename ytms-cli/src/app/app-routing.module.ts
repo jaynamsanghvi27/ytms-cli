@@ -18,6 +18,7 @@ import {
   RequesterDashboardComponent
 } from "./Component/RequesterModule/requester-dashboard/requester-dashboard.component";
 import { UploadExcelComponent } from './Component/upload-excel/upload-excel.component';
+import { ViewNominationComponent } from './Component/Requester/view-nomination/view-nomination.component';
 
 const routes: Routes = [
   {
@@ -110,6 +111,11 @@ const routes: Routes = [
     component: TrainingReqComponent
   },
   {
+    path:'tm-view-nomination/:id',
+    canActivate: [AdminGuard],
+    component: ViewNominationComponent
+  },
+  {
     path:'nomination-req',
     component: NominationReqComponent
   },
@@ -144,6 +150,7 @@ const routes: Routes = [
     canActivate: [AdminGuard],
     component: UploadExcelComponent
   },
+  
   /*{
     path: '**',
     component: LoginComponent

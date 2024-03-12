@@ -10,7 +10,6 @@ import { Nomination } from 'src/app/Model/Nomination';
 import { TrainingReqForm } from 'src/app/Model/TrainingRequestForm';
 import { TrainingRequestService } from 'src/app/services/training-request.service';
 import Swal from 'sweetalert2';
-import { NominationReqComponent } from '../nomination-req/nomination-req.component';
 
 @Component({
   selector: 'app-training-req',
@@ -50,7 +49,10 @@ export class TrainingReqComponent {
     this.userName = jwtServ.getUserNameFromToken(token);
     this.userRole = this.jwtServ.getRoleFromToken(token);
     let trainingId = this.activatedRoute.snapshot.paramMap.get('id');
+    
+    if(this.trainingReqForm!=null && this.trainingReqForm.get('id')!=undefined){
     this.editTrainingForm(trainingId);
+    }
 
   }
 
@@ -145,15 +147,16 @@ export class TrainingReqComponent {
   submit(): void {
     if (this.trainingReqForm.valid) {
       console.log("befor service " + JSON.stringify(this.trainingReqForm.value));
+      console.log("Nomination Array : "+JSON.stringify(this.nomination));
       if (this.id != null) {
         let obj: any = this.trainingReqForm.value;
-        this.ser.editTraining(obj).subscribe();
+       // this.ser.editTraining(obj).subscribe();
         Swal.fire('Success', 'Request updated and submitted to admin for approval', 'success');
         this.trainingReqForm.reset();
       }
       else {
         let obj: any = this.trainingReqForm.value;
-        this.ser.saveTraining(obj, this.nomination).subscribe();
+       // this.ser.saveTraining(obj, this.nomination).subscribe();
         this.nomination = [];
         Swal.fire('Success', 'Request has been submitted to admin for approval', 'success');
         this.trainingReqForm.reset();
@@ -178,6 +181,7 @@ export class TrainingReqComponent {
   }
 
   editTrainingForm(trainingId: any) {
+    console.log("TrainingID : "+trainingId);
     if (trainingId != null) {
       this.ser.getTrainingById(trainingId).subscribe((resp: any) => {
         this.trainingRequestObject = resp;
@@ -244,13 +248,23 @@ export class TrainingReqComponent {
     this.ser.saveNominationDataOnFrontend(this.file).subscribe((resp: Nomination[]) => {
       nomData = resp;
       for (let i = 0; i < nomData.length; i++) {
+        if(this.id!=null&&this.id>0){
+          nomData[i].trainingId=this.id;
+          this.ser.saveNomination(nomData[i]).subscribe((resp:Nomination)=>{
+            nomData[i]=resp;
+          });
+        }
         this.nomination.push(nomData[i]);
       }
+      if(this.id!=null&&this.id>0){
+        this.reloadComponent();
+        }
       if (this.nomination.length > 0) {
         this.showNomination = true;
       }
     });
   }
+
   setNominationArray(nomData: Nomination) {
     this.nomination.push(nomData);
   }
@@ -269,5 +283,11 @@ export class TrainingReqComponent {
   }
   reloadComponent(){
     window.location.reload();
+  }
+
+  deleteNominationById(nominationId: any){
+    confirm("Are You Sure Want Delete Nomination "+nominationId)
+    this.ser.deleteNominationById(nominationId).subscribe();
+    this.getNominationListByTrainingId(this.id);
   }
 }

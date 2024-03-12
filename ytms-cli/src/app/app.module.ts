@@ -36,6 +36,7 @@ import { CompetencyMasterComponent } from './Component/Requester/competency-mast
 import { TrainingTypeMasterComponent } from './Component/Requester/training-type-master/training-type-master.component';
 import { TechnologyMasterComponent } from './Component/Requester/technology-master/technology-master.component';
 import { UploadExcelComponent } from './Component/upload-excel/upload-excel.component';
+import { ViewNominationComponent } from './Component/Requester/view-nomination/view-nomination.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { UploadExcelComponent } from './Component/upload-excel/upload-excel.comp
     CompetencyMasterComponent,
     TrainingTypeMasterComponent,
     TechnologyMasterComponent,
-    UploadExcelComponent
+    UploadExcelComponent,
+    ViewNominationComponent
   ],
   imports: [
     BrowserModule,
@@ -84,7 +86,8 @@ import { UploadExcelComponent } from './Component/upload-excel/upload-excel.comp
       provide: MAT_DATE_LOCALE,
       useValue: 'en-GB',
     },
-    DatePipe
+    DatePipe,
+    TrainingReqComponent
   ],
   bootstrap: [AppComponent]
 })

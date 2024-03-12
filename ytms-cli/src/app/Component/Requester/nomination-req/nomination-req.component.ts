@@ -38,12 +38,10 @@ export class NominationReqComponent {
     // this.nominationReqForm.controls['trainingName']?.patchValue(this.service.trainingName$.subscribe());
     this.ser.nominationId$.subscribe((resp: any) => {
       this.nominationId=resp;
-      console.log(resp)
     });
-    if(this.nominationId!=null){
+    if(this.nominationId!=null&&this.nominationId>0){
       this.ser.getNominationById(this.nominationId).subscribe((resp:any)=>{
         this.nominationReqForm.patchValue(resp);
-        console.log("nomination_Data "+JSON.stringify(resp))
       })
     }
     this.ser.trainingName$.subscribe((resp: any) => {
@@ -65,7 +63,7 @@ export class NominationReqComponent {
       else if(trainingId!=null && trainingId >0){
         this.nominationReqForm.controls['trainingId'].setValue(trainingId);
         this.ser.saveNomination(this.nominationReqForm.value).subscribe();
-        this.trf.reloadComponent();
+        //this.trf.reloadComponent();
       }
       else{
         this.trf.addNominationData(this.nomination);

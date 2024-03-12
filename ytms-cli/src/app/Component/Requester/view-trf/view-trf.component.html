@@ -24,6 +24,7 @@
                             <td><b>Planned End Date</b></td>
                             <td><b>Actual Start Date</b></td>
                             <td><b>Actual End Date</b></td>
+                            <td><b>Actual Participant</b></td>
                             <td><b>Action</b></td>
                             <!-- <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER'"><b>Action</b></td> -->
                         </tr>
@@ -39,6 +40,7 @@
                             <td>{{training.endDate}}</td>
                             <td>{{training.actualStartDate}}</td>
                             <td>{{training.actualEndDate}}</td>
+                            <td><a (click)="openNominationData(training.id)">{{training.noOfActualParticipant}}</a></td>
                             <!-- <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' " style="text-align: center;"> -->
                               <td style="text-align: center;">
                                 <button *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' && training.actualStartDate == null && training.status!='DECLINED'" class="btn btn-primary btn-sm" (click)="openDialog(template);setId(training.id)">Accept</button>

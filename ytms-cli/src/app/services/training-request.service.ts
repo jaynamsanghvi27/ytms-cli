@@ -102,6 +102,9 @@ export class TrainingRequestService {
   getNominationById(nominationId:any): Observable<Nomination> {
     return this.http.get<Nomination>(this.url+"/register/getNominationById/"+nominationId); 
   }
+  deleteNominationById(nominationId:any){
+    return this.http.delete<Nomination>(this.url+"/register/deleteNominationById/"+nominationId);
+  }
   updateNominationById(nomination:any){
     let nominationBody:any=nomination;
     console.log("on service"+ JSON.stringify(nominationBody));

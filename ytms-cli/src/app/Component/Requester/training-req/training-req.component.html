@@ -197,7 +197,7 @@
                         <td>{{nomi.current_allocation}}</td>
                         <td>{{nomi.project}}</td>
                         <td>{{nomi.current_location}}</td>
-                        <td *ngIf="this.id!=null"><a (click)="setNominationId(nomi.id); openDialog(nominationtemplate)">edit</a>/<a>delete</a></td>
+                        <td *ngIf="this.id!=null"><a (click)="setNominationId(nomi.id); openDialog(nominationtemplate)">edit</a>/<a (click)="deleteNominationById(nomi.id)">delete</a></td>
                         </tr>
                       </tbody>
                     </table>

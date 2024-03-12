@@ -117,4 +117,7 @@ decline()
       //document.querySelector('#comp-render').innerHTML='<object type="text/html" data="app-upload-excel.html" ></object>';
       this.display = true;
     }
+    openNominationData(id:any){
+      this.router.navigate(['/tm-view-nomination',id]);
+    }
 }
