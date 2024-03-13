@@ -16,7 +16,7 @@ body {
     border-radius: 3px;
 }
 .form-header {
-    margin: -30px -30px 20px;
+    margin: -59px -30px 20px;
     padding: 30px 30px 10px;
     text-align: center;
     background: #005ba3;
@@ -59,11 +59,11 @@ body {
     top: 1px;
 }
 .training-request-form .btn {        
-    font-size: 8px;
+    font-size: 16px;
     font-weight: bold;
-    /* background: #004481; */
+    background: #004481;
     border: none;
-    min-width: 70px;
+    min-width: 200px;
 }
 .training-request-form .btn:hover, .training-request-form .btn:focus {
     background: #005ba3;
@@ -77,7 +77,7 @@ body {
 }
 
 .request-drop-down{
-    width: 100%;
+    width: 94%;
     min-height: 41px;
     box-shadow: none;
     border-color: #e1e1e1;
@@ -137,36 +137,12 @@ app-requester-sidebar {
 .center{
     text-align: center;
 }
-
-table {  
-    font-family: arial, sans-serif;
-    font-style: normal;
-    border-collapse: collapse;  
-    width: 100%; 
-    color:black 
-  }  
+.fa-plus{
+    font-size:24px;
+    color:#005ba3;
+    float: inline-end;
+}
+.fa-plus:hover {
     
-  td, th {  
-    border: 2px solid gray;  
-    text-align: left;  
-    padding: 8px;  
-  }  
-  tr:nth-child(even) {  
-    background-color: white;  
-  } 
-
-  .fileName-drop-down{
-    width: 75%;
-    min-height: 41px;
-    box-shadow: none;
-    border-color: #e1e1e1;
-    margin-bottom: 4px;
-}
-
-.inner
-{
-    display: inline-flex;
-}
-.inner i{
-    margin-left: 3px;
+    color: blue; /* Example hover color change */
 }

@@ -17,6 +17,8 @@ import {RequesterHomeComponent} from "./Component/Requester/requester-home/reque
 import {
   RequesterDashboardComponent
 } from "./Component/RequesterModule/requester-dashboard/requester-dashboard.component";
+import { UploadExcelComponent } from './Component/upload-excel/upload-excel.component';
+import { ViewNominationComponent } from './Component/Requester/view-nomination/view-nomination.component';
 
 const routes: Routes = [
   {
@@ -62,8 +64,8 @@ const routes: Routes = [
     path: "forgotPassword",
     component: ForgotPasswordComponent
   },
-  { 
-    path: "reset-pwd", 
+  {
+    path: "reset-pwd",
     component: ResetPasswordComponent
   },
   {
@@ -109,22 +111,32 @@ const routes: Routes = [
     component: TrainingReqComponent
   },
   {
+    path:'tm-view-nomination/:id',
+    canActivate: [AdminGuard],
+    component: ViewNominationComponent
+  },
+  {
+    path:'view-nomination/:id',
+    canActivate: [AuthGuard],
+    component: ViewNominationComponent
+  },
+  {
     path:'nomination-req',
     component: NominationReqComponent
   },
-  { 
+  {
     path: "view-trf",
-    canActivate: [AdminGuard,AuthGuard], 
+    canActivate: [AdminGuard,AuthGuard],
     component: ViewTrfComponent
   },
-  { 
+  {
     path: "re-view-trf",
-    canActivate: [AuthGuard], 
+    canActivate: [AuthGuard],
     component: ViewTrfComponent
   },
-  { 
+  {
     path: "tm-view-trf",
-    canActivate: [AdminGuard], 
+    canActivate: [AdminGuard],
     component: ViewTrfComponent
   },
   {
@@ -138,6 +150,12 @@ const routes: Routes = [
     loadChildren: () => import('./Component/RequesterModule/requester.module').then(m => m.RequesterModule)
   },
 
+  {
+    path:'upload',
+    canActivate: [AdminGuard],
+    component: UploadExcelComponent
+  },
+  
   /*{
     path: '**',
     component: LoginComponent

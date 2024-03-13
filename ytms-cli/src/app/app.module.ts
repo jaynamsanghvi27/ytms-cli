@@ -32,6 +32,11 @@ import { NominationReqComponent } from './Component/Requester/nomination-req/nom
 import { ViewTrfComponent } from './Component/Requester/view-trf/view-trf.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { UnitMasterComponent } from './Component/Requester/unit-master/unit-master.component';
+import { CompetencyMasterComponent } from './Component/Requester/competency-master/competency-master.component';
+import { TrainingTypeMasterComponent } from './Component/Requester/training-type-master/training-type-master.component';
+import { TechnologyMasterComponent } from './Component/Requester/technology-master/technology-master.component';
+import { UploadExcelComponent } from './Component/upload-excel/upload-excel.component';
+import { ViewNominationComponent } from './Component/Requester/view-nomination/view-nomination.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +57,12 @@ import { UnitMasterComponent } from './Component/Requester/unit-master/unit-mast
     TrainingReqComponent,
     NominationReqComponent,
     ViewTrfComponent,
-    UnitMasterComponent
+    UnitMasterComponent,
+    CompetencyMasterComponent,
+    TrainingTypeMasterComponent,
+    TechnologyMasterComponent,
+    UploadExcelComponent,
+    ViewNominationComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +86,8 @@ import { UnitMasterComponent } from './Component/Requester/unit-master/unit-mast
       provide: MAT_DATE_LOCALE,
       useValue: 'en-GB',
     },
-    DatePipe
+    DatePipe,
+    TrainingReqComponent
   ],
   bootstrap: [AppComponent]
 })

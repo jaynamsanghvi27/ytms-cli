@@ -4,7 +4,7 @@
 
     <main>
          <app-requester-sidebar [sideNavStatus]="sideNavStatus" *ngIf="this.userRole != 'ROLE_TRAINER'" [ngClass]="{'app-side-nav-open':sideNavStatus}"
-            class="black-border"> </app-requester-sidebar> 
+            class="black-border"> </app-requester-sidebar>
         <div class="display-area p-3" [ngClass]="{'display-area-shrink':sideNavStatus}">
             <!-- Main Content    -->
             <div class="training-request-form">
@@ -24,6 +24,7 @@
                             <td><b>Planned End Date</b></td>
                             <td><b>Actual Start Date</b></td>
                             <td><b>Actual End Date</b></td>
+                            <td><b>Actual Participant</b></td>
                             <td><b>Action</b></td>
                             <!-- <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER'"><b>Action</b></td> -->
                         </tr>
@@ -39,16 +40,19 @@
                             <td>{{training.endDate}}</td>
                             <td>{{training.actualStartDate}}</td>
                             <td>{{training.actualEndDate}}</td>
+                            <td><a (click)="openNominationData(training.id)">{{training.noOfActualParticipant}}</a></td>
                             <!-- <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' " style="text-align: center;"> -->
                               <td style="text-align: center;">
-                                <button *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' && training.actualStartDate == null && training.status!='DECLINED'" class="btn btn-primary btn-sm" (click)="openDialog(template);setId(training.id)">Accept</button>
-                                <button *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' && training.actualStartDate == null && training.status!='DECLINED'" class="btn btn-danger  btn-sm" (click)="declineDialog(template1);setId(training.id)">Reject</button>
-                                <button *ngIf="training.status=='DECLINED'" class="btn btn-warning btn-sm" (click)="editTrf(training.id)">Edit</button>
+                                <span class="inner">
+                                  <i title="Edit" *ngIf="training.status!='APPROVED'" class=" btn-info btn-sm fa fa-edit" (click)="editTrf(training.id)"></i>
+                                <i title="Approve" *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' && training.actualStartDate == null && training.status!='DECLINED'" class=" btn-success btn-sm fa fa-check-square-o" (click)="openDialog(template);setId(training.id)"></i>
+                                <i title="Decline" *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' && training.actualStartDate == null && training.status!='DECLINED'" class=" btn-danger btn-sm  fa fa-close" (click)="declineDialog(template1);setId(training.id)"></i>
+                              </span>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                
+
             </form>
         </div>
         <!-- Main Content Closed -->
@@ -58,7 +62,7 @@
             <div mat-dialog-title>
                 <!-- <h2 class="dialog-title">dialog title</h2> -->
                 <a (click)="closeDialog()"><span class="icon-close"></span></a></div>
-            
+
             <div class="form-header">
                 <h5 class="heading-color">Set Actual Start and End Date</h5>
               </div>
@@ -80,19 +84,38 @@
                       placeholder="Actual End Date"
                       class="form-control"
                     />
-                       
+
                   </div>
+
                 </div><br>
+                <!-- <select formControlName="fileName" class="form-control">   -->
+                  <!-- <option disabled>Select file to be attached</option>   -->
+                  <select class="fileName-drop-down" formControlName="fileName">
+                  <option [ngValue]="0" disabled [selected]> Select file to be attached </option>
+                  <option>Template</option>
+                  <option>Template1</option>
+                  <option>Template2</option>
+                  <option>Template3</option>
+                  <!-- <option *ngFor="let web of websiteList">{{web}}</option>   -->
+              </select>
+
                 <input type="hidden" formControlName="id" [(ngModel)]="this.id">
-                <div class="center">
-                    <button
-                      type="submit" 
-                      class="btn btn-primary btn-block btn-lg"
-                    >
-                      Submit
-                    </button>
-                  </div>
             </div>
+              <div class="center">
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-block btn-lg"
+                >
+                  Submit
+                </button>
+              </div>
+            <div class="btn btn-primary btn-block btn-lg" style="float: left;">
+              <button (click)="onPress()"></button>
+          </div>
+
+          <div id="comp-render" *ngIf="display">
+              <app-upload-excel></app-upload-excel>
+          </div>
          </form>
         </ng-template>
         <ng-template #template1>
@@ -100,7 +123,7 @@
                <div mat-dialog-title>
                    <!-- <h2 class="dialog-title">dialog title</h2> -->
                    <a (click)="closeDialog()"><span class="icon-close"></span></a></div>
-               
+
                <div class="form-header">
                    <h5 class="heading-color">Write Reason for decline request</h5>
                  </div>
@@ -115,11 +138,11 @@
                        />
                        </div>
                        </div>
-                       
+
                    <input type="hidden" formControlName="id" [(ngModel)]="this.id">
                    <div class="center">
                        <button
-                         type="submit" 
+                         type="submit"
                          class="btn btn-primary btn-block btn-lg"
                        >
                          Submit
