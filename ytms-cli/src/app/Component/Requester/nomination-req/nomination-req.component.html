@@ -40,10 +40,13 @@
                       <!-- <div class="col-2"><label>Employee Grade</label></div> -->
                       
                       <div class="col-6">
-                        <input type="text"
-                        formControlName="grade"
-                        placeholder="Employee Grade"
-                        class="form-control">
+                        <select class="request-drop-down" formControlName="grade">
+                          <option [ngValue]="0" disabled >-- Select Employee Grade --</option>
+                             <option *ngFor="let grade of grades" value="{{grade.name}}">
+                               {{grade.name}}
+                             </option>
+                         </select>
+                        
                     </div>
                   </div>
               </div>
@@ -78,10 +81,12 @@
                     <!-- <div class="col-2"><label>Current location</label></div> -->
                     
                     <div class="col-6">
-                      <input type="text"
-                      formControlName="current_location"
-                      placeholder="Current location"
-                      class="form-control">
+                      <select class="request-drop-down" formControlName="current_location">
+                        <option [ngValue]="0" disabled >-- Select Current Location --</option>
+                           <option *ngFor="let location of locations" value="{{location.name}}">
+                             {{location.name}}
+                           </option>
+                       </select>
                   </div>
                 </div>
               </div>

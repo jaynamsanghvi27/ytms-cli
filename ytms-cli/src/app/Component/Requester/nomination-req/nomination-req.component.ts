@@ -18,6 +18,9 @@ export class NominationReqComponent {
   trainingNm = "";
   nomination!: Nomination;
   nominationId:any;
+  locations:any;
+  grades:any;
+
     ngOnInit(): void {
     this.nominationReqForm = this.formBuilder.group(
       {
@@ -33,9 +36,14 @@ export class NominationReqComponent {
         trainingId:[]
       })
 
+      this.nominationReqForm.controls['current_location'].setValue(0, { onlySelf: true });
+      this.nominationReqForm.controls['grade'].setValue(0, { onlySelf: true });
+
   }
   constructor(private formBuilder: FormBuilder, private ser: TrainingRequestService, private trf: TrainingReqComponent, public dialog: MatDialog,private activatedRoute: ActivatedRoute) {
     // this.nominationReqForm.controls['trainingName']?.patchValue(this.service.trainingName$.subscribe());
+    this.loadLocation();
+    this.loadGrade();
     this.ser.nominationId$.subscribe((resp: any) => {
       this.nominationId=resp;
     });
@@ -49,7 +57,12 @@ export class NominationReqComponent {
     })
   }
 
-
+  loadLocation() {
+    this.ser.getLocationMasterList().subscribe((resp: any) => { this.locations = resp });
+  }
+  loadGrade() {
+    this.ser.getGradeMasterList().subscribe((resp: any) => { this.grades = resp });
+  }
   submit(): void {
     let trainingId: any = this.activatedRoute.snapshot.paramMap.get('id');
     

@@ -85,6 +85,12 @@ export class TrainingRequestService {
   getUnitMasterList(): Observable<any[]> {
     return this.http.get<any[]>(this.url+"/getUnitMasterList"); 
   }
+  getLocationMasterList(): Observable<any[]> {
+    return this.http.get<any[]>(this.url+"/getLocationMasterList"); 
+  }
+  getGradeMasterList(): Observable<any[]> {
+    return this.http.get<any[]>(this.url+"/getGradeMasterList"); 
+  }
   getTrainingTypesMasterList(): Observable<any[]> {
     return this.http.get<any[]>(this.url+"/getTrainingTypesMasterList"); 
   }
