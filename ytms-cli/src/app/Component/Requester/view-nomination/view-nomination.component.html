@@ -10,7 +10,7 @@
             <div class="training-request-form">
                 <form>
                 <div class="form-header">
-                    <h5 class="heading-color">Training Request List</h5>
+                    <h5 class="heading-color">Nomination List</h5>
                 </div>
 
 <div>
@@ -48,7 +48,7 @@
          <td>{{nomi.current_allocation}}</td>
          <td>{{nomi.project}}</td>
          <td>{{nomi.current_location}}</td>
-         <td><a (click)="setNominationId(nomi.id); openNominationDialog(nominationtemplate)">edit</a>/<a (click)="deleteNominationById(nomi.id)">delete</a></td>
+         <td><span class="inner"><i class=" btn-info btn-sm fa fa-edit" title="Edit" (click)="setNominationId(nomi.id); openNominationDialog(nominationtemplate)"></i><i class=" btn-danger btn-sm fa fa-trash" title="Delete" (click)="deleteNominationById(nomi.id)"></i></span></td>
          </tr>
        </tbody>
      </table>

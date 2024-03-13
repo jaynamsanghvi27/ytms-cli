@@ -146,9 +146,27 @@ app-requester-sidebar {
     
     color: blue; /* Example hover color change */
 }
-td,th{
-    padding-right: 10px;
+table {  
+    font-family: arial, sans-serif;
+    font-style: normal;
+    border-collapse: collapse;  
+    width: 100%; 
+    color:black 
+  }  
+    
+  td, th {  
+    border: 2px solid gray;  
+    text-align: left;  
+    padding: 8px;  
+  }  
+  tr:nth-child(even) {  
+    background-color: white;  
+  } 
+
+.inner
+{
+    display: inline-flex;
 }
-table,tr,th,td{
-    border: 1px solid;
+.inner i{
+    margin-left: 3px;
 }

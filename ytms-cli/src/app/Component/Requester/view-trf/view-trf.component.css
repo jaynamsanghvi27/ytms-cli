@@ -162,3 +162,11 @@ table {
     border-color: #e1e1e1;
     margin-bottom: 4px;
 }
+
+.inner
+{
+    display: inline-flex;
+}
+.inner i{
+    margin-left: 3px;
+}

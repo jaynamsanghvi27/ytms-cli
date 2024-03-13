@@ -59,11 +59,11 @@ body {
     top: 1px;
 }
 .training-request-form .btn {        
-    font-size: 16px;
+    font-size: 8px;
     font-weight: bold;
-    background: #004481;
+    /* background: #004481; */
     border: none;
-    min-width: 200px;
+    min-width: 70px;
 }
 .training-request-form .btn:hover, .training-request-form .btn:focus {
     background: #005ba3;
@@ -77,7 +77,7 @@ body {
 }
 
 .request-drop-down{
-    width: 94%;
+    width: 100%;
     min-height: 41px;
     box-shadow: none;
     border-color: #e1e1e1;
@@ -137,18 +137,36 @@ app-requester-sidebar {
 .center{
     text-align: center;
 }
-.fa-plus{
-    font-size:24px;
-    color:#005ba3;
-    float: inline-end;
-}
-.fa-plus:hover {
+
+table {  
+    font-family: arial, sans-serif;
+    font-style: normal;
+    border-collapse: collapse;  
+    width: 100%; 
+    color:black 
+  }  
     
-    color: blue; /* Example hover color change */
+  td, th {  
+    border: 2px solid gray;  
+    text-align: left;  
+    padding: 8px;  
+  }  
+  tr:nth-child(even) {  
+    background-color: white;  
+  } 
+
+  .fileName-drop-down{
+    width: 75%;
+    min-height: 41px;
+    box-shadow: none;
+    border-color: #e1e1e1;
+    margin-bottom: 4px;
 }
-td,th{
-    padding-right: 10px;
+
+.inner
+{
+    display: inline-flex;
 }
-table,tr,th,td{
-    border: 1px solid;
+.inner i{
+    margin-left: 3px;
 }

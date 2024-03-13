@@ -40,7 +40,7 @@
 
                       <div class="row">
                         
-                        <div class="col-2"><label>Training Type</label></div>
+                        <div class="col-2">Training Type</div>
                         <div class="col-4">
                           <select class="request-drop-down" formControlName="trainingType" (change)="onTrainingChange($event)">
                             <option [ngValue]="0" disabled [selected]>-- Select --</option>
@@ -50,7 +50,7 @@
                           </select>
                           <span><i class="fa fa-plus" title="Click To Add Training Type" (click)="openDialog(trainingtemplate)"></i></span>
                         </div>
-                        <div class="col-2"><label>Technology</label></div>
+                        <div class="col-2">Technology</div>
                           
                           <div class="col-4">
                             <select multiple class="request-drop-down" [(ngModel)]="selectedTechnology" formControlName="technology" (change)="onTechnologychange($event)">
@@ -73,7 +73,7 @@
                           (change)="onMonthYearchange($event)" data-month-format="MMM-YYYY"
                         />
                         </div>
-                        <div class="col-2"><label>Training Name</label></div>
+                        <div class="col-2">Training name</div>
                         <div class="col-4">
                           <input
                           type="text" [(ngModel)]="completeTrainingName"
@@ -92,7 +92,7 @@
                         class="form-control"
                       />
                       </div>
-                      <div class="col-2"><label>Planned End Date</label></div>
+                      <div class="col-2">Planned End Date</div>
                       <div class="col-4">
                           <input
                         type="date"
@@ -197,7 +197,7 @@
                         <td>{{nomi.current_allocation}}</td>
                         <td>{{nomi.project}}</td>
                         <td>{{nomi.current_location}}</td>
-                        <td *ngIf="this.id!=null"><a (click)="setNominationId(nomi.id); openDialog(nominationtemplate)">edit</a>/<a (click)="deleteNominationById(nomi.id)">delete</a></td>
+                        <td *ngIf="this.id!=null"><span class="inner"><i class=" btn-info btn-sm fa fa-edit" title="Edit" (click)="setNominationId(nomi.id); openDialog(nominationtemplate)"></i><i class=" btn-danger btn-sm fa fa-trash" title="Delete" (click)="deleteNominationById(nomi.id)"></i></span></td>
                         </tr>
                       </tbody>
                     </table>
