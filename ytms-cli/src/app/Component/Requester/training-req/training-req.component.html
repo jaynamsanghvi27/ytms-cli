@@ -23,7 +23,12 @@
                                     {{unit.name}}
                                   </option>
                               </select>
+                              <span *ngIf="hasDropDownError">Enter Country ...</span>
+                              <!-- <div style="color: rgb(185, 21, 21);" *ngIf= "trainingReqForm.controls['unit'].touched && trainingReqForm.controls['unit'].hasError('required')">Unit is required</div> -->
                               <span><i class="fa fa-plus" title="Click To Add Unit" (click)="openDialog(unittemplate)"></i></span>
+                              <!-- <div style="color: red;" *ngIf="trainingReqForm.controls['unit'].touched && trainingReqForm.controls['unit'].invalid">
+                                <span *ngIf="trainingReqForm.controls['unit'].hasError('required')">Unit is required</span>
+                            </div> -->
                          </div>
                         <div class="col-2">Competency</div>
                         <div class="col-4">
@@ -48,6 +53,7 @@
                                 {{trainingType.name}}
                               </option>
                           </select>
+                          <div style="color: red;" *ngIf= "trainingReqForm.controls['trainingType'].touched && trainingReqForm.controls['trainingType'].hasError('required')">trainingType is required</div>
                           <span><i class="fa fa-plus" title="Click To Add Training Type" (click)="openDialog(trainingtemplate)"></i></span>
                         </div>
                         <div class="col-2"><label>Technology</label></div>
@@ -59,6 +65,7 @@
                                   {{technology.name}}
                                 </option>
                             </select>  
+                            <div style="color: red;" *ngIf= "trainingReqForm.controls['technology'].touched && trainingReqForm.controls['technology'].hasError('required')">Technology is required</div>
                             <span><i class="fa fa-plus" title="Click To Add Technology" (click)="openDialog(technologytemplate)"></i></span>
                         </div>
                     </div>
@@ -72,6 +79,7 @@
                           class="form-control" forma
                           (change)="onMonthYearchange($event)" data-month-format="MMM-YYYY"
                         />
+                        <div style="color: red;" *ngIf= "trainingReqForm.controls['monthAndYear'].touched && trainingReqForm.controls['monthAndYear'].hasError('required')">MonthAndYear is required</div>
                         </div>
                         <div class="col-2"><label>Training Name</label></div>
                         <div class="col-4">
@@ -80,7 +88,12 @@
                           formControlName="trainingName"
                           placeholder="Training Name"
                           class="form-control"
+                         
                         />
+                        <span style="color: red;" *ngIf= "trainingReqForm.controls['trainingName'].touched && trainingReqForm.controls['trainingName'].hasError('required')">Training name is required</span>
+                        <!-- <div style="color: red;" *ngIf="trainingReqForm.controls['trainingName'].touched && trainingReqForm.controls['trainingName'].invalid">
+                            <span *ngIf="trainingReqForm.controls['trainingName'].hasError('required')">Training name is required</span>
+                        </div> -->
                       </div>
                     </div>
                     <div class="row">
@@ -91,6 +104,7 @@
                         placeholder="Planed Start Date"
                         class="form-control"
                       />
+                      <div style="color: red;" *ngIf= "trainingReqForm.controls['startDate'].touched && trainingReqForm.controls['startDate'].hasError('required')">Planned Start Date is required</div>
                       </div>
                       <div class="col-2"><label>Planned End Date</label></div>
                       <div class="col-4">
@@ -100,10 +114,9 @@
                         placeholder="Planed End Date"
                         class="form-control"
                       />
-                         
+                      <div style="color: red;" *ngIf= "trainingReqForm.controls['endDate'].touched && trainingReqForm.controls['endDate'].hasError('required')">Planed End Date is required</div>   
                     </div>
                   </div>
-
 
                     <div class="row">
                       <div class="col-2">No. of Participant</div>
@@ -111,14 +124,16 @@
                         <input type="number" formControlName="noOfParticipant"
                         placeholder="Tentative no. of Participant"
                         class="form-control">
+                        <div style="color: red;" *ngIf= "trainingReqForm.controls['noOfParticipant'].touched && trainingReqForm.controls['noOfParticipant'].hasError('required')">No Of Participant is required</div>
                       </div>
+
                       <div class="col-2">Purpose Of Training</div>
                         <div class="col-4">
                         <textarea formControlName="trainingDescription"
                         placeholder=""
                         class="form-control"></textarea>
+                        <div style="color: red;" *ngIf= "trainingReqForm.controls['trainingDescription'].touched && trainingReqForm.controls['trainingDescription'].hasError('required')">TrainingDescription is required</div>
                         </div>
-                        
                     </div>
                     <input type="hidden" formControlName="userName" [(ngModel)]="userName" >
                   </div>

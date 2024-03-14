@@ -41,7 +41,7 @@ export class TrainingReqComponent {
 
 
 
-
+  submitted = false;
   constructor(private formBuilder: FormBuilder, private router: Router, private ser: TrainingRequestService,
     private auth: AuthService, private jwtServ: JwtService, private datepipe: DatePipe,
     private activatedRoute: ActivatedRoute, public dialog: MatDialog) {
@@ -95,6 +95,14 @@ export class TrainingReqComponent {
   }
 
   onUnitChange(unit: any) {
+    console.log("unit "+unit)
+    let option = unit;
+    if (option == unit.name) {
+      this.trainingReqForm.controls['unit'].setValidators([
+        Validators.required,
+        Validators.maxLength(8),
+       ]);
+     }
     this.trainingArray[0] = unit;
     this.creatTrainingName();
   }
@@ -143,6 +151,8 @@ export class TrainingReqComponent {
   }
 
   submit(): void {
+    console.log("In Submit");
+    this.submitted = true
     if (this.trainingReqForm.valid) {
       console.log("befor service " + JSON.stringify(this.trainingReqForm.value));
       if (this.id != null) {
@@ -159,7 +169,15 @@ export class TrainingReqComponent {
         this.trainingReqForm.reset();
       }
     } else {
-      this.trainingReqForm.markAllAsTouched();
+      console.log("invalid");
+     this.trainingReqForm.markAllAsTouched();
+    //  this.trainingReqForm.controls['unit'].markAsTouched();
+    //  this.trainingReqForm.controls['trainingType'].markAsTouched();
+    //  this.trainingReqForm.controls['trainingName'].markAsTouched(); 
+    
+    //alert("Invaild Unit");
+    //return; 
+          
     }
   }
 
@@ -269,5 +287,13 @@ export class TrainingReqComponent {
   }
   reloadComponent(){
     window.location.reload();
+  }
+
+  get hasDropDownError() {
+    return (
+      this.trainingReqForm.get('unit')?.touched &&
+      this.trainingReqForm.get('unit')?.errors &&
+      this.trainingReqForm.get('unit')?.errors?.['required']
+    )
   }
 }
