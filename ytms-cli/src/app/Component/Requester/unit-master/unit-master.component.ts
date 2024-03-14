@@ -26,7 +26,7 @@ export class UnitMasterComponent {
       if (this.unitMatserForm.valid) {
         console.log("befor service "+JSON.stringify(this.unitMatserForm.value));
         this.ser.saveUnit(this.unitMatserForm.value).subscribe();
-        this.trfcomponent.loadUnit();
+        this.trfcomponent.pushUnit(this.unitMatserForm.value);
         Swal.fire('Success', 'Unit Added Successfully', 'success');
         this.unitMatserForm.reset();
         this.closeDialog();

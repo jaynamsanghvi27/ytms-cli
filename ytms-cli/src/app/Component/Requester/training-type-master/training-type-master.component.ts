@@ -27,10 +27,12 @@ export class TrainingTypeMasterComponent {
       if (this.trainingMatserForm.valid) {
         console.log("befor service "+JSON.stringify(this.trainingMatserForm.value));
         this.ser.saveTrainingType(this.trainingMatserForm.value).subscribe();
-        this.trfcomponent.loadTrainingTypes();
         Swal.fire('Success', 'Training Type Added Successfully', 'success');
+        console.log("this.trainingMatserForm.value.name "+this.trainingMatserForm.value.name);
+        this.trfcomponent.pushTrainingTypes(this.trainingMatserForm.value);
         this.trainingMatserForm.reset();
         this.closeDialog();
+        //this.trfcomponent.loadTrainingTypes();
       }
   
     }

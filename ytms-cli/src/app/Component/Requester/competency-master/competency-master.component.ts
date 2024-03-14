@@ -27,8 +27,8 @@ export class CompetencyMasterComponent {
       if (this.competencyMatserForm.valid) {
         console.log("befor service "+JSON.stringify(this.competencyMatserForm.value));
         this.ser.saveCompetency(this.competencyMatserForm.value).subscribe();
-        
         Swal.fire('Success', 'Competency Added Successfully', 'success');
+        this.trfcomponent.pushCompetency(this.competencyMatserForm.value);
         this.competencyMatserForm.reset();
         this.closeDialog();
       }
@@ -37,7 +37,7 @@ export class CompetencyMasterComponent {
 
     public closeDialog(): void {
       //this.dialogClosed.emit({ data: this.competencyMatserForm.value });
-      this.trfcomponent.loadCompetency();
+      
       this.dialog.closeAll();
       // this.matDialogReference.close([]);
   }

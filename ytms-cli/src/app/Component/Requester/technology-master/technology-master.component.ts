@@ -27,7 +27,7 @@ export class TechnologyMasterComponent {
       if (this.technologyMatserForm.valid) {
         console.log("befor service "+JSON.stringify(this.technologyMatserForm.value));
         this.ser.saveTechnology(this.technologyMatserForm.value).subscribe();
-        this.trfcomponent.loadTechnology();
+        this.trfcomponent.pushTechnology(this.technologyMatserForm.value);
         Swal.fire('Success', 'Technology Added Successfully', 'success');
         this.technologyMatserForm.reset();
         this.closeDialog();
