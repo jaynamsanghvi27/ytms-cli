@@ -26,11 +26,17 @@ export class TrainingTypeMasterComponent {
     submit(){
       if (this.trainingMatserForm.valid) {
         console.log("befor service "+JSON.stringify(this.trainingMatserForm.value));
-        this.ser.saveTrainingType(this.trainingMatserForm.value).subscribe();
-        Swal.fire('Success', 'Training Type Added Successfully', 'success');
-        console.log("this.trainingMatserForm.value.name "+this.trainingMatserForm.value.name);
-        this.trfcomponent.pushTrainingTypes(this.trainingMatserForm.value);
-        this.trainingMatserForm.reset();
+        const temp:any = this.trfcomponent.trainingTypes?.map(trainingType=>trainingType.name);
+        if((temp?.indexOf(this.trainingMatserForm.value.name)) < 0){
+          this.ser.saveTrainingType(this.trainingMatserForm.value).subscribe();
+          Swal.fire('Success', 'Training Type Added Successfully', 'success');
+          console.log("this.trainingMatserForm.value.name "+this.trainingMatserForm.value.name);
+          this.trfcomponent.pushTrainingTypes(this.trainingMatserForm.value);
+          this.trainingMatserForm.reset();
+        }else{
+          Swal.fire('Error', 'Training Type Already Exist', 'error');
+          this.trainingMatserForm.reset();
+        }
         this.closeDialog();
         //this.trfcomponent.loadTrainingTypes();
       }

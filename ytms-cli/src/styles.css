@@ -12,3 +12,19 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.bt-info {
+  color: #000;
+  background-color: #0dcaf0;
+  border-color: #0dcaf0;
+}
+.bt-success {
+  color: #fff;
+  background-color: #198754;
+  border-color: #198754;
+}
+.bt-danger {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from '../Core/services/auth.service';
+import { environment } from '../Core/application_constant/environment';
 
 
 @Injectable({
@@ -24,7 +25,7 @@ export class UploadExcelService {
 
     formData.append('file', file);
 
-    const req = new HttpRequest('POST', "http://localhost:8080/ytms/register/upload", formData, {
+    const req = new HttpRequest('POST', environment.baseUrl+environment.contextUrl+"/register/upload", formData, {
       headers: new HttpHeaders({
         'Authorization': 'Bearer ' + this.authservice.getToken(),
       }),

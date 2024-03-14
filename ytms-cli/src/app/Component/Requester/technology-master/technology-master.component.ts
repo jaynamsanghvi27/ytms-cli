@@ -26,10 +26,16 @@ export class TechnologyMasterComponent {
     submit(){
       if (this.technologyMatserForm.valid) {
         console.log("befor service "+JSON.stringify(this.technologyMatserForm.value));
-        this.ser.saveTechnology(this.technologyMatserForm.value).subscribe();
-        this.trfcomponent.pushTechnology(this.technologyMatserForm.value);
-        Swal.fire('Success', 'Technology Added Successfully', 'success');
-        this.technologyMatserForm.reset();
+        const temp:any = this.trfcomponent.technologies?.map(technology=>technology.name);
+        if((temp?.indexOf(this.technologyMatserForm.value.name)) < 0){
+          this.ser.saveTechnology(this.technologyMatserForm.value).subscribe();
+          this.trfcomponent.pushTechnology(this.technologyMatserForm.value);
+          Swal.fire('Success', 'Technology Added Successfully', 'success');
+          this.technologyMatserForm.reset();
+        }else{
+          Swal.fire('Error', 'Technology Already Exist', 'error');
+          this.technologyMatserForm.reset();
+        }
         this.closeDialog();
         
       }

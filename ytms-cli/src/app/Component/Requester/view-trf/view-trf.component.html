@@ -44,9 +44,9 @@
                             <!-- <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' " style="text-align: center;"> -->
                               <td style="text-align: center;">
                                 <span class="inner">
-                                  <i title="Edit" *ngIf="training.status!='APPROVED'" class=" btn-info btn-sm fa fa-edit" (click)="editTrf(training.id)"></i>
-                                <i title="Approve" *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' && training.actualStartDate == null && training.status!='DECLINED'" class=" btn-success btn-sm fa fa-check-square-o" (click)="openDialog(template);setId(training.id)"></i>
-                                <i title="Decline" *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' && training.actualStartDate == null && training.status!='DECLINED'" class=" btn-danger btn-sm  fa fa-close" (click)="declineDialog(template1);setId(training.id)"></i>
+                                  <i title="Edit" *ngIf="training.status!='APPROVED'" class=" bt-info btn-sm fa fa-edit" (click)="editTrf(training.id)"></i>
+                                <i title="Approve" *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' && training.actualStartDate == null && training.status!='DECLINED'" class=" bt-success btn-sm fa fa-check-square-o" (click)="openDialog(template);setId(training.id)"></i>
+                                <i title="Decline" *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' && training.actualStartDate == null && training.status!='DECLINED'" class=" bt-danger btn-sm  fa fa-close" (click)="declineDialog(template1);setId(training.id)"></i>
                               </span>
                             </td>
                         </tr>

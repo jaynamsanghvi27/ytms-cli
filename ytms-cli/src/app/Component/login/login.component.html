@@ -13,7 +13,7 @@
              class="img-fluid" src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp">
       </div>
       <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-        <form [formGroup]="userLoginForm">
+        <form [formGroup]="userLoginForm" (ngSubmit)="submit()">
           <div>
             <p><strong>WELCOME TO YASH TECHNOLOGIES !!!</strong></p>
           </div>
@@ -76,8 +76,8 @@
             <a [routerLink]="['/forgotPassword']">Forgot password?</a>
           </div>
           <div class="text-center text-lg-start mt-4 pt-2">
-            <button (click)="submit()" class="button"
-                    style="padding-left: 2.5rem; padding-right: 2.5rem;" type="button">Sign in
+            <button class="button"
+                    style="padding-left: 2.5rem; padding-right: 2.5rem;" type="submit">Sign in
             </button>
 
           </div>
