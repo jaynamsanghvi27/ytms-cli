@@ -22,22 +22,27 @@ export class CompetencyMasterComponent {
     this.competencyMatserForm = this.formBuilder.group({
       name: ['', [Validators.required]]});
     }
-
     submit(){
       if (this.competencyMatserForm.valid) {
         console.log("befor service "+JSON.stringify(this.competencyMatserForm.value));
-        this.ser.saveCompetency(this.competencyMatserForm.value).subscribe();
-        
-        Swal.fire('Success', 'Competency Added Successfully', 'success');
-        this.competencyMatserForm.reset();
+        const temp:any = this.trfcomponent.competencies?.map(competency=>competency.name);
+        if((temp?.indexOf(this.competencyMatserForm.value.name)) < 0){
+          this.ser.saveCompetency(this.competencyMatserForm.value).subscribe();
+          Swal.fire('Success', 'Competency Added Successfully', 'success');
+          this.trfcomponent.pushCompetency(this.competencyMatserForm.value);
+          this.competencyMatserForm.reset();
+        }else{
+          Swal.fire('Error', 'Competency Already Exist', 'error');
+          this.competencyMatserForm.reset();
+        }
         this.closeDialog();
       }
-  
+ 
     }
 
     public closeDialog(): void {
       //this.dialogClosed.emit({ data: this.competencyMatserForm.value });
-      this.trfcomponent.loadCompetency();
+      //this.trfcomponent.loadCompetency();
       this.dialog.closeAll();
       // this.matDialogReference.close([]);
   }

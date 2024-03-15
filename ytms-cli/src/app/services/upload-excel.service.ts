@@ -8,6 +8,7 @@ import { AuthService } from '../Core/services/auth.service';
   providedIn: 'root'
 })
 export class UploadExcelService {
+  url:string="http://10.4.8.35:8080/ytms";
   constructor(private httpClient: HttpClient,  private authservice: AuthService) { }
 
   httpOptions = {
@@ -24,7 +25,7 @@ export class UploadExcelService {
 
     formData.append('file', file);
 
-    const req = new HttpRequest('POST', "http://localhost:8080/ytms/register/upload", formData, {
+    const req = new HttpRequest('POST', this.url +"/register/upload", formData, {
       headers: new HttpHeaders({
         'Authorization': 'Bearer ' + this.authservice.getToken(),
       }),

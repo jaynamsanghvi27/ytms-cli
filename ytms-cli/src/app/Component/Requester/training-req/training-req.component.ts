@@ -66,6 +66,22 @@ export class TrainingReqComponent {
   loadTrainingTypes() {
     this.ser.getTrainingTypesMasterList().subscribe((resp: any) => { this.trainingTypes = resp });
   }
+  pushTechnology(technology:any) {
+    this.technologies?.push(technology);
+  }
+  
+  pushUnit(unit:any) {
+    this.units?.push(unit);
+  }
+  
+  pushCompetency(competencie:any) {
+    this.competencies?.push(competencie);
+  }
+ 
+  pushTrainingTypes(training:any) {
+    this.trainingTypes?.push(training);
+  }
+
   ngOnInit(): void {
     this.loadTechnology();
     this.loadUnit();

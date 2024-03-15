@@ -14,7 +14,7 @@ export class TrainingRequestService {
   public nominationDataSubject = new BehaviorSubject<Number>(new Number());
   nominationId$ = this.nominationDataSubject.asObservable();
 
-  url:string="http://localhost:8080/ytms";
+  url:string="http://10.26.2.42:8080/ytms";
 
   constructor(private http: HttpClient) { }
   
