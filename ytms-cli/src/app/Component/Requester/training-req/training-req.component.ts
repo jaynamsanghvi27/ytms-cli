@@ -23,6 +23,7 @@ export class TrainingReqComponent {
   //reg!: User[];
   trainingReqForm!: FormGroup;
   emailpattern = "^(.+)@(.+)$";
+  upattern="[^0]+";
   trainingArray: any[] = ["", "", "", ""];
   completeTrainingName: any = "";
   units?: any[];
@@ -86,10 +87,10 @@ export class TrainingReqComponent {
     this.trainingReqForm = this.formBuilder.group(
       {
         id: [],
-        unit: ['', [Validators.required]],
+        unit: ['', [Validators.required,Validators.pattern(this.upattern)]],
         technology: ['', [Validators.required]],
-        competency: ['', [Validators.required]],
-        trainingType: ['', [Validators.required]],
+        competency: ['', [Validators.required,Validators.pattern(this.upattern)]],
+        trainingType: ['', [Validators.required,Validators.pattern(this.upattern)]],
         monthAndYear: ['', [Validators.required]],
         trainingName: ['', [Validators.required]],
         startDate: ['', [Validators.required]],
@@ -165,6 +166,7 @@ export class TrainingReqComponent {
   submit(): void {
     console.log("In Submit");
     this.submitted = true
+    console.log("befor service " + JSON.stringify(this.trainingReqForm.value));
     if (this.trainingReqForm.valid) {
       console.log("befor service " + JSON.stringify(this.trainingReqForm.value));
       console.log("Nomination Array : "+JSON.stringify(this.nomination));
