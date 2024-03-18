@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable} from 'rxjs'
 import { Nomination } from '../Model/Nomination';
 import { TrainingReqForm } from '../Model/TrainingRequestForm';
+import { environment } from '../Core/application_constant/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class TrainingRequestService {
   public nominationDataSubject = new BehaviorSubject<Number>(new Number());
   nominationId$ = this.nominationDataSubject.asObservable();
 
-  url:string="http://localhost:8080/ytms";
+  url:string=environment.baseUrl+environment.contextUrl;
+
 
   constructor(private http: HttpClient) { }
   

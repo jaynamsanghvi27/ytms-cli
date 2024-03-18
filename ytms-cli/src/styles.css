@@ -1,5 +1,6 @@
 /* angular-cli file: src/styles.css */
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 body {
   font-family: 'Poppins', sans-serif;
 }
@@ -11,4 +12,23 @@ html, body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+<<<<<<< HEAD
+
+=======
+>>>>>>> dfadcc4f333421adfd8b4cf4ce2c10a0b9d45ee9
+.bt-info {
+  color: #000;
+  background-color: #0dcaf0;
+  border-color: #0dcaf0;
+}
+.bt-success {
+  color: #fff;
+  background-color: #198754;
+  border-color: #198754;
+}
+.bt-danger {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
 }

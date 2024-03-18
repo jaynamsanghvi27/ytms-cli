@@ -23,6 +23,7 @@ export class TrainingReqComponent {
   //reg!: User[];
   trainingReqForm!: FormGroup;
   emailpattern = "^(.+)@(.+)$";
+  upattern="[^0]+";
   trainingArray: any[] = ["", "", "", ""];
   completeTrainingName: any = "";
   units?: any[];
@@ -40,7 +41,7 @@ export class TrainingReqComponent {
 
 
 
-
+  submitted = false;
   constructor(private formBuilder: FormBuilder, private router: Router, private ser: TrainingRequestService,
     private auth: AuthService, private jwtServ: JwtService, private datepipe: DatePipe,
     private activatedRoute: ActivatedRoute, public dialog: MatDialog) {
@@ -57,15 +58,28 @@ export class TrainingReqComponent {
   loadTechnology() {
     this.ser.getTechnologyMasterList().subscribe((resp: any) => { this.technologies = resp });
   }
+  pushTechnology(technology:any) {
+    this.technologies?.push(technology);
+  }
   loadUnit() {
     this.ser.getUnitMasterList().subscribe((resp: any) => { this.units = resp });
+  }
+  pushUnit(unit:any) {
+    this.units?.push(unit);
   }
   loadCompetency() {
     this.ser.getCompetencyMasterList().subscribe((resp: any) => { this.competencies = resp });
   }
+  pushCompetency(competencie:any) {
+    this.competencies?.push(competencie);
+  }
   loadTrainingTypes() {
     this.ser.getTrainingTypesMasterList().subscribe((resp: any) => { this.trainingTypes = resp });
   }
+  pushTrainingTypes(training:any) {
+    this.trainingTypes?.push(training);
+  }
+
   ngOnInit(): void {
     this.loadTechnology();
     this.loadUnit();
@@ -74,10 +88,10 @@ export class TrainingReqComponent {
     this.trainingReqForm = this.formBuilder.group(
       {
         id: [],
-        unit: ['', [Validators.required]],
+        unit: ['', [Validators.required,Validators.pattern(this.upattern)]],
         technology: ['', [Validators.required]],
-        competency: ['', [Validators.required]],
-        trainingType: ['', [Validators.required]],
+        competency: ['', [Validators.required,Validators.pattern(this.upattern)]],
+        trainingType: ['', [Validators.required,Validators.pattern(this.upattern)]],
         monthAndYear: ['', [Validators.required]],
         trainingName: ['', [Validators.required]],
         startDate: ['', [Validators.required]],
@@ -95,6 +109,14 @@ export class TrainingReqComponent {
   }
 
   onUnitChange(unit: any) {
+    console.log("unit "+unit)
+    let option = unit;
+    if (option == unit.name) {
+      this.trainingReqForm.controls['unit'].setValidators([
+        Validators.required,
+        Validators.maxLength(8),
+       ]);
+     }
     this.trainingArray[0] = unit;
     this.creatTrainingName();
   }
@@ -143,6 +165,9 @@ export class TrainingReqComponent {
   }
 
   submit(): void {
+    console.log("In Submit");
+    this.submitted = true
+    console.log("befor service " + JSON.stringify(this.trainingReqForm.value));
     if (this.trainingReqForm.valid) {
       console.log("befor service " + JSON.stringify(this.trainingReqForm.value));
       console.log("Nomination Array : "+JSON.stringify(this.nomination));
@@ -160,7 +185,15 @@ export class TrainingReqComponent {
         this.trainingReqForm.reset();
       }
     } else {
-      this.trainingReqForm.markAllAsTouched();
+      console.log("invalid");
+     this.trainingReqForm.markAllAsTouched();
+    //  this.trainingReqForm.controls['unit'].markAsTouched();
+    //  this.trainingReqForm.controls['trainingType'].markAsTouched();
+    //  this.trainingReqForm.controls['trainingName'].markAsTouched(); 
+    
+    //alert("Invaild Unit");
+    //return; 
+          
     }
   }
 
@@ -287,5 +320,12 @@ export class TrainingReqComponent {
     confirm("Are You Sure Want Delete Nomination "+nominationId)
     this.ser.deleteNominationById(nominationId).subscribe();
     this.getNominationListByTrainingId(this.id);
+  }
+  get hasDropDownError() {
+    return (
+      this.trainingReqForm.get('unit')?.touched &&
+      this.trainingReqForm.get('unit')?.errors &&
+      this.trainingReqForm.get('unit')?.errors?.['required']
+    )
   }
 }

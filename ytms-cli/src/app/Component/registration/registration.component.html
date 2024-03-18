@@ -1,7 +1,7 @@
 <section class="vh-100">
   <div class="topnav">
     <a class="ytms-logo" href="#">
-      <img src="../../../assets/img/YTMS_LOGO 1.png"></a>
+      <img src="../../../ytmscli/assets/img/YTMS_LOGO 1.png"></a>
   </div>
   <div class="container-fluid h-custom">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -10,7 +10,7 @@
              class="img-fluid" src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp">
       </div>
       <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-        <form [formGroup]="signUpForm">
+        <form [formGroup]="signUpForm" (ngSubmit)="submit()">
           <div>
             <p><strong>WELCOME TO YASH TECHNOLOGIES !!!</strong></p>
           </div>
@@ -81,6 +81,11 @@
             <span *ngIf="signUpForm.controls['password'].hasError('required')"
             >Password is required</span
             >
+            <span *ngIf="signUpForm.controls['password'].hasError('pattern')"
+              >Password must contain at least one number, one uppercase and a
+  lowercase letter and at least 8 characters<br/>Password cannot
+  contain whitespace</span
+              >
             </div>
           </div>
 
@@ -113,7 +118,8 @@
             </div>
           </div>
           <div class="text-center text-lg-start mt-4 pt-2">
-            <button (click)="submit()" class="button" type="button">Sign up</button>
+
+            <button  class="button" type="submit">Sign up</button>
 
           </div>
         </form>
