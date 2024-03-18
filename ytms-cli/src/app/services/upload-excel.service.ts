@@ -8,7 +8,10 @@ import { AuthService } from '../Core/services/auth.service';
   providedIn: 'root'
 })
 export class UploadExcelService {
-  constructor(private httpClient: HttpClient,  private authservice: AuthService) { }
+
+  url:string="http://localhost:8080/ytms";
+
+  constructor(private httpClient: HttpClient,  private authservice: AuthService, private http: HttpClient) { }
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -34,4 +37,8 @@ export class UploadExcelService {
     });
     return this.httpClient.request(req);
 }
+
+getFileName(): Observable<any[]> {
+  return this.http.get<String[]>(this.url+"/register/getFileName"); 
+  }
 }

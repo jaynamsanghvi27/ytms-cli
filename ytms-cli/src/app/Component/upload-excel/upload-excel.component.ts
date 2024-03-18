@@ -14,6 +14,7 @@ export class UploadExcelComponent {
   currentFile?: File;
   progress = 0;
   message = '';
+  files?: any[];
 
   fileInfos?: Observable<any>;
 

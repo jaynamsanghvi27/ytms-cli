@@ -7,6 +7,7 @@ import {MatDialog} from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { UploadExcelService } from 'src/app/services/upload-excel.service';
 
 @Component({
   selector: 'app-view-trf',
@@ -22,12 +23,15 @@ export class ViewTrfComponent {
   trainingReqForm1!: FormGroup;
   userRole:string="";
   document: Document | undefined;
+  files?: any[];
 
   constructor(private ser:TrainingRequestService,private auth:AuthService,
     private jwtServ:JwtService,public dialog: MatDialog,private formBuilder: FormBuilder,private router: Router
+    , private uplaodFile:UploadExcelService
     ){
     let token = auth.getToken();
     this.userRole = jwtServ.getRoleFromToken(token);
+    this.uplaodFile.getFileName().subscribe((resp :any) => {this.files=resp})
   }
   ngOnInit(): void {
     this.loadList();
