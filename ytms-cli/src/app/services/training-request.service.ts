@@ -17,6 +17,7 @@ export class TrainingRequestService {
 
   url:string=environment.baseUrl+environment.contextUrl;
 
+
   constructor(private http: HttpClient) { }
   
   setTrainingName(userData: String): void {

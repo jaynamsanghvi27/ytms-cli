@@ -79,6 +79,7 @@ export class TrainingReqComponent {
   pushTrainingTypes(training:any) {
     this.trainingTypes?.push(training);
   }
+
   ngOnInit(): void {
     this.loadTechnology();
     this.loadUnit();

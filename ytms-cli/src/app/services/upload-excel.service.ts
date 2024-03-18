@@ -9,6 +9,7 @@ import { environment } from '../Core/application_constant/environment';
   providedIn: 'root'
 })
 export class UploadExcelService {
+  url:string="http://10.4.8.35:8080/ytms";
   constructor(private httpClient: HttpClient,  private authservice: AuthService) { }
 
   httpOptions = {
@@ -26,6 +27,7 @@ export class UploadExcelService {
     formData.append('file', file);
 
     const req = new HttpRequest('POST', environment.baseUrl+environment.contextUrl+"/register/upload", formData, {
+
       headers: new HttpHeaders({
         'Authorization': 'Bearer ' + this.authservice.getToken(),
       }),

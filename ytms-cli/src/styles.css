@@ -1,5 +1,6 @@
 /* angular-cli file: src/styles.css */
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 body {
   font-family: 'Poppins', sans-serif;
 }
@@ -12,7 +13,10 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> dfadcc4f333421adfd8b4cf4ce2c10a0b9d45ee9
 .bt-info {
   color: #000;
   background-color: #0dcaf0;

@@ -1,7 +1,7 @@
 <section class="vh-100">
   <div class="topnav">
     <a class="ytms-logo" href="#">
-      <img src="../../../assets/img/YTMS_LOGO 1.png"></a>
+      <img src="../../../ytmscli/assets/img/YTMS_LOGO 1.png"></a>
   </div>
   <div class="container-fluid h-custom">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -81,6 +81,11 @@
             <span *ngIf="signUpForm.controls['password'].hasError('required')"
             >Password is required</span
             >
+            <span *ngIf="signUpForm.controls['password'].hasError('pattern')"
+              >Password must contain at least one number, one uppercase and a
+  lowercase letter and at least 8 characters<br/>Password cannot
+  contain whitespace</span
+              >
             </div>
           </div>
 
@@ -113,7 +118,8 @@
             </div>
           </div>
           <div class="text-center text-lg-start mt-4 pt-2">
-            <button class="button" type="submit">Sign up</button>
+
+            <button  class="button" type="submit">Sign up</button>
 
           </div>
         </form>

@@ -22,7 +22,6 @@ export class CompetencyMasterComponent {
     this.competencyMatserForm = this.formBuilder.group({
       name: ['', [Validators.required]]});
     }
-
     submit(){
       if (this.competencyMatserForm.valid) {
         console.log("befor service "+JSON.stringify(this.competencyMatserForm.value));
@@ -38,12 +37,11 @@ export class CompetencyMasterComponent {
         }
         this.closeDialog();
       }
-  
+ 
     }
 
     public closeDialog(): void {
       //this.dialogClosed.emit({ data: this.competencyMatserForm.value });
-      
       this.dialog.closeAll();
       // this.matDialogReference.close([]);
   }

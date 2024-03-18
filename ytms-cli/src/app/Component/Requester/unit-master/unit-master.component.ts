@@ -21,7 +21,6 @@ export class UnitMasterComponent {
     this.unitMatserForm = this.formBuilder.group({
       name: ['', [Validators.required]]});
     }
-
     submit(){
       if (this.unitMatserForm.valid) {
         console.log("befor service "+JSON.stringify(this.unitMatserForm.value));
@@ -35,10 +34,9 @@ export class UnitMasterComponent {
           Swal.fire('Error', 'Unit Already Exist', 'error');
           this.unitMatserForm.reset();
         }
-        
         this.closeDialog();
       }
-  
+ 
     }
 
     public closeDialog(): void {

@@ -40,7 +40,7 @@ export class TrainingTypeMasterComponent {
         this.closeDialog();
         //this.trfcomponent.loadTrainingTypes();
       }
-  
+ 
     }
 
     public closeDialog(): void {

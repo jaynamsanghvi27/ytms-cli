@@ -37,9 +37,9 @@ export class TechnologyMasterComponent {
           this.technologyMatserForm.reset();
         }
         this.closeDialog();
-        
+       
       }
-  
+ 
     }
 
     public closeDialog(): void {
