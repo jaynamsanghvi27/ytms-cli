@@ -156,12 +156,13 @@ table {
   } 
 
   .fileName-drop-down{
-    width: 100%;
+    width: 75%;
     min-height: 41px;
     box-shadow: none;
     border-color: #e1e1e1;
     margin-bottom: 4px;
 }
+
 .inner
 {
     display: inline-flex;
@@ -169,6 +170,3 @@ table {
 .inner i{
     margin-left: 3px;
 }
-.image-upload>input {
-    display: none;
-  }
