@@ -25,7 +25,7 @@ export class ViewTrfComponent {
   trainingReqForm1!: FormGroup;
   userRole:string="";
   document: Document | undefined;
-  files?: any[];
+  files: any[]=[];
 
   selectedFiles?: FileList;
   currentFile?: File;
@@ -41,6 +41,7 @@ export class ViewTrfComponent {
     let token = auth.getToken();
     this.userRole = jwtServ.getRoleFromToken(token);
     this.uploadService.getFileName().subscribe((resp :any) => {this.files=resp})
+    this.files=[];
   }
   ngOnInit(): void {
     this.loadList();
@@ -174,7 +175,21 @@ decline()
 
     onFileChange(event:any) {
       let fileNameSpan:any = document.getElementById('file-name');
-      const file = event.target.files[0];
-      fileNameSpan.textContent = file.name;
+      const selectFile = event.target.files[0];
+      let file = 0;
+      file=this.files.length ;
+   
+      var tempFileName = selectFile.name.substr(0, selectFile.name.lastIndexOf("."));
+      fileNameSpan.textContent = selectFile.name;
+      for (let index = 0; index < file; index++) {
+       
+       let filename= this.files[index];
+       if(tempFileName==filename){
+        fileNameSpan.textContent = "File is already present, it is override exiting file"
+        return;
+       }   
+      }
+      //fileNameSpan.textContent = selectFile.name;
     }
+  
 }
