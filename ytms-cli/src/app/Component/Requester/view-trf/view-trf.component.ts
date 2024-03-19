@@ -193,6 +193,7 @@ decline()
         this.enableUploadButton=false;
       }else{
         this.enableUploadButton=true;
+        this.uploadService.getFileName().subscribe((resp :any) => {this.files=resp})
       }
     }
 }
