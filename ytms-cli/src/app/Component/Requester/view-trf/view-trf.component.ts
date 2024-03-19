@@ -7,6 +7,9 @@ import {MatDialog} from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { UploadExcelService } from 'src/app/services/upload-excel.service';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-view-trf',
@@ -22,12 +25,22 @@ export class ViewTrfComponent {
   trainingReqForm1!: FormGroup;
   userRole:string="";
   document: Document | undefined;
+  files?: any[];
+
+  selectedFiles?: FileList;
+  currentFile?: File;
+  progress = 0;
+  message = '';
+
+  fileInfos?: Observable<any>;
 
   constructor(private ser:TrainingRequestService,private auth:AuthService,
     private jwtServ:JwtService,public dialog: MatDialog,private formBuilder: FormBuilder,private router: Router
+    , private uploadService:UploadExcelService
     ){
     let token = auth.getToken();
     this.userRole = jwtServ.getRoleFromToken(token);
+    this.uploadService.getFileName().subscribe((resp :any) => {this.files=resp})
   }
   ngOnInit(): void {
     this.loadList();
@@ -42,7 +55,7 @@ export class ViewTrfComponent {
     id:['', [Validators.required]],
     declinedMessage:['', [Validators.required]],
 
-});
+    });
   }
 
   loadList(){
@@ -125,5 +138,51 @@ decline()
       this.router.navigate(['/trainer/view-nomination',id]);
     else
       this.router.navigate(['/view-nomination',id]);
+    }
+    selectFile(event: any): void {
+      this.selectedFiles = event.target.files;
+    }
+  
+    upload(): void {
+      this.progress = 0;
+  
+      if (this.selectedFiles) {
+        const file: File | null = this.selectedFiles.item(0);
+  
+        if (file) {
+          this.currentFile = file;
+  
+          this.uploadService.upload(this.currentFile).subscribe({
+            next: (event: any) => {
+              if (event.type === HttpEventType.UploadProgress) {
+                this.progress = Math.round(100 * event.loaded / event.total);
+              } else if (event instanceof HttpResponse) {
+                this.message = event.body.message;
+                // this.fileInfos = this.uploadService.getFiles();
+              }
+            },
+            error: (err: any) => {
+              console.log(err);
+              this.progress = 0;
+  
+              if (err.error && err.error.message) {
+                this.message = err.error.message;
+              } else {
+                this.message = 'Could not upload the file!';
+              }
+  
+              this.currentFile = undefined;
+            }
+          });
+        }
+  
+        this.selectedFiles = undefined;
+      }
+    }   
+
+    onFileChange(event:any) {
+      let fileNameSpan:any = document.getElementById('file-name');
+      const file = event.target.files[0];
+      fileNameSpan.textContent = file.name;
     }
 }
