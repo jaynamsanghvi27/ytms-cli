@@ -28,6 +28,7 @@ export class ViewTrfComponent {
   files?: any[];
 
   selectedFiles?: FileList;
+  enableUploadButton = false;
   currentFile?: File;
   progress = 0;
   message = '';
@@ -154,6 +155,7 @@ decline()
   
           this.uploadService.upload(this.currentFile).subscribe({
             next: (event: any) => {
+              this.enableUploadButton=true;
               if (event.type === HttpEventType.UploadProgress) {
                 this.progress = Math.round(100 * event.loaded / event.total);
               } else if (event instanceof HttpResponse) {
@@ -184,5 +186,13 @@ decline()
       let fileNameSpan:any = document.getElementById('file-name');
       const file = event.target.files[0];
       fileNameSpan.textContent = file.name;
+      
+      const temp:any = this.files?.map(competency=>competency);
+      if((temp?.indexOf(file.name.substring(0,file.name.indexOf('.')))) >= 0){
+        Swal.fire('File Name Already Exist', 'Upload Another File or Rename You File', 'error');
+        this.enableUploadButton=false;
+      }else{
+        this.enableUploadButton=true;
+      }
     }
 }

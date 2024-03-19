@@ -165,6 +165,7 @@
                       accept=".csv, .xlsx, .xls"
                       class="form-control"
                       (change)="bulkUploadNominationData($event)">
+                      <div style="color: blue; font-size: small;">Please upload data carefully otherwise you need to clear the data after uploading</div>
                     </div>
                     <!-- <input id="selectedFile" type="file" name="files[]" multiple id="jsonFile" accept=".xlsx" (change)="selectedFileChange($event)" /> -->
                     <div class="col-2">Single Nomination</div>
@@ -200,6 +201,7 @@
                   </div>
                   <div>
                    <a *ngIf="this.nomination.length>0" (click)="hideShowNomination()"> Number Of Nomination : {{nomination.length}} {{this.showNomination==true?'hide':'show'}}</a>
+                   <span style="float: right;"><a *ngIf="this.nomination.length>0" (click)="this.nomination=[]">Clear Data</a></span>
                     <table *ngIf="showNomination">
                       <thead>
                         <tr>
