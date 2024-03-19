@@ -9,8 +9,11 @@ import { environment } from '../Core/application_constant/environment';
   providedIn: 'root'
 })
 export class UploadExcelService {
-  url:string="http://10.4.8.35:8080/ytms";
-  constructor(private httpClient: HttpClient,  private authservice: AuthService) { }
+
+
+  url:string="http://localhost:8080/ytms";
+
+  constructor(private httpClient: HttpClient,  private authservice: AuthService, private http: HttpClient) { }
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -37,4 +40,8 @@ export class UploadExcelService {
     });
     return this.httpClient.request(req);
 }
+
+getFileName(): Observable<any[]> {
+  return this.http.get<String[]>(this.url+"/register/getFileName"); 
+  }
 }

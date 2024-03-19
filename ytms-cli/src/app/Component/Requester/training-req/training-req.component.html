@@ -24,6 +24,8 @@
                                   </option>
                               </select>
                               
+
+                              <!-- <div style="color: rgb(185, 21, 21);" *ngIf= "trainingReqForm.controls['unit'].touched && trainingReqForm.controls['unit'].hasError('required')">Unit is required</div> -->
                               <span><i class="fa fa-plus" title="Click To Add Unit" (click)="openDialog(unittemplate)"></i></span>
                               <div *ngIf="trainingReqForm.controls['unit'].touched && 
                               trainingReqForm.controls['unit'].invalid" style="color: red;">
