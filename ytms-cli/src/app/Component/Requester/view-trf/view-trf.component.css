@@ -162,3 +162,6 @@ table {
     border-color: #e1e1e1;
     margin-bottom: 4px;
 }
+.image-upload>input {
+    display: none;
+  }
