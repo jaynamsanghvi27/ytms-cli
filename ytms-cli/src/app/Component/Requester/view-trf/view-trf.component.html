@@ -25,6 +25,7 @@
                 <td><b>Actual Start Date</b></td>
                 <td><b>Actual End Date</b></td>
                 <td><b>Actual Participant</b></td>
+                <td><b>Assign Trainer</b></td>
                 <td><b>Action</b></td>
                 <!-- <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER'"><b>Action</b></td> -->
               </tr>
@@ -42,6 +43,7 @@
                 <td>{{training.actualStartDate}}</td>
                 <td>{{training.actualEndDate}}</td>
                 <td><a (click)="openNominationData(training.id)">{{training.noOfActualParticipant}}</a></td>
+                <td>{{training.trainer}}</td>
                 <!-- <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' " style="text-align: center;"> -->
                   <td style="text-align: center;">
                     <span class="inner">
