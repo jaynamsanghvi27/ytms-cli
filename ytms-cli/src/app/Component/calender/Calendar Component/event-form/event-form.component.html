@@ -1,13 +1,13 @@
 
 <mat-toolbar color="Primary">
-    <h2 mat-dialog-title>Add Event</h2>
+    <h2 mat-dialog-title>Add Task</h2>
    <button  mat-fab  (click)="closeEvents()" class="closebuttonevent" ><mat-icon>close</mat-icon></button>
   </mat-toolbar>
   <mat-dialog-content class="dialog">
     <form [formGroup]="eventForm" (ngSubmit)="createEvent()" class="eventForm">
     <mat-form-field>
         <mat-label>Task</mat-label>
-        <input matInput type="text" placeholder="Event Title" formControlName="title" name="title" required>
+        <input matInput type="text" placeholder="Task Name" formControlName="title" name="title" required>
       </mat-form-field>
     
       <mat-form-field>
@@ -70,6 +70,6 @@
     </mat-dialog-content>
   <mat-dialog-actions>
     <mat-toolbar>
-      <button mat-raised-button color="primary" type="submit" class="create-button" (click)="createEvent()">Create Event</button>
+      <button  color="primary" type="submit" class="create-button btn btn-primary" (click)="createEvent()">Create Event</button>
     </mat-toolbar>   
   </mat-dialog-actions>
