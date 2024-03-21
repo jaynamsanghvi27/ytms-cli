@@ -102,12 +102,14 @@ decline()
     if (this.trainingReqForm.valid) {
       console.log("befor service "+JSON.stringify(this.trainingReqForm.value));
       let obj:any=this.trainingReqForm.value;
-      this.ser.updateTraining(obj).subscribe();
-      Swal.fire('Success', 'Training Approved', 'success');
+      this.ser.updateTraining(obj).subscribe((resp:any)=>{
+        Swal.fire('Success', 'Training Approved', 'success');
       this.trainingReqForm.reset();
       this.closeDialog();
       this.loadList();
       window.location.reload();
+      });
+      
     } else {
       this.trainingReqForm.markAllAsTouched();
     }
@@ -193,6 +195,7 @@ decline()
         this.enableUploadButton=false;
       }else{
         this.enableUploadButton=true;
+        this.files?.push(file.name.substring(0,file.name.indexOf('.')));
         this.uploadService.getFileName().subscribe((resp :any) => {this.files=resp})
       }
     }
