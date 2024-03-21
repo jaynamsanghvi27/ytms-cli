@@ -1,13 +1,15 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import { UsersService } from 'src/app/Core/services/users.service';
 
 @Component({
   selector: 'app-requester-sidebar',
   templateUrl: './requester-sidebar.component.html',
   styleUrls: ['./requester-sidebar.component.css']
 })
-export class RequesterSidebarComponent {
+export class RequesterSidebarComponent  {
+ constructor(private userService:UsersService){}
   @Input() sideNavStatus: boolean = false;
-
+  
   list = [
     {
       number: 1,
