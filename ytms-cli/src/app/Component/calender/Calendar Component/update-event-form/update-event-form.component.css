@@ -1,0 +1,19 @@
+.eventForm
+{
+    display: flex;
+    flex-direction: column;
+   height: 60vh;       
+}
+.closebuttonevent{  
+    position: absolute;
+    left:350px;
+    bottom: 565px;
+    width: 30px;
+    height: 30px;
+
+}
+.update-button
+{
+    position: absolute;
+    left: 125px;
+}

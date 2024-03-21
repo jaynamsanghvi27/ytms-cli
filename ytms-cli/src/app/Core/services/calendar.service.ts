@@ -1,67 +1,43 @@
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Observable} from 'rxjs';
 import {environment} from '../application_constant/environment';
-import {CalendarEvent} from 'angular-calendar';
+
+export interface Calendar
+{
+  title: string;
+  start?: Date;
+  end?: Date; 
+  scheduleUser?:any;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class CalendarService {
-  baseurl: string = environment.baseUrl + environment.contextUrl + '/calendar/events';
+  url:string=environment.baseUrl+environment.contextUrl;
 
-  constructor(private modal: NgbModal, private http: HttpClient) {
+  constructor(private http: HttpClient) { }
+  
+  getALLEvents():Observable<Calendar[]>
+  {
+    return this.http.get<Calendar[]>(this.url+"/calendar/get/all")
   }
-
-  public createEvent(event: any): Observable<any> {
-    console.log(' Event creation in calendar service : ', event);
-    const httpOptions = {
-      headers: new HttpHeaders({'Content-Type': 'application/json'})
-    };
-    return this.http.post<any>(this.baseurl + "/create", event, httpOptions);
+  getEventsByTrainer(trainerEmail:any):Observable<Calendar[]>
+  {
+  return this.http.get<Calendar[]>(this.url+"/calendar/"+trainerEmail)
   }
-
-  public getAllEvents(): Observable<any> {
-    return this.http.get<any>(this.baseurl + '/get/all');
+  public addEvent(events:any[])
+  {
+   return this.http.post(this.url+"/calendar/save",events);
   }
-
-  public getAllEventsForUser(formdata: any): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({'Content-Type': 'application/json'}),
-      params: new HttpParams().set('date', formdata)
-    }
-    return this.http.get<any>(this.baseurl + '/get/user-events', httpOptions);
+  public updateEvent(event:any)
+  {
+    return this.http.post(this.url+"/calendar/update",event);   
   }
-
-  public updateEvent(eventId: any, updatedEvent: any): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({'Content-Type': 'application/json'})
-    };
-    const updateUrl = `${this.baseurl}/update/${eventId}`;
-    console.log("in calendar.service " + JSON.stringify(updatedEvent));
-    console.log("url is" + updateUrl)
-    return this.http.put<any>(updateUrl, updatedEvent, httpOptions);
+  public deleteEvent(event:any)
+  {
+    return this.http.post(this.url+"/calendar/delete",event);   
   }
-
-  public deleteEvent(eventId: any): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({'Content-Type': 'application/json'})
-    };
-    const deleteUrl = `${this.baseurl}/delete/${eventId}`;
-    return this.http.delete<any>(deleteUrl, httpOptions);
-  }
-
-  getEventById(eventId: any): Observable<CalendarEvent> {
-    const updateUrl = `${this.baseurl}/get/${eventId}`;
-    return this.http.get<CalendarEvent>(updateUrl);
-  }
-
-  public searchByTrainer(trainerEmail: string): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({'Content-Type': 'application/json'}),
-      params: new HttpParams().set('email', trainerEmail)
-    }
-    return this.http.get<any>(this.baseurl + '/get/trainer-calendar', httpOptions);
-  }
+  
 }
