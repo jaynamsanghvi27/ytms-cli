@@ -123,4 +123,10 @@ export class TrainingRequestService {
     console.log("on service"+ JSON.stringify(nomination));
     return this.http.post<any>(this.url+"/register/saveNomination",nomination);
   }
+  getTrainerMasterList(): Observable<any[]> {
+    return this.http.get<any[]>(this.url+"/register/getTrainerList"); 
+  }
+  getRequesterMasterList():Observable<any[]>{
+    return this.http.get<any[]>(this.url+"/register/getRequesterList"); 
+  }
 }

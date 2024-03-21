@@ -111,6 +111,17 @@
               </div>
             </div>
             <br>
+            <div class="row">
+            <div class="col-2">Assign Trainer</div>
+            <div class="col-4">
+                <select #teams class="request-drop-down" formControlName="trainer">
+                 <option [ngValue]="0" disabled >-- Select --</option>
+                    <option *ngFor="let trainer of trainers" value="{{trainer.fullName}}">
+                      {{trainer.fullName}}
+                    </option>
+                </select>
+              </div>
+            </div>
             <input type="hidden" formControlName="id" [(ngModel)]="this.id">
           </div>
           <div class="center">
@@ -149,5 +160,4 @@
       </ng-template>
     </div>
   </main>
-
 </div>
