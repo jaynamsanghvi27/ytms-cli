@@ -1,0 +1,75 @@
+
+<mat-toolbar color="Primary">
+    <h2 mat-dialog-title>Add Task</h2>
+   <button  mat-fab  (click)="closeEvents()" class="closebuttonevent" ><mat-icon>close</mat-icon></button>
+  </mat-toolbar>
+  <mat-dialog-content class="dialog">
+    <form [formGroup]="eventForm" (ngSubmit)="createEvent()" class="eventForm">
+    <mat-form-field>
+        <mat-label>Task</mat-label>
+        <input matInput type="text" placeholder="Task Name" formControlName="title" name="title" required>
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-label>Start Date</mat-label>
+        <input matInput type="date" placeholder="Start Date" formControlName="start_date" name="start_date" required>
+      </mat-form-field>
+   
+      <mat-form-field>
+        <mat-label>Start Time</mat-label>
+        <input matInput type="time" placeholder="Start Time (Optional)" formControlName="start_time" name="start_time">
+      </mat-form-field>
+   
+  
+      <mat-form-field>
+        <mat-label>End Date</mat-label>      
+        <input matInput type="date" placeholder="End Date (Optional)" formControlName="end_date" name="end_date" >
+      </mat-form-field>
+    
+    
+      <mat-form-field>
+        <mat-label>End Time</mat-label>
+        <input matInput type="time" placeholder="End Time (Optional)" formControlName="end_time" name="end_time">
+      </mat-form-field>
+       <div class="recurssion">    
+       <mat-label>Recurssion</mat-label>
+       <mat-checkbox class="checkRecurssion"  (change)="checkRecurssion()"></mat-checkbox>
+      </div>
+  
+      <div *ngIf="recurssion">
+      <mat-label>Day</mat-label>
+      <mat-checkbox (change)="byDay()" [disabled]="disableDay"></mat-checkbox>
+      <mat-label>Week</mat-label>
+      <mat-checkbox (change)="byWeek()" [disabled]="disableWeek"></mat-checkbox> 
+      <mat-label>Month</mat-label>
+      <mat-checkbox (change)="byMonth()" [disabled]="disableMonth" ></mat-checkbox>
+      <mat-label>Year</mat-label> 
+      <mat-checkbox (change)="byYear()"  [disabled]="disableYear" ></mat-checkbox>
+      </div>
+     <div *ngIf="day">
+      <mat-form-field>    
+      <input matInput  type="number" max="30" (mouseleave)="setDayvalue($event)">
+      </mat-form-field>
+      </div>
+      <div *ngIf="week">
+        <mat-form-field>    
+        <input matInput  type="number" max="5" (mouseleave)="setWeekvalue($event)">
+        </mat-form-field>
+      </div>
+      <div *ngIf="month" >
+        <mat-form-field>    
+        <input  matInput  type="number" max="12" (mouseleave)="setMonthvalue($event)">
+        </mat-form-field>
+      </div>
+      <div *ngIf="year">
+        <mat-form-field>    
+        <input matInput  type="number" max="2" (mouseleave)="setYearvalue($event)">
+        </mat-form-field>
+      </div>
+    </form>
+    </mat-dialog-content>
+  <mat-dialog-actions>
+    <mat-toolbar>
+      <button  color="primary" type="submit" class="create-button btn btn-primary" (click)="createEvent()">Create Event</button>
+    </mat-toolbar>   
+  </mat-dialog-actions>

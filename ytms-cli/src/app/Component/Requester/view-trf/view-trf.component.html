@@ -24,6 +24,8 @@
                 <td><b>Planned End Date</b></td>
                 <td><b>Actual Start Date</b></td>
                 <td><b>Actual End Date</b></td>
+                <td><b>Actual Participant</b></td>
+                <td><b>Assign Trainer</b></td>
                 <td><b>Action</b></td>
                 <!-- <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER'"><b>Action</b></td> -->
               </tr>
@@ -40,6 +42,8 @@
                 <td>{{training.endDate}}</td>
                 <td>{{training.actualStartDate}}</td>
                 <td>{{training.actualEndDate}}</td>
+                <td><a (click)="openNominationData(training.id)">{{training.noOfActualParticipant}}</a></td>
+                <td>{{training.trainer}}</td>
                 <!-- <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' " style="text-align: center;"> -->
                   <td style="text-align: center;">
                     <span class="inner">
@@ -111,6 +115,17 @@
               </div>
             </div>
             <br>
+            <div class="row">
+            <div class="col-2">Assign Trainer</div>
+            <div class="col-4">
+                <select #teams class="request-drop-down" formControlName="trainer">
+                 <option [ngValue]="0" disabled >-- Select --</option>
+                    <option *ngFor="let trainer of trainers" value="{{trainer.fullName}}">
+                      {{trainer.fullName}}
+                    </option>
+                </select>
+              </div>
+            </div>
             <input type="hidden" formControlName="id" [(ngModel)]="this.id">
           </div>
           <div class="center">
@@ -149,5 +164,4 @@
       </ng-template>
     </div>
   </main>
-
 </div>

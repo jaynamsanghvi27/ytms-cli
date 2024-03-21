@@ -1,0 +1,33 @@
+.eventForm
+{
+    display: flex;
+    flex-direction: column;
+   height: 60vh;       
+}
+.checkRecurssion
+{
+    position: relative;
+    bottom: 8px;
+}
+.recurssion
+{
+    display: flex;
+}
+/* .dialog
+{
+    width: 400px; 
+} */
+.closebuttonevent{  
+    position: absolute;
+    left:350px;
+    bottom: 565px;
+    width: 30px;
+    height: 30px;
+
+}
+.create-button
+{
+    position: absolute;
+    left: 125px;
+}
+

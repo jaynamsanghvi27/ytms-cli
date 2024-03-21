@@ -1,0 +1,12 @@
+<mat-toolbar><h2 mat-dialog-title>{{data.event.title}}</h2> <button [matDialogClose]="data" mat-fab class="closebutton"><mat-icon>close</mat-icon></button></mat-toolbar>
+<mat-dialog-content>
+    Start:{{data.event.start| date:'HH:mm'}}<br>
+    End:{{data.event.end| date:'HH:mm'}}<br>
+    Duration:{{durationhh}}
+</mat-dialog-content>
+<mat-toolbar>
+    <mat-dialog-actions>
+        <button mat-raised-button (click)="updateEvent()">Update</button>
+        <button mat-raised-button (click)="deleteEvent()">Delete</button>
+    </mat-dialog-actions>
+</mat-toolbar>

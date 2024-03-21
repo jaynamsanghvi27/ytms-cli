@@ -321,7 +321,7 @@ export class TrainingReqComponent {
     this.ser.deleteNominationById(nominationId).subscribe();
     this.getNominationListByTrainingId(this.id);
   }
-  get hasDropDownError() {
+  gethasDropDownError() {
     return (
       this.trainingReqForm.get('unit')?.touched &&
       this.trainingReqForm.get('unit')?.errors &&
