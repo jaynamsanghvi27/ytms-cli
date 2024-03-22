@@ -8,12 +8,13 @@ import timegrid from '@fullcalendar/timegrid';
 import { CalendarService } from 'src/app/Core/services/calendar.service';
 import { UsersService } from 'src/app/Core/services/users.service';
 import { MatSelectChange } from '@angular/material/select';
-import { eventTupleToStore } from '@fullcalendar/core/internal';
+import { addDays, eventTupleToStore } from '@fullcalendar/core/internal';
 import { MatDialog } from '@angular/material/dialog';
 import { DayComponentComponent } from './Calendar Component/day-component/day-component.component';
 import isSameDay from 'date-fns/isSameDay';
 import { EventComponentComponent } from './Calendar Component/event-component/event-component.component';
 import { EventFormComponent } from './Calendar Component/event-form/event-form.component';
+import { isWeekend, format } from 'date-fns';
 
 
 
@@ -29,10 +30,13 @@ export class CalenderComponent implements OnInit{
   constructor(private dialog:MatDialog,private calendarService:CalendarService,private authService:AuthService,private jwtService:JwtService,private userService:UsersService){}
 
   events :any[]=[]
+  emailEvents:any[]=[];
   users:any[]=[]  
   searchFilter:boolean=false;
   userRole:String='';
   sidebarClass:String='display-area p-3';
+  calendarEvents:any[]=[]
+  recusingDay=0;
   getAllEvents()
   {
     this.calendarService.getALLEvents().subscribe((data:any[]) => 
@@ -49,6 +53,7 @@ export class CalenderComponent implements OnInit{
         title: event.title,
         start: new Date(event.start),
         end: new Date(event.end),
+        scheduleUser:event.scheduleUser
       })),
       this.calendarOptionsWeek.events = data.map(event => ({
         title: event.title,
@@ -95,8 +100,92 @@ export class CalenderComponent implements OnInit{
 
   });
   }
-  switchUser(event: MatSelectChange)
-{
+  
+
+  //Updated
+  // getAllEvents() {
+  //   this.calendarService.getALLEvents().subscribe((data: any[]) => {
+  //     const events = data.map((event) => ({
+  //       id: event.id,
+  //       title: event.title,
+  //       start: new Date(event.start),
+  //       end: new Date(event.end),
+  //       scheduleUser: event.scheduleUser,
+  //       number_of_week_days: event.number_of_week_days,
+  //     }));
+  
+  //     events.forEach((event) => {
+  //       const recurringEvents = this.recurseByDay(event.number_of_week_days, event);
+  //       for(const calendar of recurringEvents)
+  //        {
+  //         this.calendarEvents.push(calendar)
+  //        }
+  //     });
+  //     console.log(this.calendarEvents)
+
+  //     this.calendarOptions.events=this.calendarEvents
+  //     this.calendarOptionsWeek.events=this.calendarEvents
+  //     this.calendarOptionsDay.events=this.calendarEvents
+  //     this.events=this.calendarEvents
+  //   });
+  // }
+  
+  // recurseByDay(day: number, event: any): any[] {
+  //   const addedEvents: any[] = [];
+  //   let addedCount = 0;
+  //   let skippedWeekends = 0;
+  
+  //   for (let i = 1; i <= day; i++) {
+  //     let newStartDate = addDays(new Date(event.start), i - 1);
+  
+  //     while (addedCount < day && skippedWeekends < day) {
+  //       if (!isWeekend(newStartDate)) {
+  //         const newEvent = {
+  //           ...event, 
+  //           start: newStartDate,
+  //         };
+  //         addedEvents.push(newEvent);
+  //         addedCount++;
+  //       } else {
+  //         skippedWeekends++;
+  //       }
+  //       newStartDate = addDays(newStartDate, 1);
+  //     }
+  //   }
+  
+  //   return addedEvents;
+  // }
+
+  // getEventByTrainer(email:any)
+  // {
+  // this.calendarService.getEventsByTrainer(email).subscribe((data: any[]) => {
+  //   const events = data.map((event) => ({
+  //     id: event.id,
+  //     title: event.title,
+  //     start: new Date(event.start),
+  //     end: new Date(event.end),
+  //     scheduleUser: event.scheduleUser,
+  //     number_of_week_days: event.number_of_week_days,
+  //   }));
+
+  //   events.forEach((event) => {
+  //     const recurringEvents = this.recurseByDay(event.number_of_week_days, event);
+  //     for(const calendar of recurringEvents)
+  //      {
+  //       this.emailEvents.push(calendar)
+  //      }
+  //   });
+  //   console.log(this.emailEvents)
+
+  //   this.calendarOptions.events=this.emailEvents
+  //   this.calendarOptionsWeek.events=this.emailEvents
+  //   this.calendarOptionsDay.events=this.emailEvents
+  //   this.events=this.emailEvents
+  // });
+  // }
+
+ switchUser(event: MatSelectChange)
+ {
   if(event.value==="All")
   {
     this.getAllEvents();
@@ -105,7 +194,8 @@ export class CalenderComponent implements OnInit{
   {
   this.getEventByTrainer(event.value)
   }
-}
+ }
+
   
   ngOnInit(): void 
   {
@@ -117,12 +207,12 @@ export class CalenderComponent implements OnInit{
     if (role === 'ROLE_TECHNICAL_MANAGER') 
     {
     this.getAllEvents();
-   this.searchFilter=true;  
-  }
+    this.searchFilter=true;  
+    }
       else if (role == 'ROLE_TRAINER')
       {
       this.sidebarClass='display-area-ns p-3';    
-   this.searchFilter=false;  
+       this.searchFilter=false;  
       this.getEventByTrainer(email);
       }
     this.userService.getAllTrainers().subscribe((data)=>{this.users=data,console.log(data)})
@@ -134,6 +224,7 @@ export class CalenderComponent implements OnInit{
     {
       text:'Month',
       click:()=>{   this.selectedValue='Month'},
+      
     }
   ,Week:
  {
@@ -151,7 +242,7 @@ Day:
  },
 }
 calendarOptions: CalendarOptions = {
- plugins: [dayGridPlugin,interactionPlugin,timegrid], 
+ plugins: [dayGridPlugin,interactionPlugin,timegrid],
  dateClick: this.handleDateClick.bind(this),
  initialView:'dayGridMonth',
  eventClick:this.handleEventClickMonthWeek.bind(this),

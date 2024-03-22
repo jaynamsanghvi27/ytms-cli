@@ -33,7 +33,7 @@ export class EventComponentComponent {
     const deletes = this.dialog.open(DeleteComponent,{width:"300px",height:"20vh",data:{event:this.data.event,id:this.data.id}})       
     const events={id:this.data.id,start:this.data.event.start,end:this.data.event.end,title:this.data.event.title}
     console.log(events)
-    this.calendarService.deleteEvent(events);    
+    this.calendarService.deleteEvent(events).subscribe((success)=>console.log(success));    
 
   }
   

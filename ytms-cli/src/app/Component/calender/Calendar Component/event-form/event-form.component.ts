@@ -3,7 +3,8 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { addDays, format, isWeekend } from 'date-fns';
+import { addDays, addMonths, addYears, differenceInDays, eachDayOfInterval, format, isWeekend } from 'date-fns';
+import { filter } from 'rxjs';
 import { CalendarService } from 'src/app/Core/services/calendar.service';
 
 @Component({
@@ -17,13 +18,15 @@ export class EventFormComponent {
   constructor(private eventService:CalendarService,private fb: FormBuilder,private datePipe: DatePipe,@Inject(MAT_DIALOG_DATA) public data:any,public addEvents:MatDialogRef<EventFormComponent>,private router: Router) { }
 
   events:any[]=[]
+  recursiveDays:number=0
+  
   user_id=1    
   recurssion:boolean=false
   day:boolean=false
   week:boolean=false
   month:boolean=false
   year:boolean=false
-  
+    
     day_value:number=0
     week_value:number=0
     month_value:number=0
@@ -104,85 +107,113 @@ setYearvalue(event:any)
     start_date: this.datePipe.transform(this.StartDate, 'yyyy-MM-dd'),
     start_time: [''],
     end_date: this.datePipe.transform(this.StartDate, 'yyyy-MM-dd'),
-    end_time: ['']
+    end_time: [''],
+    number_of_week_days:0
   });
 
 
-
-  isWeekend(date: Date): boolean {
-    const day = date.getDay(); 
-    return day === 0 || day === 6;
+  countWeekdaysBetweenMonths(startDate: Date, months: number): number {
+    const endDate = addMonths(startDate, months); 
+    let totalDays = differenceInDays(endDate, startDate); 
+    let weekdaysCount = 0;
+  
+    for (let i = 0; i <= totalDays; i++) {
+      const day = addDays(startDate, i); 
+      if (!isWeekend(day)) {
+        weekdaysCount++;
+      }
+    }
+  
+    return weekdaysCount;
+  }  
+  countWeekdaysInYear(startDate: Date,year:number): number {
+    const endDate = addYears(startDate, year);
+  
+    let totalDays = differenceInDays(endDate, startDate);
+    let weekdaysCount = 0;
+  
+    for (let i = 0; i <= totalDays; i++) {
+      const day = addDays(startDate, i);
+      if (!isWeekend(day)) {
+        weekdaysCount++;
+      }
+    }
+  
+    return weekdaysCount;
   }
 
-  // if date == 31 month ++ solve this
-  recurseByDay(day: number, event: any): void {
-    let addedCount = 0;
+//RECURSE BY DAY
+  // recurseByDay(day: number, event: any): void {
+  //   let addedCount = 0;
   
-  for (let i = 1; i <= day; i++) {
-  let newStartDate = addDays(new Date(event.start_date as (number | Date)), i - 1);
-  let skippedWeekends = 0;
+  // for (let i = 1; i <= day; i++) {
+  // let newStartDate = addDays(new Date(event.start_date as (number | Date)), i - 1);
+  // let skippedWeekends = 0;
 
-  while (addedCount < day && skippedWeekends < day) {
-    if (!isWeekend(newStartDate)) {
-      this.events.push({
-        ...event,
-        start_date: format(newStartDate, 'yyyy-MM-dd'),
-        start_time: event.start_time,
-        title: event.title,
-        end_date: format(newStartDate, 'yyyy-MM-dd'),
-        end_time: event.end_time,
-        userid: event.userid,
-      });
-      addedCount++;
-    } else {
-      skippedWeekends++;
-    }
-    newStartDate = addDays(newStartDate, 1);
-    }
-    }
+  // while (addedCount < day && skippedWeekends < day) {
+  //   if (!isWeekend(newStartDate)) {
+  //     this.events.push({
+  //       ...event,
+  //       start_date: format(newStartDate, 'yyyy-MM-dd'),
+  //       start_time: event.start_time,
+  //       title: event.title,
+  //       end_date: format(newStartDate, 'yyyy-MM-dd'),
+  //       end_time: event.end_time,
+  //       userid: event.userid,
+  //     });
+  //     addedCount++;
+  //   } else {
+  //     skippedWeekends++;
+  //   }
+  //   newStartDate = addDays(newStartDate, 1);
+  //   }
+  //   }
   
-    console.log(this.events);
-    this.eventService.addEvent(this.events).subscribe(
-      (success) => console.log(success),
-      (error) => console.log(error)
-    );
-  } 
+  //   console.log(this.events);
+  //   this.eventService.addEvent(this.events).subscribe(
+  //     (success) => console.log(success),
+  //     (error) => console.log(error)
+  //   );
+  // } 
  
 
-event:any={title:''};
+event:any={};
 createEvent()
 {
-  this.event= this.eventForm.value;
-  console.log(this.event);
-  const newStartDate = new Date(this.event.start_date as (number | Date));
-  newStartDate.setDate(newStartDate.getDate() + 1);
-  console.log(this.datePipe.transform(newStartDate, 'yyyy-MM-dd'));
-
-
-if(this.recurssion)
+ if(this.recurssion)
 {
 if(this.day)
 {
-  this.recurseByDay(this.day_value,this.event)
+  this.event =this.eventForm.value
+  console.log(this.event)
+  this.eventService.addEvent(this.event).subscribe((success)=>console.log(success))
 }
 else if(this.week)
-{
-    this.recurseByDay(7*this.week_value,this.event) 
-}
+{   
+    this.eventForm.get('number_of_week_days')?.setValue((this.eventForm.value.number_of_week_days*5) );
+    this.event =this.eventForm.value
+    console.log(this.event)
+    this.eventService.addEvent(this.event).subscribe((success)=>console.log(success))
+  }
 else if(this.month)
 {   
-  this.recurseByDay(31*this.month_value,this.event)
+  
+   this.eventForm.get('number_of_week_days')?.setValue(this.countWeekdaysBetweenMonths(this.eventForm.value.start,this.eventForm.value.number_of_week_days)) 
+   this.event =this.eventForm.value
+    console.log(this.event)
+    this.eventService.addEvent(this.event).subscribe((success)=>console.log(success)) 
 }
 }
 else if(this.year)
-{
-  this.recurseByDay(365*this.month_value,this.event)
+{ 
+  // this.eventForm.get('number_of_week_days')?.setValue(this.countWeekdaysInYear(this.eventForm.value.start,this.eventForm.value.number_of_week_days))
+  // console.log(this.eventForm.value)
 } 
 else
 {
-  this.events.push(this.event);
-  console.log(this.events)  
-  this.eventService.addEvent((this.events)).subscribe((success)=>console.log(success),(error)=>console.log(error));
+  this.event =this.eventForm.value
+  console.log(this.event)
+  this.eventService.addEvent(this.event).subscribe((success)=>console.log(success)) 
 }
 this.addEvents.close();
 // window.location.reload()

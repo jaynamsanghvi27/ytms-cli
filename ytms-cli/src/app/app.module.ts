@@ -46,6 +46,7 @@ import { EventComponentComponent } from './Component/calender/Calendar Component
 import { UpdateEventFormComponent } from './Component/calender/Calendar Component/update-event-form/update-event-form.component';
 import { DeleteComponent } from './Component/calender/Calendar Component/delete/delete.component';
 import {MatTableModule} from '@angular/material/table';
+import { DeletePageComponent } from './Component/calender/Delete Page/delete-page/delete-page.component';
 
 @NgModule({
   entryComponents:[DayComponentComponent,EventFormComponent,UpdateEventFormComponent,DeleteComponent],
@@ -78,6 +79,7 @@ import {MatTableModule} from '@angular/material/table';
     EventComponentComponent,
     UpdateEventFormComponent,
     DeleteComponent,
+    DeletePageComponent,
   ],
   imports: [
     BrowserModule,

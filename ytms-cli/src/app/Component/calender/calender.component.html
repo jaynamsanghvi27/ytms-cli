@@ -18,7 +18,8 @@
                 {{ user.fullName}}
               </mat-option>
             </mat-select>
-            <button ></button>
+            <button mat-raised-button (click)="addEvent()">Add Event</button>
+            <button mat-raised-button [routerLink]="'/delete'">Delete Requests</button>
             <br>
           </div>
   
@@ -34,7 +35,9 @@
                 {{ user.fullName}}
               </mat-option>
             </mat-select><br>
-            </div>
+            <button mat-raised-button (click)="addEvent()">Add Event</button>
+            <button mat-raised-button [routerLink]="'/delete'">Delete Requests</button>
+          </div>
             <full-calendar [options]="calendarOptionsWeek"></full-calendar>
            </div>
            <div *ngSwitchCase="'Day'">
@@ -46,6 +49,8 @@
                 {{ user.fullName}}
               </mat-option>
             </mat-select><br>
+            <button mat-raised-button (click)="addEvent()">Add Event</button>
+            <button mat-raised-button [routerLink]="'/delete'">Delete Requests</button>
             </div>
             <full-calendar [options]="calendarOptionsDay"></full-calendar>
            </div>
