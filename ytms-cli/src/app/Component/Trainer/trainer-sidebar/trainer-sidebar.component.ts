@@ -55,5 +55,11 @@ export class TrainerSidebarComponent {
       icon: 'fa-solid fa-phone',
       routing: '/requester/calendar'
     },
+    {
+      number: 8,
+      name: 'View my trainings',
+      icon: 'fa fa-eye',
+      routing: '/trainer/view-trainer-form'
+    },
   ]
 }

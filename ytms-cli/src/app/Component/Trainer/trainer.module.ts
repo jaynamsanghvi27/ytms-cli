@@ -14,6 +14,7 @@ import {CalendarModule, DateAdapter} from 'angular-calendar';
 import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
 import {FlatpickrModule} from 'angularx-flatpickr';
 import {ToastrModule} from 'ngx-toastr';
+import { ViewTrainerFormComponent } from './view-trainer-form/view-trainer-form.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {ToastrModule} from 'ngx-toastr';
     TrainerHeaderComponent,
     TrainerCalendarComponent,
     TrainerDashboardComponent,
-    TrainerSidebarComponent
+    TrainerSidebarComponent,
+    ViewTrainerFormComponent
   ],
   imports: [
     CommonModule,

@@ -25,9 +25,10 @@ export class ViewTrfComponent {
   trainingReqForm1!: FormGroup;
   userRole:string="";
   document: Document | undefined;
-  files: any[]=[];
+  files?: any[];
 
   selectedFiles?: FileList;
+  enableUploadButton = false;
   currentFile?: File;
   progress = 0;
   message = '';
@@ -41,7 +42,6 @@ export class ViewTrfComponent {
     let token = auth.getToken();
     this.userRole = jwtServ.getRoleFromToken(token);
     this.uploadService.getFileName().subscribe((resp :any) => {this.files=resp})
-    this.files=[];
   }
   ngOnInit(): void {
     this.loadList();
@@ -56,7 +56,7 @@ export class ViewTrfComponent {
     id:['', [Validators.required]],
     declinedMessage:['', [Validators.required]],
 
-});
+    });
   }
 
   loadList(){
@@ -131,7 +131,15 @@ decline()
       //document.querySelector('#comp-render').innerHTML='<object type="text/html" data="app-upload-excel.html" ></object>';
       this.display = true;
     }
+    openNominationData(id:any){
 
+      if(this.userRole == 'ROLE_TECHNICAL_MANAGER')
+      this.router.navigate(['/tm-view-nomination',id]);
+    else if(this.userRole == 'ROLE_TRAINER')
+      this.router.navigate(['/trainer/view-nomination',id]);
+    else
+      this.router.navigate(['/view-nomination',id]);
+    }
     selectFile(event: any): void {
       this.selectedFiles = event.target.files;
     }
@@ -147,6 +155,7 @@ decline()
   
           this.uploadService.upload(this.currentFile).subscribe({
             next: (event: any) => {
+              this.enableUploadButton=true;
               if (event.type === HttpEventType.UploadProgress) {
                 this.progress = Math.round(100 * event.loaded / event.total);
               } else if (event instanceof HttpResponse) {
@@ -175,21 +184,15 @@ decline()
 
     onFileChange(event:any) {
       let fileNameSpan:any = document.getElementById('file-name');
-      const selectFile = event.target.files[0];
-      let file = 0;
-      file=this.files.length ;
-   
-      var tempFileName = selectFile.name.substr(0, selectFile.name.lastIndexOf("."));
-      fileNameSpan.textContent = selectFile.name;
-      for (let index = 0; index < file; index++) {
-       
-       let filename= this.files[index];
-       if(tempFileName==filename){
-        fileNameSpan.textContent = "File is already present, it is override exiting file"
-        return;
-       }   
+      const file = event.target.files[0];
+      fileNameSpan.textContent = file.name;
+      
+      const temp:any = this.files?.map(competency=>competency);
+      if((temp?.indexOf(file.name.substring(0,file.name.indexOf('.')))) >= 0){
+        Swal.fire('File Name Already Exist', 'Upload Another File or Rename You File', 'error');
+        this.enableUploadButton=false;
+      }else{
+        this.enableUploadButton=true;
       }
-      //fileNameSpan.textContent = selectFile.name;
     }
-  
 }
