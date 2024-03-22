@@ -11,8 +11,6 @@ import { environment } from '../Core/application_constant/environment';
 export class UploadExcelService {
 
 
-  url:string="http://localhost:8080/ytms";
-
   constructor(private httpClient: HttpClient,  private authservice: AuthService, private http: HttpClient) { }
 
   httpOptions = {
@@ -42,6 +40,6 @@ export class UploadExcelService {
 }
 
 getFileName(): Observable<any[]> {
-  return this.http.get<String[]>(this.url+"/register/getFileName"); 
+  return this.http.get<String[]>(environment.baseUrl+environment.contextUrl+"/register/getFileName"); 
   }
 }
