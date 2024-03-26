@@ -12,7 +12,9 @@ import {NgbModalModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {FlatpickrModule} from 'angularx-flatpickr';
 import {ToastrModule} from 'ngx-toastr';
-import { TrainerCalendarComponent } from './trainer-calendar/trainer-calendar.component';
+import { ViewTrainerFormComponent } from './view-trainer-form/view-trainer-form.component';
+import { ViewTraninerComponent } from './view-traniner/view-traniner.component';
+import { EditNominationComponent } from './edit-nomination/edit-nomination.component';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { TrainerCalendarComponent } from './trainer-calendar/trainer-calendar.co
     TrainerHeaderComponent,
     TrainerDashboardComponent,
     TrainerSidebarComponent,
-    TrainerCalendarComponent
+    ViewTrainerFormComponent,
+    ViewTraninerComponent,
+    EditNominationComponent
   ],
   imports: [
     CommonModule,
