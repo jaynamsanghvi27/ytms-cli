@@ -180,15 +180,15 @@ tr:nth-child(even) {
 {
   width: 250px;
 }
-.actions
-{
-margin-left: 65%;
+.actions {
+  top: 1%;
+  position: absolute;
+  left: calc(100% - 410px);
+  display: flex;
 }
-.actions button
-{
-  width: 100px;
+ 
+.trainer-action {
+  position: absolute;
+  left: calc(100% - 210px);   top: 0.5%;
 }
-.trainer-action
-{
-  margin-left: 83%;
-}
+
