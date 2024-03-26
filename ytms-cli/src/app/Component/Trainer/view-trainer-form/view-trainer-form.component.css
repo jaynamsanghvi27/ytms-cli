@@ -118,7 +118,7 @@ app-requester-sidebar {
 }
 
 .display-area {
-    /* position: absolute; */
+    position: absolute;
     left: 60px;
     width: calc(100% - 60px);
     transition: width 1s linear, left 1s linear;;
@@ -162,11 +162,13 @@ table {
     border-color: #e1e1e1;
     margin-bottom: 4px;
 }
+.inner
+{
+    display: inline-flex;
+}
+.inner i{
+    margin-left: 3px;
+}
 .image-upload>input {
     display: none;
   }
-
-.main-content{
-    margin-top: 100px;
-    margin-left: 70px;
-}
