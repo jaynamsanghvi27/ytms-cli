@@ -1,7 +1,6 @@
 
 <mat-toolbar color="Primary">
     <h2 mat-dialog-title>Add Task</h2>
-   <button  mat-fab  (click)="closeEvents()" class="closebuttonevent" ><mat-icon>close</mat-icon></button>
   </mat-toolbar>
   <mat-dialog-content class="dialog">
     <form [formGroup]="eventForm" (ngSubmit)="createEvent()" class="eventForm">
@@ -41,31 +40,35 @@
       <mat-checkbox (change)="byDay()" [disabled]="disableDay"></mat-checkbox>
       <mat-label>Week</mat-label>
       <mat-checkbox (change)="byWeek()" [disabled]="disableWeek"></mat-checkbox> 
-      <mat-label>Month</mat-label>
-      <mat-checkbox (change)="byMonth()" [disabled]="disableMonth" ></mat-checkbox>
-      <mat-label>Year</mat-label> 
-      <mat-checkbox (change)="byYear()"  [disabled]="disableYear" ></mat-checkbox>
+      <!-- <mat-label>Month</mat-label>
+      <mat-checkbox (change)="byMonth()" [disabled]="disableMonth" ></mat-checkbox> -->
+      <!-- <mat-label>Year</mat-label> 
+      <mat-checkbox (change)="byYear()"  [disabled]="disableYear" ></mat-checkbox> -->
       </div>
      <div *ngIf="day">
       <mat-form-field>    
-      <input matInput  type="number" max="30" (mouseleave)="setDayvalue($event)">
+      <input matInput  type="number" max="30" formControlName="number_of_week_days" >
+      <!-- (mouseleave)="setDayvalue($event)" -->
       </mat-form-field>
       </div>
       <div *ngIf="week">
         <mat-form-field>    
-        <input matInput  type="number" max="5" (mouseleave)="setWeekvalue($event)">
+        <input matInput  type="number" max="5" formControlName="number_of_week_days">
+        <!-- (mouseleave)="setWeekvalue($event)" -->
         </mat-form-field>
       </div>
-      <div *ngIf="month" >
+      <!-- <div *ngIf="month" >
         <mat-form-field>    
-        <input  matInput  type="number" max="12" (mouseleave)="setMonthvalue($event)">
-        </mat-form-field>
-      </div>
-      <div *ngIf="year">
+        <input  matInput  type="number" max="12" formControlName="number_of_week_days">
+        (mouseleave)="setMonthvalue($event)"  
+      </mat-form-field>
+      </div> -->
+      <!-- <div *ngIf="year">
         <mat-form-field>    
-        <input matInput  type="number" max="2" (mouseleave)="setYearvalue($event)">
-        </mat-form-field>
-      </div>
+        <input matInput  type="number" max="2"  formControlName="number_of_week_days">
+        (mouseleave)="setMonthvalue($event)"  
+      </mat-form-field>
+      </div> -->
     </form>
     </mat-dialog-content>
   <mat-dialog-actions>
