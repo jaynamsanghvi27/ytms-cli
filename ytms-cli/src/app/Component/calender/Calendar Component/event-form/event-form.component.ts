@@ -216,7 +216,7 @@ else
   this.eventService.addEvent(this.event).subscribe((success)=>console.log(success)) 
 }
 this.addEvents.close();
-// window.location.reload()
+window.location.reload()
 }
   
 closeEvents()

@@ -8,7 +8,6 @@ app-trainer-header {
 
 main {
     position: absolute;
-    top: 4rem;
     width: 100%;
     z-index: 1;
 }
@@ -17,6 +16,7 @@ app-trainer-sidebar {
 
     position: absolute;
     left: 0rem;
+    top: 4rem;
     width: 60px;
     border: 1px solid black;
     height: calc(100vh - 4rem);
@@ -33,7 +33,6 @@ app-trainer-sidebar {
 
 .display-area {
     position: absolute;
-    left: 60px;
     width: calc(100% - 60px);
     transition: width 1s linear, left 1s linear;;
 

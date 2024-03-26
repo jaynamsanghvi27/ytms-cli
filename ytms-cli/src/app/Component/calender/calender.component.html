@@ -6,7 +6,7 @@
     <app-requester-sidebar [sideNavStatus]="sideNavStatus" *ngIf="this.userRole != 'ROLE_TRAINER'"
       [ngClass]="{'app-side-nav-open':sideNavStatus}" class="black-border"> </app-requester-sidebar>
 
-    <div class="{{sidebarClass}}" [ngClass]="{'display-area-shrink':sideNavStatus}">
+    <div class="display-area p-3" [ngClass]="{'display-area-shrink':sideNavStatus}">
       <div class="training-request-form">
         <div [ngSwitch]="selectedValue">
            <div *ngSwitchCase="'Month'">
@@ -18,11 +18,13 @@
                 {{ user.fullName}}
               </mat-option>
             </mat-select>
-            <button mat-raised-button (click)="addEvent()">Add Event</button>
-            <button mat-raised-button [routerLink]="'/delete'">Delete Requests</button>
             <br>
           </div>
-  
+          &nbsp;
+          <div class="{{actionCss}}">
+          <button class="btn btn-primary"  (click)="addEvent()">Add Event</button>&nbsp;
+          <button  class="btn btn-primary" *ngIf="searchFilter" [routerLink]="'/delete'">Delete Requests</button>
+        </div>
             <full-calendar [options]="calendarOptions">
             </full-calendar>
            </div>
@@ -34,9 +36,12 @@
               <mat-option *ngFor="let user of users" [value]="user.emailAdd">
                 {{ user.fullName}}
               </mat-option>
-            </mat-select><br>
-            <button mat-raised-button (click)="addEvent()">Add Event</button>
-            <button mat-raised-button [routerLink]="'/delete'">Delete Requests</button>
+            </mat-select>
+          </div>
+          &nbsp;
+            <div class="{{actionCss}}">
+            <button mat-raised-button class="btn btn-primary" (click)="addEvent()">Add Event</button>&nbsp;
+            <button mat-raised-button class="btn btn-primary" *ngIf="searchFilter" [routerLink]="'/delete'">Delete Requests</button>
           </div>
             <full-calendar [options]="calendarOptionsWeek"></full-calendar>
            </div>
@@ -48,10 +53,13 @@
               <mat-option *ngFor="let user of users" [value]="user.emailAdd">
                 {{ user.fullName}}
               </mat-option>
-            </mat-select><br>
-            <button mat-raised-button (click)="addEvent()">Add Event</button>
-            <button mat-raised-button [routerLink]="'/delete'">Delete Requests</button>
-            </div>
+            </mat-select>
+          </div>
+          &nbsp;
+            <div class="{{actionCss}}">
+            <button mat-raised-button class="btn btn-primary" (click)="addEvent()">Add Event</button>&nbsp;
+            <button mat-raised-button class="btn btn-primary" *ngIf="searchFilter" [routerLink]="'/delete'">Delete Requests</button>
+          </div>  
             <full-calendar [options]="calendarOptionsDay"></full-calendar>
            </div>
         </div></div>

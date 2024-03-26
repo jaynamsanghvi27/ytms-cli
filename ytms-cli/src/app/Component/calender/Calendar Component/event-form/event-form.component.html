@@ -1,7 +1,6 @@
 
 <mat-toolbar color="Primary">
     <h2 mat-dialog-title>Add Task</h2>
-   <button  mat-fab  (click)="closeEvents()" class="closebuttonevent" ><mat-icon>close</mat-icon></button>
   </mat-toolbar>
   <mat-dialog-content class="dialog">
     <form [formGroup]="eventForm" (ngSubmit)="createEvent()" class="eventForm">
