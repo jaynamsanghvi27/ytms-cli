@@ -1,47 +1,52 @@
-<!-- <div class="container-fluid g-0"> -->
-
-    <!-- <main> -->
+<div class="container-fluid g-0">
+      
+    <main>
+      
+      <div class="display-area p-3" >
+        <!-- Main Content    -->
         <div class="training-request-form">
-            <form>
-                <div class="form-header">
-                    <h5 class="heading-color">Training List</h5>
-                </div>
-                <div class="display-area p-3">
-                    <table style="width:100%">
-                        <tr>
-                            <th>Id</th>
-                            <th>Status</th>
-                            <th>Traniner Name</th>
-                            <th>Requester Name</th>
-                            <th>Number of Participents</th>
-                            <th>Actual Start Date</th>
-                            <th>Actual End Date</th>
-                            <th>Actions</th>
-                        </tr>
+          <form>
+            <div class="form-header">
+              <h5 class="heading-color">Training Request List</h5>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Status</th>
+                    <th>Traniner Name</th>
+                    <th>Requester Name</th>
+                    <th>Number of Participents</th>
+                    <th>Actual Start Date</th>
+                    <th>Actual End Date</th>
+                    <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let training of trainingReqForms">
+                    <td>{{training.id}}</td>
+                    <td>{{training.trainingStatus}}</td>
+                    <td>{{training.userName}}</td>
+                    <td></td>
+                    <td><a (click)="openDialog(training.id)">{{training.noOfActualParticipant}}</a></td>
+                    <td>{{training.actualStartDate}}</td>
+                    <td>{{training.actualEndDate}}</td>
+                    <!-- <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' " style="text-align: center;"> -->
+                    <td style="text-align: center;">
+                        <span class="inner">
+                            <i title="Edit" class=" bt-info btn-sm fa fa-edit" (click)="editViewTraniner(training.id)"></i>
 
-                        <tbody>
-                            <tr *ngFor="let training of trainingReqForms">
-                                <td>{{training.id}}</td>
-                                <td>{{training.trainingStatus}}</td>
-                                <td>{{training.userName}}</td>
-                                <td></td>
-                                <td><a (click)="openDialog(training.id)">{{training.noOfActualParticipant}}</a></td>
-                                <td>{{training.actualStartDate}}</td>
-                                <td>{{training.actualEndDate}}</td>
-                                <!-- <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' " style="text-align: center;"> -->
-                                <td style="text-align: center;">
-                                    <span class="inner">
-                                        <i title="Edit" class=" bt-info btn-sm fa fa-edit" (click)="editViewTraniner(training.id)"></i>
-
-                                    </span>
-                                </td>
-                            </tr>
-                        </tbody>
-
-                    </table>
-                </div>
-            </form>
+                        </span>
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+  
+          </form>
         </div>
-    <!-- </main> -->
-
-<!-- </div> -->
+        <!-- Main Content Closed -->
+  
+      
+      </div>
+    </main>
+  </div>
