@@ -19,6 +19,7 @@ import {
 } from "./Component/RequesterModule/requester-dashboard/requester-dashboard.component";
 import { UploadExcelComponent } from './Component/upload-excel/upload-excel.component';
 import { ViewNominationComponent } from './Component/Requester/view-nomination/view-nomination.component';
+import { DeletePageComponent } from './Component/calender/Delete Page/delete-page/delete-page.component';
 
 const routes: Routes = [
   {
@@ -30,7 +31,12 @@ const routes: Routes = [
     path: "login",
     component: LoginComponent
   },
+  { 
+     path:"delete",
+     component:DeletePageComponent
 
+  }
+  ,
   {
     path: "book-calendar",
     component: CalenderComponent,

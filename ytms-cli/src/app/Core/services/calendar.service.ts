@@ -3,13 +3,13 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {environment} from '../application_constant/environment';
 
-export interface Calendar
-{
-  title: string;
-  start?: Date;
-  end?: Date; 
-  scheduleUser?:any;
-}
+// export interface Calendar
+// {
+//   title: string;
+//   start?: Date;
+//   end?: Date; 
+//   scheduleUser?:any;
+// }
 
 @Injectable({
   providedIn: 'root'
@@ -19,15 +19,15 @@ export class CalendarService {
 
   constructor(private http: HttpClient) { }
   
-  getALLEvents():Observable<Calendar[]>
+  getALLEvents():Observable<any[]>
   {
-    return this.http.get<Calendar[]>(this.url+"/calendar/get/all")
+    return this.http.get<any[]>(this.url+"/calendar/get/all")
   }
-  getEventsByTrainer(trainerEmail:any):Observable<Calendar[]>
+  getEventsByTrainer(trainerEmail:any):Observable<any[]>
   {
-  return this.http.get<Calendar[]>(this.url+"/calendar/"+trainerEmail)
+  return this.http.get<any[]>(this.url+"/calendar/"+trainerEmail)
   }
-  public addEvent(events:any[])
+  public addEvent(events:any)
   {
    return this.http.post(this.url+"/calendar/save",events);
   }

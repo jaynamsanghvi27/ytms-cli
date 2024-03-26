@@ -1,12 +1,12 @@
 <div class="container-fluid g-0">
-  <app-requester-header (sideNavToggled)="sideNavStatus=$event;" >
+  <app-requester-header *ngIf="this.userRole != 'ROLE_TRAINER'" (sideNavToggled)="sideNavStatus=$event;" >
   </app-requester-header>
 
   <main>
     <app-requester-sidebar [sideNavStatus]="sideNavStatus" *ngIf="this.userRole != 'ROLE_TRAINER'"
       [ngClass]="{'app-side-nav-open':sideNavStatus}" class="black-border"> </app-requester-sidebar>
 
-    <div class="{{sidebarClass}}" [ngClass]="{'display-area-shrink':sideNavStatus}">
+    <div class="display-area p-3" [ngClass]="{'display-area-shrink':sideNavStatus}">
       <div class="training-request-form">
         <div [ngSwitch]="selectedValue">
            <div *ngSwitchCase="'Month'">
@@ -18,10 +18,13 @@
                 {{ user.fullName}}
               </mat-option>
             </mat-select>
-            <button ></button>
             <br>
           </div>
-  
+          &nbsp;
+          <div class="{{actionCss}}">
+          <button class="btn btn-primary"  (click)="addEvent()">Add Task</button>&nbsp;
+          <button  class="btn btn-primary" *ngIf="searchFilter" [routerLink]="'/delete'">Task Delete Requests</button>
+        </div>
             <full-calendar [options]="calendarOptions">
             </full-calendar>
            </div>
@@ -33,8 +36,13 @@
               <mat-option *ngFor="let user of users" [value]="user.emailAdd">
                 {{ user.fullName}}
               </mat-option>
-            </mat-select><br>
-            </div>
+            </mat-select>
+          </div>
+          &nbsp;
+            <div class="{{actionCss}}">
+            <button mat-raised-button class="btn btn-primary" (click)="addEvent()">Add Task</button>&nbsp;
+            <button mat-raised-button class="btn btn-primary" *ngIf="searchFilter" [routerLink]="'/delete'"> Task Delete Requests</button>
+          </div>
             <full-calendar [options]="calendarOptionsWeek"></full-calendar>
            </div>
            <div *ngSwitchCase="'Day'">
@@ -45,8 +53,13 @@
               <mat-option *ngFor="let user of users" [value]="user.emailAdd">
                 {{ user.fullName}}
               </mat-option>
-            </mat-select><br>
-            </div>
+            </mat-select>
+          </div>
+          &nbsp;
+            <div class="{{actionCss}}">
+            <button mat-raised-button class="btn btn-primary" (click)="addEvent()">Add Task</button>&nbsp;
+            <button mat-raised-button class="btn btn-primary" *ngIf="searchFilter" [routerLink]="'/delete'">Delete Requests</button>
+          </div>  
             <full-calendar [options]="calendarOptionsDay"></full-calendar>
            </div>
         </div></div>

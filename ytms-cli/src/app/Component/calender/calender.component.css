@@ -180,3 +180,25 @@ tr:nth-child(even) {
 {
   width: 250px;
 }
+.actions
+{
+top: 10px;
+position: absolute;
+left: 1040px;
+}
+.actions button
+{
+  width: 100px;
+}
+.trainer-action
+{
+  position: absolute;
+  left: 1250px;
+  top: 2px;
+}
+.input-button
+{
+  color: #fff;
+  background-color: #005ba3;
+  border-color: #005ba3;
+}
