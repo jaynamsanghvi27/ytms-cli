@@ -10,7 +10,7 @@
       <div class="training-request-form">
         <div [ngSwitch]="selectedValue">
            <div *ngSwitchCase="'Month'">
-            <div *ngIf="searchFilter">  
+            <div *ngIf="searchFilter" class="manager-Select">  
             Trainer:
             <mat-select (selectionChange)="switchUser($event)" class="select" placeholder="All">
               <mat-option [value]="'All'">All</mat-option>
@@ -25,11 +25,11 @@
           <button class="btn btn-primary"  (click)="addEvent()">Add Task</button>&nbsp;
           <button  class="btn btn-primary" *ngIf="searchFilter" [routerLink]="'/delete'">Task Delete Requests</button>
         </div>
-            <full-calendar [options]="calendarOptions">
+            <full-calendar class="calendar" [options]="calendarOptions">
             </full-calendar>
            </div>
            <div *ngSwitchCase="'Week'">
-            <div *ngIf="searchFilter">  
+            <div *ngIf="searchFilter" class="manager-Select">  
               Trainer:
             <mat-select (selectionChange)="switchUser($event)"  class="select" placeholder="All">
               <mat-option [value]="'All'">All</mat-option>
@@ -46,7 +46,7 @@
             <full-calendar [options]="calendarOptionsWeek"></full-calendar>
            </div>
            <div *ngSwitchCase="'Day'">
-            <div *ngIf="searchFilter"> 
+            <div *ngIf="searchFilter" class="manager-Select"> 
               Trainer: 
             <mat-select (selectionChange)="switchUser($event)"   class="select" placeholder="All">
               <mat-option [value]="'All'">All</mat-option>

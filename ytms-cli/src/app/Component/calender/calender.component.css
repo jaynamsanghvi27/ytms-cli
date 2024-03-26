@@ -180,21 +180,21 @@ tr:nth-child(even) {
 {
   width: 250px;
 }
-.actions
-{
-top: 10px;
-position: absolute;
-left: 1040px;
-}
-.actions button
-{
-  width: 100px;
-}
-.trainer-action
+.manager-Select
 {
   position: absolute;
-  left: 1250px;
-  top: 2px;
+  right: calc(100% - 320px); 
+}
+.actions {
+  top: 1%; 
+  position: absolute;
+  left: calc(100% - 410px); 
+  display: flex;
+}
+
+.trainer-action {
+  position: absolute;
+  left: calc(100% - 210px);   top: 0.5%; 
 }
 .input-button
 {
