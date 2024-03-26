@@ -4,8 +4,7 @@ import {TrainerHomeComponent} from './trainer-home/trainer-home.component';
 import {TrainerDashboardComponent} from './trainer-dashboard/trainer-dashboard.component';
 import { ViewTrfComponent } from '../Requester/view-trf/view-trf.component';
 import { TrainingReqComponent } from '../Requester/training-req/training-req.component';
-import { ViewNominationComponent } from '../Requester/view-nomination/view-nomination.component';
-import { CalenderComponent } from '../calender/calender.component';
+import { ViewTrainerFormComponent } from './view-trainer-form/view-trainer-form.component';
 
 const routes: Routes = [
   {
@@ -33,8 +32,8 @@ const routes: Routes = [
         component: TrainingReqComponent
       },
       {
-        path:'view-nomination/:id',
-        component: ViewNominationComponent
+        path:'view-trainer-form',
+        component: ViewTrainerFormComponent
       },
     ]
   }
