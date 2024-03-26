@@ -24,6 +24,8 @@
                 <td><b>Planned End Date</b></td>
                 <td><b>Actual Start Date</b></td>
                 <td><b>Actual End Date</b></td>
+                <td><b>Actual Participant</b></td>
+                <td><b>Assign Trainer</b></td>
                 <td><b>Action</b></td>
                 <!-- <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER'"><b>Action</b></td> -->
               </tr>
@@ -40,12 +42,14 @@
                 <td>{{training.endDate}}</td>
                 <td>{{training.actualStartDate}}</td>
                 <td>{{training.actualEndDate}}</td>
+                <td><a (click)="openNominationData(training.id)">{{training.noOfActualParticipant}}</a></td>
+                <td>{{training.userName}}</td>
                 <!-- <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' " style="text-align: center;"> -->
                   <td style="text-align: center;">
                     <span class="inner">
-                      <i title="Edit" *ngIf="training.status!='APPROVED'" class=" bt-info btn-sm fa fa-edit" (click)="editTrf(training.id)"></i>
-                    <i title="Approve" *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' && training.actualStartDate == null && training.status!='DECLINED'" class=" bt-success btn-sm fa fa-check-square-o" (click)="openDialog(template);setId(training.id)"></i>
-                    <i title="Decline" *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' && training.actualStartDate == null && training.status!='DECLINED'" class=" bt-danger btn-sm  fa fa-close" (click)="declineDialog(template1);setId(training.id)"></i>
+                      <i title="Edit" *ngIf="training.status!='APPROVED'" class=" btn-info btn-sm fa fa-edit" (click)="editTrf(training.id)"></i>
+                    <i title="Approve" *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' && training.actualStartDate == null && training.status!='DECLINED'" class=" btn-success btn-sm fa fa-check-square-o" (click)="openDialog(template);setId(training.id)"></i>
+                    <i title="Decline" *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' && training.actualStartDate == null && training.status!='DECLINED'" class=" btn-danger btn-sm  fa fa-close" (click)="declineDialog(template1);setId(training.id)"></i>
                   </span>
                 </td>
               </tr>
@@ -111,6 +115,17 @@
               </div>
             </div>
             <br>
+            <div class="row">
+            <div class="col-2">Assign Trainer</div>
+            <div class="col-4">
+                <select #teams class="request-drop-down" formControlName="trainer">
+                 <option [ngValue]="0" disabled >-- Select --</option>
+                    <option *ngFor="let trainer of trainers" value="{{trainer.fullName}}">
+                      {{trainer.fullName}}
+                    </option>
+                </select>
+              </div>
+            </div>
             <input type="hidden" formControlName="id" [(ngModel)]="this.id">
           </div>
           <div class="center">
@@ -149,5 +164,4 @@
       </ng-template>
     </div>
   </main>
-
 </div>

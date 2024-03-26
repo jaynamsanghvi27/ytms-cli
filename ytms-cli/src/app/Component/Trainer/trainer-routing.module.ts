@@ -2,10 +2,11 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {TrainerHomeComponent} from './trainer-home/trainer-home.component';
 import {TrainerDashboardComponent} from './trainer-dashboard/trainer-dashboard.component';
-import {TrainerCalendarComponent} from './trainer-calendar/trainer-calendar.component';
 import { ViewTrfComponent } from '../Requester/view-trf/view-trf.component';
 import { TrainingReqComponent } from '../Requester/training-req/training-req.component';
-import { ViewNominationComponent } from '../Requester/view-nomination/view-nomination.component';
+import { ViewTrainerFormComponent } from './view-trainer-form/view-trainer-form.component';
+import { CalenderComponent } from '../calender/calender.component';
+import { ViewTraninerComponent } from './view-traniner/view-traniner.component';
 
 const routes: Routes = [
   {
@@ -18,7 +19,7 @@ const routes: Routes = [
       },
       {
         path: 'trainer-calendar',
-        component: TrainerCalendarComponent
+        component:CalenderComponent
       },
       { 
         path: "view-trf",
@@ -33,10 +34,10 @@ const routes: Routes = [
         component: TrainingReqComponent
       },
       {
-        path:'view-nomination/:id',
-        component: ViewNominationComponent
+        path:'view-trainer-form',
+        component: ViewTrainerFormComponent
       },
-    ]
+          ]
   }
 ];
 

@@ -1,6 +1,5 @@
 import { NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {RequesterHeaderComponent} from './Component/Requester/requester-header/requester-header.component';
@@ -21,8 +20,7 @@ import {RegistrationComponent} from "./Component/registration/registration.compo
 import { ResetPasswordComponent } from './Component/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './Component/change-password/change-password.component';
 import { CalenderComponent } from './Component/calender/calender.component';
-import { CalendarModule, DateAdapter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { FullCalendarModule } from '@fullcalendar/angular';
 import { NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { DateFormatPipe } from './pipes/date-format.pipe';
@@ -37,8 +35,21 @@ import { TrainingTypeMasterComponent } from './Component/Requester/training-type
 import { TechnologyMasterComponent } from './Component/Requester/technology-master/technology-master.component';
 import { UploadExcelComponent } from './Component/upload-excel/upload-excel.component';
 import { ViewNominationComponent } from './Component/Requester/view-nomination/view-nomination.component';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import { DayComponentComponent } from './Component/calender/Calendar Component/day-component/day-component.component';
+import { EventFormComponent } from './Component/calender/Calendar Component/event-form/event-form.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { EventComponentComponent } from './Component/calender/Calendar Component/event-component/event-component.component';
+import { UpdateEventFormComponent } from './Component/calender/Calendar Component/update-event-form/update-event-form.component';
+import { DeleteComponent } from './Component/calender/Calendar Component/delete/delete.component';
+import {MatTableModule} from '@angular/material/table';
+import { DeletePageComponent } from './Component/calender/Delete Page/delete-page/delete-page.component';
 
 @NgModule({
+  entryComponents:[DayComponentComponent,EventFormComponent,UpdateEventFormComponent,DeleteComponent],
   declarations: [
     AppComponent,
     RequesterHeaderComponent,
@@ -62,7 +73,13 @@ import { ViewNominationComponent } from './Component/Requester/view-nomination/v
     TrainingTypeMasterComponent,
     TechnologyMasterComponent,
     UploadExcelComponent,
-    ViewNominationComponent
+    ViewNominationComponent,
+    DayComponentComponent,
+    EventFormComponent,
+    EventComponentComponent,
+    UpdateEventFormComponent,
+    DeleteComponent,
+    DeletePageComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,14 +88,11 @@ import { ViewNominationComponent } from './Component/Requester/view-nomination/v
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory,
-    }),
     HttpClientModule,
     FlatpickrModule.forRoot(),
     NgbModule,NgbModalModule,
-    MatDialogModule
+    MatDialogModule,
+    FullCalendarModule,MatSelectModule,MatInputModule,MatToolbarModule,MatIconModule,MatCheckboxModule,MatTableModule
   ],
   providers: [
     authInterceptorProviders,

@@ -1,5 +1,5 @@
 /* angular-cli file: src/styles.css */
-@import "../node_modules/angular-calendar/css/angular-calendar.css";
+
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 body {
   font-family: 'Poppins', sans-serif;
@@ -13,10 +13,6 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> dfadcc4f333421adfd8b4cf4ce2c10a0b9d45ee9
 .bt-info {
   color: #000;
   background-color: #0dcaf0;
@@ -32,3 +28,57 @@ body {
   background-color: #dc3545;
   border-color: #dc3545;
 }
+
+/* button */
+.fc .fc-button-group > .fc-button{
+  color: #fff;
+  background-color: #005ba3;
+  border-color: #005ba3;
+}
+
+/*header*/
+.fc .fc-toolbar-title
+{
+  /* color: grey; */
+}
+
+/*date*/
+.fc-daygrid-day-number,
+.fc-daygrid-day-number a {
+  color: grey;  
+  text-decoration: none; 
+}
+
+/*day*/
+.fc-col-header-cell-cushion,
+.fc-col-header-cell-cushion a {
+  color: grey;  
+  text-decoration: none; 
+}
+
+/*events*/
+.fc-daygrid-event-dot {
+  /* border: calc(var(--fc-daygrid-event-dot-width) / 2) solid #6c757d; */
+}
+.fc .fc-daygrid-event
+{
+  /* color: grey; */
+}
+
+
+
+/*bulleten not work*/
+/* .fc-daygrid-event-dot  {
+  background-color:black;
+} */
+
+/* time */
+/* .fc-event-time{
+  color: grey;
+} */
+
+/*title*/
+/* .fc-event-title
+{
+color: grey;
+} */

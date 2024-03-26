@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 
 import { Component, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/Core/services/auth.service';
@@ -95,7 +95,8 @@ export class TrainingReqComponent {
         monthAndYear: ['', [Validators.required]],
         trainingName: ['', [Validators.required]],
         startDate: ['', [Validators.required]],
-        endDate: ['', [Validators.required]],
+        // endDate: ['', [Validators.required]],
+        endDate: new FormControl({ value: null, disabled: true}),
         trainingDescription: ['', [Validators.required]],
         userName: ['', [Validators.required]],
         noOfParticipant: ['', [Validators.required]],
@@ -321,11 +322,32 @@ export class TrainingReqComponent {
     this.ser.deleteNominationById(nominationId).subscribe();
     this.getNominationListByTrainingId(this.id);
   }
-  get hasDropDownError() {
+  gethasDropDownError() {
     return (
       this.trainingReqForm.get('unit')?.touched &&
       this.trainingReqForm.get('unit')?.errors &&
       this.trainingReqForm.get('unit')?.errors?.['required']
     )
+  }
+
+  dateToday(): Date {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth();
+    const day = now.getDate();
+    const hour = now.getHours();
+    const minute = now.getMinutes();
+    return new Date(year, month, day, hour, minute);
+  }
+
+  minEndDate():Date{
+    return this.trainingReqForm.value.startDate;
+  }
+
+  enableInputField(fieldName: string) {
+    const control = this.trainingReqForm.get(fieldName) as FormControl;
+    if (control) {
+      control.enable();
+    }
   }
 }

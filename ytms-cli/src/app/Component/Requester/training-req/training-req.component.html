@@ -121,6 +121,8 @@
                         formControlName="startDate"
                         placeholder="Planed Start Date"
                         class="form-control"
+                        min="{{dateToday() | date:'yyyy-MM-dd'}}" 
+                        (change)="enableInputField('endDate')"
                       />
                       <div style="color: red;" *ngIf= "trainingReqForm.controls['startDate'].touched && trainingReqForm.controls['startDate'].hasError('required')">Planned Start Date is required</div>
                       </div>
@@ -131,6 +133,8 @@
                         formControlName="endDate"
                         placeholder="Planed End Date"
                         class="form-control"
+                        min="{{minEndDate() | date:'yyyy-MM-dd'}}" 
+                        
                       />
                       <div style="color: red;" *ngIf= "trainingReqForm.controls['endDate'].touched && trainingReqForm.controls['endDate'].hasError('required')">Planed End Date is required</div>   
                     </div>

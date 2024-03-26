@@ -1,0 +1,34 @@
+<mat-toolbar><h2 mat-dialog-title>{{data.event.title}}</h2> </mat-toolbar>
+<mat-dialog-content>
+    <!-- Start:{{data.event.start| date:'hh:mm a'}}<br>
+    End:{{data.event.end| date:'hh:mm a'}}<br>
+    Duration:{{durationhh}} -->
+    <table mat-table [dataSource]="dataSourceEvents" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="Start">
+          <th mat-header-cell *matHeaderCellDef> Start </th>
+          <td mat-cell *matCellDef="let element"> {{element.start | date:'hh:mm a'}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="End">
+          <th mat-header-cell *matHeaderCellDef>End </th>
+          <td mat-cell *matCellDef="let element"> {{element.end | date:'hh:mm a'}} </td>
+        </ng-container>
+     
+        <ng-container matColumnDef="Duration">
+            <th mat-header-cell *matHeaderCellDef>Duration</th>
+            <td mat-cell *matCellDef="let element"> {{element.duration}} Hrs </td>
+          </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef=" displayedColumnsEvents"></tr>
+        <tr mat-row *matRowDef="let row; columns:  displayedColumnsEvents;"></tr>  
+      
+    </table>
+  
+</mat-dialog-content>
+<mat-toolbar>
+    <mat-dialog-actions>
+        <button mat-raised-button class="create-button btn btn-primary" (click)="updateEvent()">Update</button>&nbsp;
+        <button mat-raised-button class="create-button btn btn-primary" (click)="deleteEvent()">Delete</button>
+    </mat-dialog-actions>
+</mat-toolbar>

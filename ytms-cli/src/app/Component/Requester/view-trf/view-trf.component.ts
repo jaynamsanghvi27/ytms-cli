@@ -26,6 +26,7 @@ export class ViewTrfComponent {
   userRole:string="";
   document: Document | undefined;
   files?: any[];
+  trainers?: any[];
 
   selectedFiles?: FileList;
   enableUploadButton = false;
@@ -45,11 +46,13 @@ export class ViewTrfComponent {
   }
   ngOnInit(): void {
     this.loadList();
+    this.loadTrainner();
     this.trainingReqForm = this.formBuilder.group({
       id:['', [Validators.required]],
       actualStartDate: ['', [Validators.required]],
       actualEndDate: ['', [Validators.required]],
-      fileName: ['', [Validators.required]]});
+      fileName: ['', [Validators.required]],
+      trainer:['',[Validators.required]]});
 
 
   this.trainingReqForm1 = this.formBuilder.group({
@@ -61,6 +64,12 @@ export class ViewTrfComponent {
 
   loadList(){
     this.ser.getTraining().subscribe((resp:any)=>{(this.trainingReqForms=resp)});
+  }
+  loadTrainner() {
+    this.ser.getTrainerMasterList().subscribe((resp: any) => { this.trainers = resp });
+  }
+  pushTrainer(trainer:any) {
+    this.trainers?.push(trainer);
   }
   declineDialog(templateRef1:any)
   {
@@ -102,12 +111,14 @@ decline()
     if (this.trainingReqForm.valid) {
       console.log("befor service "+JSON.stringify(this.trainingReqForm.value));
       let obj:any=this.trainingReqForm.value;
-      this.ser.updateTraining(obj).subscribe();
-      Swal.fire('Success', 'Training Approved', 'success');
+      this.ser.updateTraining(obj).subscribe((resp:any)=>{
+        Swal.fire('Success', 'Training Approved', 'success');
       this.trainingReqForm.reset();
       this.closeDialog();
       this.loadList();
       window.location.reload();
+      });
+      
     } else {
       this.trainingReqForm.markAllAsTouched();
     }
