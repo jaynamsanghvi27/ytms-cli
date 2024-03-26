@@ -141,39 +141,6 @@ setYearvalue(event:any)
     return weekdaysCount;
   }
 
-//RECURSE BY DAY
-  // recurseByDay(day: number, event: any): void {
-  //   let addedCount = 0;
-  
-  // for (let i = 1; i <= day; i++) {
-  // let newStartDate = addDays(new Date(event.start_date as (number | Date)), i - 1);
-  // let skippedWeekends = 0;
-
-  // while (addedCount < day && skippedWeekends < day) {
-  //   if (!isWeekend(newStartDate)) {
-  //     this.events.push({
-  //       ...event,
-  //       start_date: format(newStartDate, 'yyyy-MM-dd'),
-  //       start_time: event.start_time,
-  //       title: event.title,
-  //       end_date: format(newStartDate, 'yyyy-MM-dd'),
-  //       end_time: event.end_time,
-  //       userid: event.userid,
-  //     });
-  //     addedCount++;
-  //   } else {
-  //     skippedWeekends++;
-  //   }
-  //   newStartDate = addDays(newStartDate, 1);
-  //   }
-  //   }
-  
-  //   console.log(this.events);
-  //   this.eventService.addEvent(this.events).subscribe(
-  //     (success) => console.log(success),
-  //     (error) => console.log(error)
-  //   );
-  // } 
  
 
 event:any={};
