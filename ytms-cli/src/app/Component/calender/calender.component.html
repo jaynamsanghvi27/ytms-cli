@@ -21,9 +21,9 @@
             <br>
           </div>
           &nbsp;
-          <div class="{{actionCss}}">
-          <button class="btn btn-primary"  (click)="addEvent()">Add Task</button>&nbsp;
-          <button  class="btn btn-primary" *ngIf="searchFilter" [routerLink]="'/delete'">Task Delete Requests</button>
+          <div class="{{actionCss}}" >
+          <button class="btn btn-primary"  (click)="addEvent()">Add Task</button>&nbsp;<span>
+          <button  class="btn btn-primary" *ngIf="searchFilter" [routerLink]="'/delete'">Task Delete Requests</button></span>
         </div>
             <full-calendar [options]="calendarOptions">
             </full-calendar>
