@@ -196,3 +196,9 @@ left: 1040px;
   left: 1250px;
   top: 2px;
 }
+.input-button
+{
+  color: #fff;
+  background-color: #005ba3;
+  border-color: #005ba3;
+}
