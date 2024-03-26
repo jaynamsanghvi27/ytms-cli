@@ -15,6 +15,7 @@ export class TrainingReqForm{
     createdAt !: Date;
     userName!:String;
     noOfParticipant!:number;
+    noOfActualParticipant!:number;
     declinedMessage!:string;
     fileName!: string;
     trainingStatus!:string;

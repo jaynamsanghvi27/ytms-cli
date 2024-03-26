@@ -13,6 +13,8 @@ import {NgbModalModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FlatpickrModule} from 'angularx-flatpickr';
 import {ToastrModule} from 'ngx-toastr';
 import { ViewTrainerFormComponent } from './view-trainer-form/view-trainer-form.component';
+import { ViewTraninerComponent } from './view-traniner/view-traniner.component';
+import { EditNominationComponent } from './edit-nomination/edit-nomination.component';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { ViewTrainerFormComponent } from './view-trainer-form/view-trainer-form.
     TrainerHeaderComponent,
     TrainerDashboardComponent,
     TrainerSidebarComponent,
-    ViewTrainerFormComponent
+    ViewTrainerFormComponent,
+    ViewTraninerComponent,
+    EditNominationComponent
   ],
   imports: [
     CommonModule,
