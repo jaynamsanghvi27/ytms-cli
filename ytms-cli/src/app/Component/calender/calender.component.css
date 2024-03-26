@@ -182,9 +182,7 @@ tr:nth-child(even) {
 }
 .actions
 {
-top: 10px;
-position: absolute;
-left: 1040px;
+margin-left: 65%;
 }
 .actions button
 {
@@ -192,7 +190,5 @@ left: 1040px;
 }
 .trainer-action
 {
-  position: absolute;
-  left: 1250px;
-  top: 2px;
+  margin-left: 83%;
 }
