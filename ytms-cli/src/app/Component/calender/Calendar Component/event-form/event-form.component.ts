@@ -190,7 +190,7 @@ if(this.day)
 }
 else if(this.week)
 {   
-    this.eventForm.get('number_of_week_days')?.setValue((this.eventForm.value.number_of_week_days*5) );
+    this.eventForm.get('number_of_week_days')?.setValue(((this.eventForm.value.number_of_week_days-1)*5) );
     this.event =this.eventForm.value
     console.log(this.event)
     this.eventService.addEvent(this.event).subscribe((success)=>console.log(success))

@@ -130,8 +130,7 @@ export class CalenderComponent implements OnInit{
     this.searchFilter=true;  
     }
       else if (role == 'ROLE_TRAINER')
-      {
-      // this.sidebarClass='display-area-ns p-3';    
+      {    
       this.actionCss='trainer-action'
 
       this.searchFilter=false;  
