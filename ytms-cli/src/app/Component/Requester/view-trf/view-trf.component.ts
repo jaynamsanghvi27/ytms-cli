@@ -204,8 +204,6 @@ decline()
         this.enableUploadButton=false;
       }else{
         this.enableUploadButton=true;
-        this.files?.push(file.name.substring(0,file.name.indexOf('.')));
-        this.uploadService.getFileName().subscribe((resp :any) => {this.files=resp})
       }
     }
 }
