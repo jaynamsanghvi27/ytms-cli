@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { addDays, addMonths, addYears, differenceInDays, eachDayOfInterval, format, isWeekend } from 'date-fns';
@@ -19,7 +19,6 @@ export class EventFormComponent {
 
   events:any[]=[]
   recursiveDays:number=0
-  
   user_id=1    
   recurssion:boolean=false
   day:boolean=false
@@ -104,10 +103,10 @@ setYearvalue(event:any)
   
   eventForm: FormGroup=this.fb.group({
     title: ['', Validators.required], // Required title
-    start_date: this.datePipe.transform(this.StartDate, 'yyyy-MM-dd'),
-    start_time: [''],
-    end_date: this.datePipe.transform(this.StartDate, 'yyyy-MM-dd'),
-    end_time: [''],
+    start_date: [this.datePipe.transform(this.StartDate, 'yyyy-MM-dd'),Validators.required],
+    start_time: ['',Validators.required],
+    end_date: [this.datePipe.transform(this.StartDate, 'yyyy-MM-dd'),Validators.required],   
+     end_time: ['',Validators.required],
     number_of_week_days:0
   });
 
