@@ -1,5 +1,5 @@
 <div class="container-fluid g-0">
-  <app-requester-header (sideNavToggled)="sideNavStatus=$event;" >
+  <app-requester-header *ngIf="this.userRole != 'ROLE_TRAINER'" (sideNavToggled)="sideNavStatus=$event;" >
   </app-requester-header>
 
   <main>
@@ -22,8 +22,8 @@
           </div>
           &nbsp;
           <div class="{{actionCss}}">
-          <button class="btn btn-primary"  (click)="addEvent()">Add Event</button>&nbsp;
-          <button  class="btn btn-primary" *ngIf="searchFilter" [routerLink]="'/delete'">Delete Requests</button>
+          <button class="btn btn-primary"  (click)="addEvent()">Add Task</button>&nbsp;
+          <button  class="btn btn-primary" *ngIf="searchFilter" [routerLink]="'/delete'">Task Delete Requests</button>
         </div>
             <full-calendar [options]="calendarOptions">
             </full-calendar>
@@ -40,8 +40,8 @@
           </div>
           &nbsp;
             <div class="{{actionCss}}">
-            <button mat-raised-button class="btn btn-primary" (click)="addEvent()">Add Event</button>&nbsp;
-            <button mat-raised-button class="btn btn-primary" *ngIf="searchFilter" [routerLink]="'/delete'">Delete Requests</button>
+            <button mat-raised-button class="btn btn-primary" (click)="addEvent()">Add Task</button>&nbsp;
+            <button mat-raised-button class="btn btn-primary" *ngIf="searchFilter" [routerLink]="'/delete'"> Task Delete Requests</button>
           </div>
             <full-calendar [options]="calendarOptionsWeek"></full-calendar>
            </div>
@@ -57,8 +57,8 @@
           </div>
           &nbsp;
             <div class="{{actionCss}}">
-            <button mat-raised-button class="btn btn-primary" (click)="addEvent()">Add Event</button>&nbsp;
-            <button mat-raised-button class="btn btn-primary" *ngIf="searchFilter" [routerLink]="'/delete'">Delete Requests</button>
+            <button mat-raised-button class="btn btn-primary" (click)="addEvent()">Add Task</button>&nbsp;
+            <button mat-raised-button class="btn btn-primary" *ngIf="searchFilter" [routerLink]="'/delete'">Task Delete Requests</button>
           </div>  
             <full-calendar [options]="calendarOptionsDay"></full-calendar>
            </div>

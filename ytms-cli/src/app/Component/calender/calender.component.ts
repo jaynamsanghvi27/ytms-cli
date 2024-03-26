@@ -34,8 +34,8 @@ export class CalenderComponent implements OnInit{
   users:any[]=[]  
   searchFilter:boolean=false;
   userRole:String='';
-  sidebarClass:String='display-area p-3';
   actionCss:String='actions'
+
   calendarEvents:any[]=[]
   recusingDay=0;
   getAllEvents()
@@ -103,6 +103,7 @@ export class CalenderComponent implements OnInit{
   }
   
 
+
  switchUser(event: MatSelectChange)
  {
   if(event.value==="All")
@@ -130,8 +131,9 @@ export class CalenderComponent implements OnInit{
     }
       else if (role == 'ROLE_TRAINER')
       {
-      this.sidebarClass='display-area-ns p-3';    
+      // this.sidebarClass='display-area-ns p-3';    
       this.actionCss='trainer-action'
+
       this.searchFilter=false;  
       this.getEventByTrainer(email);
       }

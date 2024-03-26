@@ -16,11 +16,14 @@ export class DeletePageComponent implements OnInit {
  approve(id:number)
  {
 this.deleteService.approve(id).subscribe((success)=>(success));
- }
+ 
+window.location.reload();
+}
  deny(id:number)
  {
   this.deleteService.deny(id).subscribe((success)=>(success));
- }
+  window.location.reload(); 
+}
 
  ngOnInit(): void {
    this.deleteService.getToDelete().subscribe((data)=>{

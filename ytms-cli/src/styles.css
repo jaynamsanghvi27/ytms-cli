@@ -36,6 +36,12 @@ body {
   border-color: #005ba3;
 }
 
+/*header*/
+.fc .fc-toolbar-title
+{
+  /* color: grey; */
+}
+
 /*date*/
 .fc-daygrid-day-number,
 .fc-daygrid-day-number a {
@@ -52,11 +58,11 @@ body {
 
 /*events*/
 .fc-daygrid-event-dot {
-  border: calc(var(--fc-daygrid-event-dot-width) / 2) solid #6c757d;
+  /* border: calc(var(--fc-daygrid-event-dot-width) / 2) solid #6c757d; */
 }
 .fc .fc-daygrid-event
 {
-  color: grey;
+  /* color: grey; */
 }
 
 
