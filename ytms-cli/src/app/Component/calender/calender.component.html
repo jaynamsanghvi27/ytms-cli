@@ -1,12 +1,12 @@
 <div class="container-fluid g-0">
-  <app-requester-header (sideNavToggled)="sideNavStatus=$event;" >
+  <app-requester-header *ngIf="this.userRole != 'ROLE_TRAINER'" (sideNavToggled)="sideNavStatus=$event;" >
   </app-requester-header>
 
   <main>
     <app-requester-sidebar [sideNavStatus]="sideNavStatus" *ngIf="this.userRole != 'ROLE_TRAINER'"
       [ngClass]="{'app-side-nav-open':sideNavStatus}" class="black-border"> </app-requester-sidebar>
 
-    <div class="{{sidebarClass}}" [ngClass]="{'display-area-shrink':sideNavStatus}">
+    <div class="display-area p-3" [ngClass]="{'display-area-shrink':sideNavStatus}">
       <div class="training-request-form">
         <div [ngSwitch]="selectedValue">
            <div *ngSwitchCase="'Month'">

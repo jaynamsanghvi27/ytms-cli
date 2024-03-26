@@ -34,7 +34,7 @@ export class CalenderComponent implements OnInit{
   users:any[]=[]  
   searchFilter:boolean=false;
   userRole:String='';
-  sidebarClass:String='display-area p-3';
+  // sidebarClass:String='display-area p-3';
   calendarEvents:any[]=[]
   recusingDay=0;
   getAllEvents()
@@ -102,87 +102,7 @@ export class CalenderComponent implements OnInit{
   }
   
 
-  //Updated
-  // getAllEvents() {
-  //   this.calendarService.getALLEvents().subscribe((data: any[]) => {
-  //     const events = data.map((event) => ({
-  //       id: event.id,
-  //       title: event.title,
-  //       start: new Date(event.start),
-  //       end: new Date(event.end),
-  //       scheduleUser: event.scheduleUser,
-  //       number_of_week_days: event.number_of_week_days,
-  //     }));
   
-  //     events.forEach((event) => {
-  //       const recurringEvents = this.recurseByDay(event.number_of_week_days, event);
-  //       for(const calendar of recurringEvents)
-  //        {
-  //         this.calendarEvents.push(calendar)
-  //        }
-  //     });
-  //     console.log(this.calendarEvents)
-
-  //     this.calendarOptions.events=this.calendarEvents
-  //     this.calendarOptionsWeek.events=this.calendarEvents
-  //     this.calendarOptionsDay.events=this.calendarEvents
-  //     this.events=this.calendarEvents
-  //   });
-  // }
-  
-  // recurseByDay(day: number, event: any): any[] {
-  //   const addedEvents: any[] = [];
-  //   let addedCount = 0;
-  //   let skippedWeekends = 0;
-  
-  //   for (let i = 1; i <= day; i++) {
-  //     let newStartDate = addDays(new Date(event.start), i - 1);
-  
-  //     while (addedCount < day && skippedWeekends < day) {
-  //       if (!isWeekend(newStartDate)) {
-  //         const newEvent = {
-  //           ...event, 
-  //           start: newStartDate,
-  //         };
-  //         addedEvents.push(newEvent);
-  //         addedCount++;
-  //       } else {
-  //         skippedWeekends++;
-  //       }
-  //       newStartDate = addDays(newStartDate, 1);
-  //     }
-  //   }
-  
-  //   return addedEvents;
-  // }
-
-  // getEventByTrainer(email:any)
-  // {
-  // this.calendarService.getEventsByTrainer(email).subscribe((data: any[]) => {
-  //   const events = data.map((event) => ({
-  //     id: event.id,
-  //     title: event.title,
-  //     start: new Date(event.start),
-  //     end: new Date(event.end),
-  //     scheduleUser: event.scheduleUser,
-  //     number_of_week_days: event.number_of_week_days,
-  //   }));
-
-  //   events.forEach((event) => {
-  //     const recurringEvents = this.recurseByDay(event.number_of_week_days, event);
-  //     for(const calendar of recurringEvents)
-  //      {
-  //       this.emailEvents.push(calendar)
-  //      }
-  //   });
-  //   console.log(this.emailEvents)
-
-  //   this.calendarOptions.events=this.emailEvents
-  //   this.calendarOptionsWeek.events=this.emailEvents
-  //   this.calendarOptionsDay.events=this.emailEvents
-  //   this.events=this.emailEvents
-  // });
-  // }
 
  switchUser(event: MatSelectChange)
  {
@@ -211,7 +131,7 @@ export class CalenderComponent implements OnInit{
     }
       else if (role == 'ROLE_TRAINER')
       {
-      this.sidebarClass='display-area-ns p-3';    
+      // this.sidebarClass='display-area-ns p-3';    
        this.searchFilter=false;  
       this.getEventByTrainer(email);
       }
