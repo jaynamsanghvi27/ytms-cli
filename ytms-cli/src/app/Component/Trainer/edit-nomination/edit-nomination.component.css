@@ -1,0 +1,43 @@
+table {  
+    font-family: arial, sans-serif;
+    font-style: normal;
+    border-collapse: collapse;  
+    width: 100%; 
+    color:black 
+  }  
+    
+  td, th {  
+    border: 2px solid gray;  
+    text-align: left;  
+    padding: 8px;  
+  }  
+  tr:nth-child(even) {  
+    background-color: white;  
+  } 
+
+  body {
+    color: #999;
+    background: #fff;
+    font-family: 'Roboto', sans-serif;
+}
+
+.form-header {
+    margin: -30px -30px 20px;
+    padding: 30px 30px 10px;
+    text-align: center;
+    background: #005ba3;
+    border-bottom: 1px solid #eee;
+    color: #fff;
+}
+.form-header h2 {
+    font-size: 34px;
+    font-weight: bold;
+    margin: 0 0 10px;
+    font-family: 'Pacifico', sans-serif;
+}
+.form-header p {
+    margin: 20px 0 15px;
+    font-size: 17px;
+    line-height: normal;
+    font-family: 'Courgette', sans-serif;
+}
