@@ -195,10 +195,6 @@ tr:nth-child(even) {
 .trainer-action {
   position: absolute;
   left: calc(100% - 210px);   top: 0.5%; 
+
 }
-.input-button
-{
-  color: #fff;
-  background-color: #005ba3;
-  border-color: #005ba3;
-}
+
