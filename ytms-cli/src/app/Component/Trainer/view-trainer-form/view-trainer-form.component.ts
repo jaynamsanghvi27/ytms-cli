@@ -12,6 +12,8 @@ import { EditNominationComponent } from '../edit-nomination/edit-nomination.comp
 })
 export class ViewTrainerFormComponent {
 
+  sideNavStatus: boolean = false;
+
   trainingReqForms : any[]=[];
   constructor(private ser:TrainingRequestService,private router: Router,public dialog: MatDialog){
   this.loadList();

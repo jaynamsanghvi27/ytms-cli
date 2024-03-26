@@ -165,3 +165,8 @@ table {
 .image-upload>input {
     display: none;
   }
+
+.main-content{
+    margin-top: 100px;
+    margin-left: 70px;
+}
