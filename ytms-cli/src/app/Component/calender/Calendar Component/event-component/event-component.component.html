@@ -29,6 +29,6 @@
 <mat-toolbar>
     <mat-dialog-actions>
         <button mat-raised-button class="create-button btn btn-primary" (click)="updateEvent()">Update</button>&nbsp;
-        <button mat-raised-button class="create-button btn btn-primary" (click)="deleteEvent()">Delete</button>
+        <button mat-raised-button [matDialogClose]="data" class="create-button btn btn-primary" (click)="deleteEvent()">Delete</button>
     </mat-dialog-actions>
 </mat-toolbar>

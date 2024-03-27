@@ -1,6 +1,8 @@
 <form style="padding: 20px;" [formGroup]="trainingReqForm" (ngSubmit)="submit()">
   <div mat-dialog-title>
-     <h2 class="dialog-title">Edit Deatils</h2>
+   <div class="form-header">
+     <h2 class="dialog-title">Change Status</h2>
+   </div>
   </div>
   <div class="form-group">
      <div class="row">
@@ -20,7 +22,7 @@
      Submit
      </button>
      <button type="button" (click)="cancle()" class="btn btn-primary btn-block btn-sm">
-     Cancle
+     Cancel
      </button>
   </div>
   </form>
