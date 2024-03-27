@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { differenceInMinutes } from 'date-fns';
 import { UpdateEventFormComponent } from '../update-event-form/update-event-form.component';
@@ -10,10 +10,12 @@ import { CalendarService } from 'src/app/Core/services/calendar.service';
   templateUrl: './event-component.component.html',
   styleUrls: ['./event-component.component.css']
 })
-export class EventComponentComponent {
+export class EventComponentComponent implements OnInit{
   constructor(@Inject(MAT_DIALOG_DATA) public data:any,public dialog : MatDialog,private calendarService:CalendarService){}
 
-
+ngOnInit(): void {
+  console.log(this.data.number_of_week_days)
+}
   durationMin= differenceInMinutes(this.data.event.end,this.data.event.start)
    minutesToHHMM(minutes: number): string {
     const hours = Math.floor(minutes / 60);

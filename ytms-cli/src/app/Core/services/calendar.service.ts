@@ -39,5 +39,10 @@ export class CalendarService {
   {
     return this.http.post(this.url+"/calendar/delete",event);   
   }
+  getEventsById(Id:any):Observable<any>
+  {
+  return this.http.get<any>(this.url+"/calendar/get/"+Id)
+  }
+  
   
 }
