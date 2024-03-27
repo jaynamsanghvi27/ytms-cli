@@ -11,7 +11,7 @@ import { EditNominationComponent } from '../edit-nomination/edit-nomination.comp
   styleUrls: ['./view-trainer-form.component.css']
 })
 export class ViewTrainerFormComponent {
-  
+
   sideNavStatus: boolean = false;
   trainingReqForms : any[]=[];
   constructor(private ser:TrainingRequestService,private router: Router,public dialog: MatDialog){
@@ -27,7 +27,9 @@ loadList(){
 editViewTraniner(id:any){
 //  this.router.navigate(['view-trainer']);
 const dialogRef =this.dialog.open(ViewTraninerComponent,{
-  data:id
+  data:id,
+  width: '35%',
+  height: '30%'
 } );
 
 dialogRef.afterClosed().subscribe(result => {
