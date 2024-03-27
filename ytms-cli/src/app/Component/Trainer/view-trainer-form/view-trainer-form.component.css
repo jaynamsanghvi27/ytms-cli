@@ -27,11 +27,8 @@ body {
 .vt-training-request-form {
     width: 100%;
     position: relative;
-    right: calc(100% - 1960px);
-    margin-top: 100px;
+    right: auto !important;
     
-    /* margin-left: 100px;
-    margin-top: 100px; */
 }
 
 .vt-training-request-form form {
