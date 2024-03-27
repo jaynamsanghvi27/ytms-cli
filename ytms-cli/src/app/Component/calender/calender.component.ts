@@ -47,7 +47,8 @@ export class CalenderComponent implements OnInit{
       title: event.title,
       start: new Date(event.start),
       end: new Date(event.end),
-      scheduleUser:event.scheduleUser
+      scheduleUser:event.scheduleUser,
+      number_of_week_days:event.number_of_week_days   
     }))
     ,console.log(this.events), 
       this.calendarOptions.events = data.map(event => ({
@@ -80,7 +81,9 @@ export class CalenderComponent implements OnInit{
     title: event.title,
     start: new Date(event.start),
     end: new Date(event.end),
-    scheduleUser:event.scheduleUser
+    scheduleUser:event.scheduleUser,
+    number_of_week_days:event.number_of_week_days   
+
   }))
   ,console.log(this.events), 
     this.calendarOptions.events = data.map(event => ({
@@ -216,6 +219,7 @@ handelEventClickedDay(info:any)
  {
   const clickedEvent = info.event
   var id :any;
+  var number_of_week_days:any;
   for(const event of this.events)
   {  
    if (event.start) 
@@ -225,12 +229,14 @@ handelEventClickedDay(info:any)
       if(event.title===clickedEvent.title)
       {
         id=event.id
+        
+  
       }     
     }  
   } 
   } 
   console.log(clickedEvent+id)    
-  const EventDialog = this.dialog.open(EventComponentComponent,{width:"425px",height:"305px",data:{event:clickedEvent,id:id}})
+  const EventDialog = this.dialog.open(EventComponentComponent,{width:"425px",height:"305px",data:{event:clickedEvent,id:id,number_of_week_days:number_of_week_days}})
 }
 handleDateClick(info:any) {
   const clickedDateObject = info.date;
