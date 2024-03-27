@@ -1,18 +1,18 @@
 import { DatePipe } from '@angular/common';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { addDays, addMonths, addYears, differenceInDays, eachDayOfInterval, format, isWeekend } from 'date-fns';
-import { filter } from 'rxjs';
+import { addDays, addMonths, addYears, differenceInDays, eachDayOfInterval, format, isAfter, isBefore, isSameDay, isWeekend, parseISO } from 'date-fns';
+import { Subject, filter } from 'rxjs';
 import { CalendarService } from 'src/app/Core/services/calendar.service';
-
+import { InjectionToken } from '@angular/core';
 @Component({
   selector: 'app-event-form',
   templateUrl: './event-form.component.html',
   styleUrls: ['./event-form.component.css']
 })
-export class EventFormComponent {
+export class EventFormComponent implements OnInit {
 
 
   constructor(private eventService:CalendarService,private fb: FormBuilder,private datePipe: DatePipe,@Inject(MAT_DIALOG_DATA) public data:any,public addEvents:MatDialogRef<EventFormComponent>,private router: Router) { }
@@ -36,7 +36,14 @@ export class EventFormComponent {
   disableMonth:boolean=false
   disableYear:boolean=false 
  
- setDayvalue(event:any)
+
+  myFilter = (d: Date | null): boolean => {
+    const day = (d || new Date()).getDay();
+    // Prevent Saturday and Sunday from being selected.
+    return day !== 0 && day !== 6;
+  };
+ 
+  setDayvalue(event:any)
  {
   const input = event.target as HTMLInputElement;
   this.day_value=Number(input.value);
@@ -102,14 +109,28 @@ setYearvalue(event:any)
   StartDate = new Date(this.data.date);
   
   eventForm: FormGroup=this.fb.group({
-    title: ['', Validators.required], // Required title
+    title: ['', Validators.required], 
     start_date: [this.datePipe.transform(this.StartDate, 'yyyy-MM-dd'),Validators.required],
     start_time: ['',Validators.required],
     end_date: [this.datePipe.transform(this.StartDate, 'yyyy-MM-dd'),Validators.required],   
-     end_time: ['',Validators.required],
-    number_of_week_days:0
+    end_time: ['',Validators.required],
+    number_of_week_days:[1,Validators.required]
   });
 
+  minDate:Date=this.eventForm.get("start_date")?.value;
+
+  ngOnInit(): void {
+    this.eventForm.get('start_date')?.valueChanges
+  .subscribe((newStartDate) => {
+      this.minDate = newStartDate;
+      this.eventForm.get('end_date')?.setValue(this.minDate);
+  });
+  this.eventForm.get('start_time')?.valueChanges
+  .subscribe((newStartTime) => {
+      this.eventForm.get('end_time')?.setValue(newStartTime);
+  });
+  }
+  
 
   countWeekdaysBetweenMonths(startDate: Date, months: number): number {
     const endDate = addMonths(startDate, months); 
@@ -144,8 +165,90 @@ setYearvalue(event:any)
  
 
 event:any={};
+error:any={error:false,message:' '};
+message:String='';
+compareTimes(t1: string, t2: string): number {
+  const timeRegex = /^([0-1][0-9]|2[0-3]):([0-5][0-9])$/;
+  const match1 = timeRegex.exec(t1);
+  const match2 = timeRegex.exec(t2);
+
+  if (!match1 || !match2) {
+    console.error('Invalid time format:', t1, t2);
+    return 0; 
+  }
+
+  const hours1 = parseInt(match1[1], 10);
+  const minutes1 = parseInt(match1[2], 10);
+  const hours2 = parseInt(match2[1], 10);
+  const minutes2 = parseInt(match2[2], 10);
+  if (hours1 < hours2 || (hours1 === hours2 && minutes1 < minutes2)) {
+    if(isAfter(new Date(this.eventForm.get("start_date")?.value),new Date(new Date(this.eventForm.get("end_date")?.value))))
+    {
+    return 1;
+    }
+    else
+    {
+    return -1; // t1 is equal to t2
+    }  
+ 
+  } else if (hours1 === hours2 && minutes1 === minutes2) {
+  if(isSameDay(new Date(this.eventForm.get("start_date")?.value),new Date(new Date(this.eventForm.get("end_date")?.value)))|| isAfter(new Date(this.eventForm.get("start_date")?.value),new Date(new Date(this.eventForm.get("end_date")?.value))))
+  {
+  return 1;
+  }
+  else
+  {
+     return -1; // t1 is equal to t2 
+}
+  
+  } else {if(isSameDay(new Date(this.eventForm.get("start_date")?.value),new Date(new Date(this.eventForm.get("end_date")?.value)))||isAfter(new Date(this.eventForm.get("start_date")?.value),new Date(new Date(this.eventForm.get("end_date")?.value))))
+  {
+  return 1;
+  }
+  else
+  {
+    return 1; // t1 is after t2
+  }
+  }
+}
 createEvent()
 {
+  if (this.eventForm.invalid || this.compareTimes(this.eventForm.get("start_time")?.value,this.eventForm.get("end_time")?.value)>0) {
+    const missingFields: string[] = [];
+     if(this.compareTimes(this.eventForm.get("start_time")?.value,this.eventForm.get("end_time")?.value)>0)
+    {
+      missingFields.push("End Should Be More than Start")
+    }
+  
+    else{
+    for (const controlName in this.eventForm.controls) {
+      if (this.eventForm.get(controlName)?.invalid) {
+        switch (controlName) {
+          case 'title':
+            missingFields.push("Task");
+            break;
+          case 'start_time':
+            missingFields.push("Start-Time");
+            break;
+          case 'end_time':
+            missingFields.push("End-Time");
+            break;
+          case 'start_date':
+            missingFields.push("Start-Date");
+            break;
+          case 'end_date':
+            missingFields.push("End-Date");
+            break;
+        }
+      }
+      }
+    }
+    console.error('Form is invalid, missing fields:', missingFields.join(', '));
+    this.message='Missing:'+missingFields.join(', ');
+    this.error={error:true,message:this.message}
+    return;
+  }
+  else{
  if(this.recurssion)
 {
 if(this.day)
@@ -184,7 +287,7 @@ else
 this.addEvents.close();
 window.location.reload()
 }
-  
+}  
 closeEvents()
 {
   this.addEvents.close()

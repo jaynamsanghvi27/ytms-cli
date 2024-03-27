@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { differenceInHours } from 'date-fns';
+import { differenceInHours, differenceInMinutes } from 'date-fns';
 import { EventFormComponent } from '../event-form/event-form.component';
 import { AuthService } from 'src/app/Core/services/auth.service';
 import { JwtService } from 'src/app/Core/services/jwt.service';
@@ -18,7 +18,25 @@ forManager:boolean=false;
 forTrainer:boolean=false; 
 freeHours:any;
 name:any
-displayedColumnsEvents: string[] = ['Title', 'Start', 'End','Trainer Name'];
+
+minutesToHHMM(minutes: number): string {
+  const hours = Math.floor(minutes / 60);
+  const remainingMinutes = minutes % 60;
+ 
+  const formattedHours = hours.toString().padStart(2, '0');
+  const formattedMinutes = remainingMinutes.toString().padStart(2, '0');
+ 
+  return `${formattedHours}:${formattedMinutes}`;
+ }
+ 
+
+durationMin(start:any,end:any):number
+{
+return differenceInMinutes(end,start)
+}
+
+
+displayedColumnsEvents: string[] = ['Title','Start-Date', 'Start', 'End-Date','End','Duration','Trainer Name'];
 dataSourceEvents=this.data.events;
 displayedColumnsFreeHour: string[] = ['Trainer Name', 'FreeHour'];
 
@@ -70,7 +88,7 @@ ngOnInit(): void {
   
       const existingEntry = freeHours.find(entry => entry.userName === userName);
      if (!existingEntry) {
-        freeHours.push({ userName, freeHours: 9 }); 
+        freeHours.push({ userName, freeHours: 8 }); 
       }
   
       const durationInHours = differenceInHours(event.end, event.start);
@@ -91,9 +109,9 @@ ngOnInit(): void {
         const durationInHours = differenceInHours(event.end, event.start);
         totalDuration += durationInHours;
       }    
-      if(9-totalDuration>0)
+      if(8-totalDuration>0)
       {
-        return 9-totalDuration;
+        return 8-totalDuration;
       }
       else
       {

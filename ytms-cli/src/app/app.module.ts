@@ -11,7 +11,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
 import {authInterceptorProviders} from "./Core/interceptor/auth.interceptor";
-import {MAT_DATE_LOCALE} from "@angular/material/core";
+import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
 import {HttpClientModule} from "@angular/common/http";
 import {TmHomeComponent} from './Component/Technical-Manager/tm-home/tm-home.component';
 import {TmHeaderComponent} from './Component/Technical-Manager/tm-header/tm-header.component';
@@ -47,6 +47,8 @@ import { UpdateEventFormComponent } from './Component/calender/Calendar Componen
 import { DeleteComponent } from './Component/calender/Calendar Component/delete/delete.component';
 import {MatTableModule} from '@angular/material/table';
 import { DeletePageComponent } from './Component/calender/Delete Page/delete-page/delete-page.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+
 
 @NgModule({
   entryComponents:[DayComponentComponent,EventFormComponent,UpdateEventFormComponent,DeleteComponent],
@@ -80,6 +82,7 @@ import { DeletePageComponent } from './Component/calender/Delete Page/delete-pag
     UpdateEventFormComponent,
     DeleteComponent,
     DeletePageComponent,
+  
   ],
   imports: [
     BrowserModule,
@@ -91,15 +94,16 @@ import { DeletePageComponent } from './Component/calender/Delete Page/delete-pag
     HttpClientModule,
     FlatpickrModule.forRoot(),
     NgbModule,NgbModalModule,
-    MatDialogModule,
-    FullCalendarModule,MatSelectModule,MatInputModule,MatToolbarModule,MatIconModule,MatCheckboxModule,MatTableModule
+    MatDialogModule,MatDatepickerModule,
+    FullCalendarModule
+    ,MatSelectModule,MatInputModule,MatToolbarModule,MatIconModule,MatCheckboxModule,MatTableModule,MatNativeDateModule
   ],
   providers: [
     authInterceptorProviders,
     {
       provide: MAT_DATE_LOCALE,
       useValue: 'en-GB',
-    },
+    }, MatDatepickerModule,
     DatePipe,
     TrainingReqComponent
   ],
