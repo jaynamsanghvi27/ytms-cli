@@ -129,4 +129,9 @@ export class TrainingRequestService {
   getRequesterMasterList():Observable<any[]>{
     return this.http.get<any[]>(this.url+"/register/getRequesterList"); 
   }
+
+  getTrainerTrainingList():Observable<any[]>{
+    return this.http.get<any[]>(this.url+"/register/getTrainerTrainingList"); 
+  }
+
 }
