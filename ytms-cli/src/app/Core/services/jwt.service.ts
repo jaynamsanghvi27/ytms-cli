@@ -11,6 +11,7 @@ export class JwtService {
 
   decodeToken(token: string): any {
     try {
+      console.log(jwtDecode(token));
       return jwtDecode(token);
     } catch (error) {
       console.log("Error while decoding the token")
@@ -46,6 +47,14 @@ export class JwtService {
     const decodedToken = this.decodeToken(decryptedToken);
     if (decodedToken) {
       return decodedToken.exp;
+    }
+  }
+
+  getUnitFromToken(token: string): any {
+    const decryptedToken = this.encryptService.getDecryption(token);
+    const decodedToken = this.decodeToken(decryptedToken);
+    if (decodedToken) {
+      return decodedToken.unit;
     }
   }
 
