@@ -48,6 +48,7 @@ import { DeleteComponent } from './Component/calender/Calendar Component/delete/
 import {MatTableModule} from '@angular/material/table';
 import { DeletePageComponent } from './Component/calender/Delete Page/delete-page/delete-page.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { AssociateManagementComponent } from './Component/Requester/associate-management/associate-management.component';
 
 
 @NgModule({
@@ -82,6 +83,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     UpdateEventFormComponent,
     DeleteComponent,
     DeletePageComponent,
+    AssociateManagementComponent,
   
   ],
   imports: [

@@ -39,7 +39,7 @@ export class RequesterSidebarComponent {
       },
       {
         number: 4,
-        name: 'Order  ',
+        name: 'Associate Management',
         icon: 'fa-solid fa-cart-shopping',
         routing: '/requester/calendar'
   

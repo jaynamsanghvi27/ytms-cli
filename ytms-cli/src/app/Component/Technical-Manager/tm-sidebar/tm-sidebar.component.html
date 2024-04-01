@@ -2,7 +2,7 @@
   <nav>
     <ul [ngClass]="{'nav-list-open':sideNavStatus}" class="nav-list">
       <li *ngFor="let item of list" class="nav-list-item border-white">
-        <a [routerLink]=item.routing href="#">
+        <a [routerLink]=item.routing href="#" title="{{item.name}}">
         <i class="{{item.icon}}"></i>
         <span>{{ item.name }}</span></a>
       </li>
