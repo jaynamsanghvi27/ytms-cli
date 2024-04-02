@@ -64,6 +64,32 @@
           </div>
 
           <div class="form-group form-outline mb-4">
+            <label>Unit</label>
+        
+            <select  class="form-control form-control-lg request-drop-down" formControlName="unit">
+              <option [ngValue]="0" disabled>-- Select --</option>
+              <option *ngFor="let unit of units" value="{{unit.id}}">
+                {{unit.name}}
+              </option>
+            </select>
+            <div
+              *ngIf="
+            signUpForm.controls['unit'].touched &&
+            signUpForm.controls['unit'].invalid
+            "
+              style="color: red;font-size: small;"
+            >
+    <span *ngIf="signUpForm.controls['unit'].hasError('required')"
+    >Unit is required</span
+    >
+              
+            </div>
+           
+
+          </div>
+
+
+          <div class="form-group form-outline mb-4">
             <label>Password</label>
             <input
               class="form-control form-control-lg"

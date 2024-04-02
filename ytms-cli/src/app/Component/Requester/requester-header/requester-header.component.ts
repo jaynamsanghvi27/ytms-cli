@@ -13,7 +13,7 @@ export class RequesterHeaderComponent {
   isLoggedIn = false;
   username: string = '';
   userRole: string = '';
-
+  unit: string = '';
   @Output() sideNavToggled = new EventEmitter<boolean>();
   menuStatus: boolean = false;
 
@@ -29,6 +29,7 @@ export class RequesterHeaderComponent {
       const token = this.authService.getToken();
       this.username = this.jwtService.getFullNameFromToken(token);
       this.userRole = this.jwtService.getRoleFromToken(token).substring(5).replace("_"," ");
+      this.unit = this.jwtService.getUnitFromToken(token);
     }
   }
 
