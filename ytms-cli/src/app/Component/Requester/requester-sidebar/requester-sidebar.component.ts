@@ -64,6 +64,12 @@ export class RequesterSidebarComponent {
         icon: 'fa-solid fa-phone',
         routing: '/requester/calendar'
       },
+      {
+        number: 8,
+        name: 'Associate Management',
+        icon: 'fa-solid fa-address-book',
+        routing: '/tm-associate-management'
+      },
     ]
   }
   

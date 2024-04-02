@@ -48,6 +48,8 @@ import { DeleteComponent } from './Component/calender/Calendar Component/delete/
 import {MatTableModule} from '@angular/material/table';
 import { DeletePageComponent } from './Component/calender/Delete Page/delete-page/delete-page.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { AssociateManagementComponent } from './Component/Technical-Manager/tm-associate-management/associate-management/associate-management.component';
+import { AgGridAngular, AgGridModule } from 'ag-grid-angular';
 
 
 @NgModule({
@@ -82,6 +84,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     UpdateEventFormComponent,
     DeleteComponent,
     DeletePageComponent,
+    AssociateManagementComponent,
   
   ],
   imports: [
@@ -96,7 +99,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     NgbModule,NgbModalModule,
     MatDialogModule,MatDatepickerModule,
     FullCalendarModule
-    ,MatSelectModule,MatInputModule,MatToolbarModule,MatIconModule,MatCheckboxModule,MatTableModule,MatNativeDateModule
+    ,MatSelectModule,MatInputModule,MatToolbarModule,MatIconModule,MatCheckboxModule,MatTableModule,MatNativeDateModule,
+    AgGridModule
   ],
   providers: [
     authInterceptorProviders,
