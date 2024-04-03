@@ -44,5 +44,14 @@ export class CalendarService {
   return this.http.get<any>(this.url+"/calendar/get/"+Id)
   }
   
+  getALLHolidays():Observable<any[]>
+  {
+    return this.http.get<any[]>(this.url+"/holiday/get/all")
+  }
+  public addHoliday(events:any[])
+  {
+   return this.http.post(this.url+"/holiday/save",events);
+  }
   
+
 }

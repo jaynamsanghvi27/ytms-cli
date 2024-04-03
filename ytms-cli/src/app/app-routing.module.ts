@@ -20,6 +20,7 @@ import {
 import { UploadExcelComponent } from './Component/upload-excel/upload-excel.component';
 import { ViewNominationComponent } from './Component/Requester/view-nomination/view-nomination.component';
 import { DeletePageComponent } from './Component/calender/Delete Page/delete-page/delete-page.component';
+import { SummaryComponent } from './Component/calender/Summary Page/summary/summary.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,10 @@ const routes: Routes = [
   {
     path: "login",
     component: LoginComponent
+  },
+  {
+    path:"summary",
+    component:SummaryComponent
   },
   { 
      path:"delete",

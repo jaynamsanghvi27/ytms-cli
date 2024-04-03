@@ -48,10 +48,11 @@ import { DeleteComponent } from './Component/calender/Calendar Component/delete/
 import {MatTableModule} from '@angular/material/table';
 import { DeletePageComponent } from './Component/calender/Delete Page/delete-page/delete-page.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-
+import { SummaryComponent } from './Component/calender/Summary Page/summary/summary.component';
+import { OptionalHolidayComponent } from './Component/calender/Optional Holiday/optional-holiday/optional-holiday.component';
 
 @NgModule({
-  entryComponents:[DayComponentComponent,EventFormComponent,UpdateEventFormComponent,DeleteComponent],
+  entryComponents:[DayComponentComponent,EventFormComponent,UpdateEventFormComponent,DeleteComponent,OptionalHolidayComponent],
   declarations: [
     AppComponent,
     RequesterHeaderComponent,
@@ -82,6 +83,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     UpdateEventFormComponent,
     DeleteComponent,
     DeletePageComponent,
+    SummaryComponent,
+    OptionalHolidayComponent,
   
   ],
   imports: [
