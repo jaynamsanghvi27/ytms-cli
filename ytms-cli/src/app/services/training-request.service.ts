@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable} from 'rxjs'
 import { Nomination } from '../Model/Nomination';
 import { TrainingReqForm } from '../Model/TrainingRequestForm';
 import { environment } from '../Core/application_constant/environment';
+import { AssociateSummaryModel } from '../Model/AssociateSummary';
 
 
 @Injectable({
@@ -128,5 +129,9 @@ export class TrainingRequestService {
   }
   getRequesterMasterList():Observable<any[]>{
     return this.http.get<any[]>(this.url+"/register/getRequesterList"); 
+  }
+
+  getAssociateData():Observable<AssociateSummaryModel[]>{
+    return this.http.get<any[]>(this.url+"/register/getAllNominations");
   }
 }
