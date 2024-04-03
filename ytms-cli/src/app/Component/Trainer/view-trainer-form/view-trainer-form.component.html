@@ -27,9 +27,9 @@
                 <tr *ngFor="let training of trainingReqForms">
                     <td>{{training.id}}</td>
                     <td>{{training.trainingStatus}}</td>
+                    <td>{{training.trainer}}</td>
                     <td>{{training.userName}}</td>
-                    <td></td>
-                    <td><a (click)="openDialog(training.id)">{{training.noOfActualParticipant}}</a></td>
+                    <td><a (click)="openDialog(training.id)">{{training.noOfParticipant}}</a></td>
                     <td>{{training.actualStartDate}}</td>
                     <td>{{training.actualEndDate}}</td>
                     <!-- <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' " style="text-align: center;"> -->
