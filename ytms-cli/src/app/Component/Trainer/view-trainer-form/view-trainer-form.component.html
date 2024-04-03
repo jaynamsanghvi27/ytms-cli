@@ -1,12 +1,13 @@
+
 <div class="container-fluid g-0">
       
     <main>
       
-      <div class="display-area p-3" >
+      <div class="vt-display-area p-3" >
         <!-- Main Content    -->
-        <div class="training-request-form">
+        <div class="vt-training-request-form">
           <form>
-            <div class="form-header">
+            <div class="vt-form-header">
               <h5 class="heading-color">Training Request List</h5>
             </div>
             <table>
@@ -26,15 +27,15 @@
                 <tr *ngFor="let training of trainingReqForms">
                     <td>{{training.id}}</td>
                     <td>{{training.trainingStatus}}</td>
+                    <td>{{training.trainer}}</td>
                     <td>{{training.userName}}</td>
-                    <td></td>
-                    <td><a (click)="openDialog(training.id)">{{training.noOfActualParticipant}}</a></td>
+                    <td><a (click)="openDialog(training.id)">{{training.noOfParticipant}}</a></td>
                     <td>{{training.actualStartDate}}</td>
                     <td>{{training.actualEndDate}}</td>
                     <!-- <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' " style="text-align: center;"> -->
                     <td style="text-align: center;">
                         <span class="inner">
-                            <i title="Edit" class=" bt-info btn-sm fa fa-edit" (click)="editViewTraniner(training.id)"></i>
+                            <i title="Edit" class=" btn-info btn-sm fa fa-edit" (click)="editViewTraniner(training.id)"></i>
 
                         </span>
                     </td>
