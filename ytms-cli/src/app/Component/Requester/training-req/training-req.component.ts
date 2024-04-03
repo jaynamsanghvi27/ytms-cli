@@ -4,6 +4,7 @@ import { Component, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { addDays, differenceInBusinessDays, isAfter, isBefore, isWeekend } from 'date-fns';
 import { AuthService } from 'src/app/Core/services/auth.service';
 import { JwtService } from 'src/app/Core/services/jwt.service';
 import { Nomination } from 'src/app/Model/Nomination';
@@ -38,6 +39,7 @@ export class TrainingReqComponent {
   file!: File;
   nomination: Nomination[] = [];
   showNomination = false;
+  holiday:any[]=["2024-04-02","2024-04-05","2024-04-06","2024-04-10", "2024-04-11", "2024-04-12", "2024-04-13", "2024-04-14", "2024-04-15"];
 
 
 
@@ -85,6 +87,7 @@ export class TrainingReqComponent {
     this.loadUnit();
     this.loadCompetency();
     this.loadTrainingTypes();
+    
     this.trainingReqForm = this.formBuilder.group(
       {
         id: [],
@@ -97,6 +100,7 @@ export class TrainingReqComponent {
         startDate: ['', [Validators.required]],
         // endDate: ['', [Validators.required]],
         endDate: new FormControl({ value: null, disabled: true}),
+        noOfDays : [],
         trainingDescription: ['', [Validators.required]],
         userName: ['', [Validators.required]],
         noOfParticipant: ['', [Validators.required]],
@@ -344,6 +348,23 @@ export class TrainingReqComponent {
     return this.trainingReqForm.value.startDate;
   }
 
+  diff:any;
+  calculateDays():void{
+    let count=0;
+    let endDate = addDays(new Date(this.trainingReqForm.value.endDate),1);
+    let startDate = new Date(this.trainingReqForm.value.startDate);
+    for(const date of this.holiday)
+    {
+      if(isBefore(new Date(date),endDate) && isAfter(new Date(date),startDate))
+        {
+          if(!isWeekend(new Date(date)))
+          {
+            count++;
+          }
+        }
+    }
+    this.diff = differenceInBusinessDays(endDate,startDate)-count;
+  }
   enableInputField(fieldName: string) {
     const control = this.trainingReqForm.get(fieldName) as FormControl;
     if (control) {

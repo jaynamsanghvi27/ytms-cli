@@ -19,4 +19,5 @@ export class TrainingReqForm{
     declinedMessage!:string;
     fileName!: string;
     trainingStatus!:string;
+    noOfDays!:number;
 }
