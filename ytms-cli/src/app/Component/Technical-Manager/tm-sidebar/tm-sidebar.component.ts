@@ -29,11 +29,10 @@ export class TmSidebarComponent {
       routing: '/tm-view-trf'
     },
     {
-      number: 4,
-      name: 'Order  ',
-      icon: 'fa-solid fa-cart-shopping',
-      routing: '/requester/calendar'
-
+      number: 8,
+      name: 'Associate Summary',
+      icon: 'fa-solid fa-address-book',
+      routing: '/tm-associate-summary'
     },
     {
       number: 5,

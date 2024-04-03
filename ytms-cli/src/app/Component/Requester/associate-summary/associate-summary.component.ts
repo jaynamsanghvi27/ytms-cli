@@ -9,7 +9,10 @@ import { Router } from '@angular/router';
 import { UploadExcelService } from 'src/app/services/upload-excel.service';
 import { AgGridAngular } from 'ag-grid-angular';
 import { GridApi } from 'ag-grid-community';
+<<<<<<< HEAD
 import { DownloadService } from 'src/app/Core/services/download.service';
+=======
+>>>>>>> 8e88149bb3c58ed16e0b9fa0e5562079171a0077
 
 
 @Component({

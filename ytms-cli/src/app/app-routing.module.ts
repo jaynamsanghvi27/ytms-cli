@@ -20,6 +20,7 @@ import {
 import { UploadExcelComponent } from './Component/upload-excel/upload-excel.component';
 import { ViewNominationComponent } from './Component/Requester/view-nomination/view-nomination.component';
 import { DeletePageComponent } from './Component/calender/Delete Page/delete-page/delete-page.component';
+import { AssociateSummaryComponent } from './Component/Requester/associate-summary/associate-summary.component';
 
 const routes: Routes = [
   {
@@ -149,6 +150,10 @@ const routes: Routes = [
     path:'tm-training-req',
     canActivate: [AdminGuard],
     component: TrainingReqComponent
+  },
+  {
+    path: "tm-associate-summary",
+    component: AssociateSummaryComponent
   },
   {
     path: 'requester',
