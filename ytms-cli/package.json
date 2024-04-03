@@ -28,6 +28,8 @@
     "@ng-bootstrap/ng-bootstrap": "^14.2.0",
     "@popperjs/core": "^2.11.6",
     "@types/crypto-js": "^4.2.2",
+    "ag-grid-angular": "^29.0.0",
+    "ag-grid-community": "^29.0.0",
     "angularx-flatpickr": "^7.3.0",
     "bootstrap": "^5.3.3",
     "crypto-js": "^4.2.0",

@@ -4,6 +4,7 @@ import { Component, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { addDays, differenceInBusinessDays } from 'date-fns';
 import { AuthService } from 'src/app/Core/services/auth.service';
 import { JwtService } from 'src/app/Core/services/jwt.service';
 import { Nomination } from 'src/app/Model/Nomination';
@@ -97,6 +98,7 @@ export class TrainingReqComponent {
         startDate: ['', [Validators.required]],
         // endDate: ['', [Validators.required]],
         endDate: new FormControl({ value: null, disabled: true}),
+        noOfDays : [],
         trainingDescription: ['', [Validators.required]],
         userName: ['', [Validators.required]],
         noOfParticipant: ['', [Validators.required]],
@@ -344,6 +346,10 @@ export class TrainingReqComponent {
     return this.trainingReqForm.value.startDate;
   }
 
+  diff:any;
+  calculateDays():void{
+    this.diff = differenceInBusinessDays(addDays(new Date(this.trainingReqForm.value.endDate),1),new Date(this.trainingReqForm.value.startDate));
+  }
   enableInputField(fieldName: string) {
     const control = this.trainingReqForm.get(fieldName) as FormControl;
     if (control) {

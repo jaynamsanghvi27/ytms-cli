@@ -128,15 +128,19 @@
                       </div>
                       <div class="col-2">Planned End Date</div>
                       <div class="col-4">
+                        <div class="row">
+                        <div class="col-6">
                           <input
                         type="date"
                         formControlName="endDate"
                         placeholder="Planed End Date"
                         class="form-control"
                         min="{{minEndDate() | date:'yyyy-MM-dd'}}" 
-                        
-                      />
+                        (change)="calculateDays()"
+                      /></div>
+                      <div class="col-6" style="display: inline;">Duration : <span><input class="col-6" type="text" disabled value="{{this.diff}}"></span></div></div>
                       <div style="color: red;" *ngIf= "trainingReqForm.controls['endDate'].touched && trainingReqForm.controls['endDate'].hasError('required')">Planed End Date is required</div>   
+                      <input type="hidden" formControlName="noOfDays" [(ngModel)] ="this.diff">
                     </div>
                   </div>
 
