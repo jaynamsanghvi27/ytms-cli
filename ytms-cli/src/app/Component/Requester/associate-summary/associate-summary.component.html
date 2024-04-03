@@ -1,0 +1,29 @@
+<div class="container-fluid g-0">
+    <app-requester-header (sideNavToggled)="sideNavStatus=$event;">
+    </app-requester-header>
+
+    <main>
+        <app-requester-sidebar [sideNavStatus]="sideNavStatus" [ngClass]="{'app-side-nav-open':sideNavStatus}" class="black-border"> </app-requester-sidebar>
+        <div class="display-area p-3" [ngClass]="{'display-area-shrink':sideNavStatus}">
+            <!-- Main Content    -->
+            <div class="training-request-form">
+                <form>
+                    <div class="form-header">
+                        <h5 class="heading-color">Associate Summary</h5>
+                    </div>
+                    <div>
+                        <input type="text" placeholder="Search..." (keyup)="onQuickFilter($event)">
+                    </div>   
+                    <div mat-raised-button class="{{actionCss}}">
+                        <button  class="btn btn-primary"   (click)="downloadAssociates()">Export to Excel</button>
+                    </div>               
+                    <ag-grid-angular style="width: auto; height: 350px; min-height: 350px; max-height: 350px;" [rowData]="associatesData" [pagination]="pagination" [paginationPageSize]="paginationPageSize" (gridReady)="onGridReady($event)" [columnDefs]="colDefs" class="ag-theme-alpine">
+                    </ag-grid-angular>
+
+                </form>
+            </div>
+            <!-- Main Content Closed -->
+
+        </div>
+    </main>
+</div>
