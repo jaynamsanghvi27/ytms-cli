@@ -30,16 +30,15 @@ export class TmSidebarComponent {
     },
     {
       number: 4,
-      name: 'Associate Management',
-      icon: 'fa-solid fa-cart-shopping',
-      routing: '/requester/calendar'
-
+      name: 'Associate Summary',
+      icon: 'fa-solid fa-address-book',
+      routing: '/tm-associate-summary'
     },
     {
       number: 5,
-      name: 'Settings',
+      name: 'Manage Associate',
       icon: 'fa-solid fa-gear',
-      routing: '/requester/calendar'
+      routing: '/tm-manage-associate'
 
     },
     {

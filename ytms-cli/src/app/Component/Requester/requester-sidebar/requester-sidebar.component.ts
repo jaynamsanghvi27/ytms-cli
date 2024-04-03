@@ -46,9 +46,9 @@ export class RequesterSidebarComponent {
       },
       {
         number: 5,
-        name: 'Settings',
+        name: 'Manage Associate',
         icon: 'fa-solid fa-gear',
-        routing: '/requester/calendar'
+        routing: '/tm-manage-associate'
   
       },
       {
