@@ -21,6 +21,9 @@ import { UploadExcelComponent } from './Component/upload-excel/upload-excel.comp
 import { ViewNominationComponent } from './Component/Requester/view-nomination/view-nomination.component';
 import { DeletePageComponent } from './Component/calender/Delete Page/delete-page/delete-page.component';
 import { SummaryComponent } from './Component/calender/Summary Page/summary/summary.component';
+import { AssociateManagementComponent } from './Component/Technical-Manager/tm-associate-management/associate-management/associate-management.component';
+import { AssociateSummaryComponent } from './Component/Requester/associate-summary/associate-summary.component';
+import { ManageAssociateComponent } from './Component/Requester/manage-associate/manage-associate.component';
 
 const routes: Routes = [
   {
@@ -150,10 +153,30 @@ const routes: Routes = [
     canActivate: [AdminGuard],
     component: ViewTrfComponent
   },
+
+  {
+    path: "tm-associate-management",
+   // canActivate: [AdminGuard],
+    component: AssociateManagementComponent
+  },
+  {
+    path: "tm-manage-associate",
+    canActivate: [AdminGuard],
+    component: ManageAssociateComponent
+  },
   {
     path:'tm-training-req',
     canActivate: [AdminGuard],
     component: TrainingReqComponent
+  },
+  {
+    path:'tm-training-req',
+    canActivate: [AdminGuard],
+    component: TrainingReqComponent
+  },
+  {
+    path: "tm-associate-summary",
+    component: AssociateSummaryComponent
   },
   {
     path: 'requester',
