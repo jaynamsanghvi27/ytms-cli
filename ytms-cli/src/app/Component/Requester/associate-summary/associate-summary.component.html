@@ -14,9 +14,11 @@
                     <div>
                         <input type="text" placeholder="Search..." (keyup)="onQuickFilter($event)">
                     </div>
+                    <div mat-raised-button class="{{actionCss}}">
+                        <button class="btn btn-primary" (click)="downloadAssociates()">Export to Excel</button>
+                    </div>
                     <ag-grid-angular style="width: auto; height: 350px; min-height: 350px; max-height: 350px;" [rowData]="associatesData" [pagination]="pagination" [paginationPageSize]="paginationPageSize" (gridReady)="onGridReady($event)" [columnDefs]="colDefs" class="ag-theme-alpine"
-                        (cellClicked)="openDialog(template,$event)">
-                    </ag-grid-angular>
+                        (cellClicked)="openDialog(template,$event)"></ag-grid-angular>
 
                 </form>
             </div>
