@@ -225,7 +225,14 @@ compareTimes(t1: string, t2: string): number {
   }
   else
   {
-     return -1; // t1 is equal to t2 
+    if(this.isOptionalHoliday(new Date(this.eventForm.get("start_date")?.value))||(this.isOptionalHoliday(new Date(this.eventForm.get("start_date")?.value))))
+  {
+    return 4;
+  }
+  else{
+    return -1
+  }
+     ; // t1 is equal to t2 
 }
   
   } else {if(isSameDay(new Date(this.eventForm.get("start_date")?.value),new Date(new Date(this.eventForm.get("end_date")?.value)))||isAfter(new Date(this.eventForm.get("start_date")?.value),new Date(new Date(this.eventForm.get("end_date")?.value)))||this.isOptionalHoliday(new Date(this.eventForm.get("start_date")?.value))||(this.isOptionalHoliday(new Date(this.eventForm.get("start_date")?.value))))

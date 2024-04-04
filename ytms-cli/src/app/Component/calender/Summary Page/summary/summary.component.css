@@ -213,3 +213,9 @@ body {
   bottom: 50px; 
 
 }
+.download-manager
+{
+  position: absolute;
+  right: calc(100% - 1300px);  
+  bottom: 50px; 
+}
