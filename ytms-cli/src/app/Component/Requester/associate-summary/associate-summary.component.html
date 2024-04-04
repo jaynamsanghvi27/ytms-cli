@@ -14,7 +14,8 @@
                     <div>
                         <input type="text" placeholder="Search..." (keyup)="onQuickFilter($event)">
                     </div>
-                    <ag-grid-angular style="width: auto; height: 350px; min-height: 350px; max-height: 350px;" [rowData]="associatesData" [pagination]="pagination" [paginationPageSize]="paginationPageSize" (gridReady)="onGridReady($event)" [columnDefs]="colDefs" class="ag-theme-alpine">
+                    <ag-grid-angular style="width: auto; height: 350px; min-height: 350px; max-height: 350px;" [rowData]="associatesData" [pagination]="pagination" [paginationPageSize]="paginationPageSize" (gridReady)="onGridReady($event)" [columnDefs]="colDefs" class="ag-theme-alpine"
+                        (cellClicked)="openDialog(template,$event)">
                     </ag-grid-angular>
 
                 </form>
@@ -24,3 +25,7 @@
         </div>
     </main>
 </div>
+
+<ng-template #template>
+    <app-view-assoicate-trainig-data></app-view-assoicate-trainig-data>
+</ng-template>

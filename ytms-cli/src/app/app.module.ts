@@ -50,6 +50,7 @@ import { DeletePageComponent } from './Component/calender/Delete Page/delete-pag
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { AssociateSummaryComponent } from './Component/Requester/associate-summary/associate-summary.component';
 import { AgGridModule } from 'ag-grid-angular';
+import { ViewAssoicateTrainigDataComponent } from './Component/Requester/view-assoicate-trainig-data/view-assoicate-trainig-data.component';
 
 
 @NgModule({
@@ -84,7 +85,8 @@ import { AgGridModule } from 'ag-grid-angular';
     UpdateEventFormComponent,
     DeleteComponent,
     DeletePageComponent,
-    AssociateSummaryComponent
+    AssociateSummaryComponent,
+    ViewAssoicateTrainigDataComponent
   ],
   imports: [
     BrowserModule,
