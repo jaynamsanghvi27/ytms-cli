@@ -78,8 +78,8 @@ export class AssociateSummaryComponent implements OnInit {
   openDialog(templateRef:any,event:any) {
     const empEmailId = event.data.emp_mail_id;
     let dialogRef = this.dialog.open(templateRef, {
-     width: '280%',
-     height: '280%',
+     width: '80%',
+     height: '80%',
      data:empEmailId,
    });
   }
