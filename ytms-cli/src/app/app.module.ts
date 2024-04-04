@@ -51,6 +51,7 @@ import { AssociateManagementComponent } from './Component/Technical-Manager/tm-a
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { AssociateSummaryComponent } from './Component/Requester/associate-summary/associate-summary.component';
 import { AgGridModule } from 'ag-grid-angular';
+import { ViewAssoicateTrainigDataComponent } from './Component/Requester/view-assoicate-trainig-data/view-assoicate-trainig-data.component';
 import { ManageAssociateComponent } from './Component/Requester/manage-associate/manage-associate.component';
 
 
@@ -86,6 +87,8 @@ import { ManageAssociateComponent } from './Component/Requester/manage-associate
     UpdateEventFormComponent,
     DeleteComponent,
     DeletePageComponent,
+    AssociateSummaryComponent,
+    ViewAssoicateTrainigDataComponent,
     AssociateManagementComponent,
     AssociateSummaryComponent,
     ManageAssociateComponent

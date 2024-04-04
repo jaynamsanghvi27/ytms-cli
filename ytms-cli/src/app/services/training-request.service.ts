@@ -5,6 +5,8 @@ import { Nomination } from '../Model/Nomination';
 import { TrainingReqForm } from '../Model/TrainingRequestForm';
 import { environment } from '../Core/application_constant/environment';
 import { AssociateSummaryModel } from '../Model/AssociateSummary';
+import { AssociateTrainingDataModel } from '../Model/AssociateTrainingDataModel';
+import { AssociateManagement } from '../Model/AssociateManagement';
 
 
 @Injectable({
@@ -135,5 +137,13 @@ export class TrainingRequestService {
   }
   getTrainerTrainingList():Observable<any[]>{
     return this.http.get<any[]>(this.url+"/register/getTrainerTrainingList"); 
+  }
+  getTrainingDataByEmpId(emailId:any):Observable<AssociateTrainingDataModel[]>{
+    console.log(this.url+"/register/getAllTrainingsByAssociate/"+emailId);
+    return this.http.get<any[]>(this.url+"/register/getAllTrainingsByAssociate/"+emailId);
+  }
+
+  getAssociateManagementData():Observable<AssociateManagement[]>{
+    return this.http.get<any[]>(this.url+"/associate/getAllAssociateTrainings");
   }
 }
