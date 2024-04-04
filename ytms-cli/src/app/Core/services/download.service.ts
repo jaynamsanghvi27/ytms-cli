@@ -21,6 +21,14 @@ export class DownloadService {
 
   }
 
+  public ExportAssociateMgmtExcelFile(data: any) {
+    const URL = this.baseurl + '/ytms/register/exportAssociateManagementData';
+    this.http.post(URL, data, { responseType: "blob" }).subscribe((res: any) => {
+      this.downloadFile(res);
+    });
+
+  }
+
   downloadFile(data: any) {
     const blob = new Blob([data], { type: 'text/csv' });
     const url = window.URL.createObjectURL(blob);
