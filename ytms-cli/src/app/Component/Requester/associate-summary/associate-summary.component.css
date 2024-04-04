@@ -208,13 +208,13 @@ tr:nth-child(even) {
     margin-bottom: 2px;
     margin-top: auto;
     height: 60px;
-    background-color: #005ba3;
+    background-color: white;
     border-radius: 30px;
     padding: 10px;
 }
 
 .search_input {
-    color: white;
+    color: #005ba3;
     border: 0;
     outline: 0;
     background: none;
@@ -227,7 +227,7 @@ tr:nth-child(even) {
 .searchbar:hover>.search_input {
     padding: 0 10px;
     width: 450px;
-    caret-color: whitesmoke;
+    caret-color: #005ba3;
     transition: width 0.4s linear;
 }
 

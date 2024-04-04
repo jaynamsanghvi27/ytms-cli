@@ -11,45 +11,27 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>id</th>
-                                <th>trainingIdentifierName</th>
-                                <th>trainingName</th>
-                                <th>trainingDescription</th>
-                                <th>startDate</th>
-                                <th>endDate</th>
-                                <th>actualStartDate</th>
-                                <th>actualEndDate</th>
-                                <th>createdAt</th>
-                                <th>updatedAt</th>
-                                <th>status</th>
-                                <th>userName</th>
-                                <th>trainingStatus</th>
-                                <th>noOfParticipant</th>
-                                <th>trainer</th>
-                                <th>declinedMessage</th>
-                                <th>noOfActualParticipant</th>
+                                <th>ID</th>
+                                <th>Training Name</th>
+                                <th>Description</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Requester Name</th>
+                                <th>Training Status</th>
+                                <th>Trainer</th>
                             </tr>
                         </thead>
                         <tbody>
 
                             <tr *ngFor="let training of associateTrainingData">
                                 <td>{{training.id}}</td>
-                                <td>{{training.trainingIdentifierName}}</td>
                                 <td>{{training.trainingName}}</td>
                                 <td>{{training.trainingDescription}}</td>
-                                <td>{{training.startDate}}</td>
-                                <td>{{training.endDate}}</td>
                                 <td>{{training.actualStartDate}}</td>
                                 <td>{{training.actualEndDate}}</td>
-                                <td>{{training.createdAt}}</td>
-                                <td>{{training.updatedAt}}</td>
-                                <td>{{training.status}}</td>
                                 <td>{{training.userName}}</td>
                                 <td>{{training.trainingStatus}}</td>
-                                <td>{{training.noOfParticipant}}</td>
                                 <td>{{training.trainer}}</td>
-                                <td>{{training.declinedMessage}}</td>
-                                <td>{{training.noOfActualParticipant}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -57,3 +39,4 @@
             </form>
         </div>
     </main>
+</div>
