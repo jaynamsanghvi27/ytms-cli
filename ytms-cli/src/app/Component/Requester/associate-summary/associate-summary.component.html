@@ -11,11 +11,16 @@
                     <div class="form-header">
                         <h5 class="heading-color">Associate Summary</h5>
                     </div>
-                    <div>
-                        <input type="text" placeholder="Search..." (keyup)="onQuickFilter($event)">
+                    <div class="container h-100">
+                        <div class="d-flex justify-content-center h-100">
+                            <div class="searchbar">
+                                <input type="text" class="search_input" placeholder="Search..." (keyup)="onQuickFilter($event)">
+                                <i class="fa fa-search"></i>
+                            </div>
+                        </div>
                     </div>
                     <div mat-raised-button class="{{actionCss}}">
-                        <button class="btn btn-primary" (click)="downloadAssociates()">Export to Excel</button>
+                        <button class="xlsx btn btn-primary" (click)="downloadAssociates()">Export to Excel</button>
                     </div>
                     <ag-grid-angular style="width: auto; height: 350px; min-height: 350px; max-height: 350px;" [rowData]="associatesData" [pagination]="pagination" [paginationPageSize]="paginationPageSize" (gridReady)="onGridReady($event)" [columnDefs]="colDefs" class="ag-theme-alpine"
                         (cellClicked)="openDialog(template,$event)"></ag-grid-angular>
