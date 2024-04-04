@@ -29,16 +29,16 @@ export class TmSidebarComponent {
       routing: '/tm-view-trf'
     },
     {
-      number: 8,
+      number: 4,
       name: 'Associate Summary',
       icon: 'fa-solid fa-address-book',
       routing: '/tm-associate-summary'
     },
     {
       number: 5,
-      name: 'Settings',
+      name: 'Manage Associate',
       icon: 'fa-solid fa-gear',
-      routing: '/requester/calendar'
+      routing: '/tm-manage-associate'
 
     },
     {
@@ -53,6 +53,12 @@ export class TmSidebarComponent {
       name: 'Contact',
       icon: 'fa-solid fa-phone',
       routing: '/requester/calendar'
+    },
+    {
+      number: 8,
+      name: 'Associate Management',
+      icon: 'fa-solid fa-address-book',
+      routing: '/tm-associate-management'
     },
   ]
 }

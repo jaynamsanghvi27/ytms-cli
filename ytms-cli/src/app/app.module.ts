@@ -47,10 +47,12 @@ import { UpdateEventFormComponent } from './Component/calender/Calendar Componen
 import { DeleteComponent } from './Component/calender/Calendar Component/delete/delete.component';
 import { MatTableModule } from '@angular/material/table';
 import { DeletePageComponent } from './Component/calender/Delete Page/delete-page/delete-page.component';
+import { AssociateManagementComponent } from './Component/Technical-Manager/tm-associate-management/associate-management/associate-management.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { AssociateSummaryComponent } from './Component/Requester/associate-summary/associate-summary.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { ViewAssoicateTrainigDataComponent } from './Component/Requester/view-assoicate-trainig-data/view-assoicate-trainig-data.component';
+import { ManageAssociateComponent } from './Component/Requester/manage-associate/manage-associate.component';
 
 
 @NgModule({
@@ -86,7 +88,10 @@ import { ViewAssoicateTrainigDataComponent } from './Component/Requester/view-as
     DeleteComponent,
     DeletePageComponent,
     AssociateSummaryComponent,
-    ViewAssoicateTrainigDataComponent
+    ViewAssoicateTrainigDataComponent,
+    AssociateManagementComponent,
+    AssociateSummaryComponent,
+    ManageAssociateComponent
   ],
   imports: [
     BrowserModule,
@@ -102,7 +107,6 @@ import { ViewAssoicateTrainigDataComponent } from './Component/Requester/view-as
     FullCalendarModule,
     MatSelectModule, MatInputModule, MatToolbarModule, MatIconModule, MatCheckboxModule, MatTableModule, MatNativeDateModule,
     AgGridModule
-
   ],
   providers: [
     authInterceptorProviders,
