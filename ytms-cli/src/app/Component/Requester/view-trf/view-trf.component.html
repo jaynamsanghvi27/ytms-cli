@@ -118,7 +118,8 @@
             <div class="row">
             <div class="col-2">Assign Trainer</div>
             <div class="col-4">
-                <select #teams class="request-drop-down" formControlName="trainer">
+                <!-- <select #teams class="request-drop-down" formControlName="trainer"> -->
+                <select multiple class="request-drop-down" formControlName="trainer">
                  <option [ngValue]="0" disabled >-- Select --</option>
                     <option *ngFor="let trainer of trainers" value="{{trainer.fullName}}">
                       {{trainer.fullName}}
