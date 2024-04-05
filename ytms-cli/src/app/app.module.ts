@@ -47,8 +47,10 @@ import { UpdateEventFormComponent } from './Component/calender/Calendar Componen
 import { DeleteComponent } from './Component/calender/Calendar Component/delete/delete.component';
 import { MatTableModule } from '@angular/material/table';
 import { DeletePageComponent } from './Component/calender/Delete Page/delete-page/delete-page.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { SummaryComponent } from './Component/calender/Summary Page/summary/summary.component';
+import { OptionalHolidayComponent } from './Component/calender/Optional Holiday/optional-holiday/optional-holiday.component';
 import { AssociateManagementComponent } from './Component/Technical-Manager/tm-associate-management/associate-management/associate-management.component';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { AssociateSummaryComponent } from './Component/Requester/associate-summary/associate-summary.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { ViewAssoicateTrainigDataComponent } from './Component/Requester/view-assoicate-trainig-data/view-assoicate-trainig-data.component';
@@ -56,7 +58,7 @@ import { ManageAssociateComponent } from './Component/Requester/manage-associate
 
 
 @NgModule({
-  entryComponents: [DayComponentComponent, EventFormComponent, UpdateEventFormComponent, DeleteComponent],
+  entryComponents: [DayComponentComponent, EventFormComponent, UpdateEventFormComponent, DeleteComponent,OptionalHolidayComponent],
   declarations: [
     AppComponent,
     RequesterHeaderComponent,
@@ -89,6 +91,8 @@ import { ManageAssociateComponent } from './Component/Requester/manage-associate
     DeletePageComponent,
     AssociateSummaryComponent,
     ViewAssoicateTrainigDataComponent,
+    SummaryComponent,
+    OptionalHolidayComponent,
     AssociateManagementComponent,
     AssociateSummaryComponent,
     ManageAssociateComponent
@@ -106,7 +110,7 @@ import { ManageAssociateComponent } from './Component/Requester/manage-associate
     MatDialogModule, MatDatepickerModule,
     FullCalendarModule,
     MatSelectModule, MatInputModule, MatToolbarModule, MatIconModule, MatCheckboxModule, MatTableModule, MatNativeDateModule,
-    AgGridModule
+    AgGridModule,
   ],
   providers: [
     authInterceptorProviders,
