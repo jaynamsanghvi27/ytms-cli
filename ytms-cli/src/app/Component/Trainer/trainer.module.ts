@@ -15,6 +15,10 @@ import {ToastrModule} from 'ngx-toastr';
 import { ViewTrainerFormComponent } from './view-trainer-form/view-trainer-form.component';
 import { ViewTraninerComponent } from './view-traniner/view-traniner.component';
 import { EditNominationComponent } from './edit-nomination/edit-nomination.component';
+import { AddAttendanceComponent } from './add-attendance/add-attendance.component';
+import { AgGridModule } from 'ag-grid-angular';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ViewAttendanceComponent } from './view-attendance/view-attendance.component';
 
 
 @NgModule({
@@ -25,7 +29,9 @@ import { EditNominationComponent } from './edit-nomination/edit-nomination.compo
     TrainerSidebarComponent,
     ViewTrainerFormComponent,
     ViewTraninerComponent,
-    EditNominationComponent
+    EditNominationComponent,
+    AddAttendanceComponent,
+    ViewAttendanceComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +41,9 @@ import { EditNominationComponent } from './edit-nomination/edit-nomination.compo
     ToastrModule.forRoot(),
     HttpClientModule,
     FlatpickrModule.forRoot(),
-    NgbModule, NgbModalModule
+    NgbModule, NgbModalModule,
+    AgGridModule,
+    MatDialogModule
   ]
 })
 export class TrainerModule {

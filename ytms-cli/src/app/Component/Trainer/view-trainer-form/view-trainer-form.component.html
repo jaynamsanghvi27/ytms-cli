@@ -18,6 +18,7 @@
                     <th>Traniner Name</th>
                     <th>Requester Name</th>
                     <th>Number of Participents</th>
+                    <th>Attendance</th>
                     <th>Actual Start Date</th>
                     <th>Actual End Date</th>
                     <th>Actions</th>
@@ -30,6 +31,7 @@
                     <td>{{training.userName}}</td>
                     <td></td>
                     <td><a (click)="openDialog(training.id)">{{training.noOfActualParticipant}}</a></td>
+                    <td><span [ngStyle]="{'pointer-events':training.trainingStatus == 'In Progress' ? 'auto': 'none','color' :training.trainingStatus == 'In Progress' ? 'green': 'red'}" class="inner"><i  class=" btn-info btn-sm fa fa-edit" title="Edit" (click)="editAttendance(training.id)"></i></span><span style="margin-left: 10px;" (click)="viewAttendance(training.id)"><i class="fa-regular fa-eye"></i></span></td>
                     <td>{{training.actualStartDate}}</td>
                     <td>{{training.actualEndDate}}</td>
                     <!-- <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' " style="text-align: center;"> -->
