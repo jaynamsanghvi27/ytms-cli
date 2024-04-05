@@ -92,7 +92,7 @@ export class TrainingReqComponent {
       {
         id: [],
         unit: ['', [Validators.required,Validators.pattern(this.upattern)]],
-        technology: ['', [Validators.required]],
+        upgradedSkills: ['', [Validators.required]],
         competency: ['', [Validators.required,Validators.pattern(this.upattern)]],
         trainingType: ['', [Validators.required,Validators.pattern(this.upattern)]],
         monthAndYear: ['', [Validators.required]],
@@ -108,7 +108,7 @@ export class TrainingReqComponent {
       })
 
     this.trainingReqForm.controls['unit'].setValue(0, { onlySelf: true });
-    this.trainingReqForm.controls['technology'].setValue(0, { onlySelf: true });
+    this.trainingReqForm.controls['upgradedSkills'].setValue(0, { onlySelf: true });
     this.trainingReqForm.controls['competency'].setValue(0, { onlySelf: true });
     this.trainingReqForm.controls['trainingType'].setValue(0, { onlySelf: true });
   }
@@ -171,7 +171,8 @@ export class TrainingReqComponent {
 
   submit(): void {
     console.log("In Submit");
-    this.submitted = true
+    this.submitted = true;
+    this.trainingReqForm.get('upgradedSkills')?.setValue(this.trainingReqForm.value.upgradedSkills+"");
     console.log("befor service " + JSON.stringify(this.trainingReqForm.value));
     if (this.trainingReqForm.valid) {
       console.log("befor service " + JSON.stringify(this.trainingReqForm.value));
@@ -231,8 +232,8 @@ export class TrainingReqComponent {
         if (localTrainingArray.length < 8) {
           let trainingType: string = localTrainingArray[3];
           this.trainingArray[2] = trainingType;
-          let technology: string = localTrainingArray[4];
-          this.trainingArray[3] = technology.replace("(", "").replace(")", "");
+          let upgradedSkills: string = localTrainingArray[4];
+          this.trainingArray[3] = upgradedSkills.replace("(", "").replace(")", "");
           let monthAndYear: string = localTrainingArray[5] + "-" + localTrainingArray[6];
           this.trainingArray[4] = monthAndYear;
           this.trainingRequestObject?.trainingName;
@@ -242,13 +243,13 @@ export class TrainingReqComponent {
           this.trainingReqForm.get('unit')?.setValue(unit);
           this.trainingReqForm.get('competency')?.setValue(competency);
           this.trainingReqForm.get('trainingType')?.setValue(trainingType);
-          this.trainingReqForm.get('technology')?.setValue(technology);
+          this.trainingReqForm.get('upgradedSkills')?.setValue(upgradedSkills);
           this.trainingReqForm.get('monthAndYear')?.setValue(this.datepipe.transform(monthAndYear, 'yyyy-MM'));
         } else {
           let trainingType: string = localTrainingArray[3] + "-" + localTrainingArray[4];
           this.trainingArray[2] = trainingType;
-          let technology: string = localTrainingArray[5].replace("(", "").replace(")", "");
-          this.trainingArray[3] = technology;
+          let upgradedSkills: string = localTrainingArray[5].replace("(", "").replace(")", "");
+          this.trainingArray[3] = upgradedSkills;
           let monthAndYear: string = localTrainingArray[6] + "-" + localTrainingArray[7];
           this.trainingArray[4] = monthAndYear;
           this.trainingRequestObject?.trainingName;
@@ -258,7 +259,7 @@ export class TrainingReqComponent {
           this.trainingReqForm.get('unit')?.setValue(unit);
           this.trainingReqForm.get('competency')?.setValue(competency);
           this.trainingReqForm.get('trainingType')?.setValue(trainingType);
-          this.trainingReqForm.get('technology')?.setValue(technology);
+          this.trainingReqForm.get('upgradedSkills')?.setValue(upgradedSkills);
           this.trainingReqForm.get('monthAndYear')?.setValue(this.datepipe.transform(monthAndYear, 'yyyy-MM'));
         }
         this.trainingReqForm.get('startDate')?.setValue(this.datepipe.transform(this.trainingRequestObject?.startDate, 'yyyy-MM-dd'));
