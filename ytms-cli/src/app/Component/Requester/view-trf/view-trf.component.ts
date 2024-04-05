@@ -110,6 +110,7 @@ decline()
   submit(): void {
     if (this.trainingReqForm.valid) {
       console.log("befor service "+JSON.stringify(this.trainingReqForm.value));
+      this.trainingReqForm.get('trainer')?.setValue(this.trainingReqForm.value.trainer+"");
       let obj:any=this.trainingReqForm.value;
       this.ser.updateTraining(obj).subscribe((resp:any)=>{
         Swal.fire('Success', 'Training Approved', 'success');
