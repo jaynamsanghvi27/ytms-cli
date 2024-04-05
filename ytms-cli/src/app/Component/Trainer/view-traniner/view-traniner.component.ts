@@ -52,7 +52,8 @@ export class ViewTraninerComponent {
       trainingName:[],
       updatedAt:[],
       userName:[],
-      trainingStatus:['']
+      trainingStatus:[''],
+      trainer:['Planned']
       })
       
     this.ser.getTrainingById(this.trainingId).subscribe((resp: any) => {
@@ -78,7 +79,8 @@ export class ViewTraninerComponent {
       trainingName:resp.trainingName,
       updatedAt:this.datepipe.transform(resp.updatedAt, 'yyyy-MM-dd'),
       userName:resp.userName,
-     trainingStatus:""
+      trainingStatus:"",
+      trainer:resp.trainer
     })
     this.trainingReqForm.get('trainingStatus').setValue(resp?.trainingStatus);
     })   

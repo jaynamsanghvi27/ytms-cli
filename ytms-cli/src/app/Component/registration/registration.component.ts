@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {LoginService} from "../../Core/services/login.service";
 import Swal from "sweetalert2";
+import { TrainingRequestService } from 'src/app/services/training-request.service';
 
 @Component({
   selector: 'app-registration',
@@ -10,10 +11,12 @@ import Swal from "sweetalert2";
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent {
+  units?: any[];
   signUpForm: FormGroup = this.formBuilder.group(
     {
       fullName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]],
       emailAdd: ['', [Validators.required, Validators.pattern(/^[^\s@]+@yash\.com$/)]],
+      unit: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.pattern(
         /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{8,}/
       )]],
@@ -22,11 +25,12 @@ export class RegistrationComponent {
 
   constructor(private formBuilder: FormBuilder,
               private loginService: LoginService,
+              private ser: TrainingRequestService,
               private router: Router) {
   }
 
   ngOnInit(): void {
-
+    this.loadUnit();
   }
 
   submit(): void {
@@ -34,6 +38,7 @@ export class RegistrationComponent {
       let user = {
         fullName: this.signUpForm.value.fullName,
         emailAdd: this.signUpForm.value.emailAdd,
+        unit: { id: this.signUpForm.value.unit },
         password: this.signUpForm.value.password,
         confirmPassword: this.signUpForm.value.confirmPassword,
       }
@@ -48,6 +53,13 @@ export class RegistrationComponent {
     } else {
       this.signUpForm.markAllAsTouched();
     }
+  }
+
+  loadUnit() {
+    this.ser.getUnitMasterList().subscribe((resp: any) => { this.units = resp });
+  }
+  pushUnit(unit:any) {
+    this.units?.push(unit);
   }
 
   validateSubmit() {

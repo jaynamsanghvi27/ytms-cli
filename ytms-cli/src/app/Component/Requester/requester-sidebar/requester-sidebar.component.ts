@@ -39,16 +39,16 @@ export class RequesterSidebarComponent {
       },
       {
         number: 4,
-        name: 'Order  ',
+        name: 'Associate Management',
         icon: 'fa-solid fa-cart-shopping',
         routing: '/requester/calendar'
   
       },
       {
         number: 5,
-        name: 'Settings',
+        name: 'Manage Associate',
         icon: 'fa-solid fa-gear',
-        routing: '/requester/calendar'
+        routing: '/tm-manage-associate'
   
       },
       {

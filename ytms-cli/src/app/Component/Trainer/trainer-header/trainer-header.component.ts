@@ -13,7 +13,7 @@ export class TrainerHeaderComponent {
   username: string = '';
   role: string = '';
   userRole:String ="";
-
+  unit: string = '';
   @Output() sideNavToggled = new EventEmitter<boolean>();
   menuStatus: boolean = false;
 
@@ -30,6 +30,7 @@ export class TrainerHeaderComponent {
       this.username = this.jwtService.getFullNameFromToken(token);
       this.role = this.jwtService.getRoleFromToken(token).substring(5);
       this.userRole = this.jwtService.getRoleFromToken(token).substring(5).replace("_"," ");
+      this.unit = this.jwtService.getUnitFromToken(token);
     }
   }
 

@@ -17,10 +17,11 @@ export class ViewTrainerFormComponent {
   sideNavStatus: boolean = false;
   trainingReqForms : any[]=[];
   constructor(private ser:TrainingRequestService,private router: Router,public dialog: MatDialog){
-  this.loadList();
+  //this.loadList();
+  this.getTrainerTrainingList();
 }
  
-loadList(){
+getTrainerTrainingList(){
   this.ser.getTraining().subscribe((resp:any)=>{
     console.log(resp);
     (this.trainingReqForms=resp)});
@@ -35,7 +36,7 @@ viewAttendance(id:any){
   
   dialogRef.afterClosed().subscribe(result => {
     console.log('The viewAttendance dialog was closed');
-    this.loadList();
+    this.getTrainerTrainingList();
   });
 }
 
@@ -48,7 +49,7 @@ editAttendance(id:any){
   
   dialogRef.afterClosed().subscribe(result => {
     console.log('The editAttendance dialog was closed');
-    this.loadList();
+    this.getTrainerTrainingList();
   });  
 }
 
@@ -61,8 +62,9 @@ const dialogRef =this.dialog.open(ViewTraninerComponent,{
 } );
 
 dialogRef.afterClosed().subscribe(result => {
-  console.log('The ViewTraninerComponent dialog was closed'+result);
-  this.loadList();
+  console.log('The ViewTraninerComponent dialog was closed');
+  //this.loadList();
+  this.getTrainerTrainingList();
 });
 }
 
@@ -75,7 +77,8 @@ openDialog(trainingId:any){
   
   dialogRef.afterClosed().subscribe(result => {
     console.log('The EditNominationComponent dialog was closed');
-    this.loadList();
+    //this.loadList();
+    this.getTrainerTrainingList();
   });
 
 }

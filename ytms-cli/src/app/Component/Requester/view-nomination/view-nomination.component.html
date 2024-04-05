@@ -3,62 +3,61 @@
     </app-requester-header>
 
     <main>
-         <app-requester-sidebar [sideNavStatus]="sideNavStatus" *ngIf="this.userRole != 'ROLE_TRAINER'" [ngClass]="{'app-side-nav-open':sideNavStatus}"
-            class="black-border"> </app-requester-sidebar>
+        <app-requester-sidebar [sideNavStatus]="sideNavStatus" *ngIf="this.userRole != 'ROLE_TRAINER'" [ngClass]="{'app-side-nav-open':sideNavStatus}" class="black-border"> </app-requester-sidebar>
         <div class="display-area p-3" [ngClass]="{'display-area-shrink':sideNavStatus}">
             <!-- Main Content    -->
             <div class="training-request-form">
                 <form>
-                <div class="form-header">
-                    <h5 class="heading-color">Nomination List</h5>
-                </div>
+                    <div class="form-header">
+                        <h5 class="heading-color">Nomination List</h5>
+                    </div>
 
-<div>
-    <a> Number Of Nomination : {{nomination.length}} </a>
-     <table>
-       <thead>
-         <tr>
-           <th>
-             Emp-ID
-           </th>
-           <th>
-             Name
-           </th>
-           <th>
-             Email-ID
-           </th>
-           <th>
-             Grade
-           </th>
-           <th>skill</th>
-           <th>current_allocation</th>
-           <th>project</th>
-           <th>current_location</th>
-           <th>Action</th>
-         </tr>
-       </thead>
-       <tbody>
+                    <div>
+                        <a> Number Of Nomination : {{nomination.length}} </a>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Emp-ID
+                                    </th>
+                                    <th>
+                                        Name
+                                    </th>
+                                    <th>
+                                        Email-ID
+                                    </th>
+                                    <th>
+                                        Grade
+                                    </th>
+                                    <th>skill</th>
+                                    <th>current_allocation</th>
+                                    <th>project</th>
+                                    <th>current_location</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-         <tr *ngFor="let nomi of nomination">
-         <td>{{nomi.emp_id}}</td>
-         <td>{{nomi.emp_name}}</td>
-         <td>{{nomi.emp_mail_id}}</td>
-         <td>{{nomi.grade}}</td>
-         <td>{{nomi.skill}}</td>
-         <td>{{nomi.current_allocation}}</td>
-         <td>{{nomi.project}}</td>
-         <td>{{nomi.current_location}}</td>
-         <td><span class="inner"><i class=" btn-info btn-sm fa fa-edit" title="Edit" (click)="setNominationId(nomi.id); openNominationDialog(nominationtemplate)"></i><i class=" btn-danger btn-sm fa fa-trash" title="Delete" (click)="deleteNominationById(nomi.id)"></i></span></td>
-         </tr>
-       </tbody>
-     </table>
-   </div>
-</form>
-</div>
-</div>
-</main>
+                                <tr *ngFor="let nomi of nomination">
+                                    <td>{{nomi.emp_id}}</td>
+                                    <td>{{nomi.emp_name}}</td>
+                                    <td>{{nomi.emp_mail_id}}</td>
+                                    <td>{{nomi.grade}}</td>
+                                    <td>{{nomi.skill}}</td>
+                                    <td>{{nomi.current_allocation}}</td>
+                                    <td>{{nomi.project}}</td>
+                                    <td>{{nomi.current_location}}</td>
+                                    <td><span class="inner"><i class=" btn-info btn-sm fa fa-edit" title="Edit" (click)="setNominationId(nomi.id); openNominationDialog(nominationtemplate)"></i><i class=" btn-danger btn-sm fa fa-trash" title="Delete" (click)="deleteNominationById(nomi.id)"></i></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
 
 </div>
-   <ng-template #nominationtemplate>
-       <app-nomination-req></app-nomination-req>
-  </ng-template>
+<ng-template #nominationtemplate>
+    <app-nomination-req></app-nomination-req>
+</ng-template>

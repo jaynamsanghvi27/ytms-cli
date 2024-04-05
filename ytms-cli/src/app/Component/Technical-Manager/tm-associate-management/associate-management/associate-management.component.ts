@@ -27,7 +27,7 @@ export class AssociateManagementComponent {
   paginationPageSizeSelector = [200, 500, 1000];
   rowData = [
     {
-      "SNo": "1",
+      "SNo": 1,
       "Emp ID": "101101",
       "Name": "abc",
       "EmailID": "abc@yash.com",
@@ -88,7 +88,7 @@ export class AssociateManagementComponent {
       this.rowData.push(
 
         {
-          "SNo": num.toString(),
+          "SNo": num,
           "Emp ID": "101101",
           "Name": "abc",
           "EmailID": "abc@yash.com",
