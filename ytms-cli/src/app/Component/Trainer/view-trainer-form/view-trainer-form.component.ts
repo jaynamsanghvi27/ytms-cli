@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { TrainingRequestService } from 'src/app/services/training-request.service';
 import { ViewTraninerComponent } from '../view-traniner/view-traniner.component';
 import { EditNominationComponent } from '../edit-nomination/edit-nomination.component';
+import { AddAttendanceComponent } from '../add-attendance/add-attendance.component';
+import { ViewAttendanceComponent } from '../view-attendance/view-attendance.component';
 
 @Component({
   selector: 'app-view-trainer-form',
@@ -19,16 +21,36 @@ export class ViewTrainerFormComponent {
   this.getTrainerTrainingList();
 }
  
-loadList(){
+getTrainerTrainingList(){
   this.ser.getTraining().subscribe((resp:any)=>{
     console.log(resp);
     (this.trainingReqForms=resp)});
 }
 
-getTrainerTrainingList(){
-  this.ser.getTrainerTrainingList().subscribe((resp:any)=>{
-    console.log(resp);
-    (this.trainingReqForms=resp)});
+viewAttendance(id:any){
+  const dialogRef =this.dialog.open(ViewAttendanceComponent,{
+    data:id,
+    width: '100%',
+    height: '90%'
+  } );
+  
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('The viewAttendance dialog was closed');
+    this.getTrainerTrainingList();
+  });
+}
+
+editAttendance(id:any){
+  const dialogRef =this.dialog.open(AddAttendanceComponent,{
+    data:id,
+    width: '100%',
+    height: '90%'
+  } );
+  
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('The editAttendance dialog was closed');
+    this.getTrainerTrainingList();
+  });  
 }
 
 editViewTraniner(id:any){

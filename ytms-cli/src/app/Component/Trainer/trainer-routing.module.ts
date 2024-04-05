@@ -7,6 +7,7 @@ import { TrainingReqComponent } from '../Requester/training-req/training-req.com
 import { ViewTrainerFormComponent } from './view-trainer-form/view-trainer-form.component';
 import { CalenderComponent } from '../calender/calender.component';
 import { ViewTraninerComponent } from './view-traniner/view-traniner.component';
+import { AddAttendanceComponent } from './add-attendance/add-attendance.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
       {
         path:'view-trainer-form',
         component: ViewTrainerFormComponent
+      },
+      {
+        path:'add-attendance',
+        component: AddAttendanceComponent
       },
           ]
   }

@@ -1,0 +1,62 @@
+<h2 mat-dialog-title style="border-bottom: 1px solid #eee;
+color: #fff;text-align: center;background: #005ba3;">Attendance Details</h2>
+<mat-dialog-content class="mat-typography" style="height: calc(100% - 96px);">
+
+    <div class="row" style="    padding-bottom: 10px;
+    padding-top: 10px;">
+        <div class="col-2" style="font-weight: bold;">Training Dates :</div>
+        <div class="col-3" >
+           <select  class="form-control down-arrow" (change)='onOptionsSelectedFromDateDropDown($event)'>
+              <option value="">Select</option>
+              <option *ngFor="let trainingDate of trainingDatesValue" [ngValue]="trainingDate"  >
+                {{trainingDate}}
+                </option>
+           </select>
+        </div>
+         <div class="col-3"  >
+            <span style="color: red;" *ngIf="isError"> {{errorMsg}}</span>
+             
+         </div>
+        <div class="col-4" style="text-align: right;font-weight: bold;">
+            <span>Absent Count : {{absentNoOfCandiate}} </span>
+            <span>Present Count : {{presentNoOfCandidate}}</span>
+        </div>
+        <!-- <div class="col-2" style="text-align: end;"><button type="submit" (click)="submit()" style="margin-right: 20px;" class="btn btn-primary btn-block btn-sm">
+            Submit
+            </button>
+        </div> -->
+     </div>
+
+
+    <table>
+        <thead>
+          <tr>
+              <th>Employee Id</th>
+              <th>Employee Email</th>
+              <th>Employee Name</th>
+              <th><input style="margin-right: 10px;" [(ngModel)]="isChecked"
+                type="checkbox"
+                (change)="clickHeaderCheckBox($event,true)"/>Attendance </th>
+              
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let training of trainingDataList">
+              <td>{{training.emp_id}}</td>
+              <td>{{training.emp_mail_id}}</td>
+              <td>{{training.emp_name}}</td>
+              <td><input
+                  type="checkbox" [(ngModel)]="training.attendance_status" name="element_name"
+                  [checked]="training.attendance_status"
+                  (change)="clickRowCheckBox()"/></td>
+              
+          </tr>
+        </tbody>
+      </table>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close  class="btn btn-primary btn-block btn-m" style="margin-right: 15px;">Cancel</button>
+  <button type="submit" (click)="submit()"  class="btn btn-primary btn-block btn-m">
+    Submit
+    </button>
+</mat-dialog-actions>
