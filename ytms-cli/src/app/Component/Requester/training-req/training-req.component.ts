@@ -4,8 +4,9 @@ import { Component, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { addDays, differenceInBusinessDays, isAfter, isBefore, isWeekend } from 'date-fns';
+import { addDays, differenceInBusinessDays, isAfter, isBefore, isWeekend, parseISO } from 'date-fns';
 import { AuthService } from 'src/app/Core/services/auth.service';
+import { CalendarService } from 'src/app/Core/services/calendar.service';
 import { JwtService } from 'src/app/Core/services/jwt.service';
 import { Nomination } from 'src/app/Model/Nomination';
 import { TrainingReqForm } from 'src/app/Model/TrainingRequestForm';
@@ -39,14 +40,14 @@ export class TrainingReqComponent {
   file!: File;
   nomination: Nomination[] = [];
   showNomination = false;
-  holiday:any[]=["2024-04-02","2024-04-05","2024-04-06","2024-04-10", "2024-04-11", "2024-04-12", "2024-04-13", "2024-04-14", "2024-04-15"];
+  holiday:any[]=[];
 
 
 
   submitted = false;
   constructor(private formBuilder: FormBuilder, private router: Router, private ser: TrainingRequestService,
     private auth: AuthService, private jwtServ: JwtService, private datepipe: DatePipe,
-    private activatedRoute: ActivatedRoute, public dialog: MatDialog) {
+    private activatedRoute: ActivatedRoute, public dialog: MatDialog, private calService:CalendarService) {
 
     let token = auth.getToken();
     this.userName = jwtServ.getUserNameFromToken(token);
@@ -87,7 +88,7 @@ export class TrainingReqComponent {
     this.loadUnit();
     this.loadCompetency();
     this.loadTrainingTypes();
-    
+    this.calService.getALLHolidays().subscribe((resp:any)=>{ this.holiday = resp})
     this.trainingReqForm = this.formBuilder.group(
       {
         id: [],
@@ -356,9 +357,9 @@ export class TrainingReqComponent {
     let startDate = new Date(this.trainingReqForm.value.startDate);
     for(const date of this.holiday)
     {
-      if(isBefore(new Date(date),endDate) && isAfter(new Date(date),startDate))
+      if(isBefore( parseISO(date.start),endDate) && isAfter(parseISO(date.start),startDate))
         {
-          if(!isWeekend(new Date(date)))
+          if(!isWeekend(parseISO(date.start)))
           {
             count++;
           }

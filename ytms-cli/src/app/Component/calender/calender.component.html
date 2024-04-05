@@ -22,8 +22,11 @@
           </div>
           &nbsp;
           <div class="{{actionCss}}" >
-          <button class="btn btn-primary"  (click)="addEvent()">Add Task</button>&nbsp;<span>
-          <button  class="btn btn-primary" *ngIf="searchFilter" [routerLink]="'/delete'">Task Delete Requests</button></span>
+            <button  class="btn btn-primary" (click)="addOptionalHoliday()" *ngIf="searchFilter">Add Optional Holiday</button> &nbsp;  
+            <button class="btn btn-primary"  (click)="addEvent()">Add Task</button>&nbsp;
+            <button  class="btn btn-primary"  [routerLink]="'/summary'">Summary</button>&nbsp;
+            <button  class="btn btn-primary" *ngIf="searchFilter" [routerLink]="'/delete'">Task Delete Requests</button>
+          
         </div>
             <full-calendar class="calendar" [options]="calendarOptions">
             </full-calendar>
@@ -39,10 +42,13 @@
             </mat-select>
           </div>
           &nbsp;
-            <div class="{{actionCss}}">
-            <button mat-raised-button class="btn btn-primary" (click)="addEvent()">Add Task</button>&nbsp;
-            <button mat-raised-button class="btn btn-primary" *ngIf="searchFilter" [routerLink]="'/delete'"> Task Delete Requests</button>
-          </div>
+          <div class="{{actionCss}}" >
+            <button  class="btn btn-primary" (click)="addOptionalHoliday()" *ngIf="searchFilter">Add Optional Holiday</button> &nbsp;  
+            <button class="btn btn-primary"  (click)="addEvent()">Add Task</button>&nbsp;
+            <button  class="btn btn-primary"  [routerLink]="'/summary'">Summary</button>&nbsp;
+            <button  class="btn btn-primary" *ngIf="searchFilter" [routerLink]="'/delete'">Task Delete Requests</button>
+          
+        </div>
             <full-calendar [options]="calendarOptionsWeek"></full-calendar>
            </div>
            <div *ngSwitchCase="'Day'">
@@ -56,10 +62,13 @@
             </mat-select>
           </div>
           &nbsp;
-            <div class="{{actionCss}}">
-            <button mat-raised-button class="btn btn-primary" (click)="addEvent()">Add Task</button>&nbsp;
-            <button mat-raised-button class="btn btn-primary" *ngIf="searchFilter" [routerLink]="'/delete'">Delete Requests</button>
-          </div>  
+          <div class="{{actionCss}}" >
+            <button  class="btn btn-primary" (click)="addOptionalHoliday()" *ngIf="searchFilter">Add Optional Holiday</button> &nbsp;  
+            <button class="btn btn-primary"  (click)="addEvent()">Add Task</button>&nbsp;
+            <button  class="btn btn-primary"  [routerLink]="'/summary'">Summary</button>&nbsp;
+            <button  class="btn btn-primary" *ngIf="searchFilter" [routerLink]="'/delete'">Task Delete Requests</button>
+          
+        </div>
             <full-calendar [options]="calendarOptionsDay"></full-calendar>
            </div>
         </div></div>

@@ -39,9 +39,9 @@ export class RequesterSidebarComponent {
       },
       {
         number: 4,
-        name: 'Associate Management',
-        icon: 'fa-solid fa-cart-shopping',
-        routing: '/requester/calendar'
+        name: 'Associate Summary',
+        icon: 'fa-solid fa-address-book',
+        routing: '/tm-associate-summary'
   
       },
       {
