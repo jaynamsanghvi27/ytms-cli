@@ -22,7 +22,7 @@ export class ViewTrainerFormComponent {
 }
  
 getTrainerTrainingList(){
-  this.ser.getTraining().subscribe((resp:any)=>{
+  this.ser.getTrainerTrainingList().subscribe((resp:any)=>{
     console.log(resp);
     (this.trainingReqForms=resp)});
 }
