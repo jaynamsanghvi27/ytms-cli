@@ -202,8 +202,10 @@ compareTimes(t1: string, t2: string): number {
      {
       return 4;
      } 
-     else{
-     return 2;}
+     else
+     {
+     return 2;
+    }
     }
     else
     {
@@ -258,7 +260,7 @@ createEvent()
     const missingFields: string[] = [];
      if(this.compareTimes(this.eventForm.get("start_time")?.value,this.eventForm.get("end_time")?.value)===3)
     {
-      missingFields.push("StartDate and Endate Cannot Be Same")
+      missingFields.push("StartDate and Endate Cannot Be Same or Set EndTime After StartTime")
     }
     if(this.compareTimes(this.eventForm.get("start_time")?.value,this.eventForm.get("end_time")?.value)===4)
     {
@@ -271,7 +273,7 @@ createEvent()
     }
     if(this.compareTimes(this.eventForm.get("start_time")?.value,this.eventForm.get("end_time")?.value)===2)
     {
-      missingFields.push("Endate should be after StartDate ")
+      missingFields.push("Either Endate should be after StartDate or Endtime and StartTime cannot be same")
     }
   
     else{
@@ -298,7 +300,7 @@ createEvent()
       }
     }
     console.error('Form is invalid, missing fields:', missingFields.join(', '));
-    this.message='Missing:'+missingFields.join(', ');
+    this.message='Error:'+missingFields.join(', ');
     this.error={error:true,message:this.message}
     return;
   }
@@ -309,14 +311,18 @@ if(this.day)
 {
   this.event =this.eventForm.value
   console.log(this.event)
-  this.eventService.addEvent(this.event).subscribe((success)=>console.log(success))
+  this.eventService.addEvent(this.event).subscribe((success)=>{console.log(success),
+    window.location.reload()
+    })
 }
 else if(this.week)
 {   
     this.eventForm.get('number_of_week_days')?.setValue(((this.eventForm.value.number_of_week_days-1)*5) );
     this.event =this.eventForm.value
     console.log(this.event)
-    this.eventService.addEvent(this.event).subscribe((success)=>console.log(success))
+    this.eventService.addEvent(this.event).subscribe((success)=>{console.log(success),
+      window.location.reload()
+      })
   }
 else if(this.month)
 {   
@@ -324,7 +330,9 @@ else if(this.month)
    this.eventForm.get('number_of_week_days')?.setValue(this.countWeekdaysBetweenMonths(this.eventForm.value.start,this.eventForm.value.number_of_week_days)) 
    this.event =this.eventForm.value
     console.log(this.event)
-    this.eventService.addEvent(this.event).subscribe((success)=>console.log(success)) 
+    this.eventService.addEvent(this.event).subscribe((success)=>{console.log(success),
+      window.location.reload()
+  }) 
 }
 }
 else if(this.year)
@@ -336,11 +344,10 @@ else
 {
   this.event =this.eventForm.value
   console.log(this.event)
-  this.eventService.addEvent(this.event).subscribe((success)=>console.log(success)) 
+  this.eventService.addEvent(this.event).subscribe((success)=>{console.log(success),window.location.reload()
+ }) 
 }
-this.addEvents.close();
-window.location.reload()
-}
+this.addEvents.close();}
 }  
 closeEvents()
 {

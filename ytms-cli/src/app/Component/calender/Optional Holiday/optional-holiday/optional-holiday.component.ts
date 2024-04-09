@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { addDays } from 'date-fns';
+import { addBusinessDays, addDays } from 'date-fns';
 import * as FileSaver from 'file-saver';
 import { CalendarService } from 'src/app/Core/services/calendar.service';
 import * as XLSX from 'xlsx';
@@ -42,12 +42,50 @@ addHolidays()
 }
 
 exportExcel(): void {
-  const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.sampleData);
-  const workbook: XLSX.WorkBook = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
-  const excelBuffer = XLSX.write(workbook, { bookType: 'csv', type: 'string' }).replace('\uFEFF', '');
-  const blob: Blob = new Blob([excelBuffer], { type: 'text/csv;charset=utf-8' }); 
-  FileSaver.saveAs(blob, 'Holiday.csv');
-}
+  // const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.sampleData);
+  // const workbook: XLSX.WorkBook = XLSX.utils.book_new();
+  // XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+  // const excelBuffer = XLSX.write(workbook, { bookType: 'csv', type: 'string' }).replace('\uFEFF', '');
+  // const blob: Blob = new Blob([excelBuffer], { type: 'text/csv;charset=utf-8' }); 
+  // FileSaver.saveAs(blob, 'Holiday.csv');
+this.exportAsExcelFile(this.sampleData,"Holiday")
 
 }
+ EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+ EXCEL_EXTENSION = '.xlsx';
+ public exportAsExcelFile(data: any[], excelFileName: string): void {
+  const formattedData = this.formatDataForExcel(data);
+  const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(formattedData);
+  const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+  const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+  this.saveAsExcel(excelBuffer, excelFileName);
+}
+
+private formatDataForExcel(data: any[]): any[] {
+  return data.map(item => ({
+    title: item.title,
+    start_date: this.formatDate(item.start_date) // Call formatDate function
+  }));
+}
+
+private formatDate(date: Date): string {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Zero-pad month
+  const day = String(date.getDate()).padStart(2, '0'); // Zero-pad day
+
+  return `${year}-${month}-${day}`;
+}
+
+private saveAsExcel(buffer: any, fileName: string): void {
+  const blob = new Blob([buffer], { type: this.EXCEL_TYPE });
+  FileSaver.saveAs(blob, fileName + this.EXCEL_EXTENSION);
+}
+}
+
+
+
+
+
+
+
+
