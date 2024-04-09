@@ -52,7 +52,10 @@ export class ViewTrfComponent {
       actualStartDate: ['', [Validators.required]],
       actualEndDate: ['', [Validators.required]],
       fileName: ['', [Validators.required]],
-      trainer:['',[Validators.required]]});
+      trainer:['',[Validators.required]],
+      actualStartTime:['',[Validators.required]],
+      actualEndTime:['',[Validators.required]],
+    });
 
 
   this.trainingReqForm1 = this.formBuilder.group({
