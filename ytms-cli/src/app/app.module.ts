@@ -55,7 +55,7 @@ import { AssociateSummaryComponent } from './Component/Requester/associate-summa
 import { AgGridModule } from 'ag-grid-angular';
 import { ViewAssoicateTrainigDataComponent } from './Component/Requester/view-assoicate-trainig-data/view-assoicate-trainig-data.component';
 import { ManageAssociateComponent } from './Component/Requester/manage-associate/manage-associate.component';
-
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   entryComponents: [DayComponentComponent, EventFormComponent, UpdateEventFormComponent, DeleteComponent,OptionalHolidayComponent],
@@ -111,6 +111,7 @@ import { ManageAssociateComponent } from './Component/Requester/manage-associate
     FullCalendarModule,
     MatSelectModule, MatInputModule, MatToolbarModule, MatIconModule, MatCheckboxModule, MatTableModule, MatNativeDateModule,
     AgGridModule,
+    MatTooltipModule
   ],
   providers: [
     authInterceptorProviders,

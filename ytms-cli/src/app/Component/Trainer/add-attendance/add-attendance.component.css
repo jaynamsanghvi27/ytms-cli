@@ -12,6 +12,11 @@ body {
     border-bottom: 1px solid #eee;
     color: #fff;
 }
+
+button.example-custom-date-class {
+    background: orange;
+    border-radius: 100%;
+  }
 .vt-form-header h2 {
     font-size: 34px;
     font-weight: bold;

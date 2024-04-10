@@ -6,6 +6,7 @@ import { ViewTraninerComponent } from '../view-traniner/view-traniner.component'
 import { EditNominationComponent } from '../edit-nomination/edit-nomination.component';
 import { AddAttendanceComponent } from '../add-attendance/add-attendance.component';
 import { ViewAttendanceComponent } from '../view-attendance/view-attendance.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-view-trainer-form',
@@ -40,17 +41,29 @@ viewAttendance(id:any){
   });
 }
 
-editAttendance(id:any){
-  const dialogRef =this.dialog.open(AddAttendanceComponent,{
-    data:id,
-    width: '100%',
-    height: '90%'
-  } );
+editAttendance(id:any,staus:any){
+
+  if((staus!="" || staus==null) && staus!="In Progress"){
+    Swal.fire("Please check status is in In progress.");
+  }
+  else{
+
+    const dialogRef =this.dialog.open(AddAttendanceComponent,{
+      data:id,
+      width: '100%',
+      height: '90%'
+    } );
+    
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The editAttendance dialog was closed');
+      this.getTrainerTrainingList();
+    });  
+
+  }
+
   
-  dialogRef.afterClosed().subscribe(result => {
-    console.log('The editAttendance dialog was closed');
-    this.getTrainerTrainingList();
-  });  
+
+  
 }
 
 editViewTraniner(id:any){
