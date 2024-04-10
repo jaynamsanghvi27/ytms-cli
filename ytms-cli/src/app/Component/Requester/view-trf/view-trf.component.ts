@@ -52,7 +52,10 @@ export class ViewTrfComponent {
       actualStartDate: ['', [Validators.required]],
       actualEndDate: ['', [Validators.required]],
       fileName: ['', [Validators.required]],
-      trainer:['',[Validators.required]]});
+      trainer:['',[Validators.required]],
+      actualStartTime:['',[Validators.required]],
+      actualEndTime:['',[Validators.required]],
+    });
 
 
   this.trainingReqForm1 = this.formBuilder.group({
@@ -110,6 +113,7 @@ decline()
   submit(): void {
     if (this.trainingReqForm.valid) {
       console.log("befor service "+JSON.stringify(this.trainingReqForm.value));
+      this.trainingReqForm.get('trainer')?.setValue(this.trainingReqForm.value.trainer+"");
       let obj:any=this.trainingReqForm.value;
       this.ser.updateTraining(obj).subscribe((resp:any)=>{
         Swal.fire('Success', 'Training Approved', 'success');

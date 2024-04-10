@@ -35,7 +35,7 @@ export class ManageAssociateComponent implements OnInit {
     { field: "sNo" ,quickFilter:true,filter: true,sortable: true,width: 100,pinned: 'left',sort: 'asc',cellRenderer : function (params:any) {
       return params.rowIndex +1;
     } },
-    { field: "emp_id" ,quickFilter:true,filter: true,sortable: true,width: 100,pinned: 'left'},
+    { field: "emp_id" ,headerName:"Employee Id",quickFilter:true,filter: true,sortable: true,width: 100,pinned: 'left'},
     { field: "emp_name" ,quickFilter:true,filter: true,sortable: true,width: 100,pinned: 'left'},
     { field: "emp_mail_id",quickFilter:true,filter: true ,sortable: true,width: 100},
     { field: "grade",quickFilter:true,filter: true ,sortable: true,width: 100},
@@ -45,6 +45,7 @@ export class ManageAssociateComponent implements OnInit {
     { field: "actualStartDate",quickFilter:true,filter: true ,sortable: true,width: 100},
     { field: "actualEndDate",quickFilter:true,filter: true ,sortable: true,width: 100},
     { field: "skill",quickFilter:true,filter: true ,sortable: true,width: 100},
+    { field: "upgradedSkills",quickFilter:true,filter: true ,sortable: true,width: 100},
     { field: "current_allocation",quickFilter:true,filter: true ,sortable: true,width: 100},
     { field: "project",quickFilter:true,filter: true ,sortable: true,width: 100},
     { field: "current_location",quickFilter:true,filter: true ,sortable: true,width: 100},

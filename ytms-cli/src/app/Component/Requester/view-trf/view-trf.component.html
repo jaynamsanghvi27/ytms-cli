@@ -73,12 +73,27 @@
           <div class="form-group">
             <div class="row">
               <div class="col-2">Actual Start Date</div>
-              <div class="col-4"><input type="date" formControlName="actualStartDate" placeholder="Actual Start Date"
-                  class="form-control" />
+              <div class="col-4">
+                <div class="row">
+                  <div class="col-8">
+                    <input type="date" formControlName="actualStartDate" placeholder="Actual Start Date"
+                    class="form-control" />
+                  </div>
+                  <div class="col-4">
+                    <input type="time" formControlName="actualStartTime" class="form-control">
+                  </div>
+                </div>
               </div>
               <div class="col-2"><label>Actual End Date</label></div>
               <div class="col-4">
-                <input type="date" formControlName="actualEndDate" placeholder="Actual End Date" class="form-control" />
+                <div class="row">
+                  <div class="col-8">
+                    <input type="date" formControlName="actualEndDate" placeholder="Actual End Date" class="form-control" />
+                  </div>
+                  <div class="col-4">
+                    <input type="time" formControlName="actualEndTime" class="form-control">
+                  </div>
+                </div>
               </div>
             </div><br>
             <div class="row">
@@ -118,7 +133,8 @@
             <div class="row">
             <div class="col-2">Assign Trainer</div>
             <div class="col-4">
-                <select #teams class="request-drop-down" formControlName="trainer">
+                <!-- <select #teams class="request-drop-down" formControlName="trainer"> -->
+                <select multiple class="request-drop-down" formControlName="trainer">
                  <option [ngValue]="0" disabled >-- Select --</option>
                     <option *ngFor="let trainer of trainers" value="{{trainer.fullName}}">
                       {{trainer.fullName}}
