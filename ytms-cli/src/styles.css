@@ -88,7 +88,19 @@ body {
     display: block !important;
 }
 
+button.custom-date-class-optionalholiday {
+    background: antiquewhite;
+    border-radius: 100%;
+  }
 
+  button.custom-date-class-mark-attendance {
+    background: lightgreen !important;
+    border-radius: 100%;
+  }
+  button.custom-date-class-not-mark-attendance {
+    background: lightcoral !important;
+    border-radius: 100%;
+  }
 /*bulleten not work*/
 
 
