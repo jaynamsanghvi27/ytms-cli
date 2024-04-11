@@ -12,6 +12,7 @@ import { Nomination } from 'src/app/Model/Nomination';
 import { TrainingReqForm } from 'src/app/Model/TrainingRequestForm';
 import { TrainingRequestService } from 'src/app/services/training-request.service';
 import Swal from 'sweetalert2';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-training-req',
@@ -47,7 +48,8 @@ export class TrainingReqComponent {
   submitted = false;
   constructor(private formBuilder: FormBuilder, private router: Router, private ser: TrainingRequestService,
     private auth: AuthService, private jwtServ: JwtService, private datepipe: DatePipe,
-    private activatedRoute: ActivatedRoute, public dialog: MatDialog, private calService:CalendarService) {
+    private activatedRoute: ActivatedRoute, public dialog: MatDialog, private calService:CalendarService,
+    private _location: Location) {
 
     let token = auth.getToken();
     this.userName = jwtServ.getUserNameFromToken(token);
@@ -58,6 +60,9 @@ export class TrainingReqComponent {
 
   }
 
+  backClicked() {
+    this._location.back();
+  }
   loadTechnology() {
     this.ser.getTechnologyMasterList().subscribe((resp: any) => { this.technologies = resp });
   }
@@ -88,7 +93,7 @@ export class TrainingReqComponent {
     this.loadUnit();
     this.loadCompetency();
     this.loadTrainingTypes();
-    this.calService.getALLHolidays().subscribe((resp:any)=>{ this.holiday = resp})
+    this.calService.getALLHolidays().subscribe((resp:any)=>{ this.holiday = resp});
     this.trainingReqForm = this.formBuilder.group(
       {
         id: [],
@@ -352,22 +357,24 @@ export class TrainingReqComponent {
     return this.trainingReqForm.value.startDate;
   }
 
-  diff:any;
+  diff:any=0;
   calculateDays():void{
     let count=0;
-    let endDate = addDays(new Date(this.trainingReqForm.value.endDate),1);
-    let startDate = new Date(this.trainingReqForm.value.startDate);
-    for(const date of this.holiday)
-    {
-      if(isBefore( parseISO(date.start),endDate) && isAfter(parseISO(date.start),startDate))
-        {
-          if(!isWeekend(parseISO(date.start)))
+    if(this.trainingReqForm.value.endDate != null && this.trainingReqForm.value.startDate != null){
+      let endDate = addDays(new Date(this.trainingReqForm.value.endDate),1);
+      let startDate = new Date(this.trainingReqForm.value.startDate);
+      for(const date of this.holiday)
+      {
+        if(isBefore( parseISO(date.start),endDate) && isAfter(parseISO(date.start),startDate))
           {
-            count++;
+            if(!isWeekend(parseISO(date.start)))
+            {
+              count++;
+            }
           }
-        }
+      }
+      this.diff = differenceInBusinessDays(endDate,startDate)-count;
     }
-    this.diff = differenceInBusinessDays(endDate,startDate)-count;
   }
   enableInputField(fieldName: string) {
     const control = this.trainingReqForm.get(fieldName) as FormControl;
