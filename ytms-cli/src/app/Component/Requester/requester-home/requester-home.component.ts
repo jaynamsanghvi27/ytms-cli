@@ -24,6 +24,7 @@ export class RequesterHomeComponent {
   viewSideNavBar: boolean = true;
   role: string = '';
   fTraingData:any;
+  trainingActualParticipants:any;
 
   constructor(public authService: AuthService,public dialog: MatDialog,
               private jwtService: JwtService,private ser:TrainingRequestService,
@@ -48,20 +49,30 @@ export class RequesterHomeComponent {
     this.ser.getUpcomingTrainings().subscribe((resp:any)=>{(this.trainingReqForms=resp)});
   }
   bulkUploadNominationData(event: any): void {
+  this.id=this.fTraingData.id;
+  this.trainingActualParticipants=this.fTraingData.noOfActualParticipant;
     this.file = event.target.files[0]
     console.log(this.file);
     let nomData: Nomination[] = [];
     this.ser.saveNominationDataOnFrontend(this.file).subscribe((resp: Nomination[]) => {
       nomData = resp;
-      for (let i = 0; i < nomData.length; i++) {
-        if(this.id!=null&&this.id>0){
-          nomData[i].trainingId=this.id;
-          this.ser.saveNomination(nomData[i]).subscribe((resp:Nomination)=>{
-            nomData[i]=resp;
-          });
-        }
-        this.nomination.push(nomData[i]);
+      let maxLimit=nomData.length+this.trainingActualParticipants;
+      if(maxLimit>30){
+        alert("Please Check The Count Of The Nomination Your Nomination Exceed The Available Seats");
       }
+      else{
+        for (let i = 0; i < nomData.length; i++) {
+          if(this.id!=null&&this.id>0){
+              nomData[i].trainingId=this.id;
+            this.ser.saveNomination(nomData[i]).subscribe((resp:Nomination)=>{
+              nomData[i]=resp;
+            });
+          }
+          this.nomination.push(nomData[i]);
+        }
+      }
+      
+      
       if(this.id!=null&&this.id>0){
         //this.reloadComponent();
         }
@@ -70,7 +81,6 @@ export class RequesterHomeComponent {
       }
     });
   }
-
 
   openDialog(templateRef:any,traningData:any) {
 

@@ -21,21 +21,23 @@
                                         </div>
 
                                         <div class="box-text">
-                                            <span>{{training.trainingDescription}}</span>
+                                            <h6><span>Start Date    :   {{training.actualStartDate}}</span></h6>
                                         </div>
 
                                         <div class="box-text">
-                                            <span>{{training.trainer}}</span>
+                                            <h6><span>End Date  :   {{training.actualEndDate}}</span></h6>
                                         </div>
 
                                         <div class="box-text">
-                                            <span>{{training.actualStartDate}}</span>
+                                            <h6><span>Trainer Name  :   {{training.trainer}}</span></h6>
+                                        </div>
+
+                                        <div class="box-text">
+                                            <h6><span>No. Of Days   :   {{training.noOfDays}}</span></h6>
                                         </div>
                                         <div class="box-btn">
-                                            <a (click)="openDialog(template1);">View Training</a>
+                                            <a (click)="openDialog(template1);">Add Nomination</a>
                                         </div>
-
-
                                     </div>
 
                                 </div>
