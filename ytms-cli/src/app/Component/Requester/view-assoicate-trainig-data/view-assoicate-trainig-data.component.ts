@@ -4,6 +4,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/Core/services/auth.service';
 import { JwtService } from 'src/app/Core/services/jwt.service';
+import { AssociateManagement } from 'src/app/Model/AssociateManagement';
 import { AssociateTrainingDataModel } from 'src/app/Model/AssociateTrainingDataModel';
 import { TrainingRequestService } from 'src/app/services/training-request.service';
 
@@ -13,7 +14,7 @@ import { TrainingRequestService } from 'src/app/services/training-request.servic
   styleUrls: ['./view-assoicate-trainig-data.component.css']
 })
 export class ViewAssoicateTrainigDataComponent {
-  associateTrainingData:AssociateTrainingDataModel[]=[];
+  associateTrainingData:AssociateManagement[]=[];
   userRole:string="";
   sideNavStatus: boolean = false;
   ngOnInit(): void {
