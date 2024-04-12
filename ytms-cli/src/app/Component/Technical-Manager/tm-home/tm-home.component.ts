@@ -13,6 +13,8 @@ export class TmHomeComponent {
   sideNavStatus: boolean = false;
   userDetails: any = [];
   status: boolean = false;
+  listOfRequester: boolean = true;
+  requesterTable: boolean = false;
 
   constructor(private usersService: UsersService,
               private router: Router) {
@@ -50,4 +52,13 @@ export class TmHomeComponent {
         Swal.fire('Failed', "Something went wrong !", 'error');
       });
   }
+  openList(val:any){
+    if("requesterList"==val){
+      this.listOfRequester=true;
+      this.requesterTable=true;
+    }
+    else{
+      this.listOfRequester=false;
+    }
+    }
 }

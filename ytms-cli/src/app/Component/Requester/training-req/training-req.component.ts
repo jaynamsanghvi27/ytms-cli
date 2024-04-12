@@ -300,7 +300,11 @@ export class TrainingReqComponent {
             nomData[i]=resp;
           });
         }
-        this.nomination.push(nomData[i]);
+        if(this.nomination.length>=30){
+          alert("Nomination Should not be greated then 30");
+        }else{
+          this.nomination.push(nomData[i]);
+        }
       }
       if(this.id!=null&&this.id>0){
         this.reloadComponent();
@@ -312,7 +316,12 @@ export class TrainingReqComponent {
   }
 
   setNominationArray(nomData: Nomination) {
-    this.nomination.push(nomData);
+    if(this.nomination.length>=30){
+      alert("Nomination Should not be greated then 30");
+    }else{
+      this.nomination.push(nomData);
+    }
+    
   }
 
   hideShowNomination() {
@@ -320,7 +329,12 @@ export class TrainingReqComponent {
   }
 
   addNominationData(nomination: any) {
-    this.nomination.push(nomination);
+    if(this.nomination.length>=30){
+      alert("Nomination Should not be greated then 30");
+    }else{
+      this.nomination.push(nomination);
+    }
+    
   }
 
   setNominationId(nominationId: any) {
