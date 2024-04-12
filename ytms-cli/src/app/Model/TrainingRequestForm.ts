@@ -27,4 +27,5 @@ export class TrainingReqForm{
     endTime!:Time;
     actualStartTime!:Time;
     actualEndTime!:Time;
+    requestor!:string;
 }

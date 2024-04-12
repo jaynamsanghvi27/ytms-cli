@@ -9,7 +9,7 @@
             <div class="training-request-form">
                 <form>
                     <div class="form-header">
-                        <a style="float: left; color: white;" (click)="backClicked()" >Back</a>
+                        <a style="float: left; color: white;" (click)="backClicked()">Back</a>
                         <h5 class="heading-color">Nomination List</h5>
                     </div>
 
@@ -40,6 +40,7 @@
                             <tbody>
 
                                 <tr *ngFor="let nomi of nomination">
+
                                     <td>{{nomi.emp_id}}</td>
                                     <td>{{nomi.emp_name}}</td>
                                     <td>{{nomi.emp_mail_id}}</td>
@@ -48,7 +49,10 @@
                                     <td>{{nomi.current_allocation}}</td>
                                     <td>{{nomi.project}}</td>
                                     <td>{{nomi.current_location}}</td>
+
                                     <td><span class="inner"><i class=" btn-info btn-sm fa fa-edit" title="Edit" (click)="setNominationId(nomi.id); openNominationDialog(nominationtemplate)"></i><i class=" btn-danger btn-sm fa fa-trash" title="Delete" (click)="deleteNominationById(nomi.id)"></i></span></td>
+
+
                                 </tr>
                             </tbody>
                         </table>
