@@ -8,6 +8,7 @@ export class TrainingReqForm{
     trainingType!: String;
     monthAndYear!: String;
     trainingName!: String;
+    trainer!: String;
     startDate!: Date;
     endDate!: Date;
     trainingDescription!: String;

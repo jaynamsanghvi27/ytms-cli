@@ -1,7 +1,7 @@
 import { ActivatedRoute } from '@angular/router';
-import { Component} from '@angular/core';
+import { Component, Inject} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA,MatDialog } from '@angular/material/dialog';
 import { Nomination } from 'src/app/Model/Nomination';
 import { TrainingRequestService } from 'src/app/services/training-request.service';
 import { TrainingReqComponent } from '../training-req/training-req.component';
@@ -20,6 +20,7 @@ export class NominationReqComponent {
   nominationId:any;
   locations:any;
   grades:any;
+  id:any;
 
     ngOnInit(): void {
     this.nominationReqForm = this.formBuilder.group(
@@ -40,8 +41,13 @@ export class NominationReqComponent {
       this.nominationReqForm.controls['grade'].setValue(0, { onlySelf: true });
 
   }
-  constructor(private formBuilder: FormBuilder, private ser: TrainingRequestService, private trf: TrainingReqComponent, public dialog: MatDialog,private activatedRoute: ActivatedRoute) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data:any,private formBuilder: FormBuilder, private ser: TrainingRequestService, private trf: TrainingReqComponent, public dialog: MatDialog,private activatedRoute: ActivatedRoute) {
     // this.nominationReqForm.controls['trainingName']?.patchValue(this.service.trainingName$.subscribe());
+    
+    if(data!=null){
+      this.id=data.id;
+      console.log("id-----",+this.id)
+    }
     this.loadLocation();
     this.loadGrade();
     this.ser.nominationId$.subscribe((resp: any) => {
@@ -65,7 +71,11 @@ export class NominationReqComponent {
   }
   submit(): void {
     let trainingId: any = this.activatedRoute.snapshot.paramMap.get('id');
-    
+    console.log("trainingId---"+trainingId)
+    if(trainingId==null){
+      trainingId= this.id;
+    }
+    console.log("------"+trainingId);
     if (this.nominationReqForm.valid) {
 
       console.log(this.nominationReqForm.value);
