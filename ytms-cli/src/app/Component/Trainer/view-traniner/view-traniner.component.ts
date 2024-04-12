@@ -90,10 +90,16 @@ export class ViewTraninerComponent {
   cancle(){
     this.dialogRef.close();
   }
+  onOptionsSelected(){
+    console.log("the selected value is " + this.trainingReqForm.get('trainingStatus').value);
+}
+
     submit(){
       let obj: any = this.trainingReqForm.value;
+      this.responseData.trainingStatus=this.trainingReqForm.get('trainingStatus').value;
+      console.log("this.responseData " + JSON.stringify(this.responseData));
       console.log("befor service " + JSON.stringify(this.trainingReqForm.value));
-      this.ser.editTraining(obj).subscribe(data=>{
+      this.ser.editTraining(this.responseData).subscribe(data=>{
        // 
        if(obj.trainingStatus=='In Progress' && this.isAttendanceDataPresent==false){
         this.ser.createAattendanceRecord(this.trainingId).subscribe();

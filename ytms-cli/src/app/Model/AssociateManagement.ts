@@ -15,4 +15,6 @@ export class AssociateManagement {
     current_location!: string
     trainingStatus!: string
     feedback?:string;
+    finalScore?:string;
+    trainer?:string;
   }
