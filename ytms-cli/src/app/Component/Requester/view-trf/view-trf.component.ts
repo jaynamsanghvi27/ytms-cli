@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/Core/services/auth.service';
 import { JwtService } from 'src/app/Core/services/jwt.service';
 import { TrainingReqForm } from 'src/app/Model/TrainingRequestForm';
@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
 import { addDays, differenceInBusinessDays, isAfter, isBefore, isWeekend, parseISO } from 'date-fns';
 import { Location } from '@angular/common';
 import { CalendarService } from 'src/app/Core/services/calendar.service';
+import { AgGridAngular } from 'ag-grid-angular';
 
 @Component({
   selector: 'app-view-trf',
@@ -39,6 +40,24 @@ export class ViewTrfComponent {
   holiday:any[]=[];
 
   fileInfos?: Observable<any>;
+
+  
+  // @ViewChild(AgGridAngular) agGrid!: AgGridAngular;
+  // colDefs: any[] = [
+  //   { field: "id" ,quickFilter:true,filter: true,suppressSizeToFit: true,sortable: true,width: 110,pinned: 'left',sort: 'asc',cellRenderer : function (params:any) {
+  //     return params.rowIndex +1;
+  //   } },
+  //   { field: "userName" ,headerName:"Requester",quickFilter:true,filter: true,suppressSizeToFit: true,sortable: true,width: 150,pinned: 'left'},
+  //   { field: "trainingName" ,quickFilter:true,filter: true,sortable: true,suppressSizeToFit: true,width: 150,pinned: 'left'},
+  //   { field: "trainingStatus",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
+  //   { field: "createdAt",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
+  //   { field: "startDate",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
+  //   { field: "endDate",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
+  //   { field: "actualStartDate",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
+  //   { field: "actualEndDate",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
+  //   { field: "noOfActualParticipant",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
+  //   { field: "trainer",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
+  // ];
 
   constructor(private ser:TrainingRequestService,private auth:AuthService,
     private jwtServ:JwtService,public dialog: MatDialog,private formBuilder: FormBuilder,private router: Router
