@@ -1,9 +1,6 @@
 <mat-toolbar><h2 mat-dialog-title>{{data.event.title}}</h2> </mat-toolbar>
 <mat-dialog-content>
-    <!-- Start:{{data.event.start| date:'hh:mm a'}}<br>
-    End:{{data.event.end| date:'hh:mm a'}}<br>
-    Duration:{{durationhh}} -->
-    <table mat-table [dataSource]="dataSourceEvents" class="mat-elevation-z8">
+    <table  *ngIf="this.hasEndtime"  mat-table   [dataSource]="dataSourceEvents" class="mat-elevation-z8" >
 
         <ng-container matColumnDef="Start">
           <th mat-header-cell *matHeaderCellDef> Start </th>
@@ -24,11 +21,18 @@
         <tr mat-row *matRowDef="let row; columns:  displayedColumnsEvents;"></tr>  
       
     </table>
+  <div *ngIf="!this.hasEndtime">
+    Happy {{data.event.title}}
+    <br><br>
+  <br>~ From Yash Technologies <br><br>
   
+  <!-- <input type="file" accept=".xlsx" (change)="onFileChange($event)"> -->
+</div>
 </mat-dialog-content>
 <mat-toolbar>
-    <mat-dialog-actions>
+    <mat-dialog-actions *ngIf="this.hasEndtime">
         <button mat-raised-button class="create-button btn btn-primary" (click)="updateEvent()">Update</button>&nbsp;
-        <button mat-raised-button [matDialogClose]="data" class="create-button btn btn-primary" (click)="deleteEvent()">Delete</button>
+        <button mat-raised-button [matDialogClose]="data" class="create-button btn btn-primary" (click)="deleteOneTask()">Delete Task</button>&nbsp;
+        <button mat-raised-button [matDialogClose]="data" class="create-button btn btn-primary" (click)="deleteEvent()">Delete Traning</button>
     </mat-dialog-actions>
 </mat-toolbar>

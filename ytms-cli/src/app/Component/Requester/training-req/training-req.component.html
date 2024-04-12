@@ -11,6 +11,7 @@
             <div class="training-request-form">
                 <form [formGroup]="trainingReqForm" (ngSubmit)="submit()">
                   <div class="form-header">
+                    <a style="float: left; color: white;" (click)="backClicked()" >Back</a>
                     <h5 class="heading-color">Training Request Form</h5>
                   </div>
                   <div class="form-group">
@@ -125,7 +126,7 @@
                             placeholder="Planed Start Date"
                             class="form-control"
                             min="{{dateToday() | date:'yyyy-MM-dd'}}" 
-                            (change)="enableInputField('endDate')"/>
+                            (change)="enableInputField('endDate');calculateDays();"/>
                           </div>
                         <div class="col-4">
                           <input type="time"  formControlName="startTime" class="form-control">

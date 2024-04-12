@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/Core/services/auth.service';
 import { JwtService } from 'src/app/Core/services/jwt.service';
 import { Nomination } from 'src/app/Model/Nomination';
 import { TrainingRequestService } from 'src/app/services/training-request.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-view-nomination',
@@ -20,7 +21,7 @@ export class ViewNominationComponent {
 
   constructor(private formBuilder: FormBuilder, private router: Router, private ser: TrainingRequestService,
     private activatedRoute: ActivatedRoute, public dialog: MatDialog,private auth:AuthService,
-    private jwtServ:JwtService){
+    private jwtServ:JwtService,private _location: Location){
       let token = auth.getToken();
       this.userRole = jwtServ.getRoleFromToken(token);
       let trainingId = this.activatedRoute.snapshot.paramMap.get('id');
@@ -29,6 +30,10 @@ export class ViewNominationComponent {
   }
   ngOnInit(): void {
 
+  }
+
+  backClicked() {
+    this._location.back();
   }
 
   getNominationListByTrainingId(trainingId:any){

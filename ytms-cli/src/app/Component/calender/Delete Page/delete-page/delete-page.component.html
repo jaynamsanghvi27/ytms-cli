@@ -18,6 +18,10 @@
             <th mat-header-cell *matHeaderCellDef> Trainer </th>
             <td mat-cell *matCellDef="let element"> {{element.calendar.scheduleUser.fullName}} </td>
           </ng-container>
+          <ng-container matColumnDef="Type">
+            <th mat-header-cell *matHeaderCellDef> Type </th>
+            <td mat-cell *matCellDef="let element"> <span *ngIf="element.type === 'Training'">Complete</span> {{element.type}} <span *ngIf="element.type === 'Task'">({{element.delete_date|date:'dd MMM yyyy'}})</span> </td>
+          </ng-container>
           <ng-container matColumnDef="Approve">
             <th mat-header-cell *matHeaderCellDef> Approve </th>
             <td mat-cell *matCellDef="let element"><button mat-raised-button class="create-button btn btn-primary" (click)="approve(element.id)">Approve</button></td>
