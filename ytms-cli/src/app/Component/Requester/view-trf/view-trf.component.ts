@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/Core/services/auth.service';
 import { JwtService } from 'src/app/Core/services/jwt.service';
 import { TrainingReqForm } from 'src/app/Model/TrainingRequestForm';
@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
 import { addDays, differenceInBusinessDays, isAfter, isBefore, isWeekend, parseISO } from 'date-fns';
 import { Location } from '@angular/common';
 import { CalendarService } from 'src/app/Core/services/calendar.service';
+import { AgGridAngular } from 'ag-grid-angular';
 
 @Component({
   selector: 'app-view-trf',
@@ -39,6 +40,7 @@ export class ViewTrfComponent {
   holiday: any[] = [];
 
   fileInfos?: Observable<any>;
+
 
   constructor(private ser: TrainingRequestService, private auth: AuthService,
     private jwtServ: JwtService, public dialog: MatDialog, private formBuilder: FormBuilder, private router: Router

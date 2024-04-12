@@ -24,6 +24,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { AddTranierAttendanceComponent } from './add-tranier-attendance/add-tranier-attendance.component';
+import { NominationReqComponent } from './nomination-req/nomination-req.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { AddTranierAttendanceComponent } from './add-tranier-attendance/add-tran
     EditNominationComponent,
     AddAttendanceComponent,
     ViewAttendanceComponent,
-    AddTranierAttendanceComponent
+    AddTranierAttendanceComponent,
+    NominationReqComponent
   ],
   imports: [
     CommonModule,
