@@ -8,7 +8,7 @@
      <div class="row">
         <div class="col-4">Training Status</div>
         <div class="col-8">
-           <select formControlName="trainingStatus" class="form-control down-arrow">
+           <select formControlName="trainingStatus" (change)='onOptionsSelected()' class="form-control down-arrow">
               <option value="">Select</option>
               <option *ngFor="let trainingstatus of trainingStatusValue" [ngValue]="trainingstatus"  >
               {{trainingstatus}}
