@@ -23,6 +23,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { AddTranierAttendanceComponent } from './add-tranier-attendance/add-tranier-attendance.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     ViewTraninerComponent,
     EditNominationComponent,
     AddAttendanceComponent,
-    ViewAttendanceComponent
+    ViewAttendanceComponent,
+    AddTranierAttendanceComponent
   ],
   imports: [
     CommonModule,

@@ -31,7 +31,11 @@
                     <td>{{training.trainer}}</td>
                     <td>{{training.userName}}</td>
                     <td><a (click)="openDialog(training.id)">{{training.noOfParticipant}}</a></td>
-                    <td><span [ngStyle]="{'color' :training.trainingStatus == 'In Progress' ? 'green': 'red'}" class="inner"><i  class=" btn-info btn-sm fa fa-edit" title="Edit" (click)="editAttendance(training.id,training.trainingStatus)"></i></span><span style="margin-left: 10px;" (click)="viewAttendance(training.id)"><i class="fa-regular fa-eye"></i></span></td>
+                    <td>
+                      <span [ngStyle]="{'color' :training.trainingStatus == 'In Progress' ? 'green': 'red'}" class="inner"><i  class=" btn-info btn-sm fa fa-edit" title="Edit" (click)="editAttendance(training.id,training.trainingStatus)"></i></span>
+                      <span style="margin-left: 10px;" (click)="viewAttendance(training.id)"><i class="fa-regular fa-eye"></i></span>
+                      <span>  <i class="fa-solid fa-file-lines" style="margin-left: 10px;" (click)="editTranierAttendance(training.id)"></i></span>
+                    </td>
                     <td>{{training.actualStartDate}}</td>
                     <td>{{training.actualEndDate}}</td>
                     <!-- <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' " style="text-align: center;"> -->
