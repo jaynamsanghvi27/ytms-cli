@@ -14,4 +14,5 @@ export class AssociateManagement {
     project!: string
     current_location!: string
     trainingStatus!: string
+    feedback?:string;
   }

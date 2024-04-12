@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-
+import {MatTooltipModule} from '@angular/material/tooltip';
 import {TrainerRoutingModule} from './trainer-routing.module';
 import {TrainerHomeComponent} from './trainer-home/trainer-home.component';
 import {TrainerHeaderComponent} from './trainer-header/trainer-header.component';
@@ -19,6 +19,11 @@ import { AddAttendanceComponent } from './add-attendance/add-attendance.componen
 import { AgGridModule } from 'ag-grid-angular';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ViewAttendanceComponent } from './view-attendance/view-attendance.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { AddTranierAttendanceComponent } from './add-tranier-attendance/add-tranier-attendance.component';
 
 
 @NgModule({
@@ -31,7 +36,8 @@ import { ViewAttendanceComponent } from './view-attendance/view-attendance.compo
     ViewTraninerComponent,
     EditNominationComponent,
     AddAttendanceComponent,
-    ViewAttendanceComponent
+    ViewAttendanceComponent,
+    AddTranierAttendanceComponent
   ],
   imports: [
     CommonModule,
@@ -43,8 +49,14 @@ import { ViewAttendanceComponent } from './view-attendance/view-attendance.compo
     FlatpickrModule.forRoot(),
     NgbModule, NgbModalModule,
     AgGridModule,
-    MatDialogModule
-  ]
+    MatDialogModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatFormFieldModule, MatInputModule, MatDatepickerModule,
+    MatTooltipModule
+  ],
+  providers:[]
 })
 export class TrainerModule {
 }

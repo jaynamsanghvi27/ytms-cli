@@ -149,9 +149,21 @@ getAttendanceDatesList(tarningId:any): Observable<any[]> {
 getselectedDateTranieeData(selecedDate:any,tarningId:any): Observable<any[]> {
   return this.http.get<any[]>(this.url+"/register/attendance/selectedDateTranieeData/"+selecedDate+'/'+tarningId); 
 }
+
+getStartDateEndDate(tarningId:any): Observable<any[]> {
+  return this.http.get<any[]>(this.url+"/register/attendance/getStarAndEndDateData/"+tarningId); 
+}
+
+getAllTranierAttendData(tarningId:any): Observable<any[]> {
+  return this.http.get<any[]>(this.url+"/register/trainerAttendance/getAllTranierAttendance/"+tarningId); 
+}
 saveselectedDateTranieeData(selecedDate:any): Observable<any[]> {
         console.log("on service"+ JSON.stringify(selecedDate));
   return this.http.put<any[]>(this.url+"/register/attendance/add-Attendance",selecedDate); 
+}
+saveselectedDateTranierAttendanceData(data:any,tariningid:any): Observable<any[]> {
+  console.log("on service"+ JSON.stringify(data));
+return this.http.put<any[]>(this.url+"/register/trainerAttendance/updateAttendanceStatus/"+tariningid,data); 
 }
 createAattendanceRecord(data:any){
   console.log("on createAattendanceRecord"+ JSON.stringify(data));

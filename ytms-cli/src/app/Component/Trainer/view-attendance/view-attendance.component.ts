@@ -29,7 +29,7 @@ export class ViewAttendanceComponent {
   loadTranieeAttedanceList(trainingId:any){
     this.ser.getAllTranieeAttendanceViewDateData(trainingId).subscribe((resp:any)=>{
       console.log(resp)
-      this.attendsData=resp;
+      this.attendsData=resp['value'];
     
     })
 

@@ -1,5 +1,5 @@
 <h2 mat-dialog-title style="border-bottom: 1px solid #eee;
-color: #fff;text-align: center;background: #005ba3;">Attendance Details</h2>
+color: #fff;text-align: center;background: #005ba3;">Trannier Attendance Details</h2>
 <mat-dialog-content class="mat-typography" style="height: calc(100% - 96px);">
 
     <div class="row" style="    padding-bottom: 10px;
@@ -39,11 +39,8 @@ color: #fff;text-align: center;background: #005ba3;">Attendance Details</h2>
          </div>
          <div class="col-5">
           <span style="color: red;" *ngIf="isError"> {{errorMsg}}</span>
-          <span style="color: red;" *ngIf="isHolidayError"> {{hoidayErrorMsg}}</span>
-         </div>
+          </div>
         <div class="col-4" style="text-align: right;font-weight: bold;">
-            <span>Absent Count : {{absentNoOfCandiate}} </span>
-            <span>Present Count : {{presentNoOfCandidate}}</span>
             
             
         </div>
@@ -54,12 +51,11 @@ color: #fff;text-align: center;background: #005ba3;">Attendance Details</h2>
      </div>
 
 
-    <table>
+     <table>
         <thead>
           <tr>
-              <th>Employee Id</th>
-              <th>Employee Email</th>
-              <th>Employee Name</th>
+              <th>Training Id</th>
+              <th>Attendance Date</th>
               <th><input style="margin-right: 10px;" [(ngModel)]="isChecked"
                 type="checkbox"
                 (change)="clickHeaderCheckBox($event,true)"/>Attendance </th>
@@ -68,17 +64,17 @@ color: #fff;text-align: center;background: #005ba3;">Attendance Details</h2>
         </thead>
         <tbody>
           <tr *ngFor="let training of trainingDataList">
-              <td>{{training.emp_id}}</td>
-              <td>{{training.emp_mail_id}}</td>
-              <td>{{training.emp_name}}</td>
+              <td>{{training.training_id}}</td>
+              <td>{{training.attendance_date }}</td>
               <td><input
                   type="checkbox" [(ngModel)]="training.attendance_status" name="element_name"
                   [checked]="training.attendance_status"
-                  (change)="clickRowCheckBox()"/></td>
+                  (change)="clickRowCheckBox(training)"/></td>
               
           </tr>
         </tbody>
       </table>
+    
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   

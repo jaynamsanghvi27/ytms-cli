@@ -15,12 +15,15 @@ color: #fff;text-align: center;background: #005ba3;">View Attendance Details</h2
         </thead>
         <tbody>
             <tr *ngFor="let training of attendsData">
-                <td>{{training.emp_id}}</td>
-                <td>{{training.emp_mail_id}}</td>
-                <td>{{training.emp_name}}</td>
-                <td>{{training.traning_noOfDays}}</td>
-                <td>{{training.attend_noOfDays}}</td>
-                <td>{{checkNumber(training.attendance_percentage)}}</td>
+                <td>{{training.attendeace.emp_id}}</td>
+                <td>{{training.attendeace.emp_mail_id}}</td>
+                <td>{{training.attendeace.emp_name}}</td>
+                <td>{{training.attendeace.traning_noOfDays}}</td>
+                <td >
+                  <span  matTooltip="{{training.datesAttended}}"> {{training.attendeace.attend_noOfDays}}</span>
+                  
+                </td>
+                <td>{{checkNumber(training.attendeace.attendance_percentage)}}</td>
        
             </tr>
         </tbody>
