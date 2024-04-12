@@ -21,6 +21,10 @@ export class RequesterHomeComponent {
   file!: File;
   nomination: Nomination[] = [];
   id: any;
+  viewSideNavBar: boolean = true;
+  role: string = '';
+  fTraingData:any;
+
   constructor(public authService: AuthService,public dialog: MatDialog,
               private jwtService: JwtService,private ser:TrainingRequestService,
               private router: Router) {
@@ -32,6 +36,11 @@ export class RequesterHomeComponent {
     if (this.isLoggedIn) {
       const token = this.authService.getToken();
       this.username = this.jwtService.getFullNameFromToken(token);
+      this.role = this.jwtService.getRoleFromToken(token);
+      console.log("---"+this.role);
+      if(this.role=='ROLE_TECHNICAL_MANAGER'){
+        this.viewSideNavBar=false;
+      }
     }
     this.loadList();
   }
@@ -63,10 +72,16 @@ export class RequesterHomeComponent {
   }
 
 
-  openDialog(templateRef:any) {
+  openDialog(templateRef:any,traningData:any) {
+
+    if(this.fTraingData==undefined){
+      this.fTraingData=traningData;
+    }
+
     let dialogRef = this.dialog.open(templateRef, {
      width: '60%',
-     height: '50%'
+     height: '50%',
+     data:this.fTraingData
    });
   }
 }

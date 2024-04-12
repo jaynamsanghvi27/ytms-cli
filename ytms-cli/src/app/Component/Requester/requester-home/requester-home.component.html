@@ -3,7 +3,11 @@
     </app-requester-header>
 
     <main>
-        <app-requester-sidebar [sideNavStatus]="sideNavStatus" [ngClass]="{'app-side-nav-open':sideNavStatus}" class="black-border"> </app-requester-sidebar>
+        <div *ngIf="viewSideNavBar">
+            <app-requester-sidebar [sideNavStatus]="sideNavStatus" 
+                [ngClass]="{'app-side-nav-open':sideNavStatus}" class="black-border">
+            </app-requester-sidebar>
+            </div>
         <div class="display-area p-3" [ngClass]="{'display-area-shrink':sideNavStatus}">
             <!-- Main Content    -->
             <div class="training-request-form">
@@ -39,7 +43,7 @@
                                             <span>{{training.noOfDays}}</span>
                                         </div>
                                         <div class="box-btn">
-                                            <a (click)="openDialog(template1);">Add Nomination</a>
+                                            <a (click)="openDialog(template1,training);">Add Nomination</a>
                                         </div>
 
 
@@ -70,7 +74,7 @@
                             <!-- <input id="selectedFile" type="file" name="files[]" multiple id="jsonFile" accept=".xlsx" (change)="selectedFileChange($event)" /> -->
                             <div class="col-2">Single Nomination</div>
                             <div class="col-4">
-                                <a (click)="openDialog(nominationtemplate)"><span style="float: left;">Click To Add Nomination &nbsp; <i class="fa fa-plus"  title="Click To Add Nomination" ></i>
+                                <a (click)="openDialog(nominationtemplate,'')"><span style="float: left;">Click To Add Nomination &nbsp; <i class="fa fa-plus"  title="Click To Add Nomination" ></i>
                     
                     </span>
                   </a>
