@@ -30,36 +30,37 @@ export class TrainerSidebarComponent {
     },
     {
       number: 4,
+      name: 'View my trainings',
+      icon: 'fa fa-eye',
+      routing: '/trainer/view-trainer-form'
+    },
+    {
+      number: 5,
       name: 'Order  ',
       icon: 'fa-solid fa-cart-shopping',
       routing: '/requester/calendar'
 
     },
     {
-      number: 5,
+      number: 6,
       name: 'Settings',
       icon: 'fa-solid fa-gear',
       routing: '/requester/calendar'
 
     },
     {
-      number: 6,
+      number: 7,
       name: 'About',
       icon: 'fa-solid fa-circle-info',
       routing: '/requester/calendar'
 
     },
     {
-      number: 7,
+      number: 8,
       name: 'Contact',
       icon: 'fa-solid fa-phone',
       routing: '/requester/calendar'
     },
-    {
-      number: 8,
-      name: 'View my trainings',
-      icon: 'fa fa-eye',
-      routing: '/trainer/view-trainer-form'
-    },
+    
   ]
 }

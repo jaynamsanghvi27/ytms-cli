@@ -10,7 +10,8 @@
       <div class="training-request-form">
         <form>
           <div class="form-header">
-            <h5 class="heading-color">Training Request List</h5>
+            <a style="float: left; color: white;" (click)="backClicked()" >Back</a><span>
+            <h5 class="heading-color">Training Request List</h5></span>
           </div>
           <table>
             <thead>
@@ -43,11 +44,11 @@
                 <td>{{training.actualStartDate}}</td>
                 <td>{{training.actualEndDate}}</td>
                 <td><a (click)="openNominationData(training.id)">{{training.noOfActualParticipant}}</a></td>
-                <td>{{training.userName}}</td>
+                <td>{{training.trainer}}</td>
                 <!-- <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' " style="text-align: center;"> -->
                   <td style="text-align: center;">
                     <span class="inner">
-                      <i title="Edit" *ngIf="training.status!='APPROVED'" class=" btn-info btn-sm fa fa-edit" (click)="editTrf(training.id)"></i>
+                    <i title="Edit" *ngIf="training.status!='APPROVED' || userRole == 'ROLE_TECHNICAL_MANAGER'" class=" btn-info btn-sm fa fa-edit" (click)="editTrf(training.id)"></i>
                     <i title="Approve" *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' && training.actualStartDate == null && training.status!='DECLINED'" class=" btn-success btn-sm fa fa-check-square-o" (click)="openDialog(template);setId(training.id)"></i>
                     <i title="Decline" *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' && training.actualStartDate == null && training.status!='DECLINED'" class=" btn-danger btn-sm  fa fa-close" (click)="declineDialog(template1);setId(training.id)"></i>
                   </span>
@@ -73,12 +74,45 @@
           <div class="form-group">
             <div class="row">
               <div class="col-2">Actual Start Date</div>
-              <div class="col-4"><input type="date" formControlName="actualStartDate" placeholder="Actual Start Date"
-                  class="form-control" />
+              <div class="col-4">
+                <div class="row">
+                  <div class="col-7">
+                    <input type="date" formControlName="actualStartDate" placeholder="Actual Start Date"
+                    class="form-control" (change)="calculateDays();"/>
+                  </div>
+                  <div class="col-5">
+                    <input type="time" formControlName="actualStartTime" class="form-control">
+                  </div>
+                </div>
               </div>
               <div class="col-2"><label>Actual End Date</label></div>
               <div class="col-4">
-                <input type="date" formControlName="actualEndDate" placeholder="Actual End Date" class="form-control" />
+                <div class="row">
+                  <div class="col-7">
+                    <input type="date" formControlName="actualEndDate" placeholder="Actual End Date" 
+                    class="form-control" (change)="calculateDays();"/>
+                  </div>
+                  <div class="col-5">
+                    <input type="time" formControlName="actualEndTime" class="form-control">
+                  </div>
+                </div>
+              </div>
+            </div><br>
+            <div class="row">
+              <div class="col-2">Assign Trainer</div>
+              <div class="col-4">
+                <!-- <select #teams class="request-drop-down" formControlName="trainer"> -->
+                <select multiple class="request-drop-down" formControlName="trainer">
+                 <option [ngValue]="0" disabled >-- Select --</option>
+                    <option *ngFor="let trainer of trainers" value="{{trainer.fullName}}">
+                      {{trainer.fullName}}
+                    </option>
+                </select>
+              </div>
+              <div class="col-2">Training Duration</div>
+              <div class="col-4">
+                <input  type="text" disabled value="{{this.diff}}">
+                <input type="hidden" formControlName="noOfDays" [(ngModel)] ="this.diff">
               </div>
             </div><br>
             <div class="row">
@@ -115,17 +149,7 @@
               </div>
             </div>
             <br>
-            <div class="row">
-            <div class="col-2">Assign Trainer</div>
-            <div class="col-4">
-                <select #teams class="request-drop-down" formControlName="trainer">
-                 <option [ngValue]="0" disabled >-- Select --</option>
-                    <option *ngFor="let trainer of trainers" value="{{trainer.fullName}}">
-                      {{trainer.fullName}}
-                    </option>
-                </select>
-              </div>
-            </div>
+            
             <input type="hidden" formControlName="id" [(ngModel)]="this.id">
           </div>
           <div class="center">

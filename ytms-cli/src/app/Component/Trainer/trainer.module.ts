@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-
+import {MatTooltipModule} from '@angular/material/tooltip';
 import {TrainerRoutingModule} from './trainer-routing.module';
 import {TrainerHomeComponent} from './trainer-home/trainer-home.component';
 import {TrainerHeaderComponent} from './trainer-header/trainer-header.component';
@@ -15,6 +15,15 @@ import {ToastrModule} from 'ngx-toastr';
 import { ViewTrainerFormComponent } from './view-trainer-form/view-trainer-form.component';
 import { ViewTraninerComponent } from './view-traniner/view-traniner.component';
 import { EditNominationComponent } from './edit-nomination/edit-nomination.component';
+import { AddAttendanceComponent } from './add-attendance/add-attendance.component';
+import { AgGridModule } from 'ag-grid-angular';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ViewAttendanceComponent } from './view-attendance/view-attendance.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { AddTranierAttendanceComponent } from './add-tranier-attendance/add-tranier-attendance.component';
 
 
 @NgModule({
@@ -25,7 +34,10 @@ import { EditNominationComponent } from './edit-nomination/edit-nomination.compo
     TrainerSidebarComponent,
     ViewTrainerFormComponent,
     ViewTraninerComponent,
-    EditNominationComponent
+    EditNominationComponent,
+    AddAttendanceComponent,
+    ViewAttendanceComponent,
+    AddTranierAttendanceComponent
   ],
   imports: [
     CommonModule,
@@ -35,8 +47,16 @@ import { EditNominationComponent } from './edit-nomination/edit-nomination.compo
     ToastrModule.forRoot(),
     HttpClientModule,
     FlatpickrModule.forRoot(),
-    NgbModule, NgbModalModule
-  ]
+    NgbModule, NgbModalModule,
+    AgGridModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatFormFieldModule, MatInputModule, MatDatepickerModule,
+    MatTooltipModule
+  ],
+  providers:[]
 })
 export class TrainerModule {
 }

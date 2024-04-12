@@ -1,0 +1,44 @@
+<div class="container-fluid g-0">
+
+    <main>
+        <!-- Main Content    -->
+        <div class="training-request-form">
+            <form>
+                <div class="form-header">
+                    <h5 class="heading-color">Training List</h5>
+                </div>
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <!-- <th>ID</th> -->
+                                <th>Training Name</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <!-- <th>Requester Name</th> -->
+                                <th>Training Status</th>
+                                <th>Trainer</th>
+                                <th>Final Score</th>
+                                <th>Feedback</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr *ngFor="let training of associateTrainingData">
+                                <!-- <td>{{training.id}}</td> -->
+                                <td>{{training.trainingName}}</td>
+                                <td>{{training.actualStartDate}}</td>
+                                <td>{{training.actualEndDate}}</td>
+                                <!-- <td>{{training.userName}}</td> -->
+                                <td>{{training.trainingStatus}}</td>
+                                <td>{{training.trainer}}</td>
+                                <td>{{training.finalScore}}</td>
+                                <td>{{training.feedback}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </div>
+    </main>
+</div>

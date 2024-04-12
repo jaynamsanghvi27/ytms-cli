@@ -1,0 +1,85 @@
+<h2 mat-dialog-title style="border-bottom: 1px solid #eee;
+color: #fff;text-align: center;background: #005ba3;">Trannier Attendance Details</h2>
+<mat-dialog-content class="mat-typography" style="height: calc(100% - 96px);">
+
+    <div class="row" style="    padding-bottom: 10px;
+    padding-top: 10px;">
+        <!-- <div class="col-2" style="font-weight: bold;">Training Dates :</div>
+        <div class="col-3" >
+           <select  class="form-control down-arrow" (change)='onOptionsSelectedFromDateDropDown($event)'>
+              <option value="">Select</option>
+              <option *ngFor="let trainingDate of trainingDatesValue" [ngValue]="trainingDate"  >
+                {{trainingDate}}
+                </option>
+           </select>
+        </div> -->
+         <div class="col-3"  >
+          <span *ngIf="isShowcalender">
+            
+            
+            <mat-form-field>
+                <mat-label>Choose a date</mat-label>
+                <input  (dateChange)="onDateChange($event)" [min]="minDate" [max]="maxDate" [matDatepickerFilter]="myFilter" matInput [matDatepicker]="picker">
+                <mat-hint style="display: flex;">
+                  <p style="color:antiquewhite ;font-size: -webkit-xxx-large;" title="Holiday/optinalHoliday"> &bull;</p>
+                  <p style="color:lightgreen ;font-size: -webkit-xxx-large;" title="Mark Attendance"> &bull;</p>
+                  <p style="color:lightcoral ;font-size: -webkit-xxx-large;" title="Not Mark Attendance"> &bull;</p></mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker [dateClass]="dateClass" #picker></mat-datepicker>
+              </mat-form-field>        
+              
+              <!-- <mat-form-field class="example-full-width">
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="picker">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker [dateClass]="dateClass" #picker></mat-datepicker>
+              </mat-form-field> -->
+            </span>  
+         </div>
+         <div class="col-5">
+          <span style="color: red;" *ngIf="isError"> {{errorMsg}}</span>
+          </div>
+        <div class="col-4" style="text-align: right;font-weight: bold;">
+            
+            
+        </div>
+        <!-- <div class="col-2" style="text-align: end;"><button type="submit" (click)="submit()" style="margin-right: 20px;" class="btn btn-primary btn-block btn-sm">
+            Submit
+            </button>
+        </div> -->
+     </div>
+
+
+     <table>
+        <thead>
+          <tr>
+              <th>Training Id</th>
+              <th>Attendance Date</th>
+              <th><input style="margin-right: 10px;" [(ngModel)]="isChecked"
+                type="checkbox"
+                (change)="clickHeaderCheckBox($event,true)"/>Attendance </th>
+              
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let training of trainingDataList">
+              <td>{{training.training_id}}</td>
+              <td>{{training.attendance_date }}</td>
+              <td><input
+                  type="checkbox" [(ngModel)]="training.attendance_status" name="element_name"
+                  [checked]="training.attendance_status"
+                  (change)="clickRowCheckBox(training)"/></td>
+              
+          </tr>
+        </tbody>
+      </table>
+    
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  
+    <button mat-button mat-dialog-close  class="btn btn-primary btn-block btn-m" style="margin-right: 15px;">Cancel</button>
+  <button type="submit" (click)="submit()"  class="btn btn-primary btn-block btn-m">
+    Submit
+    </button>
+</mat-dialog-actions>

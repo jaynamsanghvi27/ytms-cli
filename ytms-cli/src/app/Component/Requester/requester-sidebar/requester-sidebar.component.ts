@@ -20,7 +20,7 @@ export class RequesterSidebarComponent {
          number: 1,
          name: 'My Schedule',
         icon: 'fa-solid fa-calendar-days',
-        routing: (r1=='ROLE_TECHNICAL_MANAGER')?'/book-calendar':'/requester/calendar'
+        routing: (r1=='ROLE_TECHNICAL_MANAGER')?'/book-calendar':'/trainer/trainer-calendar'
         
   
        },
@@ -39,16 +39,16 @@ export class RequesterSidebarComponent {
       },
       {
         number: 4,
-        name: 'Order  ',
-        icon: 'fa-solid fa-cart-shopping',
-        routing: '/requester/calendar'
+        name: 'Associate Summary',
+        icon: 'fa-solid fa-address-book',
+        routing: '/tm-associate-summary'
   
       },
       {
         number: 5,
-        name: 'Settings',
+        name: 'Manage Associate',
         icon: 'fa-solid fa-gear',
-        routing: '/requester/calendar'
+        routing: '/tm-manage-associate'
   
       },
       {
@@ -63,6 +63,12 @@ export class RequesterSidebarComponent {
         name: 'Contact',
         icon: 'fa-solid fa-phone',
         routing: '/requester/calendar'
+      },
+      {
+        number: 8,
+        name: 'Associate Management',
+        icon: 'fa-solid fa-address-book',
+        routing: '/tm-associate-management'
       },
     ]
   }

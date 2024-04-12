@@ -1,7 +1,9 @@
+import { Time } from "@angular/common";
+
 export class TrainingReqForm{
     id?:number;
     unit!:String;
-    technology!: any;
+    upgradedSkills!: any;
     competency!: String;
     trainingType!: String;
     monthAndYear!: String;
@@ -19,4 +21,10 @@ export class TrainingReqForm{
     declinedMessage!:string;
     fileName!: string;
     trainingStatus!:string;
+    trainer?:string;
+    noOfDays!:number;
+    startTime!:Time;
+    endTime!:Time;
+    actualStartTime!:Time;
+    actualEndTime!:Time;
 }

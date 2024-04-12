@@ -30,4 +30,8 @@
     position: absolute;
     left: 125px;
 }
-
+.error {
+    color: red; 
+    /* padding: 8px;  */
+    margin-left: 10px;
+    margin-bottom: 16px;  }
