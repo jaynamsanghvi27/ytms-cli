@@ -62,6 +62,10 @@ export class TrainingRequestService {
     return this.http.get<TrainingReqForm[]>(this.url+"/register/getTrainingRequestForm"); 
     }
 
+    getUpcomingTrainings(): Observable<any[]> {
+      return this.http.get<TrainingReqForm[]>(this.url+"/register/getUpcomingTrainingList"); 
+      }
+
   getTrainingById(trainingId:any){
     return this.http.get<TrainingReqForm>(this.url+"/register/getTrainingRequestFormById/"+trainingId); 
   }

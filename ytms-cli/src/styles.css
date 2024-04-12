@@ -1,11 +1,11 @@
 /* angular-cli file: src/styles.css */
+
 @import 'ag-grid-community/styles/ag-grid.css';
 @import 'ag-grid-community/styles/ag-theme-alpine.css';
-
-
 @import 'ag-grid-community/styles/ag-grid.css';
 @import 'ag-grid-community/styles/ag-theme-alpine.css';
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
 body {
     font-family: 'Poppins', sans-serif;
 }
@@ -124,4 +124,6 @@ button.custom-date-class-optionalholiday {
 {
 color: grey;
 } */
+
+
 /* Set scrollbar width */

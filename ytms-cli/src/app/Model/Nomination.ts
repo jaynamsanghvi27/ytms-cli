@@ -9,4 +9,5 @@ export class Nomination {
     project!: string;
     current_location!: string;
     trainingId?: number;
+    requestor!: string;
 }

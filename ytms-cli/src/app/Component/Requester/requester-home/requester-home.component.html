@@ -1,14 +1,107 @@
 <div class="container-fluid g-0">
-  <app-requester-header (sideNavToggled)="sideNavStatus=$event;">
-  </app-requester-header>
+    <app-requester-header (sideNavToggled)="sideNavStatus=$event;">
+    </app-requester-header>
 
-  <main>
-    <app-requester-sidebar [ngClass]="{'app-side-nav-open':sideNavStatus}" [sideNavStatus]="sideNavStatus"
-                           class="black-border"></app-requester-sidebar>
-    <div [ngClass]="{'display-area-shrink':sideNavStatus}" class="display-area p-3">
-      <router-outlet></router-outlet>
-      <p class="fs-1 fw-bold fst-italic text-center">{{ this.username }}, Welcome to your Dashboard !</p>
-    </div>
-  </main>
+    <main>
+        <div *ngIf="viewSideNavBar">
+            <app-requester-sidebar [sideNavStatus]="sideNavStatus" [ngClass]="{'app-side-nav-open':sideNavStatus}" class="black-border">
+            </app-requester-sidebar>
+        </div>
+        <div class="display-area p-3" [ngClass]="{'display-area-shrink':sideNavStatus}">
+            <!-- Main Content    -->
+            <div class="training-request-form">
+                <form>
+                    <div class="form-header">
+                        <h5 class="heading-color">Upcoming Training List</h5>
+                    </div>
+                    <div class="social-box">
+                        <div class="container">
+                            <div class="row" style="color: black">
 
+                                <div class="col-lg-4 col-xs-12 text-center" *ngFor="let training of trainingReqForms">
+
+                                    <div class="box">
+
+                                        <div class="box-title">
+                                            <h5>{{training.trainingName}}</h5>
+                                        </div>
+
+                                        <div class="box-text">
+                                            <h6><span>Start Date    :   {{training.actualStartDate}}</span></h6>
+                                        </div>
+
+                                        <div class="box-text">
+                                            <h6><span>End Date  :   {{training.actualEndDate}}</span></h6>
+                                        </div>
+
+                                        <div class="box-text">
+                                            <h6><span>Trainer Name  :   {{training.trainer}}</span></h6>
+                                        </div>
+
+                                        <div class="box-text">
+                                            <h6><span>No. Of Days   :   {{training.noOfDays}}</span></h6>
+                                        </div>
+                                        <div class="box-text">
+                                            <h6><span>Alloted Seat   :   {{training.noOfActualParticipant}}</span></h6>
+                                        </div>
+                                        <div class="box-text">
+                                            <h6><span>Vacant Seats   :   {{30-training.noOfActualParticipant}}</span></h6>
+                                        </div>
+                                        <div class="box-btn" *ngIf="training.noOfActualParticipant<30">
+                                            <button class="btn btn-success btn-lg " (click)="openDialog(template1,training);">Add Nomination</button>
+                                        </div>
+                                        <div class="box-btn" *ngIf="!(training.noOfActualParticipant<30)">
+                                            <h6><span style="color: red;">Batch Already Full</span></h6>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <!-- Main Content Closed -->
+            <hr>
+
+            <ng-template #template1>
+                <!-- Nomination Upload Start -->
+                <div class="training-request-form">
+                    <form>
+                        <div class="form-header">
+                            <h5 class="heading-color">Add Nomination</h5>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">Bulk Nomination</div>
+                            <div class="col-4">
+                                <input type="file" formControlName="bulkUploadFile" placeholder="Select Excel File" accept=".csv, .xlsx, .xls" class="form-control" (change)="bulkUploadNominationData($event)">
+                                <div style="color: blue; font-size: small;">Please upload data carefully otherwise you need to clear the data after uploading</div>
+                            </div>
+                            <div class="col-2">Single Nomination</div>
+                            <div class="col-4">
+                                <a (click)="openDialog(nominationtemplate,'')"><span style="float: left;">Click To Add Nomination &nbsp; <i class="fa fa-plus"  title="Click To Add Nomination" ></i>
+                    
+                    </span>
+                  </a>
+
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-4"><a href="../../../../assets/excel/SampleBulkUploadFile.xlsx" download="SampleBulkUploadFile..xlsx">Click Here To Download Sample Format</a></div>
+                        </div>
+                    </form>
+                </div>
+                <!-- Nomination Upload End -->
+            </ng-template>
+            <ng-template #nominationtemplate>
+                <app-nomination-req></app-nomination-req>
+            </ng-template>
+        </div>
+    </main>
 </div>

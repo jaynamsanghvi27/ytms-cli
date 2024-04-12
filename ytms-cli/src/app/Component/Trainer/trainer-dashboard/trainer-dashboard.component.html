@@ -1,4 +1,61 @@
-<p class="fs-1 fw-bold fst-italic text-center" style="margin-top: 4rem;">
-    {{ this.userName }}, Welcome to your Trainer Dashboard !
-  </p>
-  
+<div class="container-fluid g-0">
+
+    <main>
+        <div class="display-area p-3" [ngClass]="{'display-area-shrink':sideNavStatus}">
+            <!-- Main Content    -->
+            <div class="training-request-form">
+                <form>
+                    <div class="form-header">
+                        <h5 class="heading-color">Upcoming Training List</h5>
+                    </div>
+                    <div class="social-box">
+                        <div class="container">
+                            <div class="row" style="color: black">
+
+                                <div class="col-lg-4 col-xs-12 text-center" *ngFor="let training of trainingReqForms">
+
+                                    <div class="box">
+
+                                        <div class="box-title">
+                                            <h4>{{training.trainingName}}</h4>
+                                        </div>
+
+                                        <div class="box-text">
+                                            <h6><span>Start Date    :   {{training.actualStartDate}}</span></h6>
+                                        </div>
+
+                                        <div class="box-text">
+                                            <h6><span>End Date  :   {{training.actualEndDate}}</span></h6>
+                                        </div>
+
+                                        <div class="box-text">
+                                            <h6><span>Trainer Name  :   {{training.trainer}}</span></h6>
+                                        </div>
+
+                                        <div class="box-text">
+                                            <h6><span>No. Of Days   :   {{training.noOfDays}}</span></h6>
+                                        </div>
+                                        <div class="box-btn">
+                                            <a (click)="openDialog(template1);">Add Nomination</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <!-- Main Content Closed -->
+
+
+            <ng-template #template1>
+                Hello
+            </ng-template>
+
+        </div>
+    </main>
+</div>
