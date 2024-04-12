@@ -39,6 +39,14 @@ export class CalenderComponent implements OnInit{
   userRole:String='';
   actionCss:String='actions'
 
+numberOfDays(date:Date, date1:Date)
+{
+date
+}
+
+
+
+
   calendarEvents:any[]=[]
   recusingDay=0;
   getAllEvents()
@@ -72,8 +80,7 @@ export class CalenderComponent implements OnInit{
      
      
       })
-      
-        
+     
   })
   }
 
