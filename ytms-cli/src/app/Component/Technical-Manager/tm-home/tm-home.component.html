@@ -6,7 +6,7 @@
     <app-tm-sidebar [ngClass]="{'app-side-nav-open':sideNavStatus}" [sideNavStatus]="sideNavStatus"
                     class="black-border"></app-tm-sidebar>
     <div [ngClass]="{'display-area-shrink':sideNavStatus}" class="display-area p-3">
-      <p class="fs-1 fw-bold fst-italic text-center">List of Requesters</p>
+      <p class="fs-1 fw-bold fst-italic text-center" style="background-color: #005ba3;">List of Requesters</p>
       <table style="width:100%">
         <tr>
           <th>Full Name</th>
@@ -19,10 +19,10 @@
           <td>{{ user.fullName }}</td>
           <td>{{ user.emailAdd }}</td>
           <td>
-            <button (click)="approveUser(user)" class="btn btn-primary btn-lg" id="submitbtn" name="submit"
+            <button (click)="approveUser(user)" class="btn btn-primary btn-sn" id="submitbtn" name="submit"
                     style="margin-left: 10px;">Approve
             </button>
-            <button (click)="declineUser(user)" class="btn btn-primary btn-lg" id="submitbtn" name="submit"
+            <button (click)="declineUser(user)" class="btn btn-primary btn-sn" id="submitbtn" name="submit"
                     style="margin-left: 10px;">Decline
             </button>
           </td>
