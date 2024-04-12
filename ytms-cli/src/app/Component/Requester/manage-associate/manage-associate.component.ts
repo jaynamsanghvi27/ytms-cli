@@ -40,7 +40,6 @@ export class ManageAssociateComponent implements OnInit {
     { field: "emp_mail_id",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
     { field: "grade",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
     { field: "trainingName",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
-    { field: "trainingDescription",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
     { field: "noOfDays",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
     { field: "actualStartDate",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
     { field: "actualEndDate",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
@@ -50,7 +49,7 @@ export class ManageAssociateComponent implements OnInit {
     { field: "project",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
     { field: "current_location",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
     { field: "trainingStatus",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
-
+    { field: "feedback",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
   ];
 
   constructor(private ser:TrainingRequestService,private auth:AuthService,

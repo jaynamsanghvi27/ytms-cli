@@ -4,7 +4,7 @@ import { Component, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { addDays, differenceInBusinessDays, isAfter, isBefore, isWeekend, parseISO } from 'date-fns';
+import { addDays, differenceInBusinessDays, isAfter, isBefore, isEqual, isWeekend, parseISO } from 'date-fns';
 import { AuthService } from 'src/app/Core/services/auth.service';
 import { CalendarService } from 'src/app/Core/services/calendar.service';
 import { JwtService } from 'src/app/Core/services/jwt.service';
@@ -229,6 +229,7 @@ export class TrainingReqComponent {
     console.log("TrainingID : "+trainingId);
     if (trainingId != null) {
       this.ser.getTrainingById(trainingId).subscribe((resp: any) => {
+        console.log(resp);
         this.trainingRequestObject = resp;
         this.id = trainingId;
         this.trainingReqForm.get('id')?.setValue(trainingId);
@@ -378,6 +379,12 @@ export class TrainingReqComponent {
   }
   enableInputField(fieldName: string) {
     const control = this.trainingReqForm.get(fieldName) as FormControl;
+    let startDate = new Date(this.trainingReqForm.value.startDate);
+    for(const date of this.holiday){
+      if(isEqual(parseISO(date.start),startDate)){
+        Swal.fire('Error', 'Training Can not start on OH/Holiday', 'error');
+      }
+    }
     if (control) {
       control.enable();
     }
