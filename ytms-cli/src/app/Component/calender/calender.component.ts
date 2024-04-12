@@ -43,9 +43,10 @@ export class CalenderComponent implements OnInit{
   recusingDay=0;
   getAllEvents()
   {  
-
-    this.calendarService.getALLEvents().subscribe((data:any[]) => 
-    { console.log(data),this.allEvents = data.map(event => ({
+     this.calendarService.getALLEvents().subscribe((data:any[]) => 
+    { 
+      console.log(data),this.allEvents = data.map(event => ({
+      id:event.id,
       title: event.title,
       start: new Date(event.start),
       end: new Date(event.end),
@@ -59,16 +60,21 @@ export class CalenderComponent implements OnInit{
       scheduleUser:event.scheduleUser,
       number_of_week_days:event.number_of_week_days   
     }))
-    ,console.log(this.events),    this.calendarService.getALLHolidays().subscribe((data)=>
+    ,console.log(this.events),   
+    this.calendarService.getALLHolidays().subscribe((data)=>
     {
       console.log(data)
       this.holidays=data
-       this.calendarOptions.events = this.allEvents.concat(data),
+     
+      this.calendarOptions.events = this.allEvents.concat(data),
        this.calendarOptionsWeek.events =  this.allEvents.concat(data),
        this.calendarOptionsDay.events =this.allEvents.concat(data)
+     
+     
       })
       
-  });
+        
+  })
   }
 
 
@@ -76,10 +82,11 @@ export class CalenderComponent implements OnInit{
   {
   this.calendarService.getEventsByTrainer(email).subscribe((data:any[]) => 
   { console.log(data),this.allEvents = data.map(event => ({
+    id:event.id,
     title: event.title,
     start: new Date(event.start),
     end: new Date(event.end),
-    scheduleUser:event.scheduleUser
+    scheduleUser:event.scheduleUser 
   })),
     this.events= data.map(event => ({
     id:event.id,
@@ -181,7 +188,8 @@ calendarOptions: CalendarOptions = {
       }
     },
   initialView:'dayGridMonth',
-  eventClick:this.handleEventClickMonthWeek.bind(this),
+  eventClick:this.handelEventClickedDay.bind(this),
+  // this.handleEventClickMonthWeek.bind(this),
   headerToolbar:{
     right: 'Month,Week,Day',
     center:'title',
@@ -201,7 +209,8 @@ calendarOptions: CalendarOptions = {
       this.handleDateClick(info)}
     },
 
-  eventClick:this.handleEventClickMonthWeek.bind(this),
+  eventClick:this.handelEventClickedDay.bind(this),
+  // this.handleEventClickMonthWeek.bind(this)
   initialView:'timeGridWeek',  
   headerToolbar:{
     right: 'Month,Week,Day',
@@ -259,8 +268,6 @@ handelEventClickedDay(info:any)
       if(event.title===clickedEvent.title)
       {
         id=event.id
-        
-  
       }     
     }  
   } 
