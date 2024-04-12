@@ -66,6 +66,7 @@ export class TrainingRequestService {
     return this.http.get<TrainingReqForm>(this.url+"/register/getTrainingRequestFormById/"+trainingId); 
   }
 
+
   saveUnit(unit:any){
     console.log("on service"+ JSON.stringify(unit));
     return this.http.post<any>(this.url+"/add-unit",unit);
@@ -132,6 +133,43 @@ export class TrainingRequestService {
   getRequesterMasterList():Observable<any[]>{
     return this.http.get<any[]>(this.url+"/register/getRequesterList"); 
   }
+
+getAllTranieeAttendanceViewDateData(tarningId:any): Observable<any[]> {
+    return this.http.get<any[]>(this.url+"/register/attendance/attendViewData/"+tarningId); 
+}
+
+getAllAttendanceData(tarningId:any): Observable<any[]> {
+      return this.http.get<any[]>(this.url+"/register/attendance/getAllAttendanceDateData/"+tarningId); 
+}
+
+getAttendanceDatesList(tarningId:any): Observable<any[]> {
+ return this.http.get<any[]>(this.url+"/register/attendance/attendsDatesList/"+tarningId); 
+}
+
+getselectedDateTranieeData(selecedDate:any,tarningId:any): Observable<any[]> {
+  return this.http.get<any[]>(this.url+"/register/attendance/selectedDateTranieeData/"+selecedDate+'/'+tarningId); 
+}
+
+getStartDateEndDate(tarningId:any): Observable<any[]> {
+  return this.http.get<any[]>(this.url+"/register/attendance/getStarAndEndDateData/"+tarningId); 
+}
+
+getAllTranierAttendData(tarningId:any): Observable<any[]> {
+  return this.http.get<any[]>(this.url+"/register/trainerAttendance/getAllTranierAttendance/"+tarningId); 
+}
+saveselectedDateTranieeData(selecedDate:any): Observable<any[]> {
+        console.log("on service"+ JSON.stringify(selecedDate));
+  return this.http.put<any[]>(this.url+"/register/attendance/add-Attendance",selecedDate); 
+}
+saveselectedDateTranierAttendanceData(data:any,tariningid:any): Observable<any[]> {
+  console.log("on service"+ JSON.stringify(data));
+return this.http.put<any[]>(this.url+"/register/trainerAttendance/updateAttendanceStatus/"+tariningid,data); 
+}
+createAattendanceRecord(data:any){
+  console.log("on createAattendanceRecord"+ JSON.stringify(data));
+  return this.http.post<any>(this.url+"/register/attendance/create/"+data,"");
+}
+
   getAssociateData():Observable<AssociateSummaryModel[]>{
     return this.http.get<any[]>(this.url+"/register/getAllNominations");
   }
@@ -146,4 +184,5 @@ export class TrainingRequestService {
   getAssociateManagementData():Observable<AssociateManagement[]>{
     return this.http.get<any[]>(this.url+"/associate/getAllAssociateTrainings");
   }
+
 }

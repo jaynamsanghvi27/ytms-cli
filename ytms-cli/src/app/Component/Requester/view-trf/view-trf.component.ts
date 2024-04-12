@@ -10,6 +10,9 @@ import { Router } from '@angular/router';
 import { UploadExcelService } from 'src/app/services/upload-excel.service';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { addDays, differenceInBusinessDays, isAfter, isBefore, isWeekend, parseISO } from 'date-fns';
+import { Location } from '@angular/common';
+import { CalendarService } from 'src/app/Core/services/calendar.service';
 
 @Component({
   selector: 'app-view-trf',
@@ -33,12 +36,13 @@ export class ViewTrfComponent {
   currentFile?: File;
   progress = 0;
   message = '';
+  holiday:any[]=[];
 
   fileInfos?: Observable<any>;
 
   constructor(private ser:TrainingRequestService,private auth:AuthService,
     private jwtServ:JwtService,public dialog: MatDialog,private formBuilder: FormBuilder,private router: Router
-    , private uploadService:UploadExcelService
+    , private uploadService:UploadExcelService,private _location: Location,private calService:CalendarService
     ){
     let token = auth.getToken();
     this.userRole = jwtServ.getRoleFromToken(token);
@@ -47,12 +51,17 @@ export class ViewTrfComponent {
   ngOnInit(): void {
     this.loadList();
     this.loadTrainner();
+    this.calService.getALLHolidays().subscribe((resp:any)=>{ this.holiday = resp})
     this.trainingReqForm = this.formBuilder.group({
       id:['', [Validators.required]],
       actualStartDate: ['', [Validators.required]],
       actualEndDate: ['', [Validators.required]],
       fileName: ['', [Validators.required]],
-      trainer:['',[Validators.required]]});
+      trainer:['',[Validators.required]],
+      actualStartTime:['',[Validators.required]],
+      actualEndTime:['',[Validators.required]],
+      noOfDays : [],
+    });
 
 
   this.trainingReqForm1 = this.formBuilder.group({
@@ -60,6 +69,10 @@ export class ViewTrfComponent {
     declinedMessage:['', [Validators.required]],
 
     });
+  }
+
+  backClicked() {
+    this._location.back();
   }
 
   loadList(){
@@ -205,6 +218,26 @@ decline()
         this.enableUploadButton=false;
       }else{
         this.enableUploadButton=true;
+      }
+    }
+
+    diff:any=0;
+    calculateDays():void{
+      let count=0;
+      if(this.trainingReqForm.value.actualEndDate != "" && this.trainingReqForm.value.actualStartDate != ""){
+        let endDate = addDays(new Date(this.trainingReqForm.value.actualEndDate),1);
+        let startDate = new Date(this.trainingReqForm.value.actualStartDate);
+        for(const date of this.holiday)
+        {
+          if(isBefore( parseISO(date.start),endDate) && isAfter(parseISO(date.start),startDate))
+            {
+              if(!isWeekend(parseISO(date.start)))
+              {
+                count++;
+              }
+            }
+        }
+        this.diff = differenceInBusinessDays(endDate,startDate)-count;
       }
     }
     

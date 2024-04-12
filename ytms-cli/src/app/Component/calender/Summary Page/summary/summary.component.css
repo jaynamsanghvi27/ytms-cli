@@ -2,105 +2,105 @@ body {
     color: #999;
     background: #fff;
     font-family: 'Roboto', sans-serif;
-}
-.form-control {
+  }
+  .form-control {
     min-height: 41px;
     box-shadow: none;
     border-color: #e1e1e1;
     margin-bottom: 4px;
-}
-.form-control:focus {
+  }
+  .form-control:focus {
     border-color: #00cb82;
-}  
-.form-control, .btn {        
+  }  
+  .form-control, .btn {        
     border-radius: 3px;
-}
-.form-header {
-    margin: -59px -30px 20px;
-    /* padding: 30px 30px 10px; */
+  }
+  .form-header {
+    margin: -30px -30px 20px;
+    padding: 30px 30px 10px;
     text-align: center;
     background: #005ba3;
     border-bottom: 1px solid #eee;
     color: #fff;
-}
-.form-header h2 {
+  }
+  .form-header h2 {
     font-size: 34px;
     font-weight: bold;
-    margin: 10px 0 10px;
+    margin: 0 0 10px;
     font-family: 'Pacifico', sans-serif;
-}
-.form-header p {
+  }
+  .form-header p {
     margin: 20px 0 15px;
     font-size: 17px;
     line-height: normal;
     font-family: 'Courgette', sans-serif;
-}
-.training-request-form {
+  }
+  .training-request-form {
     width: 100%;
     margin: 0 auto;  
-}
-.training-request-form form {
+  }
+  .training-request-form form {
     color: #999;
     border-radius: 3px;
     margin-bottom: 15px;
     background: #f0f0f0;
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
     padding: 30px;
-}
-.training-request-form .form-group {
+  }
+  .training-request-form .form-group {
     margin-bottom: 20px;
-}      
-.training-request-form label {
+  }      
+  .training-request-form label {
     font-weight: normal;
     font-size: 14px;
-}
-.training-request-form input[type="checkbox"] {
+  }
+  .training-request-form input[type="checkbox"] {
     position: relative;
     top: 1px;
-}
-.training-request-form .btn {        
+  }
+  .training-request-form .btn {        
     font-size: 16px;
     font-weight: bold;
     background: #004481;
     border: none;
     min-width: 200px;
-}
-.training-request-form .btn:hover, .training-request-form .btn:focus {
+  }
+  .training-request-form .btn:hover, .training-request-form .btn:focus {
     background: #005ba3;
     outline: none;
-}
-.training-request-form a {
+  }
+  .training-request-form a {
     color: #005ba3;    
-}
-.training-request-form a:hover {
+  }
+  .training-request-form a:hover {
     text-decoration: underline;
-}
-
-.request-drop-down{
+  }
+  
+  .request-drop-down{
     width: 94%;
     min-height: 41px;
     box-shadow: none;
     border-color: #e1e1e1;
     margin-bottom: 4px;
-}
-
-app-requester-header {
+  }
+  
+  app-requester-header {
     position: fixed;
     width: 100%;
     top: 0px;
     height: 4rem;
     z-index: 2;
-}
-
-main {
+  }
+  
+  main {
     position: absolute;
     top: 4rem;
     width: 100%;
     z-index: 1;
-}
-
-app-requester-sidebar {
-
+  }
+  
+  app-requester-sidebar {
+  
     position: absolute;
     left: 0rem;
     width: 60px;
@@ -111,38 +111,111 @@ app-requester-sidebar {
     overflow-x: hidden;
     white-space: nowrap;
     transition: width 1s linear;
-}
-
-.app-side-nav-open {
+  }
+  
+  .app-side-nav-open {
     width: 250px;
-}
-
-.display-area {
+  }
+  
+  .display-area {
     position: absolute;
     left: 60px;
     width: calc(100% - 60px);
     transition: width 1s linear, left 1s linear;;
-
-}
-
-.display-area-shrink {
+  
+  }
+  .display-area-ns {
+    position: absolute;
+    width: calc(100% - 60px);
+    transition: width 1s linear, left 1s linear;;
+  
+  }
+  
+  .display-area-shrink {
     left: 250px;
     width: calc(100% - 250px);
     transition: width 1s linear, left 1s linear;;
-}
-
-.training-request-input{
+  }
+  
+  .training-request-input{
     width: 80%
-}
-.center{
+  }
+  .center{
     text-align: center;
-}
-.fa-plus{
+  }
+  .fa-plus{
     font-size:24px;
     color:#005ba3;
     float: inline-end;
-}
-.fa-plus:hover {
+  }
+  .fa-plus:hover {
     
     color: blue; /* Example hover color change */
+  }
+  table {  
+    font-family: arial, sans-serif;
+    font-style: normal;
+    border-collapse: collapse;  
+    width: 100%; 
+    color:black 
+  }  
+    
+  td, th {  
+    border: 2px solid gray;  
+    text-align: left;  
+    padding: 8px;  
+  }  
+  tr:nth-child(even) {  
+    background-color: white;  
+  } 
+  
+  .inner
+  {
+    display: inline-flex;
+  }
+  .inner i{
+    margin-left: 3px;
+  }
+  .select
+{
+  width: 250px;
+}
+.manager-Select
+{
+  position: absolute;
+  right: calc(100% - 520px); 
+}
+.trainer-action {
+ 
+  top: 1%;
+  position: absolute;
+  right: calc(100% - 410px);   top: 0.5%; 
+
+}
+.flex
+{
+  display: flex;
+}
+.flex button
+{
+  position: relative;
+  bottom: 20px;
+}
+.flex p 
+{
+  position: relative;
+ bottom: 5px;  
+}
+.download
+{
+  position: absolute;
+  right: calc(100% - 1400px);  
+  bottom: 50px; 
+
+}
+.download-manager
+{
+  position: absolute;
+  right: calc(100% - 1300px);  
+  bottom: 50px; 
 }

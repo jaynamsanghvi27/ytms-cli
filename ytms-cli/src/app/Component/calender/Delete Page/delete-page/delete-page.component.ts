@@ -9,7 +9,7 @@ import { DeleteCalendarService } from 'src/app/Core/services/delete-calendar.ser
 export class DeletePageComponent implements OnInit {
   @Input() sideNavStatus: boolean = false;
  dataSource:any[]=[];
- displayedColumns: string[] = ['Task','Trainer','Approve','Deny']; 
+ displayedColumns: string[] = ['Task','Trainer','Type','Approve','Deny']; 
  
  constructor(private deleteService:DeleteCalendarService){}
 

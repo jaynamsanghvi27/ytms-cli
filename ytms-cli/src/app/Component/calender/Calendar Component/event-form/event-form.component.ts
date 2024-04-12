@@ -36,6 +36,7 @@ export class EventFormComponent implements OnInit {
   disableMonth:boolean=false
   disableYear:boolean=false 
  
+  holidays:any[]=[]
 
   myFilter = (d: Date | null): boolean => {
     const day = (d || new Date()).getDay();
@@ -129,8 +130,21 @@ setYearvalue(event:any)
   .subscribe((newStartTime) => {
       this.eventForm.get('end_time')?.setValue(newStartTime);
   });
+  this.eventService.getALLHolidays().subscribe((data)=>{this.holidays=data})
   }
-  
+
+  isOptionalHoliday(date:Date):any
+  {
+    for(const event of this.holidays)
+    {
+      if(isSameDay(parseISO(event.start),date))
+      {
+        return true
+      }
+  }
+  return false
+  }
+
 
   countWeekdaysBetweenMonths(startDate: Date, months: number): number {
     const endDate = addMonths(startDate, months); 
@@ -182,9 +196,16 @@ compareTimes(t1: string, t2: string): number {
   const hours2 = parseInt(match2[1], 10);
   const minutes2 = parseInt(match2[2], 10);
   if (hours1 < hours2 || (hours1 === hours2 && minutes1 < minutes2)) {
-    if(isAfter(new Date(this.eventForm.get("start_date")?.value),new Date(new Date(this.eventForm.get("end_date")?.value))))
+    if(isAfter(new Date(this.eventForm.get("start_date")?.value),new Date(new Date(this.eventForm.get("end_date")?.value)))||this.isOptionalHoliday(new Date(this.eventForm.get("start_date")?.value))||(this.isOptionalHoliday(new Date(this.eventForm.get("start_date")?.value))))
     {
-    return 1;
+     if(this.isOptionalHoliday(new Date(this.eventForm.get("start_date")?.value))||(this.isOptionalHoliday(new Date(this.eventForm.get("start_date")?.value))))  
+     {
+      return 4;
+     } 
+     else
+     {
+     return 2;
+    }
     }
     else
     {
@@ -192,18 +213,40 @@ compareTimes(t1: string, t2: string): number {
     }  
  
   } else if (hours1 === hours2 && minutes1 === minutes2) {
-  if(isSameDay(new Date(this.eventForm.get("start_date")?.value),new Date(new Date(this.eventForm.get("end_date")?.value)))|| isAfter(new Date(this.eventForm.get("start_date")?.value),new Date(new Date(this.eventForm.get("end_date")?.value))))
+  if(isSameDay(new Date(this.eventForm.get("start_date")?.value),new Date(new Date(this.eventForm.get("end_date")?.value)))|| isAfter(new Date(this.eventForm.get("start_date")?.value),new Date(new Date(this.eventForm.get("end_date")?.value)))||this.isOptionalHoliday(new Date(this.eventForm.get("start_date")?.value))||(this.isOptionalHoliday(new Date(this.eventForm.get("start_date")?.value))))
   {
-  return 1;
+    if(this.isOptionalHoliday(new Date(this.eventForm.get("start_date")?.value))||(this.isOptionalHoliday(new Date(this.eventForm.get("start_date")?.value))))
+  {
+    return 4;
   }
   else
   {
-     return -1; // t1 is equal to t2 
+    return 2;
+  
+  }  
+  }
+  else
+  {
+    if(this.isOptionalHoliday(new Date(this.eventForm.get("start_date")?.value))||(this.isOptionalHoliday(new Date(this.eventForm.get("start_date")?.value))))
+  {
+    return 4;
+  }
+  else{
+    return -1
+  }
+     ; // t1 is equal to t2 
 }
   
-  } else {if(isSameDay(new Date(this.eventForm.get("start_date")?.value),new Date(new Date(this.eventForm.get("end_date")?.value)))||isAfter(new Date(this.eventForm.get("start_date")?.value),new Date(new Date(this.eventForm.get("end_date")?.value))))
+  } else {if(isSameDay(new Date(this.eventForm.get("start_date")?.value),new Date(new Date(this.eventForm.get("end_date")?.value)))||isAfter(new Date(this.eventForm.get("start_date")?.value),new Date(new Date(this.eventForm.get("end_date")?.value)))||this.isOptionalHoliday(new Date(this.eventForm.get("start_date")?.value))||(this.isOptionalHoliday(new Date(this.eventForm.get("start_date")?.value))))
   {
-  return 1;
+    if(this.isOptionalHoliday(new Date(this.eventForm.get("start_date")?.value))||(this.isOptionalHoliday(new Date(this.eventForm.get("start_date")?.value))))
+  {
+    return 4;
+  }
+  else
+  {
+  return 3;
+  }
   }
   else
   {
@@ -215,9 +258,22 @@ createEvent()
 {
   if (this.eventForm.invalid || this.compareTimes(this.eventForm.get("start_time")?.value,this.eventForm.get("end_time")?.value)>0) {
     const missingFields: string[] = [];
-     if(this.compareTimes(this.eventForm.get("start_time")?.value,this.eventForm.get("end_time")?.value)>0)
+     if(this.compareTimes(this.eventForm.get("start_time")?.value,this.eventForm.get("end_time")?.value)===3)
     {
-      missingFields.push("End Should Be More than Start")
+      missingFields.push("StartDate and Endate Cannot Be Same or Set EndTime After StartTime")
+    }
+    if(this.compareTimes(this.eventForm.get("start_time")?.value,this.eventForm.get("end_time")?.value)===4)
+    {
+      missingFields.push("StartDate or EndDate is a Holiday")
+    }
+  
+    if(this.compareTimes(this.eventForm.get("start_time")?.value,this.eventForm.get("end_time")?.value)===1)
+    {
+      missingFields.push("EndTime should be After StartTime")
+    }
+    if(this.compareTimes(this.eventForm.get("start_time")?.value,this.eventForm.get("end_time")?.value)===2)
+    {
+      missingFields.push("Either Endate should be after StartDate or Endtime and StartTime cannot be same")
     }
   
     else{
@@ -244,7 +300,7 @@ createEvent()
       }
     }
     console.error('Form is invalid, missing fields:', missingFields.join(', '));
-    this.message='Missing:'+missingFields.join(', ');
+    this.message='Error:'+missingFields.join(', ');
     this.error={error:true,message:this.message}
     return;
   }
@@ -255,14 +311,18 @@ if(this.day)
 {
   this.event =this.eventForm.value
   console.log(this.event)
-  this.eventService.addEvent(this.event).subscribe((success)=>console.log(success))
+  this.eventService.addEvent(this.event).subscribe((success)=>{console.log(success),
+    window.location.reload()
+    })
 }
 else if(this.week)
 {   
     this.eventForm.get('number_of_week_days')?.setValue(((this.eventForm.value.number_of_week_days-1)*5) );
     this.event =this.eventForm.value
     console.log(this.event)
-    this.eventService.addEvent(this.event).subscribe((success)=>console.log(success))
+    this.eventService.addEvent(this.event).subscribe((success)=>{console.log(success),
+      window.location.reload()
+      })
   }
 else if(this.month)
 {   
@@ -270,7 +330,9 @@ else if(this.month)
    this.eventForm.get('number_of_week_days')?.setValue(this.countWeekdaysBetweenMonths(this.eventForm.value.start,this.eventForm.value.number_of_week_days)) 
    this.event =this.eventForm.value
     console.log(this.event)
-    this.eventService.addEvent(this.event).subscribe((success)=>console.log(success)) 
+    this.eventService.addEvent(this.event).subscribe((success)=>{console.log(success),
+      window.location.reload()
+  }) 
 }
 }
 else if(this.year)
@@ -282,11 +344,10 @@ else
 {
   this.event =this.eventForm.value
   console.log(this.event)
-  this.eventService.addEvent(this.event).subscribe((success)=>console.log(success)) 
+  this.eventService.addEvent(this.event).subscribe((success)=>{console.log(success),window.location.reload()
+ }) 
 }
-this.addEvents.close();
-window.location.reload()
-}
+this.addEvents.close();}
 }  
 closeEvents()
 {

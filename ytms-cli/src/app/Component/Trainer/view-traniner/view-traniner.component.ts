@@ -16,6 +16,7 @@ export class ViewTraninerComponent {
    trainingId:any;
    responseData:any;
    trainingStatusValue?: any[];
+   isAttendanceDataPresent=false;
   constructor(public dialogRef: MatDialogRef<any>,private datepipe: DatePipe,private ser: TrainingRequestService, @Inject(MAT_DIALOG_DATA) public data: any,private formBuilder: FormBuilder,private activatedRoute: ActivatedRoute){
    this.trainingStatusValue=['Planned','In Progress','Hold','Complete']
     
@@ -24,6 +25,16 @@ export class ViewTraninerComponent {
   }
 
   ngOnInit(): void {
+
+    this.ser.getAllAttendanceData(this.trainingId).subscribe(result=>{
+      if(result!=null && result.length > 0){
+        this.isAttendanceDataPresent=true;
+      }
+      
+    })
+
+
+
     this.trainingReqForm = this.formBuilder.group({
       id: [],
       actualStartDate: [''],
@@ -53,7 +64,7 @@ export class ViewTraninerComponent {
     
     this.trainingReqForm.patchValue({
       id: resp.id,
-      actualStartDate:this.datepipe.transform(resp.actualEndDate, 'yyyy-MM-dd'),
+      actualStartDate:this.datepipe.transform(resp.actualStartDate, 'yyyy-MM-dd'),
       actualEndDate:this.datepipe.transform(resp.actualEndDate, 'yyyy-MM-dd'),
       createdAt:this.datepipe.transform(resp.createdAt, 'yyyy-MM-dd'),
       declinedMessage:resp.declinedMessage,
@@ -83,6 +94,10 @@ export class ViewTraninerComponent {
       let obj: any = this.trainingReqForm.value;
       console.log("befor service " + JSON.stringify(this.trainingReqForm.value));
       this.ser.editTraining(obj).subscribe(data=>{
+       // 
+       if(obj.trainingStatus=='In Progress' && this.isAttendanceDataPresent==false){
+        this.ser.createAattendanceRecord(this.trainingId).subscribe();
+       }
         this.dialogRef.close();
       });
     }

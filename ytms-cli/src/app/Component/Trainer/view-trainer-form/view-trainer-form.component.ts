@@ -4,6 +4,10 @@ import { Router } from '@angular/router';
 import { TrainingRequestService } from 'src/app/services/training-request.service';
 import { ViewTraninerComponent } from '../view-traniner/view-traniner.component';
 import { EditNominationComponent } from '../edit-nomination/edit-nomination.component';
+import { AddAttendanceComponent } from '../add-attendance/add-attendance.component';
+import { ViewAttendanceComponent } from '../view-attendance/view-attendance.component';
+import Swal from 'sweetalert2';
+import { AddTranierAttendanceComponent } from '../add-tranier-attendance/add-tranier-attendance.component';
 
 @Component({
   selector: 'app-view-trainer-form',
@@ -19,16 +23,63 @@ export class ViewTrainerFormComponent {
   this.getTrainerTrainingList();
 }
  
-loadList(){
-  this.ser.getTraining().subscribe((resp:any)=>{
-    console.log(resp);
-    (this.trainingReqForms=resp)});
-}
-
 getTrainerTrainingList(){
   this.ser.getTrainerTrainingList().subscribe((resp:any)=>{
     console.log(resp);
     (this.trainingReqForms=resp)});
+}
+
+editTranierAttendance(id:any){
+  
+  const dialogRef =this.dialog.open(AddTranierAttendanceComponent,{
+    data:id,
+    width: '100%',
+    height: '90%'
+  } );
+  
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('The editAttendance dialog was closed');
+    this.getTrainerTrainingList();
+  });  
+
+}
+
+viewAttendance(id:any){
+  const dialogRef =this.dialog.open(ViewAttendanceComponent,{
+    data:id,
+    width: '100%',
+    height: '90%'
+  } );
+  
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('The viewAttendance dialog was closed');
+    this.getTrainerTrainingList();
+  });
+}
+
+editAttendance(id:any,staus:any){
+
+  if((staus!="" || staus==null) && staus!="In Progress"){
+    Swal.fire("Please check status is in In progress.");
+  }
+  else{
+
+    const dialogRef =this.dialog.open(AddAttendanceComponent,{
+      data:id,
+      width: '100%',
+      height: '90%'
+    } );
+    
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The editAttendance dialog was closed');
+      this.getTrainerTrainingList();
+    });  
+
+  }
+
+  
+
+  
 }
 
 editViewTraniner(id:any){

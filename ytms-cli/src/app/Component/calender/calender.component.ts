@@ -14,8 +14,9 @@ import { DayComponentComponent } from './Calendar Component/day-component/day-co
 import isSameDay from 'date-fns/isSameDay';
 import { EventComponentComponent } from './Calendar Component/event-component/event-component.component';
 import { EventFormComponent } from './Calendar Component/event-form/event-form.component';
-import { isWeekend, format } from 'date-fns';
-
+import { isWeekend, format, isAfter, isBefore, parseISO } from 'date-fns';
+import  dayCellDidMount  from '@fullcalendar/daygrid';
+import { OptionalHolidayComponent } from './Optional Holiday/optional-holiday/optional-holiday.component';
 
 
 @Component({
@@ -30,8 +31,10 @@ export class CalenderComponent implements OnInit{
   constructor(private dialog:MatDialog,private calendarService:CalendarService,private authService:AuthService,private jwtService:JwtService,private userService:UsersService){}
 
   events :any[]=[]
+  allEvents:any[]=[];
   emailEvents:any[]=[];
-  users:any[]=[]  
+  users:any[]=[];
+  holidays:any[]=[];
   searchFilter:boolean=false;
   userRole:String='';
   actionCss:String='actions'
@@ -39,9 +42,16 @@ export class CalenderComponent implements OnInit{
   calendarEvents:any[]=[]
   recusingDay=0;
   getAllEvents()
-  {
-    this.calendarService.getALLEvents().subscribe((data:any[]) => 
-    { console.log(data),
+  {  
+     this.calendarService.getALLEvents().subscribe((data:any[]) => 
+    { 
+      console.log(data),this.allEvents = data.map(event => ({
+      id:event.id,
+      title: event.title,
+      start: new Date(event.start),
+      end: new Date(event.end),
+      scheduleUser:event.scheduleUser
+    })),
       this.events= data.map(event => ({
       id:event.id,
       title: event.title,
@@ -50,32 +60,34 @@ export class CalenderComponent implements OnInit{
       scheduleUser:event.scheduleUser,
       number_of_week_days:event.number_of_week_days   
     }))
-    ,console.log(this.events), 
-      this.calendarOptions.events = data.map(event => ({
-        title: event.title,
-        start: new Date(event.start),
-        end: new Date(event.end),
-        scheduleUser:event.scheduleUser
-      })),
-      this.calendarOptionsWeek.events = data.map(event => ({
-        title: event.title,
-        start: new Date(event.start),
-        end: new Date(event.end),
-      })),      
-      this.calendarOptionsDay.events = data.map(event => ({
-        title: event.title,
-        start: new Date(event.start),
-        end: new Date(event.end),
-      }))
-  
-    });
+    ,console.log(this.events),   
+    this.calendarService.getALLHolidays().subscribe((data)=>
+    {
+      console.log(data)
+      this.holidays=data
+     
+      this.calendarOptions.events = this.allEvents.concat(data),
+       this.calendarOptionsWeek.events =  this.allEvents.concat(data),
+       this.calendarOptionsDay.events =this.allEvents.concat(data)
+     
+     
+      })
       
-      
+        
+  })
   }
+
+
   getEventByTrainer(email:any)
   {
   this.calendarService.getEventsByTrainer(email).subscribe((data:any[]) => 
-  { console.log(data),
+  { console.log(data),this.allEvents = data.map(event => ({
+    id:event.id,
+    title: event.title,
+    start: new Date(event.start),
+    end: new Date(event.end),
+    scheduleUser:event.scheduleUser 
+  })),
     this.events= data.map(event => ({
     id:event.id,
     title: event.title,
@@ -85,27 +97,27 @@ export class CalenderComponent implements OnInit{
     number_of_week_days:event.number_of_week_days   
 
   }))
-  ,console.log(this.events), 
-    this.calendarOptions.events = data.map(event => ({
-      title: event.title,
-      start: new Date(event.start),
-      end: new Date(event.end),
-    })),
-    this.calendarOptionsWeek.events = data.map(event => ({
-      title: event.title,
-      start: new Date(event.start),
-      end: new Date(event.end),
-    })),      
-    this.calendarOptionsDay.events = data.map(event => ({
-      title: event.title,
-      start: new Date(event.start),
-      end: new Date(event.end),
-    }))
-
+  ,  this.calendarService.getALLHolidays().subscribe((data)=>
+  {
+     this.holidays=data
+     this.calendarOptions.events = this.allEvents.concat(data),
+     this.calendarOptionsWeek.events =  this.allEvents.concat(data),
+     this.calendarOptionsDay.events =this.allEvents.concat(data)
+    })
   });
   }
   
-
+  isOptionalHoliday(events:any,date:Date):any
+  {
+    for(const event of events)
+    {
+      if(isSameDay(parseISO(event.start),date))
+      {
+        return true
+      }
+  }
+  return false
+  }
 
  switchUser(event: MatSelectChange)
  {
@@ -166,23 +178,39 @@ Day:
  },
 }
 calendarOptions: CalendarOptions = {
- plugins: [dayGridPlugin,interactionPlugin,timegrid],
- dateClick: this.handleDateClick.bind(this),
- initialView:'dayGridMonth',
- eventClick:this.handleEventClickMonthWeek.bind(this),
- headerToolbar:{
-   right: 'Month,Week,Day',
-   center:'title',
-   left:'prev,today,next'
- }, 
-   height:"700px",
-   customButtons:this.customButtons,
-    
-};
-calendarOptionsWeek : CalendarOptions = {
+  plugins: [dayGridPlugin,interactionPlugin,timegrid],
+  dateClick: (info)=>
+  {
+    if(!isWeekend(info.date) && !this.isOptionalHoliday(this.holidays,info.date))
+    {
+      this.handleDateClick(info)}
+      else{
+      }
+    },
+  initialView:'dayGridMonth',
+  eventClick:this.handelEventClickedDay.bind(this),
+  // this.handleEventClickMonthWeek.bind(this),
+  headerToolbar:{
+    right: 'Month,Week,Day',
+    center:'title',
+    left:'prev,today,next'
+  }, 
+    height:"800px",
+    customButtons:this.customButtons,
+     
+ };
+
+ calendarOptionsWeek : CalendarOptions = {
   plugins: [dayGridPlugin,interactionPlugin,timegrid], 
-  dateClick: this.handleDateClick.bind(this),
-  eventClick:this.handleEventClickMonthWeek.bind(this),
+  dateClick: (info)=>
+  {
+    if(!isWeekend(info.date))
+    {
+      this.handleDateClick(info)}
+    },
+
+  eventClick:this.handelEventClickedDay.bind(this),
+  // this.handleEventClickMonthWeek.bind(this)
   initialView:'timeGridWeek',  
   headerToolbar:{
     right: 'Month,Week,Day',
@@ -194,7 +222,13 @@ calendarOptionsWeek : CalendarOptions = {
 };
 calendarOptionsDay : CalendarOptions = {
   plugins: [dayGridPlugin,interactionPlugin,timegrid], 
-  dateClick: this.handleDateClick.bind(this),
+  dateClick: (info)=>
+  {
+    if(!isWeekend(info.date))
+    {
+      this.handleDateClick(info)}
+
+    },
   eventClick:this.handelEventClickedDay.bind(this),
   initialView:'timeGridDay',  
   headerToolbar:{
@@ -209,19 +243,24 @@ calendarOptionsDay : CalendarOptions = {
 
 handleEventClickMonthWeek(info:any)
 {
+if(!this.isOptionalHoliday(this.holidays,info.event.start)){
 const events = info.event.start
 this.selectedValue='Day';
 this.calendarOptionsDay.initialDate=info.event.start 
 console.log(events)
+}
 }
 
 handelEventClickedDay(info:any) 
  {
   const clickedEvent = info.event
   var id :any;
+  let date
   var number_of_week_days:any;
   for(const event of this.events)
   {  
+  
+    date=event.start
    if (event.start) 
    {
     if (event.end) 
@@ -229,8 +268,6 @@ handelEventClickedDay(info:any)
       if(event.title===clickedEvent.title)
       {
         id=event.id
-        
-  
       }     
     }  
   } 
@@ -242,6 +279,7 @@ handleDateClick(info:any) {
   const clickedDateObject = info.date;
     this.calendarOptionsWeek.initialDate=clickedDateObject;
   this.calendarOptionsDay.initialDate=clickedDateObject;
+  if(!this.isOptionalHoliday(this.holidays,info.date)){
   const viewDate=this.dialog.open(DayComponentComponent,{width:"800px",data:{date:clickedDateObject,events:this.events.filter(event => {
     if (event.start) {
       return isSameDay(event.start, clickedDateObject);
@@ -251,7 +289,7 @@ handleDateClick(info:any) {
    })  ,initialView:this.selectedValue}},)
   viewDate.afterClosed().subscribe(result=>(this.selectedValue=result.initialView,this.calendarOptions.initialDate=clickedDateObject))      
  console.log(this.events),
-   
+  
  console.log(this.events.filter(event => {
   if (event.start) {
     return isSameDay(event.start, clickedDateObject);
@@ -259,12 +297,16 @@ handleDateClick(info:any) {
     return false; 
   }
 }))
+}
  }
 addEvent()
 {
  this.dialog.open(EventFormComponent,{width:"400px",height:"90vh",data:{date:new Date()}})
  }
-
+addOptionalHoliday()
+{
+  this.dialog.open(OptionalHolidayComponent,{width:"600px",height:"30vh"})
+}
 
 }
 

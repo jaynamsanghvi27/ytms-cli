@@ -32,24 +32,24 @@ export class ManageAssociateComponent implements OnInit {
   @ViewChild(AgGridAngular) agGrid!: AgGridAngular;
   
   colDefs: any[] = [
-    { field: "sNo" ,quickFilter:true,filter: true,sortable: true,width: 100,pinned: 'left',sort: 'asc',cellRenderer : function (params:any) {
+    { field: "sNo" ,quickFilter:true,filter: true,suppressSizeToFit: true,sortable: true,width: 110,pinned: 'left',sort: 'asc',cellRenderer : function (params:any) {
       return params.rowIndex +1;
     } },
-    { field: "emp_id" ,quickFilter:true,filter: true,sortable: true,width: 100,pinned: 'left'},
-    { field: "emp_name" ,quickFilter:true,filter: true,sortable: true,width: 100,pinned: 'left'},
-    { field: "emp_mail_id",quickFilter:true,filter: true ,sortable: true,width: 100},
-    { field: "grade",quickFilter:true,filter: true ,sortable: true,width: 100},
-    { field: "trainingName",quickFilter:true,filter: true ,sortable: true,width: 100},
-    { field: "trainingDescription",quickFilter:true,filter: true ,sortable: true,width: 100},
-    { field: "noOfDays",quickFilter:true,filter: true ,sortable: true,width: 100},
-    { field: "actualStartDate",quickFilter:true,filter: true ,sortable: true,width: 100},
-    { field: "actualEndDate",quickFilter:true,filter: true ,sortable: true,width: 100},
-    { field: "skill",quickFilter:true,filter: true ,sortable: true,width: 100},
-    { field: "current_allocation",quickFilter:true,filter: true ,sortable: true,width: 100},
-    { field: "project",quickFilter:true,filter: true ,sortable: true,width: 100},
-    { field: "current_location",quickFilter:true,filter: true ,sortable: true,width: 100},
-    { field: "trainingStatus",quickFilter:true,filter: true ,sortable: true,width: 100},
-
+    { field: "emp_id" ,headerName:"Employee Id",quickFilter:true,filter: true,suppressSizeToFit: true,sortable: true,width: 150,pinned: 'left'},
+    { field: "emp_name" ,quickFilter:true,filter: true,sortable: true,suppressSizeToFit: true,width: 150,pinned: 'left'},
+    { field: "emp_mail_id",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
+    { field: "grade",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
+    { field: "trainingName",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
+    { field: "noOfDays",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
+    { field: "actualStartDate",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
+    { field: "actualEndDate",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
+    { field: "skill",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
+    { field: "upgradedSkills",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
+    { field: "current_allocation",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
+    { field: "project",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
+    { field: "current_location",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
+    { field: "trainingStatus",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
+    { field: "feedback",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
   ];
 
   constructor(private ser:TrainingRequestService,private auth:AuthService,

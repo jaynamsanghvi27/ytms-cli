@@ -11,6 +11,7 @@
             <div class="training-request-form">
                 <form [formGroup]="trainingReqForm" (ngSubmit)="submit()">
                   <div class="form-header">
+                    <a style="float: left; color: white;" (click)="backClicked()" >Back</a>
                     <h5 class="heading-color">Training Request Form</h5>
                   </div>
                   <div class="form-group">
@@ -77,13 +78,13 @@
                         <div class="col-2">Technology</div>
                           
                           <div class="col-4">
-                            <select multiple class="request-drop-down" [(ngModel)]="selectedTechnology" formControlName="technology" (change)="onTechnologychange($event)">
+                            <select multiple class="request-drop-down" [(ngModel)]="selectedTechnology" formControlName="upgradedSkills" (change)="onTechnologychange($event)">
                               <option [ngValue]="0" disabled [selected]>-- Select Technology --</option>
                                 <option *ngFor="let technology of technologies" [value]="technology.name" value="{{technology.name}}">
                                   {{technology.name}}
                                 </option>
                             </select>  
-                            <div style="color: red;" *ngIf= "trainingReqForm.controls['technology'].touched && trainingReqForm.controls['technology'].hasError('required')">Technology is required</div>
+                            <div style="color: red;" *ngIf= "trainingReqForm.controls['upgradedSkills'].touched && trainingReqForm.controls['upgradedSkills'].hasError('required')">Technology is required</div>
                             <span><i class="fa fa-plus" title="Click To Add Technology" (click)="openDialog(technologytemplate)"></i></span>
                         </div>
                     </div>
@@ -116,29 +117,42 @@
                     </div>
                     <div class="row">
                       <div class="col-2">Planned Start Date</div>
-                      <div class="col-4"><input
-                        type="date"
-                        formControlName="startDate"
-                        placeholder="Planed Start Date"
-                        class="form-control"
-                        min="{{dateToday() | date:'yyyy-MM-dd'}}" 
-                        (change)="enableInputField('endDate')"
-                      />
+                      <div class="col-4">
+                        <div class="row">
+                          <div class="col-8">
+                            <input
+                            type="date"
+                            formControlName="startDate"
+                            placeholder="Planed Start Date"
+                            class="form-control"
+                            min="{{dateToday() | date:'yyyy-MM-dd'}}" 
+                            (change)="enableInputField('endDate');calculateDays();"/>
+                          </div>
+                        <div class="col-4">
+                          <input type="time"  formControlName="startTime" class="form-control">
+                        </div>
+                      </div>
+                      
+                      <div style="color: red;" *ngIf= "trainingReqForm.controls['startTime'].touched && trainingReqForm.controls['startTime'].hasError('required')">Start Time is required</div>
                       <div style="color: red;" *ngIf= "trainingReqForm.controls['startDate'].touched && trainingReqForm.controls['startDate'].hasError('required')">Planned Start Date is required</div>
                       </div>
                       <div class="col-2">Planned End Date</div>
                       <div class="col-4">
                         <div class="row">
-                        <div class="col-6">
+                        <div class="col-8">
                           <input
                         type="date"
                         formControlName="endDate"
                         placeholder="Planed End Date"
                         class="form-control"
                         min="{{minEndDate() | date:'yyyy-MM-dd'}}" 
-                        (change)="calculateDays()"
-                      /></div>
-                      <div class="col-6" style="display: inline;">Duration : <span><input class="col-6" type="text" disabled value="{{this.diff}}"></span></div></div>
+                        (change)="calculateDays()"/>
+                        </div>
+                        <div class="col-4">
+                          <input type="time" formControlName="endTime" class="form-control">
+                        </div>
+                      </div>
+                      <div style="color: red;" *ngIf= "trainingReqForm.controls['endTime'].touched && trainingReqForm.controls['endTime'].hasError('required')">End Time is required</div>   
                       <div style="color: red;" *ngIf= "trainingReqForm.controls['endDate'].touched && trainingReqForm.controls['endDate'].hasError('required')">Planed End Date is required</div>   
                       <input type="hidden" formControlName="noOfDays" [(ngModel)] ="this.diff">
                     </div>
@@ -152,15 +166,22 @@
                         class="form-control">
                         <div style="color: red;" *ngIf= "trainingReqForm.controls['noOfParticipant'].touched && trainingReqForm.controls['noOfParticipant'].hasError('required')">No Of Participant is required</div>
                       </div>
+                      <div class="col-2">Duration </div>
+                      <div class="col-4">
+                        <input  type="text" disabled value="{{this.diff}}">
+                      </div>
+                    </div>
 
+                    <div class="row">
                       <div class="col-2">Purpose Of Training</div>
-                        <div class="col-4">
+                      <div class="col-4">
                         <textarea formControlName="trainingDescription"
                         placeholder=""
                         class="form-control"></textarea>
                         <div style="color: red;" *ngIf= "trainingReqForm.controls['trainingDescription'].touched && trainingReqForm.controls['trainingDescription'].hasError('required')">TrainingDescription is required</div>
-                        </div>
+                      </div>
                     </div>
+                    
                     <input type="hidden" formControlName="userName" [(ngModel)]="userName" >
                   </div>
                   <hr>

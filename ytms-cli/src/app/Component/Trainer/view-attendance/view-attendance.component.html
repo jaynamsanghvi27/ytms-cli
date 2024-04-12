@@ -1,0 +1,35 @@
+<h2 mat-dialog-title style="border-bottom: 1px solid #eee;
+color: #fff;text-align: center;background: #005ba3;">View Attendance Details</h2>
+<mat-dialog-content class="mat-typography" style="height: calc(100% - 96px);">
+    <table>
+        <thead>
+          <tr>
+              <th>Employee Id</th>
+              <th>Employee Email</th>
+              <th>Employee Name</th>
+              <th>Traning Days</th>
+              <th>Present Days</th>
+              <th>Percentange</th>
+              
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let training of attendsData">
+                <td>{{training.attendeace.emp_id}}</td>
+                <td>{{training.attendeace.emp_mail_id}}</td>
+                <td>{{training.attendeace.emp_name}}</td>
+                <td>{{training.attendeace.traning_noOfDays}}</td>
+                <td >
+                  <span  matTooltip="{{training.datesAttended}}"> {{training.attendeace.attend_noOfDays}}</span>
+                  
+                </td>
+                <td>{{checkNumber(training.attendeace.attendance_percentage)}}</td>
+       
+            </tr>
+        </tbody>
+      </table>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close  class="btn btn-primary btn-block btn-m" style="margin-right: 15px;">Cancel</button>
+  
+</mat-dialog-actions>

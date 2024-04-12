@@ -20,7 +20,7 @@ export class RequesterSidebarComponent {
          number: 1,
          name: 'My Schedule',
         icon: 'fa-solid fa-calendar-days',
-        routing: (r1=='ROLE_TECHNICAL_MANAGER')?'/book-calendar':'/requester/calendar'
+        routing: (r1=='ROLE_TECHNICAL_MANAGER')?'/book-calendar':'/trainer/trainer-calendar'
         
   
        },
@@ -39,9 +39,9 @@ export class RequesterSidebarComponent {
       },
       {
         number: 4,
-        name: 'Associate Management',
-        icon: 'fa-solid fa-cart-shopping',
-        routing: '/requester/calendar'
+        name: 'Associate Summary',
+        icon: 'fa-solid fa-address-book',
+        routing: '/tm-associate-summary'
   
       },
       {

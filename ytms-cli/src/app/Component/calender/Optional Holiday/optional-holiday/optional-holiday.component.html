@@ -1,0 +1,10 @@
+<mat-toolbar class="form-header"><h2 class="color" mat-dialog-title>Add Optional Holiday</h2> </mat-toolbar>
+<mat-dialog-content>
+    <input type="file" accept=".xlsx" (change)="onFileChange($event)">
+</mat-dialog-content>
+<mat-dialog-actions>
+    <div class="actions">
+    <button class="create-button btn btn-primary" [matDialogClose]="" (click)="addHolidays()">Add</button>&nbsp;
+    <button class="create-button btn btn-primary" (click)="exportExcel()">Sample Data</button>
+</div>
+</mat-dialog-actions>

@@ -9,8 +9,10 @@ export class AssociateManagement {
     actualStartDate!: string
     actualEndDate!: string
     skill!: string
+    upgradedSkills!: string
     current_allocation!: string
     project!: string
     current_location!: string
     trainingStatus!: string
+    feedback?:string;
   }
