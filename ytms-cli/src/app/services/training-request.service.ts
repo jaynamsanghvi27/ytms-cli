@@ -176,7 +176,7 @@ createAattendanceRecord(data:any){
   getTrainerTrainingList():Observable<any[]>{
     return this.http.get<any[]>(this.url+"/register/getTrainerTrainingList"); 
   }
-  getTrainingDataByEmpId(emailId:any):Observable<AssociateTrainingDataModel[]>{
+  getTrainingDataByEmpId(emailId:any):Observable<AssociateManagement[]>{
     console.log(this.url+"/register/getAllTrainingsByAssociate/"+emailId);
     return this.http.get<any[]>(this.url+"/register/getAllTrainingsByAssociate/"+emailId);
   }
