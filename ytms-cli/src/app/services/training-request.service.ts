@@ -62,6 +62,10 @@ export class TrainingRequestService {
     return this.http.get<TrainingReqForm[]>(this.url+"/register/getTrainingRequestForm"); 
     }
 
+    getUpcomingTrainings(): Observable<any[]> {
+      return this.http.get<TrainingReqForm[]>(this.url+"/register/getUpcomingTrainingList"); 
+      }
+
   getTrainingById(trainingId:any){
     return this.http.get<TrainingReqForm>(this.url+"/register/getTrainingRequestFormById/"+trainingId); 
   }
@@ -176,7 +180,7 @@ createAattendanceRecord(data:any){
   getTrainerTrainingList():Observable<any[]>{
     return this.http.get<any[]>(this.url+"/register/getTrainerTrainingList"); 
   }
-  getTrainingDataByEmpId(emailId:any):Observable<AssociateTrainingDataModel[]>{
+  getTrainingDataByEmpId(emailId:any):Observable<AssociateManagement[]>{
     console.log(this.url+"/register/getAllTrainingsByAssociate/"+emailId);
     return this.http.get<any[]>(this.url+"/register/getAllTrainingsByAssociate/"+emailId);
   }
