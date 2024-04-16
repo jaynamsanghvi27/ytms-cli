@@ -27,6 +27,12 @@ export class CalendarService {
   {
   return this.http.get<any[]>(this.url+"/calendar/"+trainerEmail)
   }
+
+  getEventByTitle(eventTitle:string):Observable<any>
+  {
+  return this.http.get<any[]>(this.url+"/calendar/getByTitle/"+eventTitle)
+  }
+
   public addEvent(events:any)
   {
    return this.http.post(this.url+"/calendar/save",events);
