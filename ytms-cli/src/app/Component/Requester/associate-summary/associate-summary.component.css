@@ -253,5 +253,5 @@ tr:nth-child(even) {
 {
     margin-bottom: auto;
     margin-top: auto;
-   
+    margin-right: 10px;
 }
