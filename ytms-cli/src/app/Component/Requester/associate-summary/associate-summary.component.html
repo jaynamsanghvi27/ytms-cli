@@ -20,9 +20,8 @@
                         </div>
                     </div>
                     <div mat-raised-button class="{{actionCss}}">
-                        <button  class="xlsx btn btn-primary" (click)="downloadAssociates()">Export to Excel</button>
-                        <!-- <button *ngIf="!this.isLoading" class="xlsx btn btn-primary" (click)="downloadAssociates()">Export to Excel</button> -->
-                       <!-- <mat-spinner *ngIf="this.isLoading"></mat-spinner> -->
+                        <button class="xlsx btn btn-primary" *ngIf="!this.isLoading" (click)="downloadAssociates()">Export to Excel</button>
+                        <mat-spinner [diameter]="25" class="spinner" *ngIf="this.isLoading"></mat-spinner>
                     </div>
                     <ag-grid-angular style="width: auto; height: 350px; min-height: 350px; max-height: 350px;" [rowData]="associatesData" [pagination]="pagination" [paginationPageSize]="paginationPageSize" (gridReady)="onGridReady($event)" [columnDefs]="colDefs" class="ag-theme-alpine"
                         (cellClicked)="openDialog(template,$event)"></ag-grid-angular>
