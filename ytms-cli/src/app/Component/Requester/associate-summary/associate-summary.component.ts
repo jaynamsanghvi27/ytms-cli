@@ -48,10 +48,12 @@ export class AssociateSummaryComponent implements OnInit {
   ngOnInit(): void {
     this.getAllAssociateData();
   }
-
+isLoading:boolean=false;
   downloadAssociates() {
+    this.isLoading= true
     let rowData: AssociateSummaryModel[] = this.filteredAssociatesData.length > 0 ? this.filteredAssociatesData : this.associatesData;
     this.downloadService.ExportExcelFile(rowData);
+    this.isLoading=false
   }
 
   onGridReady(params: any) {

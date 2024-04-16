@@ -119,14 +119,16 @@ export class ViewTrfComponent {
       this.trainingReqForm1.markAllAsTouched();
     }
   }
-
+isLoading:boolean=false;
   submit(): void {
     if (this.trainingReqForm.valid) {
+      this.isLoading=true;
       console.log("befor service " + JSON.stringify(this.trainingReqForm.value));
       this.trainingReqForm.get('trainer')?.setValue(this.trainingReqForm.value.trainer + "");
       let obj: any = this.trainingReqForm.value;
       this.ser.updateTraining(obj).subscribe((resp: any) => {
         Swal.fire('Success', 'Training Approved', 'success');
+        this.isLoading=false;
         this.trainingReqForm.reset();
         this.closeDialog();
         this.loadList();

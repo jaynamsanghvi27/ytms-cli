@@ -56,6 +56,7 @@ import { AgGridModule } from 'ag-grid-angular';
 import { ViewAssoicateTrainigDataComponent } from './Component/Requester/view-assoicate-trainig-data/view-assoicate-trainig-data.component';
 import { ManageAssociateComponent } from './Component/Requester/manage-associate/manage-associate.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   entryComponents: [DayComponentComponent, EventFormComponent, UpdateEventFormComponent, DeleteComponent,OptionalHolidayComponent],
@@ -110,7 +111,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatDialogModule, MatDatepickerModule,
     FullCalendarModule,
     MatSelectModule, MatInputModule, MatToolbarModule, MatIconModule, MatCheckboxModule, MatTableModule, MatNativeDateModule,
-    AgGridModule,
+    AgGridModule,MatProgressSpinnerModule,
     MatTooltipModule
   ],
   providers: [

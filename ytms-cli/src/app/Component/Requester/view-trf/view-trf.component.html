@@ -147,10 +147,11 @@
                         <input type="hidden" formControlName="id" [(ngModel)]="this.id">
                     </div>
                     <div class="center">
-                        <button type="submit" class="btn btn-primary btn-block btn-lg">
+                        <button type="submit" *ngIf="!this.isLoading" class="btn btn-primary btn-block btn-lg">
               Submit
             </button>
-                    </div>
+            <mat-spinner *ngIf="this.isLoading" class="spinner"></mat-spinner>
+        </div>
                 </form>
             </ng-template>
             <ng-template #template1>
