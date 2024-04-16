@@ -273,6 +273,8 @@ export class TrainingReqComponent {
         }
         this.trainingReqForm.get('startDate')?.setValue(this.datepipe.transform(this.trainingRequestObject?.startDate, 'yyyy-MM-dd'));
         this.trainingReqForm.get('endDate')?.setValue(this.datepipe.transform(this.trainingRequestObject?.endDate, 'yyyy-MM-dd'))
+        
+     
 
       });
     }
@@ -284,6 +286,7 @@ export class TrainingReqComponent {
     this.ser.getNominationListByTrainingId(trainingId).subscribe(resp => {
       this.nomination = resp;
     });
+
   }
 
 
