@@ -249,3 +249,9 @@ tr:nth-child(even) {
     height: 50px;
     background-color: #005ba3;
 }
+.spinner
+{
+    margin-bottom: auto;
+    margin-top: auto;
+   
+}
