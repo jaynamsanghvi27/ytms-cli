@@ -55,7 +55,6 @@ isLoading:boolean=false;
     this.downloadService.ExportExcelFile(rowData).subscribe((res: any) => {
       this.downloadFile2(res),this.isLoading=false
     });;
-    this.isLoading=false
   }
   downloadFile2(data: any) {
     const blob = new Blob([data], { type: 'text/csv' });
