@@ -1,10 +1,10 @@
-import { ActivatedRoute } from '@angular/router';
-import { Component, Inject} from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA,MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Nomination } from 'src/app/Model/Nomination';
 import { TrainingRequestService } from 'src/app/services/training-request.service';
-import { TrainingReqComponent } from '../training-req/training-req.component';
+import { TrainingReqComponent } from '../../Requester/training-req/training-req.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-nomination-req',
@@ -12,6 +12,8 @@ import { TrainingReqComponent } from '../training-req/training-req.component';
   styleUrls: ['./nomination-req.component.css']
 })
 export class NominationReqComponent {
+
+  
 
   sideNavStatus: boolean = false;
   nominationReqForm!: FormGroup;
