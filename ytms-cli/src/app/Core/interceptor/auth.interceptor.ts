@@ -54,7 +54,12 @@ export class AuthInterceptor implements HttpInterceptor {
       );
     } else {
       this.authService.removeToken();
-      this.router.navigate(['']);
+      const paths = ['/register'];
+      if (paths.includes(this.router.url)) {
+        this.router.navigate([this.router.url]);
+      } else {
+        this.router.navigate(['']);
+      }
       return next.handle(req).pipe(
         catchError((err: HttpErrorResponse) => {
           if (err) {
