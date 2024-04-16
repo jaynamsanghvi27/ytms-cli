@@ -79,7 +79,7 @@
                                         <input type="date" formControlName="actualStartDate" placeholder="Actual Start Date" class="form-control" (change)="calculateDays();" />
                                     </div>
                                     <div class="col-5">
-                                        <input type="time" formControlName="actualStartTime" class="form-control">
+                                        <input type="time" (change)="calculateTime()" formControlName="actualStartTime" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -90,7 +90,7 @@
                                         <input type="date" formControlName="actualEndDate" placeholder="Actual End Date" class="form-control" (change)="calculateDays();" />
                                     </div>
                                     <div class="col-5">
-                                        <input type="time" formControlName="actualEndTime" class="form-control">
+                                        <input type="time" (change)="calculateTime()" formControlName="actualEndTime" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -100,16 +100,26 @@
                             <div class="col-4">
                                 <!-- <select #teams class="request-drop-down" formControlName="trainer"> -->
                                 <select multiple class="request-drop-down" formControlName="trainer">
-                 <option [ngValue]="0" disabled >-- Select --</option>
-                    <option *ngFor="let trainer of trainers" value="{{trainer.fullName}}">
-                      {{trainer.fullName}}
-                    </option>
-                </select>
+                                    <option [ngValue]="0" disabled >-- Select --</option>
+                                    <option *ngFor="let trainer of trainers" value="{{trainer.fullName}}">
+                                    {{trainer.fullName}}
+                                    </option>
+                                </select>
                             </div>
                             <div class="col-2">Training Duration</div>
                             <div class="col-4">
-                                <input type="text" disabled value="{{this.diff}}">
-                                <input type="hidden" formControlName="noOfDays" [(ngModel)]="this.diff">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <input type="text" class="col-8" disabled value="{{this.diff}}">
+                                        <input type="hidden" formControlName="noOfDays" [(ngModel)]="this.diff">
+                                    </div>
+                                    <div class="col-4">
+                                        Duration Hours/Day
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="col-8" disabled value="{{this.timeDiff}}">
+                                    </div>
+                                </div>
                             </div>
                         </div><br>
                         <div class="row">
