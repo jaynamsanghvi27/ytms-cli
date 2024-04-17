@@ -58,7 +58,7 @@ export class TrainerSidebarComponent {
       number: 8,
       name: 'About',
       icon: 'fa-solid fa-circle-info',
-      routing: '/requester/calendar'
+      routing: '/trainer/about-us'
 
     },
     {
