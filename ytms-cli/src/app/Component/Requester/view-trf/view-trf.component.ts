@@ -127,12 +127,20 @@ isLoading:boolean=false;
       this.trainingReqForm.get('trainer')?.setValue(this.trainingReqForm.value.trainer + "");
       let obj: any = this.trainingReqForm.value;
       this.ser.updateTraining(obj).subscribe((resp: any) => {
-        Swal.fire('Success', 'Training Approved', 'success');
-        this.isLoading=false;
-        this.trainingReqForm.reset();
-        this.closeDialog();
-        this.loadList();
-        window.location.reload();
+        if(resp?.status === 'Success'){
+          Swal.fire('Success', 'Training Approved', 'success');
+          this.isLoading=false;
+          this.trainingReqForm.reset();
+          this.closeDialog();
+          this.loadList();
+         window.location.reload();
+        }else{
+          Swal.fire(resp.status, resp.message, 'error');
+          this.isLoading=false;
+          this.trainingReqForm.reset();
+          this.closeDialog();
+        }
+        
       });
 
     } else {
