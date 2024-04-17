@@ -124,7 +124,9 @@ dialogRef.afterClosed().subscribe(result => {
 openDialog(trainingId:any){
 
   const dialogRef =this.dialog.open(EditNominationComponent,{
-    data:trainingId
+    data:trainingId,
+    width: '100%',
+    height: '90%'
   } );
   
   dialogRef.afterClosed().subscribe(result => {
