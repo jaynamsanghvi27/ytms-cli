@@ -30,7 +30,7 @@ export class EditNominationComponent {
   }
 
   deleteNominationById(nominationId: any){
-    confirm("Are You Sure Want Delete Nomination "+nominationId)
+    confirm("Are You Sure Want Delete Nomination ")
     this.ser.deleteNominationById(nominationId).subscribe(data=>{
       console.log(data)
       this.dialogRef.close();
