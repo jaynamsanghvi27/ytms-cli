@@ -15,17 +15,19 @@ export class DownloadService {
 
   public ExportExcelFile(data: any) {
     const URL = this.baseurl + '/ytms/register/export-to-excel';
-    this.http.post(URL, data, { responseType: "blob" }).subscribe((res: any) => {
-      this.downloadFile(res);
-    });
+    return this.http.post(URL, data, { responseType: "blob" })
+    // .subscribe((res: any) => {
+      // this.downloadFile(res);
+    // });
 
   }
 
   public ExportAssociateMgmtExcelFile(data: any) {
     const URL = this.baseurl + '/ytms/register/exportAssociateManagementData';
-    this.http.post(URL, data, { responseType: "blob" }).subscribe((res: any) => {
-      this.downloadFile(res);
-    });
+    return this.http.post(URL, data, { responseType: "blob" })
+    //.subscribe((res: any) => {
+    //   this.downloadFile(res)
+    // });
 
   }
 

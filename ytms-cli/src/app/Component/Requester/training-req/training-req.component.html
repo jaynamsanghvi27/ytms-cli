@@ -27,7 +27,7 @@
                               
 
                               <!-- <div style="color: rgb(185, 21, 21);" *ngIf= "trainingReqForm.controls['unit'].touched && trainingReqForm.controls['unit'].hasError('required')">Unit is required</div> -->
-                              <span><i class="fa fa-plus" title="Click To Add Unit" (click)="openDialog(unittemplate)"></i></span>
+                              <span><i *ngIf="this.userRole=='ROLE_TECHNICAL_MANAGER'" class="fa fa-plus" title="Click To Add Unit" (click)="openDialog(unittemplate)"></i></span>
                               <div *ngIf="trainingReqForm.controls['unit'].touched && 
                               trainingReqForm.controls['unit'].invalid" style="color: red;">
                                 <span *ngIf="trainingReqForm.controls['unit'].hasError('required') || trainingReqForm.controls['unit'].hasError('pattern')">
@@ -43,7 +43,7 @@
                                 {{competency.name}}
                               </option>
                           </select>  
-                          <span><i class="fa fa-plus " title="Click To Add Competency" (click)="openDialog(competencytemplate)"></i></span>
+                          <span><i *ngIf="this.userRole=='ROLE_TECHNICAL_MANAGER'" class="fa fa-plus " title="Click To Add Competency" (click)="openDialog(competencytemplate)"></i></span>
                           <div *ngIf="trainingReqForm.controls['competency'].touched && 
                           trainingReqForm.controls['competency'].invalid" style="color: red;">
                             <span *ngIf="trainingReqForm.controls['competency'].hasError('required') || 
@@ -65,7 +65,7 @@
                                 {{trainingType.name}}
                               </option>
                           </select>
-                          <span><i class="fa fa-plus" title="Click To Add Training Type" (click)="openDialog(trainingtemplate)"></i></span>
+                          <span><i *ngIf="this.userRole=='ROLE_TECHNICAL_MANAGER'" class="fa fa-plus" title="Click To Add Training Type" (click)="openDialog(trainingtemplate)"></i></span>
                           <!-- <div style="color: red;" *ngIf= "trainingReqForm.controls['trainingType'].touched && trainingReqForm.controls['trainingType'].hasError('required')">TrainingType is required</div> -->
                           <div *ngIf="trainingReqForm.controls['trainingType'].touched && 
                           trainingReqForm.controls['trainingType'].invalid" style="color: red;">
@@ -85,7 +85,7 @@
                                 </option>
                             </select>  
                             <div style="color: red;" *ngIf= "trainingReqForm.controls['upgradedSkills'].touched && trainingReqForm.controls['upgradedSkills'].hasError('required')">Technology is required</div>
-                            <span><i class="fa fa-plus" title="Click To Add Technology" (click)="openDialog(technologytemplate)"></i></span>
+                            <span><i *ngIf="this.userRole=='ROLE_TECHNICAL_MANAGER'" class="fa fa-plus" title="Click To Add Technology" (click)="openDialog(technologytemplate)"></i></span>
                         </div>
                     </div>
 
@@ -119,7 +119,7 @@
                       <div class="col-2">Planned Start Date</div>
                       <div class="col-4">
                         <div class="row">
-                          <div class="col-8">
+                          <div class="col-12">
                             <input
                             type="date"
                             formControlName="startDate"
@@ -128,18 +128,14 @@
                             min="{{dateToday() | date:'yyyy-MM-dd'}}" 
                             (change)="enableInputField('endDate');calculateDays();"/>
                           </div>
-                        <div class="col-4">
-                          <input type="time"  formControlName="startTime" class="form-control">
-                        </div>
                       </div>
                       
-                      <div style="color: red;" *ngIf= "trainingReqForm.controls['startTime'].touched && trainingReqForm.controls['startTime'].hasError('required')">Start Time is required</div>
                       <div style="color: red;" *ngIf= "trainingReqForm.controls['startDate'].touched && trainingReqForm.controls['startDate'].hasError('required')">Planned Start Date is required</div>
                       </div>
                       <div class="col-2">Planned End Date</div>
                       <div class="col-4">
                         <div class="row">
-                        <div class="col-8">
+                        <div class="col-7">
                           <input
                         type="date"
                         formControlName="endDate"
@@ -148,15 +144,47 @@
                         min="{{minEndDate() | date:'yyyy-MM-dd'}}" 
                         (change)="calculateDays()"/>
                         </div>
-                        <div class="col-4">
-                          <input type="time" formControlName="endTime" class="form-control">
+                        <div class="col-3">
+                          Duration :
+                        </div>
+                        <div class="col-2">
+                          <input class="col-12" type="text" disabled value="{{this.diff}}">
                         </div>
                       </div>
-                      <div style="color: red;" *ngIf= "trainingReqForm.controls['endTime'].touched && trainingReqForm.controls['endTime'].hasError('required')">End Time is required</div>   
                       <div style="color: red;" *ngIf= "trainingReqForm.controls['endDate'].touched && trainingReqForm.controls['endDate'].hasError('required')">Planed End Date is required</div>   
                       <input type="hidden" formControlName="noOfDays" [(ngModel)] ="this.diff">
                     </div>
                   </div>
+
+                  <div class="row">
+                    <div class="col-2">Planned Start Time</div>
+                    <div class="col-4">
+                      <div class="row">
+                        
+                      <div class="col-4">
+                        <input type="time" (change)="calculateTime()" formControlName="startTime" class="form-control">
+                      </div>
+                    </div>
+                    
+                    <div style="color: red;" *ngIf= "trainingReqForm.controls['startTime'].touched && trainingReqForm.controls['startTime'].hasError('required')">Start Time is required</div>
+                    </div>
+                    <div class="col-2">Planned End Time</div>
+                    <div class="col-4">
+                      <div class="row">
+                      <div class="col-4">
+                        <input type="time" (change)="calculateTime()" formControlName="endTime" class="form-control">
+                      </div>
+                      <div class="col-5">
+                        Duration in Hours :
+                      </div>
+                      <div class="col-3">
+                        <input class="col-12" type="text" disabled value="{{this.timeDiff}}">
+                      </div>
+                    </div>
+                    <div style="color: red;" *ngIf= "trainingReqForm.controls['endTime'].touched && trainingReqForm.controls['endTime'].hasError('required')">End Time is required</div>   
+                    <!-- <input type="hidden" formControlName="noOfDays" [(ngModel)] ="this.diff"> -->
+                  </div>
+                </div>
 
                     <div class="row">
                       <div class="col-2">No. of Participant</div>
@@ -166,13 +194,6 @@
                         class="form-control">
                         <div style="color: red;" *ngIf= "trainingReqForm.controls['noOfParticipant'].touched && trainingReqForm.controls['noOfParticipant'].hasError('required')">No Of Participant is required</div>
                       </div>
-                      <div class="col-2">Duration </div>
-                      <div class="col-4">
-                        <input  type="text" disabled value="{{this.diff}}">
-                      </div>
-                    </div>
-
-                    <div class="row">
                       <div class="col-2">Purpose Of Training</div>
                       <div class="col-4">
                         <textarea formControlName="trainingDescription"
@@ -181,6 +202,8 @@
                         <div style="color: red;" *ngIf= "trainingReqForm.controls['trainingDescription'].touched && trainingReqForm.controls['trainingDescription'].hasError('required')">TrainingDescription is required</div>
                       </div>
                     </div>
+
+                    
                     
                     <input type="hidden" formControlName="userName" [(ngModel)]="userName" >
                   </div>

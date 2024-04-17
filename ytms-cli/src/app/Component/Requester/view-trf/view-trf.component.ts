@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 import { UploadExcelService } from 'src/app/services/upload-excel.service';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { addDays, differenceInBusinessDays, isAfter, isBefore, isWeekend, parseISO } from 'date-fns';
+import { addDays, differenceInBusinessDays, differenceInMinutes, isAfter, isBefore, isWeekend, parseISO } from 'date-fns';
 import { Location } from '@angular/common';
 import { CalendarService } from 'src/app/Core/services/calendar.service';
 import { AgGridAngular } from 'ag-grid-angular';
@@ -119,14 +119,16 @@ export class ViewTrfComponent {
       this.trainingReqForm1.markAllAsTouched();
     }
   }
-
+isLoading:boolean=false;
   submit(): void {
     if (this.trainingReqForm.valid) {
+      this.isLoading=true;
       console.log("befor service " + JSON.stringify(this.trainingReqForm.value));
       this.trainingReqForm.get('trainer')?.setValue(this.trainingReqForm.value.trainer + "");
       let obj: any = this.trainingReqForm.value;
       this.ser.updateTraining(obj).subscribe((resp: any) => {
         Swal.fire('Success', 'Training Approved', 'success');
+        this.isLoading=false;
         this.trainingReqForm.reset();
         this.closeDialog();
         this.loadList();
@@ -222,6 +224,7 @@ export class ViewTrfComponent {
   }
 
   diff: any = 0;
+  timeDiff: any = 0;
   calculateDays(): void {
     let count = 0;
     if (this.trainingReqForm.value.actualEndDate != "" && this.trainingReqForm.value.actualStartDate != "") {
@@ -237,5 +240,20 @@ export class ViewTrfComponent {
       this.diff = differenceInBusinessDays(endDate, startDate) - count;
     }
   }
-
+  calculateTime():void{
+    let startDate = new Date("2024-01-01 "+this.trainingReqForm.value.actualEndTime);
+    console.log("hello "+startDate);
+    
+    if(this.trainingReqForm.value.actualEndTime != "" && this.trainingReqForm.value.actualStartTime != ""){
+      
+      let endTime = new Date("2024-01-01 "+this.trainingReqForm.value.actualEndTime);
+      let startTime = new Date("2024-01-01 "+this.trainingReqForm.value.actualStartTime);
+      console.log("endtime "+endTime+"  startTime : "+startTime);
+        if(isBefore( startTime,endTime))
+          {
+            this.timeDiff = (differenceInMinutes(endTime,startTime)/60).toFixed(2);
+          }
+      
+    }
+  }
 }

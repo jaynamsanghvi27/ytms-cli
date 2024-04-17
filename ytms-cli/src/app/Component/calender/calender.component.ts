@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import {AuthService} from "../../Core/services/auth.service";
 import {JwtService} from "../../Core/services/jwt.service";
-import { CalendarOptions } from '@fullcalendar/core';
+import { Calendar, CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timegrid from '@fullcalendar/timegrid';
@@ -17,6 +17,7 @@ import { EventFormComponent } from './Calendar Component/event-form/event-form.c
 import { isWeekend, format, isAfter, isBefore, parseISO } from 'date-fns';
 import  dayCellDidMount  from '@fullcalendar/daygrid';
 import { OptionalHolidayComponent } from './Optional Holiday/optional-holiday/optional-holiday.component';
+import { SelectionChange } from '@angular/cdk/collections';
 
 
 @Component({
@@ -39,11 +40,14 @@ export class CalenderComponent implements OnInit{
   userRole:String='';
   actionCss:String='actions'
 
+
   calendarEvents:any[]=[]
   recusingDay=0;
-  getAllEvents()
+  
+  async getAllEvents()
   {  
-     this.calendarService.getALLEvents().subscribe((data:any[]) => 
+   this.calendarOptions.initialDate=new Date();
+    this.calendarService.getALLEvents().subscribe((data:any[]) => 
     { 
       console.log(data),this.allEvents = data.map(event => ({
       id:event.id,
@@ -64,21 +68,19 @@ export class CalenderComponent implements OnInit{
     this.calendarService.getALLHolidays().subscribe((data)=>
     {
       console.log(data)
-      this.holidays=data
-     
+      this.holidays=data     
       this.calendarOptions.events = this.allEvents.concat(data),
-       this.calendarOptionsWeek.events =  this.allEvents.concat(data),
-       this.calendarOptionsDay.events =this.allEvents.concat(data)
+      this.calendarOptionsWeek.events =  this.allEvents.concat(data),
+      this.calendarOptionsDay.events =this.allEvents.concat(data)
      
      
       })
-      
-        
+     
   })
   }
 
 
-  getEventByTrainer(email:any)
+  async getEventByTrainer(email:any)
   {
   this.calendarService.getEventsByTrainer(email).subscribe((data:any[]) => 
   { console.log(data),this.allEvents = data.map(event => ({
@@ -107,30 +109,28 @@ export class CalenderComponent implements OnInit{
   });
   }
   
-  isOptionalHoliday(events:any,date:Date):any
+ 
+  switchUser({ value }: MatSelectChange) {
+    if (value === "All") {
+ this.calendarOptions.events=[];
+      this.getAllEvents();
+    } else {
+ this.calendarOptions.events=[];
+      this.getEventByTrainer(value);
+    }
+  }
+
+isOptionalHoliday(events:any,date:Date):any
+{
+  for(const event of events)
   {
-    for(const event of events)
+    if(isSameDay(parseISO(event.start),date))
     {
-      if(isSameDay(parseISO(event.start),date))
-      {
-        return true
-      }
-  }
-  return false
-  }
-
- switchUser(event: MatSelectChange)
- {
-  if(event.value==="All")
-  {
-    this.getAllEvents();
-  }
-  else
-  {
-  this.getEventByTrainer(event.value)
-  }
- }
-
+      return true
+    }
+}
+return false
+}
   
   ngOnInit(): void 
   {
@@ -139,19 +139,24 @@ export class CalenderComponent implements OnInit{
     const email = this.jwtService.getUserNameFromToken(token);
     this.userRole=role;
     console.log(role,email);
+
     if (role === 'ROLE_TECHNICAL_MANAGER') 
     {
     this.getAllEvents();
     this.searchFilter=true;  
     }
-      else if (role == 'ROLE_TRAINER')
-      {    
-      this.actionCss='trainer-action'
+
+    else if (role == 'ROLE_TRAINER')
+    {    
+    
+        this.actionCss='trainer-action'
 
       this.searchFilter=false;  
       this.getEventByTrainer(email);
-      }
-    this.userService.getAllTrainers().subscribe((data)=>{this.users=data,console.log(data)})
+      
+    }
+
+      this.userService.getAllTrainers().subscribe((data)=>{this.users=data,console.log(data)})
 
   }
   customButtons=
@@ -239,7 +244,6 @@ calendarOptionsDay : CalendarOptions = {
   customButtons:this.customButtons
   
 };
-
 
 handleEventClickMonthWeek(info:any)
 {
