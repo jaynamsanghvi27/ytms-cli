@@ -350,7 +350,7 @@ export class TrainingReqComponent {
   }
 
   deleteNominationById(nominationId: any){
-    confirm("Are You Sure Want Delete Nomination "+nominationId)
+    confirm("Are You Sure Want Delete Nomination ")
     this.ser.deleteNominationById(nominationId).subscribe();
     this.getNominationListByTrainingId(this.id);
   }
