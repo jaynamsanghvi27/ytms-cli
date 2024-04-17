@@ -13,6 +13,7 @@ import { AssociateManagement } from '../Model/AssociateManagement';
   providedIn: 'root'
 })
 export class TrainingRequestService {
+  
   private trainingDataSubject = new BehaviorSubject<String>(new String());
   trainingName$ = this.trainingDataSubject.asObservable();
 
@@ -187,6 +188,13 @@ createAattendanceRecord(data:any){
 
   getAssociateManagementData():Observable<AssociateManagement[]>{
     return this.http.get<any[]>(this.url+"/associate/getAllAssociateTrainings");
+  }
+
+  saveEmployeeFeedbackByTrainer(employees: Nomination[]): Observable<any[]> {
+    return this.http.put<any>(this.url+"/register/updateFeedBack",employees);
+  }
+  savefinalScore(employees: Nomination[]): Observable<any[]> {
+    return this.http.put<any>(this.url+"/register/updateFinalScore",employees);
   }
 
 }

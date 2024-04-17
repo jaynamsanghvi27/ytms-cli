@@ -1,59 +1,62 @@
-
 <div class="container-fluid g-0">
-      
+
     <main>
-      
-      <div class="vt-display-area p-3" >
-        <!-- Main Content    -->
-        <div class="vt-training-request-form">
-          <form>
-            <div class="vt-form-header">
-              <h5 class="heading-color">Training Request List</h5>
-            </div>
-            <table>
-              <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Status</th>
-                    <th>Traniner Name</th>
-                    <th>Requester Name</th>
-                    <th>Number of Participents</th>
-                    <th>Attendance</th>
-                    <th>Actual Start Date</th>
-                    <th>Actual End Date</th>
-                    <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let training of trainingReqForms">
-                    <td>{{training.id}}</td>
-                    <td>{{training.trainingStatus}}</td>
-                    <td>{{training.trainer}}</td>
-                    <td>{{training.userName}}</td>
-                    <td><a (click)="openDialog(training.id)">{{training.noOfActualParticipant}}</a></td>
-                    <td>
-                      <span [ngStyle]="{'color' :training.trainingStatus == 'In Progress' ? 'green': 'red'}" class="inner"><i  class=" btn-info btn-sm fa fa-edit" title="Edit" (click)="editAttendance(training.id,training.trainingStatus)"></i></span>
-                      <span style="margin-left: 10px;" (click)="viewAttendance(training.id)"><i class="fa-regular fa-eye"></i></span>
-                      <!-- <span>  <i class="fa-solid fa-file-lines" style="margin-left: 10px;" (click)="editTranierAttendance(training.id)"></i></span> -->
-                    </td>
-                    <td>{{training.actualStartDate}}</td>
-                    <td>{{training.actualEndDate}}</td>
-                    <!-- <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' " style="text-align: center;"> -->
-                    <td style="text-align: center;">
-                        <span class="inner">
+
+        <div class="vt-display-area p-3">
+            <!-- Main Content    -->
+            <div class="vt-training-request-form">
+                <form>
+                    <div class="vt-form-header">
+                        <h5 class="heading-color">Training Request List</h5>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Status</th>
+                                <th>Traniner Name</th>
+                                <th>Requester Name</th>
+                                <th>Number of Participents</th>
+                                <th>Attendance</th>
+                                <th>FeedBack</th>
+                                <th>Score</th>
+                                <th>Actual Start Date</th>
+                                <th>Actual End Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let training of trainingReqForms">
+                                <td>{{training.id}}</td>
+                                <td>{{training.trainingStatus}}</td>
+                                <td>{{training.trainer}}</td>
+                                <td>{{training.userName}}</td>
+                                <td><a (click)="openDialog(training.id)">{{training.noOfActualParticipant}}</a></td>
+                                <td>
+                                    <span [ngStyle]="{'color' :training.trainingStatus == 'In Progress' ? 'green': 'red'}" class="inner"><i  class=" btn-info btn-sm fa fa-edit" title="Edit" (click)="editAttendance(training.id,training.trainingStatus)"></i></span>
+                                    <span style="margin-left: 10px;" (click)="viewAttendance(training.id)"><i class="fa-regular fa-eye"></i></span>
+                                    <!-- <span>  <i class="fa-solid fa-file-lines" style="margin-left: 10px;" (click)="editTranierAttendance(training.id)"></i></span> -->
+                                </td>
+                                <td><i class="btn-info btn-sm fa-solid fa-comments" title="Feedback" (click)="addEditFeedBack(training.id)"></i></td>
+                                <td><i class="btn-info btn-sm fas fa-list-alt" title="Score" (click)="updateFinalScore(training.id)"></i></td>
+                                <td>{{training.actualStartDate}}</td>
+                                <td>{{training.actualEndDate}}</td>
+                                <!-- <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' " style="text-align: center;"> -->
+                                <td style="text-align: center;">
+                                    <span class="inner">
                             <i title="Edit" class=" btn-info btn-sm fa fa-edit" (click)="editViewTraniner(training.id)"></i>
 
                         </span>
-                    </td>
-                </tr>
-              </tbody>
-            </table>
-  
-          </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </form>
+            </div>
+            <!-- Main Content Closed -->
+
+
         </div>
-        <!-- Main Content Closed -->
-  
-      
-      </div>
     </main>
-  </div>
+</div>
