@@ -8,6 +8,7 @@ export class TrainingReqForm{
     trainingType!: String;
     monthAndYear!: String;
     trainingName!: String;
+    trainer!: String;
     startDate!: Date;
     endDate!: Date;
     trainingDescription!: String;
@@ -21,10 +22,10 @@ export class TrainingReqForm{
     declinedMessage!:string;
     fileName!: string;
     trainingStatus!:string;
-    trainer?:string;
     noOfDays!:number;
     startTime!:Time;
     endTime!:Time;
     actualStartTime!:Time;
     actualEndTime!:Time;
+    requestor!:string;
 }

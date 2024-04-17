@@ -1,191 +1,195 @@
 <div class="container-fluid g-0">
-  <app-requester-header (sideNavToggled)="sideNavStatus=$event;">
-  </app-requester-header>
+    <app-requester-header (sideNavToggled)="sideNavStatus=$event;">
+    </app-requester-header>
 
-  <main>
-    <app-requester-sidebar [sideNavStatus]="sideNavStatus" *ngIf="this.userRole != 'ROLE_TRAINER'"
-      [ngClass]="{'app-side-nav-open':sideNavStatus}" class="black-border"> </app-requester-sidebar>
-    <div class="display-area p-3" [ngClass]="{'display-area-shrink':sideNavStatus}">
-      <!-- Main Content    -->
-      <div class="training-request-form">
-        <form>
-          <div class="form-header">
-            <a style="float: left; color: white;" (click)="backClicked()" >Back</a><span>
+    <main>
+        <app-requester-sidebar [sideNavStatus]="sideNavStatus" *ngIf="this.userRole != 'ROLE_TRAINER'" [ngClass]="{'app-side-nav-open':sideNavStatus}" class="black-border"> </app-requester-sidebar>
+        <div class="display-area p-3" [ngClass]="{'display-area-shrink':sideNavStatus}">
+            <!-- Main Content    -->
+            <div class="training-request-form">
+                <form>
+                    <div class="form-header">
+                        <a style="float: left; color: white;" (click)="backClicked()">Back</a><span>
             <h5 class="heading-color">Training Request List</h5></span>
-          </div>
-          <table>
-            <thead>
-              <tr>
-                <td><b>Training Id</b></td>
-                <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER'"><b>Training Requested by</b></td>
-                <td><b>Training Name</b></td>
-                <td><b>Training Status(For declined,Click)</b></td>
-                <td><b>Training Created At</b></td>
-                <td><b>Planned Start Date</b></td>
-                <td><b>Planned End Date</b></td>
-                <td><b>Actual Start Date</b></td>
-                <td><b>Actual End Date</b></td>
-                <td><b>Actual Participant</b></td>
-                <td><b>Assign Trainer</b></td>
-                <td><b>Action</b></td>
-                <!-- <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER'"><b>Action</b></td> -->
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let training of trainingReqForms">
-                <td>{{training.id}}</td>
-                <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER'">{{training.userName}}</td>
-                <td>{{training.trainingName}}</td>
-                <td> <a *ngIf="training.status=='DECLINED'" (click)="showMessage(training.declinedMessage)">
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td><b>Training Id</b></td>
+                                <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER'"><b>Training Requested by</b></td>
+                                <td><b>Training Name</b></td>
+                                <td><b>Training Status(For declined,Click)</b></td>
+                                <td><b>Training Created At</b></td>
+                                <td><b>Planned Start Date</b></td>
+                                <td><b>Planned End Date</b></td>
+                                <td><b>Actual Start Date</b></td>
+                                <td><b>Actual End Date</b></td>
+                                <td><b>Actual Participant</b></td>
+                                <td><b>Assign Trainer</b></td>
+                                <td><b>Action</b></td>
+                                <!-- <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER'"><b>Action</b></td> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let training of trainingReqForms">
+                                <td>{{training.id}}</td>
+                                <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER'">{{training.userName}}</td>
+                                <td>{{training.trainingName}}</td>
+                                <td> <a *ngIf="training.status=='DECLINED'" (click)="showMessage(training.declinedMessage)">
                     {{training.status}}</a> {{training.status!='DECLINED'?training.status:''}}</td>
-                <td>{{training.createdAt}}</td>
-                <td>{{training.startDate}}</td>
-                <td>{{training.endDate}}</td>
-                <td>{{training.actualStartDate}}</td>
-                <td>{{training.actualEndDate}}</td>
-                <td><a (click)="openNominationData(training.id)">{{training.noOfActualParticipant}}</a></td>
-                <td>{{training.trainer}}</td>
-                <!-- <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' " style="text-align: center;"> -->
-                  <td style="text-align: center;">
-                    <span class="inner">
+                                <td>{{training.createdAt}}</td>
+                                <td>{{training.startDate}}</td>
+                                <td>{{training.endDate}}</td>
+                                <td>{{training.actualStartDate}}</td>
+                                <td>{{training.actualEndDate}}</td>
+                                <td><a (click)="openNominationData(training.id)">{{training.noOfActualParticipant}}</a></td>
+                                <td>{{training.trainer}}</td>
+                                <!-- <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' " style="text-align: center;"> -->
+                                <td style="text-align: center;">
+                                    <span class="inner">
                     <i title="Edit" *ngIf="training.status!='APPROVED' || userRole == 'ROLE_TECHNICAL_MANAGER'" class=" btn-info btn-sm fa fa-edit" (click)="editTrf(training.id)"></i>
                     <i title="Approve" *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' && training.actualStartDate == null && training.status!='DECLINED'" class=" btn-success btn-sm fa fa-check-square-o" (click)="openDialog(template);setId(training.id)"></i>
                     <i title="Decline" *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' && training.actualStartDate == null && training.status!='DECLINED'" class=" btn-danger btn-sm  fa fa-close" (click)="declineDialog(template1);setId(training.id)"></i>
                   </span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-        </form>
-      </div>
-      <!-- Main Content Closed -->
+                </form>
+            </div>
+            <!-- Main Content Closed -->
 
-      <ng-template #template>
-        <form style="padding: 20px;" [formGroup]="trainingReqForm" (ngSubmit)="submit()">
-          <div mat-dialog-title>
-            <!-- <h2 class="dialog-title">dialog title</h2> -->
-            <a (click)="closeDialog()"><span class="icon-close"></span></a>
-          </div>
+            <ng-template #template>
+                <form style="padding: 20px;" [formGroup]="trainingReqForm" (ngSubmit)="submit()">
+                    <div mat-dialog-title>
+                        <!-- <h2 class="dialog-title">dialog title</h2> -->
+                        <a (click)="closeDialog()"><span class="icon-close"></span></a>
+                    </div>
 
-          <div class="form-header">
-            <h5 class="heading-color">Set Actual Start and End Date</h5>
-          </div>
-          <div class="form-group">
-            <div class="row">
-              <div class="col-2">Actual Start Date</div>
-              <div class="col-4">
-                <div class="row">
-                  <div class="col-7">
-                    <input type="date" formControlName="actualStartDate" placeholder="Actual Start Date"
-                    class="form-control" (change)="calculateDays();"/>
-                  </div>
-                  <div class="col-5">
-                    <input type="time" formControlName="actualStartTime" class="form-control">
-                  </div>
-                </div>
-              </div>
-              <div class="col-2"><label>Actual End Date</label></div>
-              <div class="col-4">
-                <div class="row">
-                  <div class="col-7">
-                    <input type="date" formControlName="actualEndDate" placeholder="Actual End Date" 
-                    class="form-control" (change)="calculateDays();"/>
-                  </div>
-                  <div class="col-5">
-                    <input type="time" formControlName="actualEndTime" class="form-control">
-                  </div>
-                </div>
-              </div>
-            </div><br>
-            <div class="row">
-              <div class="col-2">Assign Trainer</div>
-              <div class="col-4">
-                <!-- <select #teams class="request-drop-down" formControlName="trainer"> -->
-                <select multiple class="request-drop-down" formControlName="trainer">
-                 <option [ngValue]="0" disabled >-- Select --</option>
-                    <option *ngFor="let trainer of trainers" value="{{trainer.fullName}}">
-                      {{trainer.fullName}}
-                    </option>
-                </select>
-              </div>
-              <div class="col-2">Training Duration</div>
-              <div class="col-4">
-                <input  type="text" disabled value="{{this.diff}}">
-                <input type="hidden" formControlName="noOfDays" [(ngModel)] ="this.diff">
-              </div>
-            </div><br>
-            <div class="row">
-              <div class="col-2">Select file to be attached</div>
-              <div class="col-4"> <select class="fileName-drop-down" formControlName="fileName">
+                    <div class="form-header">
+                        <h5 class="heading-color">Set Actual Start and End Date</h5>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-2">Actual Start Date</div>
+                            <div class="col-4">
+                                <div class="row">
+                                    <div class="col-7">
+                                        <input type="date" formControlName="actualStartDate" placeholder="Actual Start Date" class="form-control" (change)="calculateDays();" />
+                                    </div>
+                                    <div class="col-5">
+                                        <input type="time" (change)="calculateTime()" formControlName="actualStartTime" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2"><label>Actual End Date</label></div>
+                            <div class="col-4">
+                                <div class="row">
+                                    <div class="col-7">
+                                        <input type="date" formControlName="actualEndDate" placeholder="Actual End Date" class="form-control" (change)="calculateDays();" />
+                                    </div>
+                                    <div class="col-5">
+                                        <input type="time" (change)="calculateTime()" formControlName="actualEndTime" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-2">Assign Trainer</div>
+                            <div class="col-4">
+                                <!-- <select #teams class="request-drop-down" formControlName="trainer"> -->
+                                <select multiple class="request-drop-down" formControlName="trainer">
+                                    <option [ngValue]="0" disabled >-- Select --</option>
+                                    <option *ngFor="let trainer of trainers" value="{{trainer.fullName}}">
+                                    {{trainer.fullName}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-2">Training Duration</div>
+                            <div class="col-4">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <input type="text" class="col-8" disabled value="{{this.diff}}">
+                                        <input type="hidden" formControlName="noOfDays" [(ngModel)]="this.diff">
+                                    </div>
+                                    <div class="col-4">
+                                        Duration Hours/Day
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="text" class="col-8" disabled value="{{this.timeDiff}}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-2">Select file to be attached</div>
+                            <div class="col-4"> <select class="fileName-drop-down" formControlName="fileName">
                   <option *ngFor="let file of files" value="{{file}}">
                     {{file}}
                   </option>
                 </select>
-              </div>
-              <div class="col-2"><label>Upload new template</label></div>
-              <div class="col-4">
-                <input type="file" id="file-input" accept=".xlsx" style="display: none;"
-                  (change)="onFileChange($event); selectFile($event)">
-                <label for="file-input" class="file-upload">
+                            </div>
+                            <div class="col-2"><label>Upload new template</label></div>
+                            <div class="col-4">
+                                <input type="file" id="file-input" accept=".xlsx" style="display: none;" (change)="onFileChange($event); selectFile($event)">
+                                <label for="file-input" class="file-upload">
                   <i class="fas fa-upload"></i> Upload a file
-                </label>
-                &nbsp;&nbsp;<span id="file-name"></span>
-                <span style="float: right;">
+                </label> &nbsp;&nbsp;
+                                <span id="file-name"></span>
+                                <span style="float: right;">
                   <button class="btn btn-success btn-sm" [disabled]="!enableUploadButton" (click)="upload()">
                     Upload
                   </button>
                 </span>
-                
 
-                <div *ngIf="currentFile" class="progress my-3">
-                  <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
-                    attr.aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100"
-                    [ngStyle]="{ width: progress + '%' }">
-                    {{ progress }}%
-                  </div>
-                </div>
-                <div *ngIf="message" class="alert alert-secondary" role="alert">{{ message }}</div>
-              </div>
-            </div>
-            <br>
-            
-            <input type="hidden" formControlName="id" [(ngModel)]="this.id">
-          </div>
-          <div class="center">
-            <button type="submit" class="btn btn-primary btn-block btn-lg">
+
+                                <div *ngIf="currentFile" class="progress my-3">
+                                    <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ width: progress + '%' }">
+                                        {{ progress }}%
+                                    </div>
+                                </div>
+                                <div *ngIf="message" class="alert alert-secondary" role="alert">{{ message }}</div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <input type="hidden" formControlName="id" [(ngModel)]="this.id">
+                    </div>
+                    <div class="center">
+                        <button type="submit" *ngIf="!this.isLoading" class="btn btn-primary btn-block btn-lg">
               Submit
             </button>
-          </div>
-        </form>
-      </ng-template>
-      <ng-template #template1>
-        <form style="padding: 20px;" [formGroup]="trainingReqForm1" (ngSubmit)="decline()">
-          <div mat-dialog-title>
-            <!-- <h2 class="dialog-title">dialog title</h2> -->
-            <a (click)="closeDialog()"><span class="icon-close"></span></a>
-          </div>
+            <mat-spinner *ngIf="this.isLoading" class="spinner"></mat-spinner>
+        </div>
+                </form>
+            </ng-template>
+            <ng-template #template1>
+                <form style="padding: 20px;" [formGroup]="trainingReqForm1" (ngSubmit)="decline()">
+                    <div mat-dialog-title>
+                        <!-- <h2 class="dialog-title">dialog title</h2> -->
+                        <a (click)="closeDialog()"><span class="icon-close"></span></a>
+                    </div>
 
-          <div class="form-header">
-            <h5 class="heading-color">Write Reason for decline request</h5>
-          </div>
-          <div class="form-group">
-            <div class="row">
-              <div class="col-2">Message</div>
-              <div class="col-4"><input type="text" formControlName="declinedMessage"
-                  placeholder="Write the declined message" class="form-control" />
-              </div>
-            </div>
+                    <div class="form-header">
+                        <h5 class="heading-color">Write Reason for decline request</h5>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-2">Message</div>
+                            <div class="col-4"><input type="text" formControlName="declinedMessage" placeholder="Write the declined message" class="form-control" />
+                            </div>
+                        </div>
 
-            <input type="hidden" formControlName="id" [(ngModel)]="this.id">
-            <div class="center">
-              <button type="submit" class="btn btn-primary btn-block btn-lg">
+                        <input type="hidden" formControlName="id" [(ngModel)]="this.id">
+                        <div class="center">
+                            <button type="submit" class="btn btn-primary btn-block btn-lg">
                 Submit
               </button>
-            </div>
-          </div>
-        </form>
-      </ng-template>
-    </div>
-  </main>
+                        </div>
+                    </div>
+                </form>
+            </ng-template>
+        </div>
+    </main>
 </div>

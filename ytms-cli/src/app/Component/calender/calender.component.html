@@ -12,6 +12,10 @@
            <div *ngSwitchCase="'Month'">
             <div *ngIf="searchFilter" class="manager-Select">  
             Trainer:
+            <!-- <select (change)="switchUsers($event)">
+             <option value="All">All</option>
+              <option *ngFor="let user of users" value="{{user.emailAdd}}"> {{ user.fullName}}</option>
+            </select> -->
             <mat-select (selectionChange)="switchUser($event)" class="select" placeholder="All">
               <mat-option [value]="'All'">All</mat-option>
               <mat-option *ngFor="let user of users" [value]="user.emailAdd">
@@ -28,7 +32,7 @@
             <button  class="btn btn-primary" *ngIf="searchFilter" [routerLink]="'/delete'">Task Delete Requests</button>
           
         </div>
-            <full-calendar class="calendar" [options]="calendarOptions">
+            <full-calendar class="calendar" [options]="calendarOptions" >
             </full-calendar>
            </div>
            <div *ngSwitchCase="'Week'">

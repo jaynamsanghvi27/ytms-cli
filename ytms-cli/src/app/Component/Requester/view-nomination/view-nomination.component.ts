@@ -17,6 +17,7 @@ export class ViewNominationComponent {
   nomination: Nomination[] = [];
   id:any;
   userRole:string="";
+  userName:string="";
   sideNavStatus: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private ser: TrainingRequestService,
@@ -24,6 +25,7 @@ export class ViewNominationComponent {
     private jwtServ:JwtService,private _location: Location){
       let token = auth.getToken();
       this.userRole = jwtServ.getRoleFromToken(token);
+      this.userName = jwtServ.getUserNameFromToken(token);
       let trainingId = this.activatedRoute.snapshot.paramMap.get('id');
       this.id=trainingId;
       this.getNominationListByTrainingId(trainingId);
@@ -39,7 +41,20 @@ export class ViewNominationComponent {
   getNominationListByTrainingId(trainingId:any){
     if(trainingId != null && trainingId >0)
     this.ser.getNominationListByTrainingId(trainingId).subscribe(resp => {
+     
       this.nomination = resp;
+      if(this.userRole !== 'ROLE_TECHNICAL_MANAGER'){
+
+        this.nomination =this.nomination.filter(nomination=>{
+          console.log("nomination.requestor");
+          console.log(nomination.requestor);
+          console.log("this.userName");
+          console.log(this.userName);
+          return nomination.requestor == this.userName
+        });
+
+      }
+      
     });
   }
 

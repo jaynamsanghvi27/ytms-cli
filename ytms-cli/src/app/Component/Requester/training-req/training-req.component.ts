@@ -4,7 +4,7 @@ import { Component, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { addDays, differenceInBusinessDays, isAfter, isBefore, isEqual, isWeekend, parseISO } from 'date-fns';
+import { addDays, differenceInBusinessDays, differenceInMinutes, isAfter, isBefore, isEqual, isWeekend, parseISO } from 'date-fns';
 import { AuthService } from 'src/app/Core/services/auth.service';
 import { CalendarService } from 'src/app/Core/services/calendar.service';
 import { JwtService } from 'src/app/Core/services/jwt.service';
@@ -13,6 +13,7 @@ import { TrainingReqForm } from 'src/app/Model/TrainingRequestForm';
 import { TrainingRequestService } from 'src/app/services/training-request.service';
 import Swal from 'sweetalert2';
 import { Location } from '@angular/common';
+import { parse } from 'date-fns/esm';
 
 @Component({
   selector: 'app-training-req',
@@ -273,6 +274,8 @@ export class TrainingReqComponent {
         }
         this.trainingReqForm.get('startDate')?.setValue(this.datepipe.transform(this.trainingRequestObject?.startDate, 'yyyy-MM-dd'));
         this.trainingReqForm.get('endDate')?.setValue(this.datepipe.transform(this.trainingRequestObject?.endDate, 'yyyy-MM-dd'))
+        
+     
 
       });
     }
@@ -284,6 +287,7 @@ export class TrainingReqComponent {
     this.ser.getNominationListByTrainingId(trainingId).subscribe(resp => {
       this.nomination = resp;
     });
+
   }
 
 
@@ -300,7 +304,11 @@ export class TrainingReqComponent {
             nomData[i]=resp;
           });
         }
-        this.nomination.push(nomData[i]);
+        if(this.nomination.length>=30){
+          alert("Nomination Should not be greated then 30");
+        }else{
+          this.nomination.push(nomData[i]);
+        }
       }
       if(this.id!=null&&this.id>0){
         this.reloadComponent();
@@ -312,7 +320,12 @@ export class TrainingReqComponent {
   }
 
   setNominationArray(nomData: Nomination) {
-    this.nomination.push(nomData);
+    if(this.nomination.length>=30){
+      alert("Nomination Should not be greated then 30");
+    }else{
+      this.nomination.push(nomData);
+    }
+    
   }
 
   hideShowNomination() {
@@ -320,7 +333,12 @@ export class TrainingReqComponent {
   }
 
   addNominationData(nomination: any) {
-    this.nomination.push(nomination);
+    if(this.nomination.length>=30){
+      alert("Nomination Should not be greated then 30");
+    }else{
+      this.nomination.push(nomination);
+    }
+    
   }
 
   setNominationId(nominationId: any) {
@@ -359,6 +377,7 @@ export class TrainingReqComponent {
   }
 
   diff:any=0;
+  timeDiff:any=0
   calculateDays():void{
     let count=0;
     if(this.trainingReqForm.value.endDate != null && this.trainingReqForm.value.startDate != null){
@@ -377,6 +396,24 @@ export class TrainingReqComponent {
       this.diff = differenceInBusinessDays(endDate,startDate)-count;
     }
   }
+
+  calculateTime():void{
+    let startDate = new Date("2024-01-01 "+this.trainingReqForm.value.endTime);
+    console.log("hello "+startDate);
+    
+    if(this.trainingReqForm.value.endTime != "" && this.trainingReqForm.value.startTime != ""){
+      
+      let endTime = new Date("2024-01-01 "+this.trainingReqForm.value.endTime);
+      let startTime = new Date("2024-01-01 "+this.trainingReqForm.value.startTime);
+      console.log("endtime "+endTime+"  startTime : "+startTime);
+        if(isBefore( startTime,endTime))
+          {
+            this.timeDiff = (differenceInMinutes(endTime,startTime)/60).toFixed(2);
+          }
+      
+    }
+  }
+
   enableInputField(fieldName: string) {
     const control = this.trainingReqForm.get(fieldName) as FormControl;
     let startDate = new Date(this.trainingReqForm.value.startDate);

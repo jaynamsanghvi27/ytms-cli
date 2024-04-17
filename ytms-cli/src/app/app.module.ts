@@ -28,7 +28,7 @@ import { DatePipe } from '@angular/common';
 import { TrainingReqComponent } from './Component/Requester/training-req/training-req.component';
 import { NominationReqComponent } from './Component/Requester/nomination-req/nomination-req.component';
 import { ViewTrfComponent } from './Component/Requester/view-trf/view-trf.component';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import {  MatDialogModule } from '@angular/material/dialog';
 import { UnitMasterComponent } from './Component/Requester/unit-master/unit-master.component';
 import { CompetencyMasterComponent } from './Component/Requester/competency-master/competency-master.component';
 import { TrainingTypeMasterComponent } from './Component/Requester/training-type-master/training-type-master.component';
@@ -56,6 +56,7 @@ import { AgGridModule } from 'ag-grid-angular';
 import { ViewAssoicateTrainigDataComponent } from './Component/Requester/view-assoicate-trainig-data/view-assoicate-trainig-data.component';
 import { ManageAssociateComponent } from './Component/Requester/manage-associate/manage-associate.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   entryComponents: [DayComponentComponent, EventFormComponent, UpdateEventFormComponent, DeleteComponent,OptionalHolidayComponent],
@@ -110,7 +111,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatDialogModule, MatDatepickerModule,
     FullCalendarModule,
     MatSelectModule, MatInputModule, MatToolbarModule, MatIconModule, MatCheckboxModule, MatTableModule, MatNativeDateModule,
-    AgGridModule,
+    AgGridModule,MatProgressSpinnerModule,
     MatTooltipModule
   ],
   providers: [

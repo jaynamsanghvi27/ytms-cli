@@ -49,6 +49,7 @@ export class ManageAssociateComponent implements OnInit {
     { field: "project",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
     { field: "current_location",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
     { field: "trainingStatus",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
+    { field: "finalScore",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
     { field: "feedback",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
   ];
 
@@ -75,10 +76,27 @@ export class ManageAssociateComponent implements OnInit {
       console.log(JSON.stringify(this.associatesData))
     });
   }
-
-  downloadAssociates() {
+isLoading:boolean= false
+   downloadAssociates() {
+    this.isLoading=true;
     let rowData: AssociateManagement[] = this.filteredAssociatesData.length > 0 ? this.filteredAssociatesData : this.associatesData;
-    this.downloadService.ExportAssociateMgmtExcelFile(rowData);
+   this.downloadService.ExportAssociateMgmtExcelFile(rowData).subscribe((res: any) => {
+      this.downloadFile2(res),this.isLoading=false
+    });
+  }
+
+  downloadFile2(data: any) {
+    const blob = new Blob([data], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    document.body.appendChild(a);
+    a.setAttribute('style', 'display: none');
+    a.setAttribute('target', 'blank');
+    a.href = url;
+    a.download = "Associates.xlsx";
+    a.click();
+    window.URL.revokeObjectURL(url);
+    a.remove();
   }
 
 }

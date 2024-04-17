@@ -59,11 +59,11 @@ body {
     top: 1px;
 }
 .training-request-form .btn {        
-    font-size: 8px;
+    font-size: 16px;
     font-weight: bold;
-    /* background: #004481; */
+    background: #004481;
     border: none;
-    min-width: 70px;
+    min-width: 200px;
 }
 .training-request-form .btn:hover, .training-request-form .btn:focus {
     background: #005ba3;
@@ -137,47 +137,15 @@ app-requester-sidebar {
 .center{
     text-align: center;
 }
-
-table {  
-    font-family: arial, sans-serif;
-    font-style: normal;
-    border-collapse: collapse;  
-    width: 100%; 
-    color:black ;
-    font-size:12px;
-    overflow-x:auto;
-  }  
-    
-  td, th {  
-    border: 2px solid gray;  
-    text-align: left;  
-    padding: 8px;  
-  }  
-  tr:nth-child(even) {  
-    background-color: white;  
-  } 
-
-  .fileName-drop-down{
-    width: 100%;
-    min-height: 41px;
-    box-shadow: none;
-    border-color: #e1e1e1;
-    margin-bottom: 4px;
+.closeIcon{
+    float: right;
+    position: absolute;
+    top: 0rem;
+    right: 1rem;
+    background: none;
+    order: none;
+    cursor: pointer;
+    z-index: 2; 
+    font-size:48px;
+    color:black
 }
-.inner
-{
-    display: inline-flex;
-}
-.inner i{
-    margin-left: 3px;
-}
-.image-upload>input {
-    display: none;
-  }
-  .spinner {
-    position: relative;
-    left: 545px;
-    width: 15px; 
-    height: 15px; 
-    border-radius: 5px; 
-  }

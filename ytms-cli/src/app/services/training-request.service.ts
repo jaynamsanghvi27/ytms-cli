@@ -62,6 +62,10 @@ export class TrainingRequestService {
     return this.http.get<TrainingReqForm[]>(this.url+"/register/getTrainingRequestForm"); 
     }
 
+    getUpcomingTrainings(): Observable<any[]> {
+      return this.http.get<TrainingReqForm[]>(this.url+"/register/getUpcomingTrainingList"); 
+      }
+
   getTrainingById(trainingId:any){
     return this.http.get<TrainingReqForm>(this.url+"/register/getTrainingRequestFormById/"+trainingId); 
   }
@@ -176,13 +180,37 @@ createAattendanceRecord(data:any){
   getTrainerTrainingList():Observable<any[]>{
     return this.http.get<any[]>(this.url+"/register/getTrainerTrainingList"); 
   }
-  getTrainingDataByEmpId(emailId:any):Observable<AssociateTrainingDataModel[]>{
+  getTrainingDataByEmpId(emailId:any):Observable<AssociateManagement[]>{
     console.log(this.url+"/register/getAllTrainingsByAssociate/"+emailId);
     return this.http.get<any[]>(this.url+"/register/getAllTrainingsByAssociate/"+emailId);
   }
 
   getAssociateManagementData():Observable<AssociateManagement[]>{
     return this.http.get<any[]>(this.url+"/associate/getAllAssociateTrainings");
+  }
+
+ 
+
+  public downLoadAttendaceExcelReport(data: any,trainingName:any) {
+    const URL = this.url + '/register/attendance/attendanceDownload/'+data;
+    this.http.post(URL, data, { responseType: "blob" }).subscribe((res: any) => {
+      this.downloadFile(res ,data,trainingName);
+    });
+
+  }
+
+  downloadFile(res: any,data:any,trainingName:any) {
+    const blob = new Blob([res], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    document.body.appendChild(a);
+    a.setAttribute('style', 'display: none');
+    a.setAttribute('target', 'blank');
+    a.href = url;
+    a.download = "AttdenaceReport_traningId_"+data+"_"+trainingName+".xlsx";
+    a.click();
+    window.URL.revokeObjectURL(url);
+    a.remove();
   }
 
 }
