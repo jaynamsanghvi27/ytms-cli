@@ -1,0 +1,30 @@
+<h2 mat-dialog-title style="border-bottom: 1px solid #eee;
+color: #fff;text-align: center;background: #005ba3;">Add/Update FeedBack</h2>
+<mat-dialog-content class="mat-typography" style="height: calc(100% - 96px);">
+    <table>
+        <thead>
+            <tr>
+                <th>Employee Id</th>
+                <th>Employee Email</th>
+                <th>Employee Name</th>
+                <th>FeedBack</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let employee of employees">
+                <td>{{employee.emp_id}}</td>
+                <td>{{employee.emp_mail_id}}</td>
+                <td>{{employee.emp_name}}</td>
+                <td><textarea type="text" [(ngModel)]="employee.feedback" name="feedback" rows="10" [disabled]="employee.disableFeedback ? employee.disableFeedback : false"></textarea></td>
+            </tr>
+        </tbody>
+    </table>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close class="btn btn-primary btn-block btn-m" style="margin-right: 15px;">Cancel</button>
+    <button type="submit" (click)="submit()" class="btn btn-primary btn-block btn-m">
+        Submit
+        </button>
+</mat-dialog-actions>

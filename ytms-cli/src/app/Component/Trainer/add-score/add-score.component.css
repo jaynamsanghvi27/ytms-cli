@@ -1,0 +1,106 @@
+body {
+    color: #999;
+    background: #fff;
+    font-family: 'Roboto', sans-serif;
+}
+
+.vt-form-header {
+    margin: -30px -30px 20px;
+    padding: 30px 30px 10px;
+    text-align: center;
+    background: #005ba3;
+    border-bottom: 1px solid #eee;
+    color: #fff;
+}
+
+.vt-form-header h2 {
+    font-size: 34px;
+    font-weight: bold;
+    margin: 0 0 10px;
+    font-family: 'Pacifico', sans-serif;
+}
+
+.vt-form-header p {
+    margin: 20px 0 15px;
+    font-size: 17px;
+    line-height: normal;
+    font-family: 'Courgette', sans-serif;
+}
+
+.vt-training-request-form {
+    width: 100%;
+    position: relative;
+    right: auto !important;
+}
+
+.vt-training-request-form form {
+    color: #999;
+    border-radius: 3px;
+    margin-bottom: 15px;
+    background: #f0f0f0;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+}
+
+.vt-training-request-form .form-group {
+    margin-bottom: 20px;
+}
+
+.vt-training-request-form label {
+    font-weight: normal;
+    font-size: 14px;
+}
+
+main {
+    position: absolute;
+    top: 4rem;
+    width: 100%;
+    z-index: 1;
+}
+
+.app-side-nav-open {
+    width: 250px;
+}
+
+.vt-display-area {
+    position: absolute;
+    left: 60px;
+    width: calc(100% - 60px);
+    transition: width 1s linear, left 1s linear;
+    ;
+}
+
+.training-request-input {
+    width: 80%
+}
+
+.center {
+    text-align: center;
+}
+
+table {
+    font-family: arial, sans-serif;
+    font-style: normal;
+    border-collapse: collapse;
+    width: 100%;
+    color: black
+}
+
+.vt-training-request-form a {
+    color: #005ba3;
+}
+
+.vt-training-request-form a:hover {
+    text-decoration: underline;
+}
+
+td,
+th {
+    border: 2px solid gray;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: white;
+}

@@ -25,6 +25,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { AddTranierAttendanceComponent } from './add-tranier-attendance/add-tranier-attendance.component';
 import { NominationReqComponent } from './nomination-req/nomination-req.component';
+import { AddFeedbackComponent } from './add-feedback/add-feedback.component';
+import { AddScoreComponent } from './add-score/add-score.component';
 
 
 @NgModule({
@@ -39,7 +41,9 @@ import { NominationReqComponent } from './nomination-req/nomination-req.componen
     AddAttendanceComponent,
     ViewAttendanceComponent,
     AddTranierAttendanceComponent,
-    NominationReqComponent
+    NominationReqComponent,
+    AddFeedbackComponent,
+    AddScoreComponent
   ],
   imports: [
     CommonModule,

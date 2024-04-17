@@ -10,4 +10,7 @@ export class Nomination {
     current_location!: string;
     trainingId?: number;
     requestor!: string;
+    finalScore!:number;
+    feedback!: string;
+    disableFeedback?: boolean;
 }
