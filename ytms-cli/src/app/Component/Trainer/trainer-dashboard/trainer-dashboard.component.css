@@ -72,11 +72,12 @@ body {
 }
 
 .training-request-form .btn {
-    font-size: 8px;
+    font-size: 12px;
     font-weight: bold;
-    /* background: #004481; */
     border: none;
-    min-width: 70px;
+    min-width: 120px;
+    height: 30px;
+    background: #005ba3;
 }
 
 .training-request-form .btn:hover,
