@@ -45,7 +45,7 @@ export class RequesterSidebarComponent {
         number: 5,
         name: 'Training Status Reports',
         icon: 'fa fa-eye',
-        routing: (r1=='ROLE_TECHNICAL_MANAGER')? '/tm-view-trainer-form':'/requestor/view-trainer-form'
+        routing: (r1=='ROLE_TECHNICAL_MANAGER')? '/tm-view-trainer-form':'/requester/view-trainer-form'
       },
       {
         number: 6,

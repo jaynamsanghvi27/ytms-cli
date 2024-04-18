@@ -13,7 +13,7 @@
                     <div class="vt-form-header">
                         <h5 class="heading-color">Training Request List</h5>
                     </div>
-                    <div mat-raised-button>
+                    <div mat-raised-button *ngIf="role === 'ROLE_TECHNICAL_MANAGER'">
                         <button class="xlsx btn btn-primary" (click)="downloadAssociates()">Export to Excel</button>
                     </div>
                     <table>

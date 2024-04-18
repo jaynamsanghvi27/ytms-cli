@@ -212,7 +212,11 @@ const routes: Routes = [
     canActivate: [AdminGuard],
     component: ViewTrainerFormComponent
   },
-  
+  {
+    path:'requester/tm-view-trainer-form',
+    canActivate: [AuthGuard],
+    component: ViewTrainerFormComponent
+  },
   /*{
     path: '**',
     component: LoginComponent
