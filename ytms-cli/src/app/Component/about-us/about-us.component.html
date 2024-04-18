@@ -1,122 +1,134 @@
 <div class="container-fluid g-0">
-    <app-requester-header (sideNavToggled)="sideNavStatus=$event;">
-    </app-requester-header>
+  <app-requester-header (sideNavToggled)="sideNavStatus=$event;">
+  </app-requester-header>
 
-    <main>
-        <app-requester-sidebar [sideNavStatus]="sideNavStatus" [ngClass]="{'app-side-nav-open':sideNavStatus}" class="black-border"> </app-requester-sidebar>
-        <div class="display-area p-3" [ngClass]="{'display-area-shrink':sideNavStatus}">
-        <!-- Main Content    -->
-        <div class="about-section">
-            <h1>About Us Page</h1>
-            <p>At Yash Technologies, we believe in the power of a well-trained workforce. That's why we developed YTMS, 
-                a user-friendly web application designed to revolutionize the way you manage associate training programs.</p>
-            <p>We understand the challenges of traditional training methods – scattered resources, time-consuming administration, and difficulty tracking progress.
-                  YTMS tackles these issues head-on by offering a centralized platform for:
-                    <b>Creating and managing training programs, </b>
-                    <b>Streamlined course assignment, </b>
-                    <b>Tracking progress and performance, </b>
-                    <b>Engaging learning experience. </b>
-                </p>
-          </div>
-          
-          <h2 style="text-align:center">Our Team</h2>
-          <div class="row">
-            <div class="column">
-              <div class="card">
-                <img src="#" alt="Jyanam Sanghvi" style="width:100%">
-                <div class="container">
-                  <h2>Jyanam Sanghvi</h2>
-                  <p class="title">Project Lead</p>
-                  <p>Handle Project Architecture and Team Management</p>
-                  <p>Jyanam.sanghvi@yash.com</p>
-                  <p><button class="button">Contact</button></p>
-                </div>
-              </div>
-            </div>
-          
-            <div class="column">
-              <div class="card">
-                <img src="/w3images/team2.jpg" alt="Rahul Dube" style="width:100%">
-                <div class="container">
-                  <h2>Rahul Dube</h2>
-                  <p class="title">Fullstack Developer</p>
-                  <p>Handling Fontend, Backend, DB and Team Coordination</p>
-                  <p>rahul.dube@yash.com</p>
-                  <p><button class="button">Contact</button></p>
-                </div>
-              </div>
-            </div>
-          
-            <div class="column">
-              <div class="card">
-                <img src="/w3images/team3.jpg" alt="Aakash Sanap" style="width:100%">
-                <div class="container">
-                  <h2>Aakash Sanap</h2>
-                  <p class="title">Fullstack Developer</p>
-                  <p>Handling Fontend, Backend and Team Coordination</p>
-                  <p>aakash.sanap@yash.com</p>
-                  <p><button class="button">Contact</button></p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="column">
-              <div class="card">
-                <img src="#" alt="Shaik Meeravali" style="width:100%">
-                <div class="container">
-                  <h2>Shaik Meeravali</h2>
-                  <p class="title">Fullstack Developer</p>
-                  <p>Handling Fontend, Backend and DB</p>
-                  <p>shaik.meeravali@yash.com</p>
-                  <p><button class="button">Contact</button></p>
-                </div>
-              </div>
-            </div>
-          
-            <div class="column">
-              <div class="card">
-                <img src="/w3images/team2.jpg" alt="Prathmesh Ranadive" style="width:100%">
-                <div class="container">
-                  <h2>Prathmesh Ranadive</h2>
-                  <p class="title">Jonior Developer</p>
-                  <p>Handling Calendar Funtionality</p>
-                  <p>prathmesh.ranadive@yash.com</p>
-                  <p><button class="button">Contact</button></p>
-                </div>
-              </div>
-            </div>
-          
-            <div class="column">
-              <div class="card">
-                <img src="/w3images/team3.jpg" alt="Aakash Sanap" style="width:100%">
-                <div class="container">
-                  <h2>Amol Palve</h2>
-                  <p class="title">Fontend Developer</p>
-                  <p>Handling Fontend and Team Coordination</p>
-                  <p>amol.palve@yash.com</p>
-                  <p><button class="button">Contact</button></p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="column">
-                <div class="card">
-                    <img src="/w3images/team2.jpg" alt="Rahul Soni" style="width:100%">
-                    <div class="container">
-                      <h2>Rahul Soni</h2>
-                      <p class="title">Backend Developer</p>
-                      <p>Handling Backend, DB and Team Coordination</p>
-                      <p>soni.rahul@yash.com</p>
-                      <p><button class="button">Contact</button></p>
-                    </div>
-                  </div>
-            </div>
-          </div>
-        <!-- Main Content Closed -->
-
+  <main>
+      <app-requester-sidebar [sideNavStatus]="sideNavStatus" [ngClass]="{'app-side-nav-open':sideNavStatus}" class="black-border"> </app-requester-sidebar>
+      <div class="display-area p-3" [ngClass]="{'display-area-shrink':sideNavStatus}">
+      <!-- Main Content    -->
+      <div class="about-section">
+          <h1>About Us Page</h1>
+          <p>At Yash Technologies, we believe in the power of a well-trained workforce. That's why we developed YTMS,
+              a user-friendly web application designed to revolutionize the way you manage associate training programs.</p>
+          <p>We understand the challenges of traditional training methods – scattered resources, time-consuming administration, and difficulty tracking progress.
+                YTMS tackles these issues head-on by offering a centralized platform for:
+                  <b>Creating and managing training programs, </b>
+                  <b>Streamlined course assignment, </b>
+                  <b>Tracking progress and performance, </b>
+                  <b>Engaging learning experience. </b>
+              </p>
         </div>
-    </main>
+       
+        <h2 style="text-align:center">Our Team</h2>
+        <div class="row">
+          <div class="column">
+            <div class="card">
+              <img src="#" alt="Jaynam Sanghvi" style="width:100%">
+              <div class="container">
+                <h2>Jaynam Sanghvi</h2>
+                <p class="title">Project Manager</p>
+                <p>Handle Project Architecture,Requirement and Team Management</p>
+                <p>jaynam.sanghvi@yash.com</p>
+                <p><button class="button">Contact</button></p>
+              </div>
+            </div>
+          </div>
+       
+          <div class="column">
+            <div class="card">
+              <img src="/w3images/team2.jpg" alt="Rahul Dube" style="width:100%">
+              <div class="container">
+                <h2>Rahul Dube</h2>
+                <p class="title">Fullstack Developer</p>
+                <p>Handling Frontend, Backend, DB and Team Coordination</p>
+                <p>rahul.dube@yash.com</p>
+                <p><button class="button">Contact</button></p>
+              </div>
+            </div>
+          </div>
+       
+          <div class="column">
+            <div class="card">
+              <img src="/w3images/team3.jpg" alt="Aakash Sanap" style="width:100%">
+              <div class="container">
+                <h2>Aakash Sanap</h2>
+                <p class="title">Fullstack Developer</p>
+                <p>Handling Frontend, Backend, DB and Team Coordination</p>
+                <p>aakash.sanap@yash.com</p>
+                <p><button class="button">Contact</button></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="column">
+            <div class="card">
+              <img src="#" alt="Shaik Meeravali" style="width:100%">
+              <div class="container">
+                <h2>Shaik Meeravali</h2>
+                <p class="title">Fullstack Developer</p>
+                <p>Handling Frontend, Backend, DB and Team Coordination</p>
+                <p>shaik.meeravali@yash.com</p>
+                <p><button class="button">Contact</button></p>
+              </div>
+            </div>
+          </div>
+       
+          <div class="column">
+            <div class="card">
+              <img src="/w3images/team2.jpg" alt="Prathmesh Ranadive" style="width:100%">
+              <div class="container">
+                <h2>Prathmesh Ranadive</h2>
+                <p class="title">Fullstack Developer</p>
+                <p>Handling Frontend, Backend, DB and Team Coordination</p>
+                <p>prathmesh.ranadive@yash.com</p>
+                <p><button class="button">Contact</button></p>
+              </div>
+            </div>
+          </div>
+       
+          <div class="column">
+            <div class="card">
+              <img src="/w3images/team3.jpg" alt="Amol Palve" style="width:100%">
+              <div class="container">
+                <h2>Amol Palve</h2>
+                <p class="title">Fullstack Developer</p>
+                <p>Handling Frontend, Backend, DB and Team Coordination</p>
+                <p>amol.palve@yash.com</p>
+                <p><button class="button">Contact</button></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column">
+              <div class="card">
+                  <img src="/w3images/team2.jpg" alt="Rahul Soni" style="width:100%">
+                  <div class="container">
+                    <h2>Rahul Soni</h2>
+                    <p class="title">Fullstack Developer</p>
+                    <p>Handling Frontend, Backend, DB and Team Coordination</p>
+                    <p>soni.rahul@yash.com</p>
+                    <p><button class="button">Contact</button></p>
+                  </div>
+                </div>
+          </div>
+          <div class="column">
+            <div class="card">
+                <img src="/w3images/team2.jpg" alt="Praful Suryavanshi" style="width:100%">
+                <div class="container">
+                  <h2>Praful Suryavanshi</h2>
+                  <p class="title">Fullstack Developer</p>
+                  <p>Handling Frontend, Backend, DB and Team Coordination</p>
+                  <p>soni.rahul@yash.com</p>
+                  <p><button class="button">Contact</button></p>
+                </div>
+              </div>
+        </div>
+        </div>
+      <!-- Main Content Closed -->
+
+      </div>
+  </main>
 </div>
