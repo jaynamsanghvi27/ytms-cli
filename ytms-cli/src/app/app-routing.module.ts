@@ -25,6 +25,7 @@ import { AssociateManagementComponent } from './Component/Technical-Manager/tm-a
 import { AssociateSummaryComponent } from './Component/Requester/associate-summary/associate-summary.component';
 import { ManageAssociateComponent } from './Component/Requester/manage-associate/manage-associate.component';
 import { ExcludeTrainerGuard } from './Core/guard/exclude-trainer.guard';
+import { AboutUsComponent } from './Component/about-us/about-us.component';
 
 const routes: Routes = [
   {
@@ -189,6 +190,16 @@ const routes: Routes = [
     path:'upload',
     canActivate: [AdminGuard],
     component: UploadExcelComponent
+  },
+  {
+    path:'tm-about-us',
+    canActivate: [AdminGuard],
+    component: AboutUsComponent
+  },
+  {
+    path:'requester/about-us',
+    canActivate: [AuthGuard],
+    component: AboutUsComponent
   },
   
   /*{

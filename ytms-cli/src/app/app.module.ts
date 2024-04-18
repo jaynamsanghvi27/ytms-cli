@@ -57,6 +57,7 @@ import { ViewAssoicateTrainigDataComponent } from './Component/Requester/view-as
 import { ManageAssociateComponent } from './Component/Requester/manage-associate/manage-associate.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { AboutUsComponent } from './Component/about-us/about-us.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatBadgeModule} from '@angular/material/badge';
 
@@ -98,7 +99,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     OptionalHolidayComponent,
     AssociateManagementComponent,
     AssociateSummaryComponent,
-    ManageAssociateComponent
+    ManageAssociateComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule,

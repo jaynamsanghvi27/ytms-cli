@@ -23,7 +23,7 @@
                                     <div class="box">
 
                                         <div class="box-title">
-                                            <h5>{{training.trainingName}}</h5>
+                                            <h5>{{training.upgradedSkills}}</h5>
                                         </div>
 
                                         <div class="box-text">
@@ -32,6 +32,10 @@
 
                                         <div class="box-text">
                                             <h6><span>End Date  :   {{training.actualEndDate}}</span></h6>
+                                        </div>
+
+                                        <div class="box-text">
+                                            <h6><span>Time  :   {{training.actualStartTime}}-{{training.actualEndTime}} </span></h6>
                                         </div>
 
                                         <div class="box-text">
@@ -48,7 +52,7 @@
                                             <h6><span>Vacant Seats   :   {{30-training.noOfActualParticipant}}</span></h6>
                                         </div>
                                         <div class="box-btn" *ngIf="training.noOfActualParticipant<30">
-                                            <button class="btn btn-success btn-lg " (click)="openDialog(template1,training);">Add Nomination</button>
+                                            <button class="btn btn-success btn-lg" (click)="openDialog(template1,training);">Add Nomination</button>
                                         </div>
                                         <div class="box-btn" *ngIf="!(training.noOfActualParticipant<30)">
                                             <h6><span style="color: red;">Batch Already Full</span></h6>

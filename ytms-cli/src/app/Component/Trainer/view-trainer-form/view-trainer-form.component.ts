@@ -8,6 +8,8 @@ import { AddAttendanceComponent } from '../add-attendance/add-attendance.compone
 import { ViewAttendanceComponent } from '../view-attendance/view-attendance.component';
 import Swal from 'sweetalert2';
 import { AddTranierAttendanceComponent } from '../add-tranier-attendance/add-tranier-attendance.component';
+import { AddFeedbackComponent } from '../add-feedback/add-feedback.component';
+import { AddScoreComponent } from '../add-score/add-score.component';
 
 @Component({
   selector: 'app-view-trainer-form',
@@ -122,7 +124,9 @@ dialogRef.afterClosed().subscribe(result => {
 openDialog(trainingId:any){
 
   const dialogRef =this.dialog.open(EditNominationComponent,{
-    data:trainingId
+    data:trainingId,
+    width: '100%',
+    height: '90%'
   } );
   
   dialogRef.afterClosed().subscribe(result => {
@@ -131,6 +135,32 @@ openDialog(trainingId:any){
     this.getTrainerTrainingList();
   });
 
+}
+
+addEditFeedBack(id:any){
+  const dialogRef =this.dialog.open(AddFeedbackComponent,{
+    data:id,
+    width: '100%',
+    height: '90%'
+  } );
+  
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('The viewAttendance dialog was closed');
+    this.getTrainerTrainingList();
+  });
+}
+
+updateFinalScore(id:any){
+  const dialogRef =this.dialog.open(AddScoreComponent,{
+    data:id,
+    width: '100%',
+    height: '90%'
+  } );
+  
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('The viewAttendance dialog was closed');
+    this.getTrainerTrainingList();
+  });
 }
 
 
