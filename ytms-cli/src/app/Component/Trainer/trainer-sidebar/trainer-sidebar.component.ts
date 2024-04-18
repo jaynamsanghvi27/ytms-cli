@@ -7,7 +7,8 @@ import { Component, Input } from '@angular/core';
 })
 export class TrainerSidebarComponent {
   @Input() sideNavStatus: boolean = false;
-
+  role:any;
+  
   list = [
     {
       number: 1,

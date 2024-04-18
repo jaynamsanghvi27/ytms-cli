@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TrainingRequestService } from 'src/app/services/training-request.service';
@@ -10,6 +10,9 @@ import Swal from 'sweetalert2';
 import { AddTranierAttendanceComponent } from '../add-tranier-attendance/add-tranier-attendance.component';
 import { AddFeedbackComponent } from '../add-feedback/add-feedback.component';
 import { AddScoreComponent } from '../add-score/add-score.component';
+import { AuthService } from 'src/app/Core/services/auth.service';
+import { JwtService } from 'src/app/Core/services/jwt.service';
+import { DownloadService } from 'src/app/Core/services/download.service';
 
 @Component({
   selector: 'app-view-trainer-form',
@@ -17,17 +20,32 @@ import { AddScoreComponent } from '../add-score/add-score.component';
   styleUrls: ['./view-trainer-form.component.css']
 })
 export class ViewTrainerFormComponent {
-
-  sideNavStatus: boolean = false;
+  @Output() sideNavToggled = new EventEmitter<boolean>();
+  sideNavStatus: boolean = true;
   trainingReqForms : any[]=[];
-  constructor(private ser:TrainingRequestService,private router: Router,public dialog: MatDialog){
+  role: string = '';
+  constructor(private authService:AuthService,
+    private jwtService:JwtService,
+    private ser:TrainingRequestService,private downloadService: DownloadService,
+    private router: Router,public dialog: MatDialog){
   //this.loadList();
   this.getTrainerTrainingList();
 }
 
+ngOnInit(): void {
+  const token = this.authService.getToken();
+  this.role = this.jwtService.getRoleFromToken(token);
+}
+
 downLoadExcel(id:any,trainingName:any){
   this.ser.downLoadAttendaceExcelReport(id,trainingName);
-   
+ 
+}
+
+
+sideNavToggle() {
+ // this.menuStatus = !this.menuStatus;
+  this.sideNavToggled.emit(true);
 }
 
 downloadFile(data: any) {
@@ -139,7 +157,7 @@ openDialog(trainingId:any){
 
 addEditFeedBack(id:any){
   const dialogRef =this.dialog.open(AddFeedbackComponent,{
-    data:id,
+    data:{'id':id,'role':this.role},
     width: '100%',
     height: '90%'
   } );
@@ -152,7 +170,7 @@ addEditFeedBack(id:any){
 
 updateFinalScore(id:any){
   const dialogRef =this.dialog.open(AddScoreComponent,{
-    data:id,
+    data:{'id':id,'role':this.role},
     width: '100%',
     height: '90%'
   } );
@@ -161,6 +179,26 @@ updateFinalScore(id:any){
     console.log('The viewAttendance dialog was closed');
     this.getTrainerTrainingList();
   });
+}
+
+downloadAssociates() {
+  this.downloadService.ExporTrainingstExcelFile(this.trainingReqForms).subscribe((res: any) => {
+    this.downloadFile2(res);
+  });;
+}
+
+downloadFile2(data: any) {
+  const blob = new Blob([data], { type: 'text/csv' });
+  const url = window.URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  document.body.appendChild(a);
+  a.setAttribute('style', 'display: none');
+  a.setAttribute('target', 'blank');
+  a.href = url;
+  a.download = "Associates.xlsx";
+  a.click();
+  window.URL.revokeObjectURL(url);
+  a.remove();
 }
 
 

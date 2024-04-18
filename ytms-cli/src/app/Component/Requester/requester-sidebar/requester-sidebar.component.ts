@@ -43,6 +43,12 @@ export class RequesterSidebarComponent {
       },
       {
         number: 5,
+        name: 'Training Status Reports',
+        icon: 'fa fa-eye',
+        routing: (r1=='ROLE_TECHNICAL_MANAGER')? '/tm-view-trainer-form':'/requestor/view-trainer-form'
+      },
+      {
+        number: 6,
         name: 'Associate Summary',
         icon: 'fa-solid fa-users',
         routing: '/tm-associate-summary'
@@ -56,14 +62,14 @@ export class RequesterSidebarComponent {
   
       },
       {
-        number: 7,
+        number: 8,
         name: 'About',
         icon: 'fa-solid fa-circle-info',
         routing: (r1=='ROLE_TECHNICAL_MANAGER')?'/tm-about-us':'/requester/about-us'
   
       },
       {
-        number: 8,
+        number: 9,
         name: 'Contact',
         icon: 'fa-solid fa-phone',
         routing: '/requester/calendar'

@@ -26,6 +26,7 @@ import { AssociateSummaryComponent } from './Component/Requester/associate-summa
 import { ManageAssociateComponent } from './Component/Requester/manage-associate/manage-associate.component';
 import { ExcludeTrainerGuard } from './Core/guard/exclude-trainer.guard';
 import { AboutUsComponent } from './Component/about-us/about-us.component';
+import { ViewTrainerFormComponent } from './Component/Trainer/view-trainer-form/view-trainer-form.component';
 
 const routes: Routes = [
   {
@@ -200,6 +201,16 @@ const routes: Routes = [
     path:'requester/about-us',
     canActivate: [AuthGuard],
     component: AboutUsComponent
+  },
+  {
+    path:'requester/view-trainer-form',
+    canActivate: [AuthGuard],
+    component: ViewTrainerFormComponent
+  },
+  {
+    path:'tm-view-trainer-form',
+    canActivate: [AdminGuard],
+    component: ViewTrainerFormComponent
   },
   
   /*{

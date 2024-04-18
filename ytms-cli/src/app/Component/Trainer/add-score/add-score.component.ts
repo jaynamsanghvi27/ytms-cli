@@ -12,13 +12,14 @@ import { ViewAttendanceComponent } from '../view-attendance/view-attendance.comp
 })
 export class AddScoreComponent {
   
-
+  role:string = 'ROLE_TRAINER';
   trainingId:any;
   attendsData:any;
   employees: Nomination[] = [];
   constructor(public dialogRef: MatDialogRef<ViewAttendanceComponent>,@Inject(MAT_DIALOG_DATA) public data: any,private ser:TrainingRequestService,private router: Router,public dialog: MatDialog){
-    
-    this.trainingId = data;
+  
+    this.trainingId = data?.id;
+    this.role = data?.role;
     this.getNominationListByTrainingId(this.trainingId);
    
   }
@@ -51,6 +52,15 @@ export class AddScoreComponent {
       console.log(JSON.stringify( resp));
       this.employees = this.processEmployeeData(resp);
     });
+  }
+
+  isSubmitDisabled(employee:any): boolean {
+    if(this.role !== 'ROLE_TRAINER'){
+      return true;
+    }else{
+      return employee.finalScore !== null;
+    }
+
   }
 
   processEmployeeData(data:any[]): Nomination[] {

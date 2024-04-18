@@ -34,32 +34,39 @@ export class TmSidebarComponent {
       icon: 'fa-regular fa-rectangle-list',
       routing: '/tm-view-trf'
     },
+    
     {
       number: 5,
+      name: 'All Trainings',
+      icon: 'fa fa-eye',
+      routing: '/tm-view-trainer-form'
+    },
+    {
+      number: 6,
       name: 'Associate Summary',
       icon: 'fa-solid fa-users',
       routing: '/tm-associate-summary'
     },
     {
-      number: 6,
+      number: 7,
       name: 'Manage Associate',
       icon: 'fa fa-id-card-o',
       routing: '/tm-manage-associate'
 
     },
     {
-      number: 7,
+      number: 8,
       name: 'About',
       icon: 'fa-solid fa-circle-info',
       routing: '/tm-about-us'
 
     },
     {
-      number: 8,
+      number: 9,
       name: 'Contact',
       icon: 'fa-solid fa-phone',
       routing: '/requester/calendar'
-    },
+    }
     // {
     //   number: 9,
     //   name: 'Associate Management',
