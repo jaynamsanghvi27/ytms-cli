@@ -24,6 +24,7 @@ import { SummaryComponent } from './Component/calender/Summary Page/summary/summ
 import { AssociateManagementComponent } from './Component/Technical-Manager/tm-associate-management/associate-management/associate-management.component';
 import { AssociateSummaryComponent } from './Component/Requester/associate-summary/associate-summary.component';
 import { ManageAssociateComponent } from './Component/Requester/manage-associate/manage-associate.component';
+import { ExcludeTrainerGuard } from './Core/guard/exclude-trainer.guard';
 
 const routes: Routes = [
   {
@@ -156,12 +157,12 @@ const routes: Routes = [
 
   {
     path: "tm-associate-management",
-   // canActivate: [AdminGuard],
+    canActivate: [ExcludeTrainerGuard],
     component: AssociateManagementComponent
   },
   {
     path: "tm-manage-associate",
-    canActivate: [AdminGuard],
+    canActivate: [ExcludeTrainerGuard],
     component: ManageAssociateComponent
   },
   {
