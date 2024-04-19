@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Nomination } from 'src/app/Model/Nomination';
 import { TrainingRequestService } from 'src/app/services/training-request.service';
 import { ViewAttendanceComponent } from '../view-attendance/view-attendance.component';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-add-feedback',
@@ -31,6 +32,28 @@ export class AddFeedbackComponent {
       this.dialogRef.close();
     })
   }
+
+  exportToExcel(){
+    console.log("Export To Excel  : ");
+    
+    const data = this.modifiedData(this.employees);
+
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+  
+    XLSX.writeFile(workbook, 'Feedback.xlsx');
+  }
+  modifiedData(nominee: Nomination[]):any[]{
+    return nominee.map(nomination => (
+      { 'Employee Id': nomination.emp_id,
+       'Employee Email': nomination.emp_name,
+        'Employee Name':nomination.emp_name,
+        'FeedBack':nomination.feedback,
+      })
+      );
+  }
+
 
   checkNumber(value:any){
 
