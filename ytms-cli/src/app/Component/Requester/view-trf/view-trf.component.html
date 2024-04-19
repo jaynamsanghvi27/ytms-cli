@@ -20,10 +20,10 @@
                                 <td><b>Training Name</b></td>
                                 <td><b>Training Status(For declined,Click)</b></td>
                                 <td><b>Training Created At</b></td>
-                                <td><b>Planned Start Date</b></td>
-                                <td><b>Planned End Date</b></td>
-                                <td><b>Actual Start Date</b></td>
-                                <td><b>Actual End Date</b></td>
+                                <td style="width: 150px;"><b>Planned Start Date & Time</b></td>
+                                <td style="width: 150px;"><b>Planned End Date & Time</b></td>
+                                <td style="width: 150px;"><b>Actual Start Date & Time</b></td>
+                                <td style="width: 150px;"><b>Actual End Date & Time</b></td>
                                 <td><b>Actual Participant</b></td>
                                 <td><b>Assign Trainer</b></td>
                                 <td><b>Action</b></td>
@@ -38,10 +38,10 @@
                                 <td> <a *ngIf="training.status=='DECLINED'" (click)="showMessage(training.declinedMessage)">
                     {{training.status}}</a> {{training.status!='DECLINED'?training.status:''}}</td>
                                 <td>{{training.createdAt}}</td>
-                                <td>{{training.startDate}}</td>
-                                <td>{{training.endDate}}</td>
-                                <td>{{training.actualStartDate}}</td>
-                                <td>{{training.actualEndDate}}</td>
+                                <td>{{training.startDate}} {{training.startTime}}</td>
+                                <td>{{training.endDate}} {{training.endTime}}</td>
+                                <td>{{training.actualStartDate}} {{training.actualStartTime}}</td>
+                                <td>{{training.actualEndDate}} {{training.actualEndTime}}</td>
                                 <td><a (click)="openNominationData(training.id)">{{training.noOfActualParticipant}}</a></td>
                                 <td>{{training.trainer}}</td>
                                 <!-- <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' " style="text-align: center;"> -->

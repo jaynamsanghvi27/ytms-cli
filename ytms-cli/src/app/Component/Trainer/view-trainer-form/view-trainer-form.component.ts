@@ -49,7 +49,9 @@ downloadFile(data: any) {
 getTrainerTrainingList(){
   this.ser.getTrainerTrainingList().subscribe((resp:any)=>{
     console.log(resp);
+    // < *ngIf ="resp.trainingStatus=='In Progress'"
     (this.trainingReqForms=resp)});
+    // </ngIf>
 }
 
 editTranierAttendance(id:any){
@@ -105,10 +107,12 @@ editAttendance(id:any,staus:any){
   
 }
 
-editViewTraniner(id:any){
+editViewTraniner(id:any,tstatus:any){
 //  this.router.navigate(['view-trainer']);
 const dialogRef =this.dialog.open(ViewTraninerComponent,{
-  data:id,
+  
+  data:{trainingId:id,
+    status:tstatus},
   width: '35%',
   height: '30%'
 } );
@@ -124,7 +128,9 @@ dialogRef.afterClosed().subscribe(result => {
 openDialog(trainingId:any){
 
   const dialogRef =this.dialog.open(EditNominationComponent,{
-    data:trainingId
+    data:trainingId,
+    width: '100%',
+    height: '90%'
   } );
   
   dialogRef.afterClosed().subscribe(result => {

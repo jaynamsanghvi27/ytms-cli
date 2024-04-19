@@ -11,52 +11,58 @@ export class TrainerSidebarComponent {
   list = [
     {
       number: 1,
+      name: 'Dashboard',
+     icon: 'fa-solid fa-home',
+     routing: ''
+    },
+    {
+      number: 2,
       name: 'My Schedule',
       icon: 'fa-solid fa-calendar-days',
       routing:'/trainer/trainer-calendar'
 
     },
     {
-      number: 2,
+      number: 3,
       name: 'Training Request',
       icon: 'fa-solid fa-person-chalkboard',
       routing: '/trainer/training-req'
     },
     {
-      number: 3,
+      number: 4,
       name: 'View Training Request',
       icon: 'fa-regular fa-rectangle-list',
       routing: '/trainer/view-trf'
     },
     {
-      number: 4,
+      number: 5,
       name: 'View my trainings',
       icon: 'fa fa-eye',
       routing: '/trainer/view-trainer-form'
     },
     {
-      number: 5,
+      number: 6,
       name: 'Order  ',
       icon: 'fa-solid fa-cart-shopping',
       routing: '/requester/calendar'
 
     },
     {
-      number: 6,
-      name: 'Settings',
-      icon: 'fa-solid fa-gear',
-      routing: '/requester/calendar'
-
-    },
-    {
       number: 7,
-      name: 'About',
-      icon: 'fa-solid fa-circle-info',
+      name: 'Settings',
+      icon: 'fa fa-id-card-o',
       routing: '/requester/calendar'
 
     },
     {
       number: 8,
+      name: 'About',
+      icon: 'fa-solid fa-circle-info',
+      routing: '/trainer/about-us'
+
+    },
+    {
+      number: 9,
       name: 'Contact',
       icon: 'fa-solid fa-phone',
       routing: '/requester/calendar'
