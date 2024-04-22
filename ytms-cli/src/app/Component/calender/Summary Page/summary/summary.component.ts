@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatSelectChange } from '@angular/material/select';
+import { en } from '@fullcalendar/core/internal-common';
 import {  addDays, differenceInBusinessDays, differenceInMinutes, format, isAfter, isBefore, isWeekend, parseISO } from 'date-fns';
 import * as FileSaver from 'file-saver';
 import { AuthService } from 'src/app/Core/services/auth.service';
@@ -18,7 +19,7 @@ export class SummaryComponent implements OnInit {
   
   datasource:any[]=[]; 
   dateRange: any[] = [];
-  displayedColumns = ['user', 'task', 'date-range', 'freeHours'];
+  displayedColumns = ['user', 'task', 'date-range',"TotalDays", 'freeHours'];
   events :any[]=[];
   searchFilter:boolean=false;
   userRole:String='';
@@ -67,8 +68,10 @@ getUniqueTitles(data:any) {
   return titleSet.size; // Return the size of the set (number of unique titles)
 }
 
-
-
+diffDays(endDate: any, startDate: any) {
+  const adjustedEndDate = addDays(new Date(endDate), 1);
+  return differenceInBusinessDays(adjustedEndDate, new Date(startDate));
+}
 exportExcel(): void {
 // let i =0;
  this.datasource.forEach((file)=>{ 

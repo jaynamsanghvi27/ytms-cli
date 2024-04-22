@@ -54,8 +54,12 @@
                     </td>
                   </ng-container>
                   <ng-container matColumnDef="date-range">
-                    <th mat-header-cell *matHeaderCellDef> Task Duration </th>
+                    <th mat-header-cell *matHeaderCellDef> Dates </th>
                     <td mat-cell *matCellDef="let element"> {{element.start_date | date:'dd MMM yyyy'}}&nbsp;<span *ngIf="element.end_date"> - &nbsp;{{element.end_date | date:'dd MMM yyyy'}}</span> </td>
+                  </ng-container>
+                  <ng-container matColumnDef="TotalDays">
+                    <th mat-header-cell *matHeaderCellDef>TotalDays </th>
+                    <td mat-cell *matCellDef="let element"> <span *ngIf="element.end_date">{{this.diffDays(element.end_date,element.start_date)}}</span><span *ngIf="!element.end_date">1</span> </td>
                   </ng-container>
                   <ng-container matColumnDef="freeHours">
                     <th mat-header-cell *matHeaderCellDef> Free Hours </th>
