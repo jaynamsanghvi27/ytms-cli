@@ -24,6 +24,7 @@ export class SummaryComponent implements OnInit {
   userRole:String='';
   users:any[]=[]  
   downloadfile:any[]=[];
+  totalTasks:any;
   
   constructor(private calendarService:CalendarService,private authService:AuthService,private jwtService:JwtService,private userService:UsersService){};
   getAllEvents():any
@@ -37,7 +38,7 @@ export class SummaryComponent implements OnInit {
       end: new Date(event.end),
       scheduleUser:event.scheduleUser,
       number_of_week_days:event.number_of_week_days   
-    })),this.datasource = this.calculateDuration(this.transformDateRange(this.transformData(data))),console.log(this.datasource),console.log(this.transformData(data))
+    })),this.datasource = this.calculateDuration(this.transformDateRange(this.transformData(data))),console.log(this.datasource),this.totalTasks = this.getUniqueTitles(this.datasource)
   });
  }
  getEventByTrainer(email:any)
@@ -53,8 +54,20 @@ export class SummaryComponent implements OnInit {
    number_of_week_days:event.number_of_week_days   
 
  })),this.datasource = this.calculateDuration(this.transformDateRange(this.transformData(data))),console.log(this.datasource)
-});
+,this.totalTasks = this.getUniqueTitles(this.datasource)});
 }
+
+
+
+getUniqueTitles(data:any) {
+  const titleSet = new Set(); // Set to store unique titles
+  for (const item of data) {
+    titleSet.add(item.title.split(',').join(' ')); // Combine titles, remove commas, and add to set
+  }
+  return titleSet.size; // Return the size of the set (number of unique titles)
+}
+
+
 
 exportExcel(): void {
 
@@ -150,6 +163,7 @@ transformData(data: any): any {
 
   return finalData;
 }
+
 transformUser(data: any) {
   const events = [];
   let currentRange: any;
@@ -159,7 +173,8 @@ transformUser(data: any) {
     const formattedDate = format(parseISO(event.start), 'yyyy-MM-dd'); 
     const startTime = format(parseISO(event.start), 'HH:mm '); 
     const endTime = format(parseISO(event.end), 'HH:mm '); 
-    const title = event.title+"("+startTime +"-"+endTime+")";
+    const title = event.title;
+    // +"("+startTime +"-"+endTime+")"
     if (!currentRange || currentTitle !== title || formattedDate !== currentRange.end_date) {
       currentRange = {
         id: event.id,
@@ -187,7 +202,7 @@ transformUser(data: any) {
         existingEvent.start_date === currentRange.start_date &&
         existingEvent.end_date === currentRange.end_date
       ) {
-        existingEvent.title += `,${title}`;
+        existingEvent.title += `,${title} `;
         existingEvent.currentRangeDuration+= `,${startTime}-${endTime}`
         events.splice(events.indexOf(currentRange), 1);
 
@@ -245,51 +260,12 @@ convertMinutesToHoursMin(minutes: number): string {
 }
 
 
-//  calculateDuration(events: any[]): any  {
-//   return events.map((event) => {
-//     const startTimeParts = event.StartTime.split(':');
-//     const endTimeParts = event.EndTime.split(':');
-//     const start_date = new Date().setHours(parseInt(startTimeParts[0]),parseInt(startTimeParts[1]));
-//     const end_date = new Date().setHours(parseInt(endTimeParts[0]),parseInt(endTimeParts[1]));
-
-
-   
-//     let durationMinutes = 480- differenceInMinutes(end_date,start_date);
-
-//     return {
-//       ...event,
-//       freeHours: this.convertMinutesToHoursMin(durationMinutes),
-//     };
-//   });
-// }
-
-dates=["2024-04-02","2024-04-05","2024-04-06","2024-04-10", "2024-04-11", "2024-04-12", "2024-04-13", "2024-04-14", "2024-04-15"]
-optionalHoliday()
-{
-  let count = 0;
-  const startDate= new Date("2024-04-01")
-  const endDate = addDays(startDate,7)
-  for(const date of this.dates)
-  {
-   if(isBefore(new Date(date),endDate) && isAfter(new Date(date),startDate))
-   {
-    if(!isWeekend(new Date(date)))
-   {
-    count++;
-   }
-  }
-  }
- return differenceInBusinessDays(endDate,startDate)-count;
-}
-
-
 ngOnInit(): void {
   const token = this.authService.getToken();
   const role = this.jwtService.getRoleFromToken(token);
   const email = this.jwtService.getUserNameFromToken(token);
   this.userRole=role;
   console.log(role,email);
-  console.log(this.optionalHoliday())
   if (role === 'ROLE_TECHNICAL_MANAGER') 
   {
   this.getAllEvents();
@@ -300,7 +276,11 @@ ngOnInit(): void {
     this.searchFilter=false;  
     this.getEventByTrainer(email);
     }
-  this.userService.getAllTrainers().subscribe((data)=>{this.users=data,console.log(data)})}
+  this.userService.getAllTrainers().subscribe((data)=>{this.users=data,console.log(data)})
 
+
+  
+
+}
 
 }
