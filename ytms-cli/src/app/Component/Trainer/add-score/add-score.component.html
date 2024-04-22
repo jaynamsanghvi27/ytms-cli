@@ -17,7 +17,7 @@ color: #fff;text-align: center;background: #005ba3;">Add/Update FeedBack</h2>
                 <td>{{employee.emp_id}}</td>
                 <td>{{employee.emp_mail_id}}</td>
                 <td>{{employee.emp_name}}</td>
-                <td><input type="number" [(ngModel)]="employee.finalScore" name="finalScore" pattern="[0-9]+" [disabled]="employee.finalScore !== null" /></td>
+                <td><input type="number" [(ngModel)]="employee.finalScore" name="finalScore" pattern="[0-9]+" [disabled]="isSubmitDisabled(employee)" /></td>
             </tr>
         </tbody>
     </table>
@@ -27,7 +27,7 @@ color: #fff;text-align: center;background: #005ba3;">Add/Update FeedBack</h2>
         excel
         </button>
     <button mat-button mat-dialog-close class="btn btn-primary btn-block btn-m" style="margin-right: 10px;">Cancel</button>
-    <button type="submit" (click)="submit()" class="btn btn-primary btn-block btn-m">
+    <button type="submit" (click)="submit()" class="btn btn-primary btn-block btn-m" [disabled]="role !== 'ROLE_TRAINER'">
         Submit
         </button>
 </mat-dialog-actions>
