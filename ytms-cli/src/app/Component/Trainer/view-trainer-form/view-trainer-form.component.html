@@ -13,18 +13,19 @@
                     <div class="vt-form-header">
                         <h5 class="heading-color">Training Request List</h5>
                     </div>
-                    <div mat-raised-button *ngIf="role === 'ROLE_TECHNICAL_MANAGER'">
+                    <div align="right" mat-raised-button *ngIf="role === 'ROLE_TECHNICAL_MANAGER'">
                         <button class="xlsx btn btn-primary" (click)="downloadAssociates()">Export to Excel</button>
                     </div>
+                    <&nbsp>
                     <table>
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Traning Name</th>
+                                <th>Training Name</th>
                                 <th>Status</th>
-                                <th>Traniner Name</th>
+                                <th>Trainer Name</th>
                                 <th>Requester Name</th>
-                                <th>Number of Participents</th>
+                                <th>Number of Participants</th>
                                 <th>Attendance</th>
                                 <th>FeedBack</th>
                                 <th>Score</th>
