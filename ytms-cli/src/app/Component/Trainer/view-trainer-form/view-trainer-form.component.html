@@ -39,6 +39,7 @@
                                 <td>{{training.trainingName}}</td>
 
                                 <td>{{training.trainingStatus}}</td>
+
                                 <td>{{training.trainer}}</td>
                                 <td>{{training.userName}}</td>
                                 <td><a (click)="openDialog(training.id)">{{training.noOfActualParticipant}}</a></td>
@@ -56,7 +57,7 @@
                                 <!-- <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' " style="text-align: center;"> -->
                                 <td *ngIf="role === 'ROLE_TRAINER'" style="text-align: center;">
                                     <span class="inner">
-                            <i title="Edit" class=" btn-info btn-sm fa fa-edit" (click)="editViewTraniner(training.id)"></i>
+                            <i title="Edit" class=" btn-info btn-sm fa fa-edit" (click)="editViewTraniner(training.id,training.trainingStatus)"></i>
 
                         </span>
                                 </td>
