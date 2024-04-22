@@ -70,18 +70,47 @@ getUniqueTitles(data:any) {
 
 
 exportExcel(): void {
-
- this.datasource.forEach((file)=>{
+// let i =0;
+ this.datasource.forEach((file)=>{ 
+  // i++;
+  const subtasks = file.title.trim() ? file.title.split(',') : [];
+  const durations = file.currentRangeDuration.split(',');
+  const totalTasks = subtasks.length;
   if(file.end_date!=null)
   {
-    file.start_date= addDays(new Date(file.start_date),1).toISOString().slice(0, 10)   
-    file.end_date= addDays(new Date(file.end_date),1).toISOString().slice(0, 10)   
-  this.downloadfile.push({Trainer:file.scheduleUser.fullName,Task:file.title,Start:file.start_date,End:file.end_date,FreeHours:file.freeHours})
+    
+    const totalDays=differenceInBusinessDays(addDays(new Date(file.end_date),1),new Date(file.start_date))
+    file.start_date= new Date(file.start_date).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' })
+    // file.start_date= addDays(new Date(file.start_date),1).toISOString().slice(0, 10)   
+    file.end_date= new Date(file.end_date).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' })  
+
+    // file.end_date= addDays(new Date(file.end_date),1).toISOString().slice(0, 10)   
+  this.downloadfile.push({
+    Trainer:file.scheduleUser.fullName,
+    Task: subtasks.map((subtask: string, index: number) => `${index + 1}. ${subtask.trim()}`).join('\n'),
+    // Task:`${i})${file.title}`,
+    Unavailable_Slots: durations.map((duration:string)=>`${duration.trim()}`).join('\n'),
+    // Unavailable_Slots:file.currentRangeDuration,
+    Total_Tasks:totalTasks,
+    Start:file.start_date,
+    End:file.end_date,
+    TotalDays:totalDays,
+    FreeHours:file.freeHours})
   }
   else
   {
     file.start_date= addDays(new Date(file.start_date),1).toISOString().slice(0, 10)   
-    this.downloadfile.push({Trainer:file.scheduleUser.fullName,Task:file.title,Start:file.start_date,End:file.start_date,FreeHours:file.freeHours})
+    this.downloadfile.push({
+      Trainer:file.scheduleUser.fullName,
+      Task: subtasks.map((subtask: string, index: number) => `${index + 1}. ${subtask.trim()}`).join('\n'),
+    // Task:`${i})${file.title}`,
+    Unavailable_Slots: durations.map((duration:string)=>`${duration.trim()}`).join('\n'),
+    // Unavailable_Slots:file.currentRangeDuration,
+    Total_Tasks:totalTasks,
+    Start:file.start_date,
+      End:file.start_date,
+      TotalDays:1,
+      FreeHours:file.freeHours})
   } 
 })
   const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.downloadfile);
@@ -91,6 +120,7 @@ exportExcel(): void {
   const blob: Blob = new Blob([excelBuffer], { type: 'text/csv;charset=utf-8' }); 
   FileSaver.saveAs(blob, 'Summary.csv');
 }
+
 
 
 
