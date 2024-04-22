@@ -17,14 +17,17 @@ color: #fff;text-align: center;background: #005ba3;">Add/Update FeedBack</h2>
                 <td>{{employee.emp_id}}</td>
                 <td>{{employee.emp_mail_id}}</td>
                 <td>{{employee.emp_name}}</td>
-                <td><textarea type="text" [(ngModel)]="employee.feedback" name="feedback" rows="10" [disabled]="employee.disableFeedback ? employee.disableFeedback : false"></textarea></td>
+                <td><textarea type="text" [(ngModel)]="employee.feedback" name="feedback" rows="10" [disabled]="isSubmitDisabled(employee)"></textarea></td>
             </tr>
         </tbody>
     </table>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close class="btn btn-primary btn-block btn-m" style="margin-right: 15px;">Cancel</button>
-    <button type="submit" (click)="submit()" class="btn btn-primary btn-block btn-m">
+    <button type="submit" (click)="exportToExcel()" style="margin-right: 10px;" class="btn btn-primary btn-block btn-m">
+        excel
+        </button>
+    <button mat-button mat-dialog-close class="btn btn-primary btn-block btn-m" style="margin-right: 10px;">Cancel</button>
+    <button type="submit" (click)="submit()" class="btn btn-primary btn-block btn-m" [disabled]="role !== 'ROLE_TRAINER'">
         Submit
         </button>
 </mat-dialog-actions>

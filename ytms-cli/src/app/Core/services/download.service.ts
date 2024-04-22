@@ -22,6 +22,12 @@ export class DownloadService {
 
   }
 
+  public ExporTrainingstExcelFile(data: any) {
+    const URL = this.baseurl + '/ytms/register/export-traings-to-excel';
+    return this.http.post(URL, data, { responseType: "blob" })
+   
+  }
+
   public ExportAssociateMgmtExcelFile(data: any) {
     const URL = this.baseurl + '/ytms/register/exportAssociateManagementData';
     // return this.http.get(URL+'?data'+encodeURIComponent(JSON.stringify(data)));
