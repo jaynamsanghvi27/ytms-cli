@@ -26,8 +26,8 @@
                                 <td style="width: 150px;"><b>Actual End Date & Time</b></td>
                                 <td><b>Actual Participant</b></td>
                                 <td><b>Assign Trainer</b></td>
-                                <td><b>Action</b></td>
-                                <!-- <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER'"><b>Action</b></td> -->
+                                <!-- <td><b>Action</b></td> -->
+                                <td *ngIf="userRole != 'ROLE_COMPETENCY_MANAGER'"><b>Action</b></td>
                             </tr>
                         </thead>
                         <tbody>
@@ -45,8 +45,9 @@
                                 <td><a (click)="openNominationData(training.id)">{{training.noOfActualParticipant}}</a></td>
                                 <td>{{training.trainer}}</td>
                                 <!-- <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' " style="text-align: center;"> -->
-                                <td style="text-align: center;">
-                                    <span class="inner">
+                    
+                    <td *ngIf="userRole != 'ROLE_COMPETENCY_MANAGER'" style="text-align: center;">
+                    <span class="inner">             
                     <i title="Edit" *ngIf="training.status!='APPROVED' || userRole == 'ROLE_TECHNICAL_MANAGER'" class=" btn-info btn-sm fa fa-edit" (click)="editTrf(training.id)"></i>
                     <i title="Approve" *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' && training.actualStartDate == null && training.status!='DECLINED'" class=" btn-success btn-sm fa fa-check-square-o" (click)="openDialog(template);setId(training.id)"></i>
                     <i title="Decline" *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' && training.actualStartDate == null && training.status!='DECLINED'" class=" btn-danger btn-sm  fa fa-close" (click)="declineDialog(template1);setId(training.id)"></i>

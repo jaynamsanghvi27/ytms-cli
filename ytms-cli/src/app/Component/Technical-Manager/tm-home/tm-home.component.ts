@@ -3,6 +3,8 @@ import {UsersService} from "../../../Core/services/users.service";
 import Swal from "sweetalert2";
 import {Router} from "@angular/router";
 import { TrainingRequestService } from 'src/app/services/training-request.service';
+import { AuthService } from 'src/app/Core/services/auth.service';
+import { JwtService } from 'src/app/Core/services/jwt.service';
 
 @Component({
   selector: 'app-tm-home',
@@ -16,12 +18,14 @@ export class TmHomeComponent {
   status: boolean = false;
   listOfRequester: boolean = true;
   requesterTable: boolean = false;
-
+  userRole:any
   listOfRequestersCount: number = 0;
   listOfTrainingsCount: number = 0;
 
   constructor(private usersService: UsersService,private trainingRequestService:TrainingRequestService,
-              private router: Router) {
+              private router: Router,private auth: AuthService, private jwtServ: JwtService) {
+                let token = auth.getToken();
+                this.userRole = jwtServ.getRoleFromToken(token);
   }
 
   ngOnInit(): void {
