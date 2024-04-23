@@ -168,7 +168,7 @@ isLoading:boolean=false;
   }
   openNominationData(id: any) {
 
-    if (this.userRole == 'ROLE_TECHNICAL_MANAGER' || this.userRole =='ROLE_TECHNICAL_MANAGER')
+    if (this.userRole == 'ROLE_TECHNICAL_MANAGER' || this.userRole =='ROLE_COMPETENCY_MANAGER')
       this.router.navigate(['/tm-view-nomination', id]);
     else if (this.userRole == 'ROLE_TRAINER')
       this.router.navigate(['/trainer/view-nomination', id]);
