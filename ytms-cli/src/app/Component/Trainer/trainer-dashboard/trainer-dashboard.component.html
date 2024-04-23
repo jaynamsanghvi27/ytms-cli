@@ -43,12 +43,12 @@
                                             <h6><span>Alloted Seat   :   {{training.noOfActualParticipant}}</span></h6>
                                         </div>
                                         <div class="box-text">
-                                            <h6><span>Vacant Seats   :   {{30-training.noOfActualParticipant}}</span></h6>
+                                            <h6><span>Vacant Seats   :   {{60-training.noOfActualParticipant}}</span></h6>
                                         </div>
-                                        <div class="box-btn" *ngIf="training.noOfActualParticipant<30">
+                                        <div class="box-btn" *ngIf="training.noOfActualParticipant<60">
                                             <button class="btn btn-success btn-lg " (click)="openDialog(template1,training);">Add Nomination</button>
                                         </div>
-                                        <div class="box-btn" *ngIf="!(training.noOfActualParticipant<30)">
+                                        <div class="box-btn" *ngIf="!(training.noOfActualParticipant<60)">
                                             <h6><span style="color: red;">Batch Already Full</span></h6>
                                         </div>
 
