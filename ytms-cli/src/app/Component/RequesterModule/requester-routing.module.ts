@@ -3,6 +3,7 @@ import {NgModule} from "@angular/core";
 import {RequesterDashboardComponent} from "./requester-dashboard/requester-dashboard.component";
 import {RequesterCalendarComponent} from "./requester-calendar/requester-calendar.component";
 import {RequesterHomeComponent} from "./requester-home/requester-home.component";
+import { ViewTrainerFormComponent } from "../Trainer/view-trainer-form/view-trainer-form.component";
 
 /**
  * Project Name - ytms-cli
@@ -22,6 +23,10 @@ const routes: Routes = [
       {
         path: 'requester-calendar',
         component: RequesterCalendarComponent
+      },
+      {
+        path:'requester/view-trainer-form',
+        component: ViewTrainerFormComponent
       }
     ]
   }

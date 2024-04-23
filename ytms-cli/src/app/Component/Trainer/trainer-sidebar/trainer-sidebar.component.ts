@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { AuthService } from 'src/app/Core/services/auth.service';
+import { JwtService } from 'src/app/Core/services/jwt.service';
 
 @Component({
   selector: 'app-trainer-sidebar',
@@ -8,8 +10,13 @@ import { Component, Input } from '@angular/core';
 export class TrainerSidebarComponent {
   @Input() sideNavStatus: boolean = false;
   role:any;
+  list:any;
   
-  list = [
+  constructor(private auth:AuthService, private jwtserv:JwtService){
+    let token = auth.getToken();
+     this.role= jwtserv.getRoleFromToken(token);
+    console.log(this.role);
+    this.list  = [
     {
       number: 1,
       name: 'Dashboard',
@@ -37,7 +44,7 @@ export class TrainerSidebarComponent {
     },
     {
       number: 5,
-      name: 'View my trainings',
+      name: this.getViewName(this.role),
       icon: 'fa fa-eye',
       routing: '/trainer/view-trainer-form'
     },
@@ -70,4 +77,20 @@ export class TrainerSidebarComponent {
     },
     
   ]
+}
+
+  getViewName(role: string) {
+
+    if ('ROLE_TECHNICAL_MANAGER' === role) {
+      return "All Trainings";
+    }
+
+    else if ('ROLE_REQUESTER' === role) {
+      return "Training Status Reports";
+    }
+
+    else return "View My Trainings"
+
+  }
+
 }

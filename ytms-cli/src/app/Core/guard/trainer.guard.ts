@@ -29,6 +29,8 @@ export class TrainerGuard implements CanActivate {
         if (!this.jwtService.isTokenExpired(token)) {
           //get roles from token
           const role = this.jwtService.getRoleFromToken(token);
+          if('/tm-view-trainer-form' ===this.router.url) return true;
+          if('/requester/view-trainer-form' ===this.router.url) return true;
           // Check if route is restricted by role
           if (role === 'ROLE_TRAINER') {
             // Role not authorized, redirect to home page
