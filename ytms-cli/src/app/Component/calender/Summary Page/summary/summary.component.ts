@@ -266,7 +266,7 @@ ngOnInit(): void {
   const email = this.jwtService.getUserNameFromToken(token);
   this.userRole=role;
   console.log(role,email);
-  if (role === 'ROLE_TECHNICAL_MANAGER') 
+  if (role === 'ROLE_TECHNICAL_MANAGER' ||  role === 'ROLE_COMPETENCY_MANAGER') 
   {
   this.getAllEvents();
   this.searchFilter=true;  

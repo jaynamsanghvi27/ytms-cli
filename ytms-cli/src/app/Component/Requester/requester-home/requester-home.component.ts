@@ -39,7 +39,7 @@ export class RequesterHomeComponent {
       this.username = this.jwtService.getFullNameFromToken(token);
       this.role = this.jwtService.getRoleFromToken(token);
       console.log("---"+this.role);
-      if(this.role=='ROLE_TECHNICAL_MANAGER'){
+      if(this.role=='ROLE_TECHNICAL_MANAGER' || this.role === 'ROLE_COMPETENCY_MANAGER'){
         this.viewSideNavBar=false;
       }
     }

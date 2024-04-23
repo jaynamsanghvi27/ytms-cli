@@ -81,7 +81,7 @@ export class TrainerSidebarComponent {
 
   getViewName(role: string) {
 
-    if ('ROLE_TECHNICAL_MANAGER' === role) {
+    if ('ROLE_TECHNICAL_MANAGER' === role || role === 'ROLE_COMPETENCY_MANAGER') {
       return "All Trainings";
     }
 
