@@ -6,6 +6,7 @@ import { TrainingReqForm } from 'src/app/Model/TrainingRequestForm';
 import { TrainingRequestService } from 'src/app/services/training-request.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Nomination } from 'src/app/Model/Nomination';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-requester-home',
@@ -57,8 +58,8 @@ export class RequesterHomeComponent {
     this.ser.saveNominationDataOnFrontend(this.file).subscribe((resp: Nomination[]) => {
       nomData = resp;
       let maxLimit=nomData.length+this.trainingActualParticipants;
-      if(maxLimit>30){
-        alert("Please Check The Count Of The Nomination Your Nomination Exceed The Available Seats");
+      if(maxLimit>60){
+        Swal.fire('Oops...', 'Nomination Should not be greated then 60', 'error')
       }
       else{
         for (let i = 0; i < nomData.length; i++) {

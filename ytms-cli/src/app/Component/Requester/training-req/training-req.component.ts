@@ -304,8 +304,9 @@ export class TrainingReqComponent {
             nomData[i]=resp;
           });
         }
-        if(this.nomination.length>=30){
-          alert("Nomination Should not be greated then 30");
+        if(this.nomination.length>=60){
+          Swal.fire('Oops...', 'Nomination Should not be greated then 60', 'error')
+          break
         }else{
           this.nomination.push(nomData[i]);
         }
@@ -320,8 +321,8 @@ export class TrainingReqComponent {
   }
 
   setNominationArray(nomData: Nomination) {
-    if(this.nomination.length>=30){
-      alert("Nomination Should not be greated then 30");
+    if(this.nomination.length>=60){
+      Swal.fire('Oops...', 'Nomination Should not be greated then 60', 'error')
     }else{
       this.nomination.push(nomData);
     }
@@ -333,8 +334,8 @@ export class TrainingReqComponent {
   }
 
   addNominationData(nomination: any) {
-    if(this.nomination.length>=30){
-      alert("Nomination Should not be greated then 30");
+    if(this.nomination.length>=60){
+      Swal.fire('Oops...', 'Nomination Should not be greated then 60', 'error')
     }else{
       this.nomination.push(nomination);
     }

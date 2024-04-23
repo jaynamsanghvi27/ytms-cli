@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/Core/services/auth.service';
 import { JwtService } from 'src/app/Core/services/jwt.service';
 import { Nomination } from 'src/app/Model/Nomination';
 import { TrainingRequestService } from 'src/app/services/training-request.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-trainer-dashboard',
@@ -46,8 +47,8 @@ export class TrainerDashboardComponent {
       this.ser.saveNominationDataOnFrontend(this.file).subscribe((resp: Nomination[]) => {
         nomData = resp;
         let maxLimit=nomData.length+this.trainingActualParticipants;
-        if(maxLimit>30){
-          alert("Please Check The Count Of The Nomination Your Nomination Exceed The Available Seats");
+        if(maxLimit>60){
+          Swal.fire('Oops...', 'Nomination Should not be greated then 60', 'error')
         }
         else{
           for (let i = 0; i < nomData.length; i++) {
