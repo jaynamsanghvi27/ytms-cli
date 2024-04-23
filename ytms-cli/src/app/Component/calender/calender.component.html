@@ -1,96 +1,81 @@
 <div class="container-fluid g-0">
-  <app-requester-header *ngIf="this.userRole != 'ROLE_TRAINER'" (sideNavToggled)="sideNavStatus=$event;" >
-  </app-requester-header>
+    <app-requester-header *ngIf="this.userRole != 'ROLE_TRAINER'" (sideNavToggled)="sideNavStatus=$event;">
+    </app-requester-header>
 
-  <main>
-    <app-requester-sidebar [sideNavStatus]="sideNavStatus" *ngIf="this.userRole != 'ROLE_TRAINER'"
-      [ngClass]="{'app-side-nav-open':sideNavStatus}" class="black-border"> </app-requester-sidebar>
+    <main>
+        <app-requester-sidebar [sideNavStatus]="sideNavStatus" *ngIf="this.userRole != 'ROLE_TRAINER'" [ngClass]="{'app-side-nav-open':sideNavStatus}" class="black-border"> </app-requester-sidebar>
 
-    <div class="display-area p-3" [ngClass]="{'display-area-shrink':sideNavStatus}">
-      <div class="training-request-form">
-        <div [ngSwitch]="selectedValue">
-           <div *ngSwitchCase="'Month'">
-            <div *ngIf="searchFilter" class="manager-Select">  
-            Trainer:
-            <!-- <select (change)="switchUsers($event)">
+        <div class="display-area p-3" [ngClass]="{'display-area-shrink':sideNavStatus}">
+            <div class="training-request-form">
+                <div [ngSwitch]="selectedValue">
+                    <div *ngSwitchCase="'Month'">
+                        <div *ngIf="searchFilter" class="manager-Select">
+                            Trainer:
+                            <!-- <select (change)="switchUsers($event)">
              <option value="All">All</option>
               <option *ngFor="let user of users" value="{{user.emailAdd}}"> {{ user.fullName}}</option>
             </select> -->
-            <mat-select (selectionChange)="switchUser($event)" class="select" placeholder="All">
-              <mat-option [value]="'All'">All</mat-option>
-              <mat-option *ngFor="let user of users" [value]="user.emailAdd">
-                {{ user.fullName}}
-              </mat-option>
-            </mat-select>
-            <br>
-          </div>
-          &nbsp;
-          <div class="{{actionCss}}" >
-            <button  class="btn btn-primary" (click)="addOptionalHoliday()" *ngIf="searchFilter">Add Optional Holiday</button> &nbsp;  
-            <button class="btn btn-primary"  (click)="addEvent()">Add Task</button>&nbsp;
-            <button  class="btn btn-primary"  [routerLink]="'/summary'">Summary</button>&nbsp;
-            <button  class="btn btn-primary" *ngIf="searchFilter" [routerLink]="'/delete'">Task Delete Requests</button>
-          
+                            <mat-select (selectionChange)="switchUser($event)" class="select" placeholder="All">
+                                <mat-option [value]="'All'">All</mat-option>
+                                <mat-option *ngFor="let user of users" [value]="user.emailAdd">
+                                    {{ user.fullName}}
+                                </mat-option>
+                            </mat-select>
+                            <br>
+                        </div>
+                        &nbsp;
+                        <div class="{{actionCss}}">
+                            <button class="btn btn-primary" (click)="addOptionalHoliday()" *ngIf="searchFilter && userRole !== 'ROLE_COMPETENCY_MANAGER'">Add Optional Holiday</button> &nbsp;
+                            <button class="btn btn-primary" *ngIf="userRole !== 'ROLE_COMPETENCY_MANAGER'" (click)="addEvent()">Add Task</button>&nbsp;
+                            <button class="btn btn-primary" style="align-items:left" [routerLink]="'/summary'">Summary</button>&nbsp;
+                            <button class="btn btn-primary" *ngIf="searchFilter && userRole !== 'ROLE_COMPETENCY_MANAGER'" [routerLink]="'/delete'">Task Delete Requests</button>
+
+                        </div>
+                        <full-calendar class="calendar" [options]="calendarOptions">
+                        </full-calendar>
+                    </div>
+                    <div *ngSwitchCase="'Week'">
+                        <div *ngIf="searchFilter" class="manager-Select">
+                            Trainer:
+                            <mat-select (selectionChange)="switchUser($event)" class="select" placeholder="All">
+                                <mat-option [value]="'All'">All</mat-option>
+                                <mat-option *ngFor="let user of users" [value]="user.emailAdd">
+                                    {{ user.fullName}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
+                        &nbsp;
+                        <div class="{{actionCss}}">
+                            <button class="btn btn-primary" (click)="addOptionalHoliday()" *ngIf="searchFilter">Add Optional Holiday</button> &nbsp;
+                            <button class="btn btn-primary" (click)="addEvent()">Add Task</button>&nbsp;
+                            <button class="btn btn-primary" [routerLink]="'/summary'">Summary</button>&nbsp;
+                            <button class="btn btn-primary" *ngIf="searchFilter" [routerLink]="'/delete'">Task Delete Requests</button>
+
+                        </div>
+                        <full-calendar [options]="calendarOptionsWeek"></full-calendar>
+                    </div>
+                    <div *ngSwitchCase="'Day'">
+                        <div *ngIf="searchFilter" class="manager-Select">
+                            Trainer:
+                            <mat-select (selectionChange)="switchUser($event)" class="select" placeholder="All">
+                                <mat-option [value]="'All'">All</mat-option>
+                                <mat-option *ngFor="let user of users" [value]="user.emailAdd">
+                                    {{ user.fullName}}
+                                </mat-option>
+                            </mat-select>
+                        </div>
+                        &nbsp;
+                        <div class="{{actionCss}}">
+                            <button class="btn btn-primary" (click)="addOptionalHoliday()" *ngIf="searchFilter">Add Optional Holiday</button> &nbsp;
+                            <button class="btn btn-primary" (click)="addEvent()">Add Task</button>&nbsp;
+                            <button class="btn btn-primary" [routerLink]="'/summary'">Summary</button>&nbsp;
+                            <button class="btn btn-primary" *ngIf="searchFilter" [routerLink]="'/delete'">Task Delete Requests</button>
+
+                        </div>
+                        <full-calendar [options]="calendarOptionsDay"></full-calendar>
+                    </div>
+                </div>
+            </div>
         </div>
-            <full-calendar class="calendar" [options]="calendarOptions" >
-            </full-calendar>
-           </div>
-           <div *ngSwitchCase="'Week'">
-            <div *ngIf="searchFilter" class="manager-Select">  
-              Trainer:
-            <mat-select (selectionChange)="switchUser($event)"  class="select" placeholder="All">
-              <mat-option [value]="'All'">All</mat-option>
-              <mat-option *ngFor="let user of users" [value]="user.emailAdd">
-                {{ user.fullName}}
-              </mat-option>
-            </mat-select>
-          </div>
-          &nbsp;
-          <div class="{{actionCss}}" >
-            <button  class="btn btn-primary" (click)="addOptionalHoliday()" *ngIf="searchFilter">Add Optional Holiday</button> &nbsp;  
-            <button class="btn btn-primary"  (click)="addEvent()">Add Task</button>&nbsp;
-            <button  class="btn btn-primary"  [routerLink]="'/summary'">Summary</button>&nbsp;
-            <button  class="btn btn-primary" *ngIf="searchFilter" [routerLink]="'/delete'">Task Delete Requests</button>
-          
-        </div>
-            <full-calendar [options]="calendarOptionsWeek"></full-calendar>
-           </div>
-           <div *ngSwitchCase="'Day'">
-            <div *ngIf="searchFilter" class="manager-Select"> 
-              Trainer: 
-            <mat-select (selectionChange)="switchUser($event)"   class="select" placeholder="All">
-              <mat-option [value]="'All'">All</mat-option>
-              <mat-option *ngFor="let user of users" [value]="user.emailAdd">
-                {{ user.fullName}}
-              </mat-option>
-            </mat-select>
-          </div>
-          &nbsp;
-          <div class="{{actionCss}}" >
-            <button  class="btn btn-primary" (click)="addOptionalHoliday()" *ngIf="searchFilter">Add Optional Holiday</button> &nbsp;  
-            <button class="btn btn-primary"  (click)="addEvent()">Add Task</button>&nbsp;
-            <button  class="btn btn-primary"  [routerLink]="'/summary'">Summary</button>&nbsp;
-            <button  class="btn btn-primary" *ngIf="searchFilter" [routerLink]="'/delete'">Task Delete Requests</button>
-          
-        </div>
-            <full-calendar [options]="calendarOptionsDay"></full-calendar>
-           </div>
-        </div></div>
-    </div>
-  </main>
+    </main>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

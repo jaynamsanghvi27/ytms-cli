@@ -17,11 +17,14 @@ import * as XLSX from 'xlsx';
 export class EventComponentComponent implements OnInit{
   constructor(@Inject(MAT_DIALOG_DATA) public data:any,public dialog : MatDialog,private calendarService:CalendarService,private authService:AuthService,private jwtService:JwtService,private userService:UsersService){}
  name:string=''
+ userRole:string=''
 ngOnInit(): void {
   console.log(this.data.event.title)
   console.log(this.data.event.id)
   const token = this.authService.getToken();
   this.name = this.jwtService.getFullNameFromToken(token);  
+  const role = this.jwtService.getRoleFromToken(token);
+  this.userRole=role;
 }
 checkEndTime(events:any[])
 {
