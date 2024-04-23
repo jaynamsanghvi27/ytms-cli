@@ -61,7 +61,7 @@ ngOnInit(): void {
     this.schedule=false
   }
 
-  if (role === 'ROLE_TECHNICAL_MANAGER') 
+  if (role === 'ROLE_TECHNICAL_MANAGER' || role === 'ROLE_COMPETENCY_MANAGER')  
   {
     this.freeHours=this.calculateFreeHoursPerUser()
     console.log(this.freeHours)

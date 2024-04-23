@@ -66,7 +66,7 @@ export class LoginComponent {
     const token = this.authService.getToken();
     const role = this.jwtService.getRoleFromToken(token);
     console.log(role)
-    if (role == 'ROLE_TECHNICAL_MANAGER')
+    if (role == 'ROLE_TECHNICAL_MANAGER' || role == 'ROLE_COMPETENCY_MANAGER')
       this.router.navigateByUrl('/tm-dashboard');
     if (role == 'ROLE_REQUESTER')
       this.router.navigateByUrl('/requester/dashboard');
