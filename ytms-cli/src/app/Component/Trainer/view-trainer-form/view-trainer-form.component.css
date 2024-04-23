@@ -259,3 +259,10 @@ tr:nth-child(even) {
     margin-top: auto;
     margin-right: 10px;
 }
+
+.actions {
+    top: 20%;
+    position: absolute;
+    left: calc(100% - 130px);
+    display: flex;
+}
