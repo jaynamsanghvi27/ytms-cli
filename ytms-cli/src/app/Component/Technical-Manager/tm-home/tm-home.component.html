@@ -16,6 +16,7 @@
                     <tr>
                         <th>Full Name</th>
                         <th>Email</th>
+                        <th>Role</th>
                         <th>Actions</th>
                     </tr>
 
@@ -23,6 +24,11 @@
                         <tr>
                             <td>{{ user.fullName }}</td>
                             <td>{{ user.emailAdd }}</td>
+                            <td> <select [(ngModel)]="selectedRoleType">
+                                <option *ngFor="let role of roles" [value]="role.roleTypes">
+                                  {{ role.roleTypes }}
+                                </option>
+                              </select></td>
                             <td>
                                 <button (click)="approveUser(user)" class="btn btn-primary btn-sn" id="submitbtn" name="submit" style="margin-left: 10px;">Approve
             </button>

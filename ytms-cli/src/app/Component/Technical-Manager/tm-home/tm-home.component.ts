@@ -16,6 +16,8 @@ export class TmHomeComponent {
   status: boolean = false;
   listOfRequester: boolean = true;
   requesterTable: boolean = false;
+  roles:any=[];
+  selectedRoleType: any;
 
   listOfRequestersCount: number = 0;
   listOfTrainingsCount: number = 0;
@@ -27,6 +29,13 @@ export class TmHomeComponent {
   ngOnInit(): void {
     this.getAllPendingUsers();
     this.getUpcomingTrainings();
+    this.getAllRoles();
+  }
+
+  getAllRoles(){
+    this.usersService.getAllRoles().subscribe(res => {
+      this.roles = res;
+    })
   }
 
   getAllPendingUsers() {
@@ -41,7 +50,7 @@ export class TmHomeComponent {
   }
 
   approveUser(user: any) {
-    this.usersService.approvePendingUser(user.emailAdd).subscribe(res => {
+    this.usersService.approvePendingUser(user.emailAdd,this.selectedRoleType).subscribe(res => {
       this.status = res;
     })
     window.location.reload();
