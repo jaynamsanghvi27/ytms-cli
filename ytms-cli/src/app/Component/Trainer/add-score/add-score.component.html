@@ -17,12 +17,16 @@ color: #fff;text-align: center;background: #005ba3;">Add/Update FeedBack</h2>
                 <td>{{employee.emp_id}}</td>
                 <td>{{employee.emp_mail_id}}</td>
                 <td>{{employee.emp_name}}</td>
-                <td><input type="number" [(ngModel)]="employee.finalScore" name="finalScore" pattern="[0-9]+" [disabled]="isSubmitDisabled(employee)" /></td>
+                <td><input type="number" [(ngModel)]="employee.finalScore" name="finalScore" pattern="[0-9]+"  /></td>
+                <!-- [disabled]="isSubmitDisabled(employee)" -->
             </tr>
         </tbody>
     </table>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
+    
+    <input type="file" accept=".xlsx" (change)="onFileChange($event)">
+    
     <button type="submit" (click)="exportToExcel()" style="margin-right: 10px;" class="btn btn-primary btn-block btn-m">
         excel
         </button>
