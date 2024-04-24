@@ -41,9 +41,9 @@ export class ViewNominationComponent {
   getNominationListByTrainingId(trainingId:any){
     if(trainingId != null && trainingId >0)
     this.ser.getNominationListByTrainingId(trainingId).subscribe(resp => {
-     
+
       this.nomination = resp;
-      if(this.userRole !== 'ROLE_TECHNICAL_MANAGER'){
+      if(this.userRole !== 'ROLE_TECHNICAL_MANAGER'  && this.userRole !=='ROLE_COMPETENCY_MANAGER'){
 
         this.nomination =this.nomination.filter(nomination=>{
           console.log("nomination.requestor");
@@ -54,7 +54,7 @@ export class ViewNominationComponent {
         });
 
       }
-      
+
     });
   }
 
@@ -80,5 +80,5 @@ export class ViewNominationComponent {
     //this.nominationReq.nominationId=nominationId;
   }
 
-    
+
 }

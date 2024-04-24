@@ -6,7 +6,7 @@ import { TrainingRequestService } from 'src/app/services/training-request.servic
 import { ViewAttendanceComponent } from '../view-attendance/view-attendance.component';
 import * as ExcelJS from 'exceljs';
 import * as FileSaver from 'file-saver';
-
+import * as XLSX from 'xlsx';
 @Component({
   selector: 'app-add-score',
   templateUrl: './add-score.component.html',
@@ -17,7 +17,10 @@ export class AddScoreComponent {
   role:string = 'ROLE_TRAINER';
   trainingId:any;
   attendsData:any;
-  employees: Nomination[] = [];
+  employees: any[] = [];
+  finalScores:any[]=[];
+
+
   constructor(public dialogRef: MatDialogRef<ViewAttendanceComponent>,@Inject(MAT_DIALOG_DATA) public data: any,private ser:TrainingRequestService,private router: Router,public dialog: MatDialog){
   
     this.trainingId = data?.id;
@@ -32,6 +35,35 @@ export class AddScoreComponent {
       this.dialogRef.close();
     })
   }
+
+  
+  onFileChange(event: any) {
+    const input = event.target;
+    const reader = new FileReader();
+  
+    reader.readAsArrayBuffer(input.files[0]);
+  
+    reader.onload = (e) => {
+      const arrayBuffer = e.target?.result;
+      const data = XLSX.read(arrayBuffer, { type: 'array' });
+      const sheetName = data.SheetNames[0];
+      const worksheet = data.Sheets[sheetName];
+      const jsonData = XLSX.utils.sheet_to_json(worksheet);
+  
+      console.log(jsonData);
+       this.finalScores = jsonData
+      for (const employee of this.employees) {
+        const matchingScore = this.finalScores.find((score: any) => Number(score.EMPID) == Number(employee.emp_id));
+        console.log("Matching Score for EMPID:", employee.emp_id, matchingScore);
+        if (matchingScore) {
+          employee.finalScore = matchingScore.FinalScore;
+        }
+      }
+      console.log(this.employees);
+    };
+  }
+  
+
 
   async exportToExcel(): Promise<void>{
     console.log("Export To Excel  : ");

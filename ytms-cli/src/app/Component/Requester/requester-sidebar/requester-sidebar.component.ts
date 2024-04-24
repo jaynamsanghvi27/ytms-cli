@@ -26,26 +26,26 @@ export class RequesterSidebarComponent {
          number: 2,
          name: 'My Schedule',
         icon: 'fa-solid fa-calendar-days',
-        routing: (r1=='ROLE_TECHNICAL_MANAGER')?'/book-calendar':'/trainer/trainer-calendar'
+        routing: (r1=='ROLE_TECHNICAL_MANAGER' || r1 == 'ROLE_COMPETENCY_MANAGER')?'/book-calendar':'/trainer/trainer-calendar'
        },
       {
         number: 3,
         name: 'Training Request',
         icon: 'fa-solid fa-person-chalkboard',
-        routing: (r1=='ROLE_TECHNICAL_MANAGER')?'/tm-training-req':'/re-training-req'
+        routing: (r1=='ROLE_TECHNICAL_MANAGER' || r1 == 'ROLE_COMPETENCY_MANAGER')?'/tm-training-req':'/re-training-req'
       },
       {
         number: 4,
         name: 'View Training Request',
         icon: 'fa-regular fa-rectangle-list',
-        routing: (r1=='ROLE_TECHNICAL_MANAGER')?'/tm-view-trf':'/re-view-trf'
+        routing: (r1=='ROLE_TECHNICAL_MANAGER' || r1 == 'ROLE_COMPETENCY_MANAGER')?'/tm-view-trf':'/re-view-trf'
   
       },
       {
         number: 5,
         name: 'Training Status Reports',
         icon: 'fa fa-eye',
-        routing: (r1=='ROLE_TECHNICAL_MANAGER')? '/tm-view-trainer-form':'/requester/view-trainer-form'
+        routing: (r1=='ROLE_TECHNICAL_MANAGER' || r1 == 'ROLE_COMPETENCY_MANAGER')? '/tm-view-trainer-form':'/requester/view-trainer-form'
       },
       {
         number: 6,
@@ -65,7 +65,7 @@ export class RequesterSidebarComponent {
         number: 8,
         name: 'About',
         icon: 'fa-solid fa-circle-info',
-        routing: (r1=='ROLE_TECHNICAL_MANAGER')?'/tm-about-us':'/requester/about-us'
+        routing: (r1=='ROLE_TECHNICAL_MANAGER' || r1 == 'ROLE_COMPETENCY_MANAGER')?'/tm-about-us':'/requester/about-us'
   
       },
       {
