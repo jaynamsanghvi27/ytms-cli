@@ -50,10 +50,16 @@ export class TmHomeComponent {
   }
 
   approveUser(user: any) {
-    this.usersService.approvePendingUser(user.emailAdd,this.selectedRoleType).subscribe(res => {
-      this.status = res;
-    })
+    if(!this.selectedRoleType)
+      {
+        Swal.fire('Oops!','Please Assign Role','error');
+      }
+    else{
+      this.usersService.approvePendingUser(user.emailAdd,this.selectedRoleType).subscribe(res => {
+       this.status = res;
+     })
     window.location.reload();
+    }
   }
 
   declineUser(user: any) {
