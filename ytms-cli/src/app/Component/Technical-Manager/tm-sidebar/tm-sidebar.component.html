@@ -1,10 +1,17 @@
 <div class="side-nav-content border-white">
   <nav>
     <ul [ngClass]="{'nav-list-open':sideNavStatus}" class="nav-list">
-      <li *ngFor="let item of list" class="nav-list-item border-white">
+      <li *ngFor="let item of list" class="nav-list-item border-white" >
+       <span *ngIf="userRole=='ROLE_COMPETENCY_MANAGER' && item.name!='Training Request'">
         <a [routerLink]=item.routing href="#" title="{{item.name}}">
-        <i class="{{item.icon}}"></i>
-        <span>{{ item.name }}</span></a>
+          <i class="{{item.icon}}"></i>
+          <span>{{ item.name }}</span></a>
+       </span>
+       <span *ngIf="userRole=='ROLE_TECHNICAL_MANAGER'">
+        <a [routerLink]=item.routing href="#" title="{{item.name}}">
+          <i class="{{item.icon}}"></i>
+          <span>{{ item.name }}</span></a>
+       </span>
       </li>
     </ul>
   </nav>

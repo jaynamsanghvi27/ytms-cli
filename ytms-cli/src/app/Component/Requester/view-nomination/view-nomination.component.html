@@ -34,7 +34,8 @@
                                     <th>current_allocation</th>
                                     <th>project</th>
                                     <th>current_location</th>
-                                    <th>Action</th>
+                                    <!-- <th>Action</th> -->
+                                    <th *ngIf="userRole != 'ROLE_COMPETENCY_MANAGER'">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -50,7 +51,9 @@
                                     <td>{{nomi.project}}</td>
                                     <td>{{nomi.current_location}}</td>
 
-                                    <td><span class="inner"><i class=" btn-info btn-sm fa fa-edit" title="Edit" (click)="setNominationId(nomi.id); openNominationDialog(nominationtemplate)"></i><i class=" btn-danger btn-sm fa fa-trash" title="Delete" (click)="deleteNominationById(nomi.id)"></i></span></td>
+                                    <td *ngIf="userRole != 'ROLE_COMPETENCY_MANAGER'">
+                                        <span class="inner"><i class=" btn-info btn-sm fa fa-edit" title="Edit" (click)="setNominationId(nomi.id); openNominationDialog(nominationtemplate)"></i><i class=" btn-danger btn-sm fa fa-trash" title="Delete" (click)="deleteNominationById(nomi.id)"></i></span>
+                                    </td>
 
 
                                 </tr>
