@@ -138,6 +138,11 @@ const routes: Routes = [
     component: ViewNominationComponent
   },
   {
+    path:'trainer/view-nomination/:id',
+    canActivate: [TrainerGuard],
+    component: ViewNominationComponent
+  },
+  {
     path:'nomination-req',
     component: NominationReqComponent
   },

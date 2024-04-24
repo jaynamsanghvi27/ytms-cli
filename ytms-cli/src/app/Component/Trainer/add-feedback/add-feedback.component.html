@@ -27,7 +27,7 @@ color: #fff;text-align: center;background: #005ba3;">Add/Update FeedBack</h2>
         excel
         </button>
     <button mat-button mat-dialog-close class="btn btn-primary btn-block btn-m" style="margin-right: 10px;">Cancel</button>
-    <button type="submit" (click)="submit()" class="btn btn-primary btn-block btn-m" [disabled]="role !== 'ROLE_TRAINER'">
+    <button type="submit" (click)="submit()" class="btn btn-primary btn-block btn-m" [hidden]="role !== 'ROLE_TRAINER'">
         Submit
         </button>
 </mat-dialog-actions>
