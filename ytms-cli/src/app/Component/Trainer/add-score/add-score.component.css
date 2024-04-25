@@ -104,3 +104,31 @@ th {
 tr:nth-child(even) {
     background-color: white;
 }
+.custom-file-button {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+  }
+  
+  .custom-file-button input[type=file] {
+    position: absolute;
+    font-size: 999px;
+    opacity: 0;
+  }
+  
+  .custom-file-button label {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .custom-file-button label:hover {
+    background-color: #0056b3;
+  }
+  
+  .custom-file-button:hover label {
+    background-color: #0056b3;
+    cursor: pointer;
+  }
