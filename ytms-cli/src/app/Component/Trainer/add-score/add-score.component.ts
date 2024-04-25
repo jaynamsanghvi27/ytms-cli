@@ -53,8 +53,8 @@ export class AddScoreComponent {
       console.log(jsonData);
        this.finalScores = jsonData
       for (const employee of this.employees) {
-        const matchingScore = this.finalScores.find((score: any) => Number(score.EMPID) == Number(employee.emp_id));
-        console.log("Matching Score for EMPID:", employee.emp_id, matchingScore);
+        const matchingScore = this.finalScores.find((score: any) => score.Email  == employee.emp_mail_id);
+        console.log("Matching Score for EMPID:", employee.emp_mail_id, matchingScore);
         if (matchingScore) {
           employee.finalScore = matchingScore.FinalScore;
         }
