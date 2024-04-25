@@ -18,11 +18,13 @@
      </div>
   </div>
   <div style="text-align: right;">
-     <button type="submit" style="margin-right: 20px;" class="btn btn-primary btn-block btn-sm">
+   <mat-spinner [diameter]="20" style="margin-right: 20px;" *ngIf="this.isLoading" class="spinner"></mat-spinner> 
+   <button type="submit" *ngIf="!this.isLoading" style="margin-right: 20px;" class="btn btn-primary btn-block btn-sm">
      Submit
      </button>
-     <button type="button" (click)="cancle()" class="btn btn-primary btn-block btn-sm">
+     <button type="button" *ngIf="!this.isLoading" (click)="cancle()" class="btn btn-primary btn-block btn-sm">
      Cancel
      </button>
+   
   </div>
   </form>

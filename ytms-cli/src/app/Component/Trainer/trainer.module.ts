@@ -27,7 +27,7 @@ import { AddTranierAttendanceComponent } from './add-tranier-attendance/add-tran
 import { NominationReqComponent } from './nomination-req/nomination-req.component';
 import { AddFeedbackComponent } from './add-feedback/add-feedback.component';
 import { AddScoreComponent } from './add-score/add-score.component';
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -60,7 +60,7 @@ import { AddScoreComponent } from './add-score/add-score.component';
     MatFormFieldModule,
     MatInputModule,
     MatFormFieldModule, MatInputModule, MatDatepickerModule,
-    MatTooltipModule
+    MatTooltipModule,MatProgressSpinnerModule
   ],
   providers:[]
 })
