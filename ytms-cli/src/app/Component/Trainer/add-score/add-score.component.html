@@ -28,11 +28,14 @@ color: #fff;text-align: center;background: #005ba3;" *ngIf="role === 'ROLE_TRAIN
     </table>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
+    <div class="row">
+        <div style="text-align: left;margin-right: 10px;" class="btn btn-block btn-m"><a href="../../../../assets/excel/FinalScore.xlsx" download="FinalScore.xlsx">Click Here To Download Sample Format</a></div>
+    </div>
     <div class="custom-file-button">
         <input type="file" accept=".xlsx" (change)="onFileChange($event)">
         <label>Upload FinalScore</label>
     </div>&nbsp;
-    
+
     <button type="submit" (click)="exportToExcel()" style="margin-right: 10px;" class="btn btn-primary btn-block btn-m">
         ExportToExcel
         </button>

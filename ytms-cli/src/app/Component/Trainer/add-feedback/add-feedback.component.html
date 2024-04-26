@@ -1,11 +1,10 @@
-
 <h2 mat-dialog-title style="border-bottom: 1px solid #eee;
 color: #fff;text-align: center;background: #005ba3;" *ngIf="role === 'ROLE_TECHNICAL_MANAGER'">
-FeedBack
+    FeedBack
 </h2>
 <h2 mat-dialog-title style="border-bottom: 1px solid #eee;
 color: #fff;text-align: center;background: #005ba3;" *ngIf="role === 'ROLE_TRAINER'">
-Add/Update FeedBack
+    Add/Update FeedBack
 </h2>
 <mat-dialog-content class="mat-typography" style="height: calc(100% - 96px);">
     <table>
@@ -30,6 +29,9 @@ Add/Update FeedBack
     </table>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
+    <div class="row">
+        <div style="text-align: left;margin-right: 10px;" class="btn btn-block btn-m"><a href="../../../../assets/excel/FeedBack.xlsx" download="SampleBulkUploadFile..xlsx">Click Here To Download Sample Format</a></div>
+    </div>
     <div class="custom-file-button">
         <input type="file" accept=".xlsx" (change)="onFileChange($event)">
         <label>Upload FeedBack</label>
