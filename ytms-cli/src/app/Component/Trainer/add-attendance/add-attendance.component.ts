@@ -16,7 +16,10 @@ export class AddAttendanceComponent {
   hoidayErrorMsg:String="Selected date is Holiday/Optional Holiday";
   isShowcalender=false;
   holidayAndOptionalHoliday:any;
+  isTraninerAbsent=false;
+  trainerAbsentDates:any;
   listOfAttendanceMarkDates:any;
+  absentDays:any;
   starDate:any
   endDate:any
   minDate:any;
@@ -65,9 +68,10 @@ export class AddAttendanceComponent {
 
   validateDate(dateValue:any){
     this.isChecked=false;
+    this.isTraninerAbsent=false;
     this.absentNoOfCandiate=0;
+    this.trainingDataList=[];
     this.presentNoOfCandidate=0;  
-    
     const value = dateValue;
     var date = (new Date()).toISOString().split('T')[0];
     this.isError=false;
@@ -75,6 +79,9 @@ export class AddAttendanceComponent {
     if(Date.parse(date) < Date.parse(value)){
       this.isError=true;
       this.trainingDataList=[];
+    }
+    else if(this.trainerAbsentDates.includes(dateValue)){
+      this.isTraninerAbsent=true;
     }
     else{
       this.checkHolidayAndOptionalHoilday(value);
@@ -95,6 +102,9 @@ export class AddAttendanceComponent {
   else if(this.listOfAttendanceMarkDates.includes(tempdate)){
     console.log(tempdate)
         return 'custom-date-class-mark-attendance';
+      }
+      else if(this.trainerAbsentDates.includes(tempdate)){
+        return 'custom-date-class-optionalholiday1';
       }
       else{
         if(this.starDate <= tempdate && this.endDate >= tempdate && day!=0 && day!=6 ){
@@ -124,6 +134,7 @@ export class AddAttendanceComponent {
     this.presentNoOfCandidate=0;  
     
     const value = event.target.value;
+    
     var date = (new Date()).toISOString().split('T')[0];
     this.isError=false;
     if(Date.parse(date) < Date.parse(value)){
@@ -165,12 +176,19 @@ export class AddAttendanceComponent {
     })
   }
 
+  getTraninerAttendacedate(){
+    this.ser.getTrainerAttendanceData().subscribe((resp:any)=>{
+      console.log("getTraninerAttendacedate :"+resp)
+      this.absentDays=resp['absentData'];     
+    })
+  }
   getStartAndEndDateAndHoliday(trainingId:any){
     this.ser.getStartDateEndDate(trainingId).subscribe((resp:any)=>{
       console.log(resp)
      // this.trainingDatesValue=resp; 
       this.listOfAttendanceMarkDates=resp['listOfMarkAttendanceDate'];
        this.holidayAndOptionalHoliday=resp['optionalHoliday'];
+       this.trainerAbsentDates=resp['trainerAbsentDates'];
       let starDate=resp['starendDate'][0];
       this.starDate=starDate;
       let endDate=resp['starendDate'][1];

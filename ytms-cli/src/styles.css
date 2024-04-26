@@ -93,6 +93,11 @@ button.custom-date-class-optionalholiday {
     border-radius: 100%;
   }
 
+  button.custom-date-class-optionalholiday1 {
+    background:#6c757d5c !important;
+    border-radius: 100%;
+  }
+
   button.custom-date-class-mark-attendance {
     background: lightgreen !important;
     border-radius: 100%;

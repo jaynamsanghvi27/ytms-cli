@@ -13,6 +13,7 @@ import { AddScoreComponent } from '../add-score/add-score.component';
 import { AuthService } from 'src/app/Core/services/auth.service';
 import { JwtService } from 'src/app/Core/services/jwt.service';
 import { DownloadService } from 'src/app/Core/services/download.service';
+import { AddLeaveComponent } from '../add-leave/add-leave.component';
 
 @Component({
   selector: 'app-view-trainer-form',
@@ -72,6 +73,18 @@ getTrainerTrainingList(){
     // </ngIf>
 }
 
+applyLeave(){
+  const dialogRef =this.dialog.open(AddLeaveComponent,{
+    //data:id,
+    width: '100%',
+    height: '90%'
+  } );
+  
+  dialogRef.afterClosed().subscribe(result => {
+    this.getTrainerTrainingList();
+  }); 
+
+}
 editTranierAttendance(id:any){
   
   const dialogRef =this.dialog.open(AddTranierAttendanceComponent,{
