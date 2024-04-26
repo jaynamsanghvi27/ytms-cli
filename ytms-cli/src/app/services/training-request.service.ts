@@ -216,4 +216,19 @@ export class TrainingRequestService {
     a.remove();
   }
 
+  getOptionalHoilday(): Observable<any[]> {
+    return this.http.get<any[]>(this.url + "/register/attendance/optionalHolidayList");
+  }
+
+  postLeaveData(startDate:any,endDate:any,trainingIds:any): Observable<any[]> {
+    return this.http.get<any[]>(this.url + "/register/attendance/changeAttendanceBasedOnLeave/"+ startDate+"/"+endDate+"/"+trainingIds);
+  }
+
+  postTranierLeaveData(startDate:any,endDate:any,trainingIds:any): Observable<any[]> {
+    return this.http.get<any[]>(this.url + "/register/attendance/saveTraninerAttendaceData/"+ startDate+"/"+endDate+"/"+trainingIds);
+  }
+
+  getTrainerAttendanceData(): Observable<any[]> {
+    return this.http.get<any[]>(this.url + "/register/attendance/getTraninerAttendaceData");
+  }
 }

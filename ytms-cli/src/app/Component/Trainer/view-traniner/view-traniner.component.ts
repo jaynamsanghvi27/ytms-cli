@@ -17,7 +17,7 @@ export class ViewTraninerComponent {
    responseData:any;
    trainingStatusValue?: any[];
    isAttendanceDataPresent=false;
-  constructor(public dialogRef: MatDialogRef<any>,private datepipe: DatePipe,private ser: TrainingRequestService, @Inject(MAT_DIALOG_DATA) public data: any,private formBuilder: FormBuilder,private activatedRoute: ActivatedRoute){
+  constructor(public dialogRef: MatDialogRef<ViewTraninerComponent>,private datepipe: DatePipe,private ser: TrainingRequestService, @Inject(MAT_DIALOG_DATA) public data: any,private formBuilder: FormBuilder,private activatedRoute: ActivatedRoute){
     this.trainingStatusValue=['In Progress','Hold','Complete']
    if(data.status=="Complete"){
     this.trainingStatusValue=['Complete']

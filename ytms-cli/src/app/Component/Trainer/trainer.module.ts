@@ -9,7 +9,7 @@ import {TrainerSidebarComponent} from './trainer-sidebar/trainer-sidebar.compone
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {NgbModalModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 import {FlatpickrModule} from 'angularx-flatpickr';
 import {ToastrModule} from 'ngx-toastr';
 import { ViewTrainerFormComponent } from './view-trainer-form/view-trainer-form.component';
@@ -27,6 +27,7 @@ import { AddTranierAttendanceComponent } from './add-tranier-attendance/add-tran
 import { NominationReqComponent } from './nomination-req/nomination-req.component';
 import { AddFeedbackComponent } from './add-feedback/add-feedback.component';
 import { AddScoreComponent } from './add-score/add-score.component';
+import { AddLeaveComponent } from './add-leave/add-leave.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { AddScoreComponent } from './add-score/add-score.component';
     AddTranierAttendanceComponent,
     NominationReqComponent,
     AddFeedbackComponent,
-    AddScoreComponent
+    AddScoreComponent,
+    AddLeaveComponent
   ],
   imports: [
     CommonModule,
@@ -60,7 +62,8 @@ import { AddScoreComponent } from './add-score/add-score.component';
     MatFormFieldModule,
     MatInputModule,
     MatFormFieldModule, MatInputModule, MatDatepickerModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatProgressSpinnerModule
   ],
   providers:[]
 })
