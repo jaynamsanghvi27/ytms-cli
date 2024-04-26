@@ -30,10 +30,11 @@ export class UsersService {
       });
   }
 
-  approvePendingUser(emailAdd: string): Observable<any> {
+  approvePendingUser(emailAdd: string,roleName: string): Observable<any> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     const params = new HttpParams()
-      .set('emailAdd', emailAdd);
+      .set('emailAdd', emailAdd)
+      .set('roleName',roleName);
     return this.http.post(environment.baseUrl
       + environment.contextUrl
       + this.usersUrl
@@ -67,6 +68,7 @@ export class UsersService {
     return this.http.get<string[]>(environment.baseUrl + environment.contextUrl + this.usersUrl + '/get/all-trainers');
   }
 
-
-
+  public getAllRoles(){
+    return this.http.get<any>(environment.baseUrl + environment.contextUrl + this.usersUrl + '/roles');
+  }
 }

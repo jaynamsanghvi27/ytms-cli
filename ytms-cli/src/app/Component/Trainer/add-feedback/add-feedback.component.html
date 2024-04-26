@@ -1,5 +1,12 @@
+
 <h2 mat-dialog-title style="border-bottom: 1px solid #eee;
-color: #fff;text-align: center;background: #005ba3;">Add/Update FeedBack</h2>
+color: #fff;text-align: center;background: #005ba3;" *ngIf="role === 'ROLE_TECHNICAL_MANAGER'">
+FeedBack
+</h2>
+<h2 mat-dialog-title style="border-bottom: 1px solid #eee;
+color: #fff;text-align: center;background: #005ba3;" *ngIf="role === 'ROLE_TRAINER'">
+Add/Update FeedBack
+</h2>
 <mat-dialog-content class="mat-typography" style="height: calc(100% - 96px);">
     <table>
         <thead>
@@ -24,7 +31,7 @@ color: #fff;text-align: center;background: #005ba3;">Add/Update FeedBack</h2>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button type="submit" (click)="exportToExcel()" style="margin-right: 10px;" class="btn btn-primary btn-block btn-m">
-        excel
+        ExportToExcel
         </button>
     <button mat-button mat-dialog-close class="btn btn-primary btn-block btn-m" style="margin-right: 10px;">Cancel</button>
     <button type="submit" (click)="submit()" class="btn btn-primary btn-block btn-m" [disabled]="role !== 'ROLE_TRAINER'">

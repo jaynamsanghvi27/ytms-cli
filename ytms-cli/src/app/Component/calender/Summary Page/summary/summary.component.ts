@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatSelectChange } from '@angular/material/select';
+import { en } from '@fullcalendar/core/internal-common';
 import {  addDays, differenceInBusinessDays, differenceInMinutes, format, isAfter, isBefore, isWeekend, parseISO } from 'date-fns';
 import * as FileSaver from 'file-saver';
 import { AuthService } from 'src/app/Core/services/auth.service';
@@ -18,7 +19,7 @@ export class SummaryComponent implements OnInit {
   
   datasource:any[]=[]; 
   dateRange: any[] = [];
-  displayedColumns = ['user', 'task', 'date-range', 'freeHours'];
+  displayedColumns = ['user', 'task', 'date-range',"TotalDays", 'freeHours'];
   events :any[]=[];
   searchFilter:boolean=false;
   userRole:String='';
@@ -67,21 +68,52 @@ getUniqueTitles(data:any) {
   return titleSet.size; // Return the size of the set (number of unique titles)
 }
 
-
-
+diffDays(endDate: any, startDate: any) {
+  const adjustedEndDate = addDays(new Date(endDate), 1);
+  return differenceInBusinessDays(adjustedEndDate, new Date(startDate));
+}
 exportExcel(): void {
-
- this.datasource.forEach((file)=>{
+// let i =0;
+ this.datasource.forEach((file)=>{ 
+  // i++;
+  const subtasks = file.title.trim() ? file.title.split(',') : [];
+  const durations = file.currentRangeDuration.split(',');
+  const totalTasks = subtasks.length;
   if(file.end_date!=null)
   {
-    file.start_date= addDays(new Date(file.start_date),1).toISOString().slice(0, 10)   
-    file.end_date= addDays(new Date(file.end_date),1).toISOString().slice(0, 10)   
-  this.downloadfile.push({Trainer:file.scheduleUser.fullName,Task:file.title,Start:file.start_date,End:file.end_date,FreeHours:file.freeHours})
+    
+    const totalDays=differenceInBusinessDays(addDays(new Date(file.end_date),1),new Date(file.start_date))
+    file.start_date= new Date(file.start_date).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' })
+    // file.start_date= addDays(new Date(file.start_date),1).toISOString().slice(0, 10)   
+    file.end_date= new Date(file.end_date).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' })  
+
+    // file.end_date= addDays(new Date(file.end_date),1).toISOString().slice(0, 10)   
+  this.downloadfile.push({
+    Trainer:file.scheduleUser.fullName,
+    Task: subtasks.map((subtask: string, index: number) => `${index + 1}. ${subtask.trim()}`).join('\n'),
+    // Task:`${i})${file.title}`,
+    Unavailable_Slots: durations.map((duration:string)=>`${duration.trim()}`).join('\n'),
+    // Unavailable_Slots:file.currentRangeDuration,
+    Total_Tasks:totalTasks,
+    Start:file.start_date,
+    End:file.end_date,
+    TotalDays:totalDays,
+    FreeHours:file.freeHours})
   }
   else
   {
     file.start_date= addDays(new Date(file.start_date),1).toISOString().slice(0, 10)   
-    this.downloadfile.push({Trainer:file.scheduleUser.fullName,Task:file.title,Start:file.start_date,End:file.start_date,FreeHours:file.freeHours})
+    this.downloadfile.push({
+      Trainer:file.scheduleUser.fullName,
+      Task: subtasks.map((subtask: string, index: number) => `${index + 1}. ${subtask.trim()}`).join('\n'),
+    // Task:`${i})${file.title}`,
+    Unavailable_Slots: durations.map((duration:string)=>`${duration.trim()}`).join('\n'),
+    // Unavailable_Slots:file.currentRangeDuration,
+    Total_Tasks:totalTasks,
+    Start:file.start_date,
+      End:file.start_date,
+      TotalDays:1,
+      FreeHours:file.freeHours})
   } 
 })
   const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.downloadfile);
@@ -91,6 +123,7 @@ exportExcel(): void {
   const blob: Blob = new Blob([excelBuffer], { type: 'text/csv;charset=utf-8' }); 
   FileSaver.saveAs(blob, 'Summary.csv');
 }
+
 
 
 
@@ -266,7 +299,7 @@ ngOnInit(): void {
   const email = this.jwtService.getUserNameFromToken(token);
   this.userRole=role;
   console.log(role,email);
-  if (role === 'ROLE_TECHNICAL_MANAGER') 
+  if (role === 'ROLE_TECHNICAL_MANAGER' ||  role === 'ROLE_COMPETENCY_MANAGER') 
   {
   this.getAllEvents();
   this.searchFilter=true;  

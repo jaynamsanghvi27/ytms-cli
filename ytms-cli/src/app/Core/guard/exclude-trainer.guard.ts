@@ -31,7 +31,7 @@ export class ExcludeTrainerGuard implements CanActivate {
           //get roles from token
           const role = this.jwtService.getRoleFromToken(token);
        
-          if ((role === 'ROLE_TECHNICAL_MANAGER' || role === 'ROLE_REQUESTER') && role != undefined || null) {
+          if ((role === 'ROLE_TECHNICAL_MANAGER' || role === 'ROLE_REQUESTER' || role === 'ROLE_COMPETENCY_MANAGER') && role != undefined || null) {
             // Role not authorized, redirect to home page
             return true;
           } else {
