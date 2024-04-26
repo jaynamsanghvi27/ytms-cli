@@ -9,88 +9,190 @@ import { JwtService } from 'src/app/Core/services/jwt.service';
 })
 export class TrainerSidebarComponent {
   @Input() sideNavStatus: boolean = false;
-  role:any;
+  userRole:any;
   list:any;
   
   constructor(private auth:AuthService, private jwtserv:JwtService){
     let token = auth.getToken();
-     this.role= jwtserv.getRoleFromToken(token);
-    console.log(this.role);
-    this.list  = [
-    {
-      number: 1,
-      name: 'Dashboard',
-     icon: 'fa-solid fa-home',
-     routing: ''
-    },
-    {
-      number: 2,
-      name: 'My Schedule',
-      icon: 'fa-solid fa-calendar-days',
-      routing:'/trainer/trainer-calendar'
+    this.userRole= jwtserv.getRoleFromToken(token);
+    if(this.userRole==='ROLE_TECHNICAL_MANAGER'){
+     this.list = this.list1;
+   }
+   else if(this.userRole==='ROLE_COMPETENCY_MANAGER'){
+     this.list = this.list2;
+   }
+   else if(this.userRole==='ROLE_TRAINER'){
+     this.list = this.list3;
+   }
+   else{
+     this.list=this.list4;
+   }
+ }
 
-    },
-    {
-      number: 3,
-      name: 'Training Request',
-      icon: 'fa-solid fa-person-chalkboard',
-      routing: '/trainer/training-req'
-    },
-    {
-      number: 4,
-      name: 'View Training Request',
-      icon: 'fa-regular fa-rectangle-list',
-      routing: '/trainer/view-trf'
-    },
-    {
-      number: 5,
-      name: this.getViewName(this.role),
-      icon: 'fa fa-eye',
-      routing: '/trainer/view-trainer-form'
-    },
-    {
-      number: 6,
-      name: 'Order  ',
-      icon: 'fa-solid fa-cart-shopping',
-      routing: '/requester/calendar'
-
-    },
-    {
-      number: 7,
-      name: 'Settings',
-      icon: 'fa fa-id-card-o',
-      routing: '/requester/calendar'
-
-    },
-    {
-      number: 8,
-      name: 'About',
-      icon: 'fa-solid fa-circle-info',
-      routing: '/trainer/about-us'
-
-    },
-    {
-      number: 9,
-      name: 'Contact',
-      icon: 'fa-solid fa-phone',
-      routing: '/requester/calendar'
-    },
-    
-  ]
-}
-
-  getViewName(role: string) {
-
-    if ('ROLE_TECHNICAL_MANAGER' === role || role === 'ROLE_COMPETENCY_MANAGER') {
-      return "All Trainings";
-    }
-
-    else if ('ROLE_REQUESTER' === role) {
-      return "Training Status Reports";
-    }
-
-    else return "View My Trainings"
-
-  }
+   list1 = [
+     {
+       number: 1,
+       name: 'Dashboard',
+      icon: 'fa-solid fa-home',
+      routing: ''
+     },
+     {
+       number: 2,
+       name: 'Schedule',
+       icon: 'fa-solid fa-calendar-days',
+       routing: '/book-calendar'
+ 
+     },
+     {
+       number: 3,
+       name: 'Training Request',
+       icon: 'fa-solid fa-person-chalkboard',
+       routing: '/tm-training-req'
+     },
+     {
+       number: 4,
+       name: 'View Training Request',
+       icon: 'fa-regular fa-rectangle-list',
+       routing: '/tm-view-trf'
+     },
+     
+     {
+       number: 5,
+       name: 'All Trainings',
+       icon: 'fa fa-eye',
+       routing: '/tm-view-trainer-form'
+     },
+     {
+       number: 6,
+       name: 'Associate Summary',
+       icon: 'fa-solid fa-users',
+       routing: '/tm-associate-summary'
+     },
+     {
+       number: 7,
+       name: 'Manage Associate',
+       icon: 'fa fa-id-card-o',
+       routing: '/tm-manage-associate'
+ 
+     }
+   ]
+ 
+   list2 = [
+     {
+       number: 1,
+       name: 'Dashboard',
+      icon: 'fa-solid fa-home',
+      routing: ''
+     },
+     {
+       number: 2,
+       name: 'Schedule',
+       icon: 'fa-solid fa-calendar-days',
+       routing: '/book-calendar'
+ 
+     },
+     {
+       number: 3,
+       name: 'View Training Request',
+       icon: 'fa-regular fa-rectangle-list',
+       routing: '/tm-view-trf'
+     },
+     
+     {
+       number: 4,
+       name: 'All Trainings',
+       icon: 'fa fa-eye',
+       routing: '/tm-view-trainer-form'
+     },
+     {
+       number: 5,
+       name: 'Associate Summary',
+       icon: 'fa-solid fa-users',
+       routing: '/tm-associate-summary'
+     },
+     {
+       number: 6,
+       name: 'Manage Associate',
+       icon: 'fa fa-id-card-o',
+       routing: '/tm-manage-associate'
+ 
+     }
+   ]
+   list3 = [
+     {
+       number: 1,
+       name: 'Dashboard',
+      icon: 'fa-solid fa-home',
+      routing: ''
+     },
+     {
+       number: 2,
+       name: 'My Schedule',
+       icon: 'fa-solid fa-calendar-days',
+       routing:'/trainer/trainer-calendar'
+ 
+     },
+     {
+       number: 3,
+       name: 'Training Request',
+       icon: 'fa-solid fa-person-chalkboard',
+       routing: '/trainer/training-req'
+     },
+     {
+       number: 4,
+       name: 'View Training Request',
+       icon: 'fa-regular fa-rectangle-list',
+       routing: '/trainer/view-trf'
+     },
+     {
+       number: 5,
+       name: 'View My Trainings',
+       icon: 'fa fa-eye',
+       routing: '/trainer/view-trainer-form'
+     }
+   ]
+   list4 = [
+     {
+       number: 1,
+       name: 'Dashboard',
+      icon: 'fa-solid fa-home',
+      routing: ''
+     },
+     {
+       number: 2,
+       name: 'Training Request',
+       icon: 'fa-solid fa-person-chalkboard',
+       routing: '/re-training-req'
+     },
+     {
+       number: 3,
+       name: 'View Training Request',
+       icon: 'fa-regular fa-rectangle-list',
+       routing: '/re-view-trf'
+ 
+     },
+     {
+       number: 4,
+       name: 'Training Status Reports',
+       icon: 'fa fa-eye',
+       routing: '/requester/view-trainer-form'
+ 
+     },
+     {
+       number: 5,
+       name: 'Associate Summary',
+       icon: 'fa-solid fa-users',
+       routing: '/re-associate-summary'
+ 
+     },
+     {
+       number: 6,
+       name: 'Manage Associate',
+       icon: 'fa fa-id-card-o',
+       routing: '/re-manage-associate'
+ 
+     }
+   ]
+ 
 
 }

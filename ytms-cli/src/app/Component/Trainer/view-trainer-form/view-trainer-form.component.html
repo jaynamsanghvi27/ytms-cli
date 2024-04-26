@@ -2,7 +2,7 @@
     <app-trainer-header (sideNavToggled)="sideNavStatus=$event;" *ngIf="role !== 'ROLE_TRAINER'">
     </app-trainer-header>
     <main>
-        <app-trainer-sidebar [ngClass]="{'app-side-nav-open':sideNavStatus}" [sideNavStatus]="sideNavStatus" class="black-border"></app-trainer-sidebar>
+        <app-trainer-sidebar [ngClass]="{'app-side-nav-open':sideNavStatus}" *ngIf="this.role != 'ROLE_TRAINER'" [sideNavStatus]="sideNavStatus" class="black-border"></app-trainer-sidebar>
         <div class="display-area p-3" [ngClass]="{'display-area-shrink':sideNavStatus}">
             <!-- Main Content    -->
             <div class="vt-training-request-form">

@@ -207,6 +207,14 @@ const routes: Routes = [
     component: ViewTrainerFormComponent
   },
   {
+    path: "re-associate-summary",
+    component: AssociateSummaryComponent
+  },
+  {
+    path: "re-manage-associate",
+    component: ManageAssociateComponent
+  },
+  {
     path:'tm-view-trainer-form',
     component: ViewTrainerFormComponent
   },
