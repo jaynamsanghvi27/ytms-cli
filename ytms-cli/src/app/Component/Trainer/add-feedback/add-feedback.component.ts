@@ -7,6 +7,7 @@ import { TrainingRequestService } from 'src/app/services/training-request.servic
 import { ViewAttendanceComponent } from '../view-attendance/view-attendance.component';
 import * as ExcelJS from 'exceljs';
 import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-add-feedback',
@@ -20,6 +21,8 @@ export class AddFeedbackComponent {
   attendsData:any;
   employees: Nomination[] = [];
   showTooltip:Boolean=false;
+  finalFeedback:any[]=[];
+
   constructor(public dialogRef: MatDialogRef<ViewAttendanceComponent>,@Inject(MAT_DIALOG_DATA) public data: any,private ser:TrainingRequestService,private router: Router,public dialog: MatDialog){
     
     this.trainingId = data?.id;
@@ -44,13 +47,13 @@ export class AddFeedbackComponent {
      const workbook = new ExcelJS.Workbook();
      const worksheet = workbook.addWorksheet('My Sheet');
  
-     worksheet.addRow(['Employee Id', 'Employee Email', 'Employee Name', 'FeedBack'], 'n');
+     worksheet.addRow(['EMPID', 'Employee Email', 'Employee Name', 'Feedback'], 'n');
  
      worksheet.columns = [
-       { header: 'Employee Id', key: 'Employee Id', width: 10 },
+       { header: 'EMPID', key: 'EMPID', width: 10 },
        { header: 'Employee Email', key: 'Employee Email', width: 10 },
        { header: 'Employee Name', key: 'Employee Name', width: 10 },
-       { header: 'FeedBack', key: 'FeedBack', width: 10 }
+       { header: 'Feedback', key: 'Feedback', width: 10 }
      ];
  
      data.forEach(item => {
@@ -66,10 +69,10 @@ export class AddFeedbackComponent {
 
   modifiedData(nominee: Nomination[]):any[]{
     return nominee.map(nomination => (
-      { 'Employee Id': nomination.emp_id,
+      { 'EMPID': nomination.emp_id,
        'Employee Email': nomination.emp_name,
         'Employee Name':nomination.emp_name,
-        'FeedBack':nomination.feedback,
+        'Feedback':nomination.feedback,
       })
       );
   }
@@ -111,5 +114,31 @@ export class AddFeedbackComponent {
       ...employee,
       disableFeedback: employee.feedback!=null
     }));
+  }
+
+  onFileChange(event: any) {
+    const input = event.target;
+    const reader = new FileReader();
+  
+    reader.readAsArrayBuffer(input.files[0]);
+  
+    reader.onload = (e) => {
+      const arrayBuffer = e.target?.result;
+      const data = XLSX.read(arrayBuffer, { type: 'array' });
+      const sheetName = data.SheetNames[0];
+      const worksheet = data.Sheets[sheetName];
+      const jsonData = XLSX.utils.sheet_to_json(worksheet);
+  
+      console.log(jsonData);
+      this.finalFeedback = jsonData
+      for (const employee of this.employees) {
+        const matchingFeedback = this.finalFeedback.find((feedback: any) => Number(feedback.EMPID) == Number(employee.emp_id));
+        console.log("Matching Score for EMPID:", employee.emp_id, matchingFeedback);
+        if (matchingFeedback) {
+          employee.feedback = matchingFeedback.Feedback;
+        }
+      }
+      console.log(this.employees);
+    };
   }
 }
