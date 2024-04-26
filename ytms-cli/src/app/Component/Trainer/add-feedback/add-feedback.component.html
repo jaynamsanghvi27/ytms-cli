@@ -30,6 +30,10 @@ Add/Update FeedBack
     </table>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
+    <div class="custom-file-button">
+        <input type="file" accept=".xlsx" (change)="onFileChange($event)">
+        <label>Upload FeedBack</label>
+    </div>&nbsp;
     <button type="submit" (click)="exportToExcel()" style="margin-right: 10px;" class="btn btn-primary btn-block btn-m">
         ExportToExcel
         </button>
