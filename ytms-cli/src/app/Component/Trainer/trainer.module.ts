@@ -29,7 +29,6 @@ import { AddFeedbackComponent } from './add-feedback/add-feedback.component';
 import { AddScoreComponent } from './add-score/add-score.component';
 import { AddLeaveComponent } from './add-leave/add-leave.component';
 
-
 @NgModule({
   declarations: [
     TrainerHomeComponent,

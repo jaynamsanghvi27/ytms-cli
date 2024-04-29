@@ -22,7 +22,7 @@ import { AddLeaveComponent } from '../add-leave/add-leave.component';
 })
 export class ViewTrainerFormComponent {
   @Output() sideNavToggled = new EventEmitter<boolean>();
-  sideNavStatus: boolean = true;
+  sideNavStatus: boolean = false;
   trainingReqForms : any[]=[];
   role: string = '';
   constructor(private authService:AuthService,

@@ -5,6 +5,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { th } from 'date-fns/locale';
 import { TrainingRequestService } from 'src/app/services/training-request.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-view-traniner',
@@ -95,8 +96,9 @@ export class ViewTraninerComponent {
   onOptionsSelected(){
     console.log("the selected value is " + this.trainingReqForm.get('trainingStatus').value);
 }
-
+     isLoading:boolean=false;
     submit(){
+      this.isLoading=true;
       let obj: any = this.trainingReqForm.value;
       this.responseData.trainingStatus=this.trainingReqForm.get('trainingStatus').value;
       console.log("this.responseData " + JSON.stringify(this.responseData));
@@ -104,9 +106,15 @@ export class ViewTraninerComponent {
       this.ser.editTraining(this.responseData).subscribe(data=>{
        // 
        if(obj.trainingStatus=='In Progress' && this.isAttendanceDataPresent==false){
-        this.ser.createAattendanceRecord(this.trainingId).subscribe();
+        this.ser.createAattendanceRecord(this.trainingId).subscribe(data=>{
+          this.isLoading=false;
+        });
        }
-        this.dialogRef.close();
+       else
+        {
+          this.isLoading=false;   
+          this.dialogRef.close();
+        }
       });
     }
 }

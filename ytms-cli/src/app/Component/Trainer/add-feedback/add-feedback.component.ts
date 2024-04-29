@@ -7,6 +7,7 @@ import { TrainingRequestService } from 'src/app/services/training-request.servic
 import { ViewAttendanceComponent } from '../view-attendance/view-attendance.component';
 import * as ExcelJS from 'exceljs';
 import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-add-feedback',
@@ -19,6 +20,7 @@ export class AddFeedbackComponent {
   trainingId:any;
   attendsData:any;
   employees: Nomination[] = [];
+  feedBack:any[]=[];
   showTooltip:Boolean=false;
   constructor(public dialogRef: MatDialogRef<ViewAttendanceComponent>,@Inject(MAT_DIALOG_DATA) public data: any,private ser:TrainingRequestService,private router: Router,public dialog: MatDialog){
     
@@ -35,6 +37,34 @@ export class AddFeedbackComponent {
       this.dialogRef.close();
     })
   }
+
+  onFileChange(event: any) {
+    const input = event.target;
+    const reader = new FileReader();
+  
+    reader.readAsArrayBuffer(input.files[0]);
+  
+    reader.onload = (e) => {
+      const arrayBuffer = e.target?.result;
+      const data = XLSX.read(arrayBuffer, { type: 'array' });
+      const sheetName = data.SheetNames[0];
+      const worksheet = data.Sheets[sheetName];
+      const jsonData = XLSX.utils.sheet_to_json(worksheet);
+  
+      console.log(jsonData);
+       this.feedBack = jsonData
+      for (const employee of this.employees) {
+        const matchingScore = this.feedBack.find((score: any) => score.Email  == employee.emp_mail_id);
+        console.log("Matching Score for EMPID:", employee.emp_mail_id, matchingScore);
+        if (matchingScore) {
+          employee.feedback = matchingScore.FeedBack;
+        }
+      }
+      console.log(this.employees);
+    };
+  }
+
+
 
   async exportToExcel(): Promise<void>{
     console.log("Export To Excel  : ");
