@@ -81,6 +81,7 @@ export class TmHomeComponent {
         Swal.fire('Failed', "Something went wrong !", 'error');
       });
   }
+  
   openList(val:any){
     if("requesterList"==val){
       this.listOfRequester=true;

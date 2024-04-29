@@ -136,7 +136,7 @@ app-requester-sidebar {
 
 .display-area {
     position: absolute;
-    left: 60px;
+    /* left: 60px; */
     width: calc(100% - 60px);
     transition: width 1s linear, left 1s linear;
     ;

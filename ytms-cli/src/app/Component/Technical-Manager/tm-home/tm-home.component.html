@@ -4,7 +4,7 @@
 
     <main>
         <app-tm-sidebar [ngClass]="{'app-side-nav-open':sideNavStatus}" [sideNavStatus]="sideNavStatus" class="black-border"></app-tm-sidebar>
-        <div [ngClass]="{'display-area-shrink':sideNavStatus}" class="display-area p-3">
+        <div class="display-area p-3" [ngClass]="{'display-area-shrink':sideNavStatus}" >
             <div class="tab">
                 <button *ngIf="userRole !== 'ROLE_COMPETENCY_MANAGER'" matBadge="{{listOfRequestersCount}}" matBadgeColor="warn" class="tablinks" style="background-color: #005ba3; color: white;" (click)="openList('requesterList')">List of Requesters</button> &nbsp;&nbsp;
                 <button matBadge="{{listOfTrainingsCount}}" matBadgeColor="warn" class="tablinks" style="background-color: #005ba3; color: white;" (click)="openList('trainingList')">Upcoming Training List</button>

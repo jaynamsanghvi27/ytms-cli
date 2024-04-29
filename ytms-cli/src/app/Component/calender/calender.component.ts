@@ -39,7 +39,7 @@ export class CalenderComponent implements OnInit{
   searchFilter:boolean=false;
   userRole:String='';
   actionCss:String='actions'
-
+  userCss:String='display-area p-3';
 
   calendarEvents:any[]=[]
   recusingDay=0;
@@ -156,8 +156,8 @@ return false
     {    
     
         this.actionCss='trainer-action'
-
-      this.searchFilter=false;  
+         this.userCss='display-area-tr p-3'
+        this.searchFilter=false;  
       this.getEventByTrainer(email);
       
     }

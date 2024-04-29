@@ -25,6 +25,7 @@ export class ViewTrainerFormComponent {
   sideNavStatus: boolean = false;
   trainingReqForms : any[]=[];
   role: string = '';
+  userCss:String ='display-area p-3';
   constructor(private authService:AuthService,
     private jwtService:JwtService,
     private ser:TrainingRequestService,private downloadService: DownloadService,
@@ -36,6 +37,10 @@ export class ViewTrainerFormComponent {
 ngOnInit(): void {
   const token = this.authService.getToken();
   this.role = this.jwtService.getRoleFromToken(token);
+ if(this.role ===  'ROLE_TRAINER' )
+  {
+ this.userCss='display-area-tr p-3'
+  }
 }
 
 downLoadExcel(id:any,trainingName:any){

@@ -3,7 +3,7 @@
   </app-requester-header>
 
   <main>
-      <app-requester-sidebar [sideNavStatus]="sideNavStatus" [ngClass]="{'app-side-nav-open':sideNavStatus}" class="black-border"> </app-requester-sidebar>
+      <app-requester-sidebar [sideNavStatus]="sideNavStatus" *ngIf="this.userRole != 'ROLE_TRAINER'" [ngClass]="{'app-side-nav-open':sideNavStatus}" class="black-border"> </app-requester-sidebar>
       <div class="display-area p-3" [ngClass]="{'display-area-shrink':sideNavStatus}">
       <!-- Main Content    -->
       <div class="about-section">

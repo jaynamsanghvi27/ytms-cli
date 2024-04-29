@@ -24,24 +24,24 @@ app-trainer-sidebar {
     background-color: white;
     overflow-x: hidden;
     white-space: nowrap;
-    /* transition: width 1s linear; */
+    transition: width 1s linear;
 }
+
 
 .app-side-nav-open {
     width: 250px;
-}
-
-.display-area {
+  }
+  
+  .display-area {
     position: absolute;
+    left: 60px;
     width: calc(100% - 60px);
     transition: width 1s linear, left 1s linear;;
-    
-}
-
-.display-area-shrink {
+  
+  }
+  
+  .display-area-shrink {
     left: 250px;
-    position: absolute;
     width: calc(100% - 250px);
     transition: width 1s linear, left 1s linear;;
-}
-
+  }

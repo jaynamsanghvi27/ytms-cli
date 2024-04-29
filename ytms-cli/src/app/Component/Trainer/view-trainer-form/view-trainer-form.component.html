@@ -4,12 +4,8 @@
     <main>
         <app-trainer-sidebar [ngClass]="{'app-side-nav-open':sideNavStatus}" *ngIf="this.role != 'ROLE_TRAINER'" [sideNavStatus]="sideNavStatus" class="black-border"></app-trainer-sidebar>
 
-        <div class="display-area p-3" [ngClass]="{'display-area-shrink':sideNavStatus}">
-            <!-- Main Content    -->
+        <div class={{this.userCss}} [ngClass]="{'display-area-shrink':sideNavStatus}">
             <div class="vt-training-request-form">
-                <!-- Main Content    -->
-
-
                 <form>
                     <div class="vt-form-header">
                         <span style="display: inline-block;"> <h5 class="heading-color">Training Request List</h5></span>

@@ -43,7 +43,8 @@ export class TrainingReqComponent {
   nomination: Nomination[] = [];
   showNomination = false;
   holiday:any[]=[];
-
+  userCss:String ='display-area p-3';
+ 
 
 
   submitted = false;
@@ -90,6 +91,10 @@ export class TrainingReqComponent {
   }
 
   ngOnInit(): void {
+    if ( this.userRole ===  'ROLE_TRAINER' )
+      {
+     this.userCss='display-area-tr p-3'
+      }
     this.loadTechnology();
     this.loadUnit();
     this.loadCompetency();

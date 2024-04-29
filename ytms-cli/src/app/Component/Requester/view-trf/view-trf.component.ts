@@ -31,7 +31,7 @@ export class ViewTrfComponent {
   document: Document | undefined;
   files?: any[];
   trainers?: any[];
-
+  userCss:String ='display-area p-3';
   selectedFiles?: FileList;
   enableUploadButton = false;
   currentFile?: File;
@@ -51,6 +51,11 @@ export class ViewTrfComponent {
     this.uploadService.getFileName().subscribe((resp: any) => { this.files = resp })
   }
   ngOnInit(): void {
+
+    if ( this.userRole ===  'ROLE_TRAINER' )
+      {
+     this.userCss='display-area-tr p-3'
+      }
     this.loadList();
     this.loadTrainner();
     this.calService.getALLHolidays().subscribe((resp: any) => { this.holiday = resp })
