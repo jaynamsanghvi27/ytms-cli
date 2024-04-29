@@ -4,6 +4,7 @@ import { DateAdapter } from '@angular/material/core';
 import { MatCalendarCellClassFunction, MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { th } from 'date-fns/locale';
 import { TrainingRequestService } from 'src/app/services/training-request.service';
 
 @Component({
@@ -17,12 +18,15 @@ export class AddLeaveComponent {
   todayDate:Date = new Date();
   holidayAndOptionalHoliday:any;
   absentDays:any;
+  idVsLeaveDates:any;
   traninglist: any[]=[];
   isChecked:any;
   range : any;
   leaveStartDate:any;
   leaveEndDate:any;
   isLoading=false;
+  waringObject: any[]=[];;
+  isTraningImpact:boolean=false;
 
   constructor(public dialogRef: MatDialogRef<AddLeaveComponent>,private dateAdapter: DateAdapter<Date>,private ser:TrainingRequestService,private router: Router,public dialog: MatDialog){
     this.getTraninerAttendacedate(); 
@@ -71,7 +75,8 @@ export class AddLeaveComponent {
   getTraninerAttendacedate(){
     this.ser.getTrainerAttendanceData().subscribe((resp:any)=>{
       console.log("getTraninerAttendacedate :"+resp)
-      this.absentDays=resp['absentDates'];     
+      this.absentDays=resp['absentDates'];  
+      this.idVsLeaveDates=resp['idvsdate'];  
     })
   }
 
@@ -114,6 +119,7 @@ export class AddLeaveComponent {
   }
  
   clickHeaderCheckBox(event: any,idetifer:any){
+    this.waringObject=[]
     console.log(event.currentTarget.checked);
     console.log(this.traninglist)
     for(let i=0;i<this.traninglist.length;i++){
@@ -125,7 +131,7 @@ export class AddLeaveComponent {
   dateRangeChange(dateRangeStart: HTMLInputElement, dateRangeEnd: HTMLInputElement) {
     console.log(dateRangeStart.value);
     console.log(dateRangeEnd.value);
-     
+    this.waringObject=[];
     if(dateRangeStart.value!=null && dateRangeStart.value!=undefined  && dateRangeStart.value!='' && dateRangeEnd.value!=null && dateRangeEnd.value!=undefined && dateRangeEnd.value!='' ){
       this.traninglist=[];
       var parts =dateRangeEnd.value.split('/');
@@ -143,6 +149,15 @@ export class AddLeaveComponent {
 return arr;
 }
 
+getDaysArray = function(start:any, end:any) {
+    for(var arr=[],dt=new Date(start); dt<=new Date(end); dt.setDate(dt.getDate()+1)){
+        arr.push(new Date(dt));
+    }
+    return arr;
+};
+clickRowCheckBox(){
+  this.waringObject=[];
+}
 submitLeave(){
   this.isLoading=true;
   this.isSubmitbuttonDisable=true;
@@ -151,6 +166,23 @@ submitLeave(){
  let end= this.range.get("end")?.value;
  let convertedStartdate = this.convert(start);
  let convertedEndDate = this.convert(end);;
+ let leavedates: any[]=[];
+ let cleavedates:any[]=[];
+
+ if(start!=end){
+  leavedates=this.getDaysArray(convertedStartdate,convertedEndDate);
+  //leavedates.map((v)=>v.toISOString().slice(0,10));
+  leavedates.map((v)=>this.convert(v));
+ }
+ if(leavedates.length > 0){
+    for(let i=0;i<leavedates.length;i++){
+     cleavedates.push(this.convert(leavedates[i]))
+}
+ }
+
+
+
+
  //let traingIds=[];
  var traingIds:string[] = []
  console.log("submitLeave1")
@@ -159,12 +191,51 @@ submitLeave(){
     traingIds.push(this.traninglist[i]['id'])
   }  
  } 
- console.log("submitLeave2")
+let tlIds = Object.keys(this.idVsLeaveDates); 
+
+
+
+  for(let i=0;i<traingIds.length;i++){
+  let id=traingIds[i].toString();
+  if(tlIds.includes(id)){
+       for (var key in this.idVsLeaveDates) {
+       
+       if(id==key){
+          let leaveDates=this.idVsLeaveDates[key]
+          for(let j=0;j<leaveDates.length;j++){
+           let  t= leaveDates[j];
+               if(cleavedates.includes(t)){
+                let obj={'id':id,'date':t};
+                this.waringObject.push(obj);
+               }
+          }
+   }
+   }
+   }
+}
+ 
+console.log("submitLeave2")
+
+if(this.waringObject.length==0){
+
   this.ser.postTranierLeaveData(convertedStartdate,convertedEndDate,traingIds).subscribe((resp:any)=>{
     console.log(resp);
-    this.postLeaveData(convertedStartdate,convertedEndDate,traingIds);
+    if(this.isTraningImpact==false){
+      this.postLeaveData(convertedStartdate,convertedEndDate,traingIds);
+    }
+    else{
+      console.log(resp);
+      this.isSubmitbuttonDisable=true;
+      this.isLoading=false;
+      this.dialogRef.close();  
+    }
+    
   })
-
+}
+else{
+  this.isLoading=false;
+}
+   
 }
 postLeaveData(convertedStartdate:any,convertedEndDate:any,traingIds:any){
 
