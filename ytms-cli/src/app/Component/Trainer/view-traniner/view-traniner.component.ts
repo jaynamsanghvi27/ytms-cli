@@ -108,6 +108,7 @@ export class ViewTraninerComponent {
        if(obj.trainingStatus=='In Progress' && this.isAttendanceDataPresent==false){
         this.ser.createAattendanceRecord(this.trainingId).subscribe(data=>{
           this.isLoading=false;
+          this.dialogRef.close();
         });
        }
        else
