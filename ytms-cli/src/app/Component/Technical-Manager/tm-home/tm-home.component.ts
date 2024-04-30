@@ -23,6 +23,7 @@ export class TmHomeComponent {
   userRole:any;
   listOfRequestersCount: number = 0;
   listOfTrainingsCount: number = 0;
+  listOfPendingLeaves: boolean = false;
 
   constructor(private usersService: UsersService,private trainingRequestService:TrainingRequestService,
               private router: Router,private auth: AuthService, private jwtServ: JwtService) {
@@ -84,13 +85,26 @@ export class TmHomeComponent {
         Swal.fire('Failed', "Something went wrong !", 'error');
       });
   }
-  openList(val:any){
-    if("requesterList"==val){
-      this.listOfRequester=true;
-      this.requesterTable=true;
+  openList(val: any) {
+    if ("requesterList" == val) {
+      this.listOfRequester = true;
+      this.requesterTable = true;
     }
-    else{
-      this.listOfRequester=false;
+    else {
+      this.listOfRequester = false;
+      this.listOfPendingLeaves =false;
     }
+  }
+
+  openPendingLeaves(val: any) {
+    if ("pendingLeaveList" == val) {
+      this.listOfRequester = false;
+      this.requesterTable = false;
+      this.listOfPendingLeaves =true;
     }
+    else {
+      this.listOfRequester = true;
+      this.listOfPendingLeaves =false;
+    }
+  }
 }
