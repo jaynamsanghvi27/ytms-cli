@@ -218,17 +218,11 @@ console.log("submitLeave2")
 
 if(this.waringObject.length==0){
 
-  this.ser.postTranierLeaveData(convertedStartdate,convertedEndDate,traingIds).subscribe((resp:any)=>{
+  this.ser.postTranierLeaveData(convertedStartdate,convertedEndDate,traingIds,this.isTraningImpact).subscribe((resp:any)=>{
     console.log(resp);
-    if(this.isTraningImpact==false){
-      this.postLeaveData(convertedStartdate,convertedEndDate,traingIds);
-    }
-    else{
-      console.log(resp);
       this.isSubmitbuttonDisable=true;
       this.isLoading=false;
       this.dialogRef.close();  
-    }
     
   })
 }

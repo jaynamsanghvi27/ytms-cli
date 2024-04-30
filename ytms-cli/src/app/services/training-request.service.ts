@@ -224,8 +224,8 @@ export class TrainingRequestService {
     return this.http.get<any[]>(this.url + "/register/attendance/changeAttendanceBasedOnLeave/"+ startDate+"/"+endDate+"/"+trainingIds);
   }
 
-  postTranierLeaveData(startDate:any,endDate:any,trainingIds:any): Observable<any[]> {
-    return this.http.get<any[]>(this.url + "/register/attendance/saveTraninerAttendaceData/"+ startDate+"/"+endDate+"/"+trainingIds);
+  postTranierLeaveData(startDate:any,endDate:any,trainingIds:any,isTraingImapct:any): Observable<any[]> {
+    return this.http.get<any[]>(this.url + "/register/attendance/saveTraninerAttendaceData/"+ startDate+"/"+endDate+"/"+trainingIds+"/"+isTraingImapct);
   }
 
   getTrainerAttendanceData(): Observable<any[]> {
