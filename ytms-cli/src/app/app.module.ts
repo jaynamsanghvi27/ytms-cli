@@ -60,6 +60,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { AboutUsComponent } from './Component/about-us/about-us.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatBadgeModule} from '@angular/material/badge';
+import { PendingLeavesComponent } from './Component/Technical-Manager/pending-leaves/pending-leaves.component';
 
 @NgModule({
   entryComponents: [DayComponentComponent, EventFormComponent, UpdateEventFormComponent, DeleteComponent,OptionalHolidayComponent],
@@ -100,7 +101,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     AssociateManagementComponent,
     AssociateSummaryComponent,
     ManageAssociateComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    PendingLeavesComponent
   ],
   imports: [
     BrowserModule,
