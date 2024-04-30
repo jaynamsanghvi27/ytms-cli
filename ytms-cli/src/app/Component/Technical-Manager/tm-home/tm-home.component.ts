@@ -46,6 +46,9 @@ export class TmHomeComponent {
     this.usersService.getAllPendingUsers().subscribe(res => {
       this.userDetails = res;
       this.listOfRequestersCount = this.userDetails.length; 
+      for(let i=0;i<this.userDetails.length;i++){
+        this.userDetails[i]['roleType']="";
+      }
     })
   }
 
@@ -54,15 +57,15 @@ export class TmHomeComponent {
   }
 
   approveUser(user: any) {
-    if(!this.selectedRoleType)
+    if(!user.roleType)
       {
         Swal.fire('Oops!','Please Assign Role','error');
       }
     else{
-      this.usersService.approvePendingUser(user.emailAdd,this.selectedRoleType).subscribe(res => {
+      this.usersService.approvePendingUser(user.emailAdd,user.roleType).subscribe(res => {
        this.status = res;
+       window.location.reload();
      })
-    window.location.reload();
     }
   }
 
