@@ -103,7 +103,7 @@ export class ViewTraninerComponent {
       this.responseData.trainingStatus=this.trainingReqForm.get('trainingStatus').value;
       console.log("this.responseData " + JSON.stringify(this.responseData));
       console.log("befor service " + JSON.stringify(this.trainingReqForm.value));
-      this.ser.editTraining(this.responseData).subscribe(data=>{
+      this.ser.changeTrainingStatus(this.responseData).subscribe(data=>{
        // 
        if(obj.trainingStatus=='In Progress' && this.isAttendanceDataPresent==false){
         this.ser.createAattendanceRecord(this.trainingId).subscribe(data=>{
