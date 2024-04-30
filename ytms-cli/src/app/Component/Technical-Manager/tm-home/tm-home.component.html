@@ -8,7 +8,7 @@
             <div class="tab">
                 <button *ngIf="userRole !== 'ROLE_COMPETENCY_MANAGER'" matBadge="{{listOfRequestersCount}}" matBadgeColor="warn" class="tablinks" style="background-color: #005ba3; color: white;" (click)="openList('requesterList')">List of Requesters</button>                &nbsp;&nbsp;
                 <button matBadge="{{listOfTrainingsCount}}" matBadgeColor="warn" class="tablinks" style="background-color: #005ba3; color: white;" (click)="openList('trainingList')">Upcoming Training List</button> &nbsp;&nbsp;
-                <button *ngIf="userRole !== 'ROLE_COMPETENCY_MANAGER'" matBadge="{{listOfRequestersCount}}" matBadgeColor="warn" class="tablinks" style="background-color: #005ba3; color: white;" (click)="openPendingLeaves('pendingLeaveList')">Pending Leaves</button>                &nbsp;&nbsp;
+                <button *ngIf="userRole !== 'ROLE_COMPETENCY_MANAGER'" matBadge="{{listOfPendingLeavesCount}}" matBadgeColor="warn" class="tablinks" style="background-color: #005ba3; color: white;" (click)="openPendingLeaves('pendingLeaveList')">Pending Leaves</button>                &nbsp;&nbsp;
             </div>
             <!-- <p class="fs-1 fw-bold fst-italic text-center" style="background-color: #005ba3;">List of Requesters</p> -->
             <div *ngIf="listOfRequester">

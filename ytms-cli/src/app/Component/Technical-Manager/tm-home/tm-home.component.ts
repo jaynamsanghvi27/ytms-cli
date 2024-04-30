@@ -5,6 +5,8 @@ import {Router} from "@angular/router";
 import { TrainingRequestService } from 'src/app/services/training-request.service';
 import { AuthService } from 'src/app/Core/services/auth.service';
 import { JwtService } from 'src/app/Core/services/jwt.service';
+import { TrainerAttendanceService } from 'src/app/services/trainer-attendance.service';
+import { TrainerAttendance } from 'src/app/Model/trainer-attendance';
 
 @Component({
   selector: 'app-tm-home',
@@ -23,9 +25,10 @@ export class TmHomeComponent {
   userRole:any;
   listOfRequestersCount: number = 0;
   listOfTrainingsCount: number = 0;
+  listOfPendingLeavesCount: number = 0;
   listOfPendingLeaves: boolean = false;
 
-  constructor(private usersService: UsersService,private trainingRequestService:TrainingRequestService,
+  constructor(private usersService: UsersService,private trainingRequestService:TrainingRequestService,private trainerAttendanceService:TrainerAttendanceService,
               private router: Router,private auth: AuthService, private jwtServ: JwtService) {
                 let token = auth.getToken();
                 this.userRole = jwtServ.getRoleFromToken(token);
@@ -35,6 +38,7 @@ export class TmHomeComponent {
     this.getAllPendingUsers();
     this.getUpcomingTrainings();
     this.getAllRoles();
+    this.loadPendingLeaves();
   }
 
   getAllRoles(){
@@ -50,6 +54,12 @@ export class TmHomeComponent {
       for(let i=0;i<this.userDetails.length;i++){
         this.userDetails[i]['roleType']="";
       }
+    })
+  }
+
+  loadPendingLeaves() {
+    this.trainerAttendanceService.getAllTranierAttendData().subscribe((response:TrainerAttendance[])=>{
+        this.listOfPendingLeavesCount =response.length;;
     })
   }
 
