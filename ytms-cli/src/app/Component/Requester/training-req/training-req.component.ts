@@ -43,7 +43,7 @@ export class TrainingReqComponent {
   nomination: Nomination[] = [];
   showNomination = false;
   holiday:any[]=[];
-
+  isEdit:boolean=false;
 
 
   submitted = false;
@@ -56,7 +56,11 @@ export class TrainingReqComponent {
     this.userName = jwtServ.getUserNameFromToken(token);
     this.userRole = this.jwtServ.getRoleFromToken(token);
     let trainingId = this.activatedRoute.snapshot.paramMap.get('id');
-    
+    if(trainingId){
+      this.isEdit=true;
+    }else{
+      this.isEdit=false;
+    }
    this.editTrainingForm(trainingId);
 
   }
@@ -106,8 +110,9 @@ export class TrainingReqComponent {
         trainingName: ['', [Validators.required]],
         startDate: ['', [Validators.required]],
         startTime: ['', [Validators.required]],
-        // endDate: ['', [Validators.required]],
-        endDate: new FormControl({ value: null, disabled: true}),
+        //endDate: ['', [Validators.required]],
+        endDate:  this.isEdit?new FormControl({ value: null, disabled: false}):new FormControl({ value: null, disabled: true}),
+        //endDate: new FormControl({ value: null, disabled: true}),
         endTime: ['', [Validators.required]],
         noOfDays : [],
         trainingDescription: ['', [Validators.required]],
