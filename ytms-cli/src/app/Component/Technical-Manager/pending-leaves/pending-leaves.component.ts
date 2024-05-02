@@ -34,9 +34,9 @@ export class PendingLeavesComponent {
   }
 
   
-  approveUser(trainerAttendance: TrainerAttendance) {
+  approve(trainerAttendance: TrainerAttendance) {
+    trainerAttendance.leave_status ='APPROVED';
     this.trainerAttendanceService.approvePendingLeave(trainerAttendance).subscribe(res => {
-      //this.status = res;
       this.postLeaveData(trainerAttendance.leave_Start_date,trainerAttendance.leave_End_date,trainerAttendance.training_id);
       this.loadPendingLeaves();
     })
@@ -51,8 +51,13 @@ export class PendingLeavesComponent {
     })
   }
 
-  declineUser(user: any) {
+  decline(trainerAttendance: TrainerAttendance) {
+    trainerAttendance.leave_status ='DECLINED';
     
+    this.trainerAttendanceService.approvePendingLeave(trainerAttendance).subscribe(res => {
+      
+      this.loadPendingLeaves();
+    })
   }
 
 }
