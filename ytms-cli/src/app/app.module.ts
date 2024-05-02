@@ -61,6 +61,7 @@ import { AboutUsComponent } from './Component/about-us/about-us.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatBadgeModule} from '@angular/material/badge';
 import { PendingLeavesComponent } from './Component/Technical-Manager/pending-leaves/pending-leaves.component';
+import { LeavedetailsComponent } from './Component/Requester/leavedetails/leavedetails.component';
 
 @NgModule({
   entryComponents: [DayComponentComponent, EventFormComponent, UpdateEventFormComponent, DeleteComponent,OptionalHolidayComponent],
@@ -102,7 +103,8 @@ import { PendingLeavesComponent } from './Component/Technical-Manager/pending-le
     AssociateSummaryComponent,
     ManageAssociateComponent,
     AboutUsComponent,
-    PendingLeavesComponent
+    PendingLeavesComponent,
+    LeavedetailsComponent
   ],
   imports: [
     BrowserModule,

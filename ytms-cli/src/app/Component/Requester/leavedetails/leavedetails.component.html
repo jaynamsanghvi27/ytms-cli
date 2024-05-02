@@ -1,0 +1,23 @@
+<div class="container-fluid g-0">
+    <app-requester-header (sideNavToggled)="sideNavStatus=$event;">
+    </app-requester-header>
+
+    <main>
+        <app-requester-sidebar [sideNavStatus]="sideNavStatus" [ngClass]="{'app-side-nav-open':sideNavStatus}" class="black-border"> </app-requester-sidebar>
+        <div class="display-area p-3" [ngClass]="{'display-area-shrink':sideNavStatus}">
+            <!-- Main Content    -->
+            <div class="training-request-form">
+                <form>
+                    <div class="form-header">
+                        <h5 class="heading-color">Leave Deatils</h5>
+                    </div>
+                   
+                    
+
+                </form>
+            </div>
+            <!-- Main Content Closed -->
+
+        </div>
+    </main>
+</div>
