@@ -50,6 +50,13 @@ const sideNavForTechnicalManager: MenuItem[] = [
       icon: 'fa fa-id-card-o',
       routing: '/tm-manage-associate'
 
+    },
+    {
+      number: 8,
+      name: 'Leave Details',
+      icon: 'fas fa-mug-hot',
+      routing: '/tm-leave-details'
+
     }
   ]
 
