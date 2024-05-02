@@ -1,0 +1,28 @@
+<!-- <p class="fs-1 fw-bold fst-italic text-center" style="background-color: #005ba3;">List of Requesters</p> -->
+<div>
+    <table style="width:100%">
+        <tr>
+            <th>Trainer Name</th>
+            <th>Training Name</th>
+            <th>Leave Start Date</th>
+            <th>Leave End Date</th>
+            <th>Actions</th>
+        </tr>
+
+        <tbody *ngFor="let leave of pendingLeaves">
+            <tr>
+                <td>{{ leave.tranier_mail_id }}</td>
+                <td>{{ leave.tranining_name }}</td>
+                <td>{{ leave.leave_Start_date }}</td>
+                <td>{{ leave.leave_End_date }}</td>
+                <td>
+                    <button (click)="approveUser(leave)" class="btn btn-primary btn-sn" id="submitbtn" name="submit" style="margin-left: 10px;">Approve
+            </button>
+                    <button (click)="declineUser(leave)" class="btn btn-primary btn-sn" id="submitbtn" name="submit" style="margin-left: 10px;">Decline
+            </button>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+</div>

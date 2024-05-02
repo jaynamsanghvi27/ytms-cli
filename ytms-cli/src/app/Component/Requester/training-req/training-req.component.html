@@ -3,315 +3,280 @@
     </app-requester-header>
 
     <main>
-        <app-requester-sidebar [sideNavStatus]="sideNavStatus" *ngIf="this.userRole != 'ROLE_TRAINER'"  [ngClass]="{'app-side-nav-open':sideNavStatus}"
-            class="black-border"> </app-requester-sidebar>
-            
+        <app-requester-sidebar [sideNavStatus]="sideNavStatus" *ngIf="this.userRole != 'ROLE_TRAINER'" [ngClass]="{'app-side-nav-open':sideNavStatus}" class="black-border"> </app-requester-sidebar>
+
         <div class="display-area p-3" [ngClass]="{'display-area-shrink':sideNavStatus}">
             <!-- Main Content    -->
             <div class="training-request-form">
                 <form [formGroup]="trainingReqForm" (ngSubmit)="submit()">
-                  <div class="form-header">
-                    <a style="float: left; color: white;" (click)="backClicked()" >Back</a>
-                    <h5 class="heading-color">Training Request Form</h5>
-                  </div>
-                  <div class="form-group">
-                      <div class="row">
-                          <div class="col-2">Unit</div>
-                          <div class="col-4">
-                              <select #teams class="request-drop-down" formControlName="unit" (change)="onUnitChange(teams.value)">
+                    <div class="form-header">
+                        <a style="float: left; color: white;" (click)="backClicked()">Back</a>
+                        <h5 class="heading-color">Training Request Form</h5>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-2">Unit</div>
+                            <div class="col-4">
+                                <select #teams class="request-drop-down" formControlName="unit" (change)="onUnitChange(teams.value)">
                                <option [ngValue]="0" disabled >-- Select --</option>
                                   <option *ngFor="let unit of units" value="{{unit.name}}">
                                     {{unit.name}}
                                   </option>
                               </select>
-                              
 
-                              <!-- <div style="color: rgb(185, 21, 21);" *ngIf= "trainingReqForm.controls['unit'].touched && trainingReqForm.controls['unit'].hasError('required')">Unit is required</div> -->
-                              <span><i *ngIf="this.userRole=='ROLE_TECHNICAL_MANAGER'" class="fa fa-plus" title="Click To Add Unit" (click)="openDialog(unittemplate)"></i></span>
-                              <div *ngIf="trainingReqForm.controls['unit'].touched && 
+
+                                <!-- <div style="color: rgb(185, 21, 21);" *ngIf= "trainingReqForm.controls['unit'].touched && trainingReqForm.controls['unit'].hasError('required')">Unit is required</div> -->
+                                <span><i *ngIf="this.userRole=='ROLE_TECHNICAL_MANAGER'" class="fa fa-plus" title="Click To Add Unit" (click)="openDialog(unittemplate)"></i></span>
+                                <div *ngIf="trainingReqForm.controls['unit'].touched && 
                               trainingReqForm.controls['unit'].invalid" style="color: red;">
-                                <span *ngIf="trainingReqForm.controls['unit'].hasError('required') || trainingReqForm.controls['unit'].hasError('pattern')">
+                                    <span *ngIf="trainingReqForm.controls['unit'].hasError('required') || trainingReqForm.controls['unit'].hasError('pattern')">
                                   Unit is required
                                 </span>
-                              </div>
-                         </div>
-                        <div class="col-2">Competency</div>
-                        <div class="col-4">
-                          <select class="request-drop-down" formControlName="competency" (change)="onCompetencyChange($event)">
+                                </div>
+                            </div>
+                            <div class="col-2">Competency</div>
+                            <div class="col-4">
+                                <select class="request-drop-down" formControlName="competency" (change)="onCompetencyChange($event)">
                             <option [ngValue]="0" disabled >-- Select --</option>
                               <option *ngFor="let competency of competencies" value="{{competency.name}}">
                                 {{competency.name}}
                               </option>
-                          </select>  
-                          <span><i *ngIf="this.userRole=='ROLE_TECHNICAL_MANAGER'" class="fa fa-plus " title="Click To Add Competency" (click)="openDialog(competencytemplate)"></i></span>
-                          <div *ngIf="trainingReqForm.controls['competency'].touched && 
+                          </select>
+                                <span><i *ngIf="this.userRole=='ROLE_TECHNICAL_MANAGER'" class="fa fa-plus " title="Click To Add Competency" (click)="openDialog(competencytemplate)"></i></span>
+                                <div *ngIf="trainingReqForm.controls['competency'].touched && 
                           trainingReqForm.controls['competency'].invalid" style="color: red;">
-                            <span *ngIf="trainingReqForm.controls['competency'].hasError('required') || 
+                                    <span *ngIf="trainingReqForm.controls['competency'].hasError('required') || 
                             trainingReqForm.controls['competency'].hasError('pattern')">
                               Competency is required
                             </span>
-                          </div>
-                        </div>
-                          
-                      </div>
+                                </div>
+                            </div>
 
-                      <div class="row">
-                        
-                        <div class="col-2">Training Type</div>
-                        <div class="col-4">
-                          <select class="request-drop-down" formControlName="trainingType" (change)="onTrainingChange($event)">
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-2">Training Type</div>
+                            <div class="col-4">
+                                <select class="request-drop-down" formControlName="trainingType" (change)="onTrainingChange($event)">
                             <option [ngValue]="0" disabled >-- Select --</option>
                               <option *ngFor="let trainingType of trainingTypes" value="{{trainingType.name}}">
                                 {{trainingType.name}}
                               </option>
                           </select>
-                          <span><i *ngIf="this.userRole=='ROLE_TECHNICAL_MANAGER'" class="fa fa-plus" title="Click To Add Training Type" (click)="openDialog(trainingtemplate)"></i></span>
-                          <!-- <div style="color: red;" *ngIf= "trainingReqForm.controls['trainingType'].touched && trainingReqForm.controls['trainingType'].hasError('required')">TrainingType is required</div> -->
-                          <div *ngIf="trainingReqForm.controls['trainingType'].touched && 
+                                <span><i *ngIf="this.userRole=='ROLE_TECHNICAL_MANAGER'" class="fa fa-plus" title="Click To Add Training Type" (click)="openDialog(trainingtemplate)"></i></span>
+                                <!-- <div style="color: red;" *ngIf= "trainingReqForm.controls['trainingType'].touched && trainingReqForm.controls['trainingType'].hasError('required')">TrainingType is required</div> -->
+                                <div *ngIf="trainingReqForm.controls['trainingType'].touched && 
                           trainingReqForm.controls['trainingType'].invalid" style="color: red;">
-                            <span *ngIf="trainingReqForm.controls['trainingType'].hasError('required') || 
+                                    <span *ngIf="trainingReqForm.controls['trainingType'].hasError('required') || 
                             trainingReqForm.controls['trainingType'].hasError('pattern')">
                               TrainingType is required
                             </span>
-                          </div>
-                        </div>
-                        <div class="col-2">Technology</div>
-                          
-                          <div class="col-4">
-                            <select multiple class="request-drop-down" [(ngModel)]="selectedTechnology" formControlName="upgradedSkills" (change)="onTechnologychange($event)">
+                                </div>
+                            </div>
+                            <div class="col-2">Technology</div>
+
+                            <div class="col-4">
+                                <select multiple class="request-drop-down" [(ngModel)]="selectedTechnology" formControlName="upgradedSkills" (change)="onTechnologychange($event)">
                               <option [ngValue]="0" disabled [selected]>-- Select Technology --</option>
                                 <option *ngFor="let technology of technologies" [value]="technology.name" value="{{technology.name}}">
                                   {{technology.name}}
                                 </option>
-                            </select>  
-                            <div style="color: red;" *ngIf= "trainingReqForm.controls['upgradedSkills'].touched && trainingReqForm.controls['upgradedSkills'].hasError('required')">Technology is required</div>
-                            <span><i *ngIf="this.userRole=='ROLE_TECHNICAL_MANAGER'" class="fa fa-plus" title="Click To Add Technology" (click)="openDialog(technologytemplate)"></i></span>
+                            </select>
+                                <div style="color: red;" *ngIf="trainingReqForm.controls['upgradedSkills'].touched && trainingReqForm.controls['upgradedSkills'].hasError('required')">Technology is required</div>
+                                <span><i *ngIf="this.userRole=='ROLE_TECHNICAL_MANAGER'" class="fa fa-plus" title="Click To Add Technology" (click)="openDialog(technologytemplate)"></i></span>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-2">Month & Year</div>
-                        <div class="col-4"><input
-                          type="month"
-                          formControlName="monthAndYear"
-                          placeholder="Month & Year"
-                          class="form-control" forma
-                          (change)="onMonthYearchange($event)" data-month-format="MMM-YYYY"
-                        />
-                        <div style="color: red;" *ngIf= "trainingReqForm.controls['monthAndYear'].touched && trainingReqForm.controls['monthAndYear'].hasError('required')">MonthAndYear is required</div>
-                        </div>
-                        <div class="col-2">Training name</div>
-                        <div class="col-4">
-                          <input
-                          type="text" [(ngModel)]="completeTrainingName"
-                          formControlName="trainingName"
-                          placeholder="Training Name"
-                          class="form-control"
-                         
-                        />
-                        <span style="color: red;" *ngIf= "trainingReqForm.controls['trainingName'].touched && trainingReqForm.controls['trainingName'].hasError('required')">Training name is required</span>
-                        <!-- <div style="color: red;" *ngIf="trainingReqForm.controls['trainingName'].touched && trainingReqForm.controls['trainingName'].invalid">
+                        <div class="row">
+                            <div class="col-2">Month & Year</div>
+                            <div class="col-4"><input type="month" formControlName="monthAndYear" placeholder="Month & Year" class="form-control" forma (change)="onMonthYearchange($event)" data-month-format="MMM-YYYY" />
+                                <div style="color: red;" *ngIf="trainingReqForm.controls['monthAndYear'].touched && trainingReqForm.controls['monthAndYear'].hasError('required')">MonthAndYear is required</div>
+                            </div>
+                            <div class="col-2">Training name</div>
+                            <div class="col-4">
+                                <input type="text" [(ngModel)]="completeTrainingName" formControlName="trainingName" placeholder="Training Name" class="form-control" />
+                                <span style="color: red;" *ngIf="trainingReqForm.controls['trainingName'].touched && trainingReqForm.controls['trainingName'].hasError('required')">Training name is required</span>
+                                <!-- <div style="color: red;" *ngIf="trainingReqForm.controls['trainingName'].touched && trainingReqForm.controls['trainingName'].invalid">
                             <span *ngIf="trainingReqForm.controls['trainingName'].hasError('required')">Training name is required</span>
                         </div> -->
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-2">Planned Start Date</div>
-                      <div class="col-4">
+                            </div>
+                        </div>
                         <div class="row">
-                          <div class="col-12">
-                            <input
-                            type="date"
-                            formControlName="startDate"
-                            placeholder="Planed Start Date"
-                            class="form-control"
-                            min="{{dateToday() | date:'yyyy-MM-dd'}}" 
-                            (change)="enableInputField('endDate');calculateDays();"/>
-                          </div>
-                      </div>
-                      
-                      <div style="color: red;" *ngIf= "trainingReqForm.controls['startDate'].touched && trainingReqForm.controls['startDate'].hasError('required')">Planned Start Date is required</div>
-                      </div>
-                      <div class="col-2">Planned End Date</div>
-                      <div class="col-4">
+                            <div class="col-2">Planned Start Date</div>
+                            <div class="col-4">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <input type="date" formControlName="startDate" placeholder="Planed Start Date" class="form-control" [min]="isEdit ? (dateToday() | date:'yyyy-MM-dd')?.slice(0, -2) + '99' : (dateToday() | date:'yyyy-MM-dd')" (change)="enableInputField('endDate');calculateDays();"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div style="color: red;" *ngIf="trainingReqForm.controls['startDate'].touched && trainingReqForm.controls['startDate'].hasError('required')">Planned Start Date is required</div>
+                            </div>
+                            <div class="col-2">Planned End Date</div>
+                            <div class="col-4">
+                                <div class="row">
+                                    <div class="col-7">
+                                        <input type="date" formControlName="endDate" placeholder="Planed End Date" class="form-control" min="{{minEndDate() | date:'yyyy-MM-dd'}}" (change)="calculateDays()" />
+                                    </div>
+                                    <div class="col-3">
+                                        Duration :
+                                    </div>
+                                    <div class="col-2">
+                                        <input class="col-12" type="text" disabled value="{{this.diff}}">
+                                    </div>
+                                </div>
+                                <div style="color: red;" *ngIf="trainingReqForm.controls['endDate'].touched && trainingReqForm.controls['endDate'].hasError('required')">Planed End Date is required</div>
+                                <input type="hidden" formControlName="noOfDays" [(ngModel)]="this.diff">
+                            </div>
+                        </div>
+
                         <div class="row">
-                        <div class="col-7">
-                          <input
-                        type="date"
-                        formControlName="endDate"
-                        placeholder="Planed End Date"
-                        class="form-control"
-                        min="{{minEndDate() | date:'yyyy-MM-dd'}}" 
-                        (change)="calculateDays()"/>
-                        </div>
-                        <div class="col-3">
-                          Duration :
-                        </div>
-                        <div class="col-2">
-                          <input class="col-12" type="text" disabled value="{{this.diff}}">
-                        </div>
-                      </div>
-                      <div style="color: red;" *ngIf= "trainingReqForm.controls['endDate'].touched && trainingReqForm.controls['endDate'].hasError('required')">Planed End Date is required</div>   
-                      <input type="hidden" formControlName="noOfDays" [(ngModel)] ="this.diff">
-                    </div>
-                  </div>
+                            <div class="col-2">Planned Start Time</div>
+                            <div class="col-4">
+                                <div class="row">
 
-                  <div class="row">
-                    <div class="col-2">Planned Start Time</div>
-                    <div class="col-4">
-                      <div class="row">
-                        
-                      <div class="col-4">
-                        <input type="time" (change)="calculateTime()" formControlName="startTime" class="form-control">
-                      </div>
-                    </div>
-                    
-                    <div style="color: red;" *ngIf= "trainingReqForm.controls['startTime'].touched && trainingReqForm.controls['startTime'].hasError('required')">Start Time is required</div>
-                    </div>
-                    <div class="col-2">Planned End Time</div>
-                    <div class="col-4">
-                      <div class="row">
-                      <div class="col-4">
-                        <input type="time" (change)="calculateTime()" formControlName="endTime" class="form-control">
-                      </div>
-                      <div class="col-5">
-                        Duration in Hours :
-                      </div>
-                      <div class="col-3">
-                        <input class="col-12" type="text" disabled value="{{this.timeDiff}}">
-                      </div>
-                    </div>
-                    <div style="color: red;" *ngIf= "trainingReqForm.controls['endTime'].touched && trainingReqForm.controls['endTime'].hasError('required')">End Time is required</div>   
-                    <!-- <input type="hidden" formControlName="noOfDays" [(ngModel)] ="this.diff"> -->
-                  </div>
-                </div>
+                                    <div class="col-4">
+                                        <input type="time" (change)="calculateTime()" formControlName="startTime" class="form-control">
+                                    </div>
+                                </div>
 
+                                <div style="color: red;" *ngIf="trainingReqForm.controls['startTime'].touched && trainingReqForm.controls['startTime'].hasError('required')">Start Time is required</div>
+                            </div>
+                            <div class="col-2">Planned End Time</div>
+                            <div class="col-4">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <input type="time" (change)="calculateTime()" formControlName="endTime" class="form-control">
+                                    </div>
+                                    <div class="col-5">
+                                        Duration in Hours :
+                                    </div>
+                                    <div class="col-3">
+                                        <input class="col-12" type="text" disabled value="{{this.timeDiff}}">
+                                    </div>
+                                </div>
+                                <div style="color: red;" *ngIf="trainingReqForm.controls['endTime'].touched && trainingReqForm.controls['endTime'].hasError('required')">End Time is required</div>
+                                <!-- <input type="hidden" formControlName="noOfDays" [(ngModel)] ="this.diff"> -->
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-2">No. of Participant</div>
+                            <div class="col-4">
+                                <input type="number" formControlName="noOfParticipant" placeholder="Tentative no. of Participant" class="form-control">
+                                <div style="color: red;" *ngIf="trainingReqForm.controls['noOfParticipant'].touched && trainingReqForm.controls['noOfParticipant'].hasError('required')">No Of Participant is required</div>
+                            </div>
+                            <div class="col-2">Purpose Of Training</div>
+                            <div class="col-4">
+                                <textarea formControlName="trainingDescription" placeholder="" class="form-control"></textarea>
+                                <div style="color: red;" *ngIf="trainingReqForm.controls['trainingDescription'].touched && trainingReqForm.controls['trainingDescription'].hasError('required')">TrainingDescription is required</div>
+                            </div>
+                        </div>
+
+
+
+                        <input type="hidden" formControlName="userName" [(ngModel)]="userName">
+                    </div>
+                    <hr>
+                    <!-- Nomination Upload Start -->
                     <div class="row">
-                      <div class="col-2">No. of Participant</div>
-                      <div class="col-4">
-                        <input type="number" formControlName="noOfParticipant"
-                        placeholder="Tentative no. of Participant"
-                        class="form-control">
-                        <div style="color: red;" *ngIf= "trainingReqForm.controls['noOfParticipant'].touched && trainingReqForm.controls['noOfParticipant'].hasError('required')">No Of Participant is required</div>
-                      </div>
-                      <div class="col-2">Purpose Of Training</div>
-                      <div class="col-4">
-                        <textarea formControlName="trainingDescription"
-                        placeholder=""
-                        class="form-control"></textarea>
-                        <div style="color: red;" *ngIf= "trainingReqForm.controls['trainingDescription'].touched && trainingReqForm.controls['trainingDescription'].hasError('required')">TrainingDescription is required</div>
-                      </div>
-                    </div>
-
-                    
-                    
-                    <input type="hidden" formControlName="userName" [(ngModel)]="userName" >
-                  </div>
-                  <hr>
-                  <!-- Nomination Upload Start -->
-                  <div class="row">
-                    <div class="col-2">Bulk Nomination</div>
-                    <div class="col-4">
-                      <input type="file" formControlName="bulkUploadFile"
-                      placeholder="Select Excel File"
-                      accept=".csv, .xlsx, .xls"
-                      class="form-control"
-                      (change)="bulkUploadNominationData($event)">
-                      <div style="color: blue; font-size: small;">Please upload data carefully otherwise you need to clear the data after uploading</div>
-                    </div>
-                    <!-- <input id="selectedFile" type="file" name="files[]" multiple id="jsonFile" accept=".xlsx" (change)="selectedFileChange($event)" /> -->
-                    <div class="col-2">Single Nomination</div>
-                      <div class="col-4">
-                        <a (click)="openDialog(nominationtemplate)"><span style="float: left;">Click To Add Nomination &nbsp; <i class="fa fa-plus"  title="Click To Add Nomination" ></i>
+                        <div class="col-2">Bulk Nomination</div>
+                        <div class="col-4">
+                            <input type="file" formControlName="bulkUploadFile" placeholder="Select Excel File" accept=".csv, .xlsx, .xls" class="form-control" (change)="bulkUploadNominationData($event)">
+                            <div style="color: blue; font-size: small;">Please upload data carefully otherwise you need to clear the data after uploading</div>
+                        </div>
+                        <!-- <input id="selectedFile" type="file" name="files[]" multiple id="jsonFile" accept=".xlsx" (change)="selectedFileChange($event)" /> -->
+                        <div class="col-2">Single Nomination</div>
+                        <div class="col-4">
+                            <a (click)="openDialog(nominationtemplate)"><span style="float: left;">Click To Add Nomination &nbsp; <i class="fa fa-plus"  title="Click To Add Nomination" ></i>
                         
                         </span>
                       </a>
-                        
-                      </div>
-                      
-                  </div>
-                  <div class="row">
-                    <div class="col-4"><a href="../../../../assets/excel/SampleBulkUploadFile.xlsx" download="SampleBulkUploadFile..xlsx">Click Here To Download Sample Format</a></div>                      
-                  </div>
-                  <!-- Nomination Upload End -->
 
-                  <hr>
-                  <div class="center">
-                    <input type="hidden" formControlName="id">
-                    <!-- <button
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-4"><a href="../../../../assets/excel/SampleBulkUploadFile.xlsx" download="SampleBulkUploadFile..xlsx">Click Here To Download Sample Format</a></div>
+                    </div>
+                    <!-- Nomination Upload End -->
+
+                    <hr>
+                    <div class="center">
+                        <input type="hidden" formControlName="id">
+                        <!-- <button
                       type="button" (click)="redirectComponent()"
                       class="btn btn-primary btn-block btn-lg"
                     >
                       Next
                     </button> -->
-                    <button
-                      type="submit" 
-                      class="btn btn-primary btn-block btn-lg"
-                    >
+                        <button type="submit" class="btn btn-primary btn-block btn-lg">
                       Submit
                     </button>
-                  </div>
-                  <div>
-                   <a *ngIf="this.nomination.length>0" (click)="hideShowNomination()"> Number Of Nomination : {{nomination.length}} {{this.showNomination==true?'hide':'show'}}</a>
-                   <span style="float: right;"><a *ngIf="this.nomination.length>0" (click)="this.nomination=[]">Clear Data</a></span>
-                    <table *ngIf="showNomination">
-                      <thead>
-                        <tr>
-                          <th>
-                            Emp-ID
-                          </th>
-                          <th>
-                            Name
-                          </th>
-                          <th>
-                            Email-ID
-                          </th>
-                          <th>
-                            Grade
-                          </th>
-                          <th>skill</th>
-                          <th>current_allocation</th>
-                          <th>project</th>
-                          <th>current_location</th>
-                          <th *ngIf="this.id!=null">Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
+                    </div>
+                    <div>
+                        <a *ngIf="this.nomination.length>0" (click)="hideShowNomination()"> Number Of Nomination : {{nomination.length}} {{this.showNomination==true?'hide':'show'}}</a>
+                        <span style="float: right;"><a *ngIf="this.nomination.length>0" (click)="this.nomination=[]">Clear Data</a></span>
+                        <table *ngIf="showNomination">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Emp-ID
+                                    </th>
+                                    <th>
+                                        Name
+                                    </th>
+                                    <th>
+                                        Email-ID
+                                    </th>
+                                    <th>
+                                        Grade
+                                    </th>
+                                    <th>skill</th>
+                                    <th>current_allocation</th>
+                                    <th>project</th>
+                                    <th>current_location</th>
+                                    <th *ngIf="this.id!=null">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                        <tr *ngFor="let nomi of nomination">
-                        <td>{{nomi.emp_id}}</td>
-                        <td>{{nomi.emp_name}}</td>
-                        <td>{{nomi.emp_mail_id}}</td>
-                        <td>{{nomi.grade}}</td>
-                        <td>{{nomi.skill}}</td>
-                        <td>{{nomi.current_allocation}}</td>
-                        <td>{{nomi.project}}</td>
-                        <td>{{nomi.current_location}}</td>
-                        <td *ngIf="this.id!=null"><span class="inner"><i class=" btn-info btn-sm fa fa-edit" title="Edit" (click)="setNominationId(nomi.id); openDialog(nominationtemplate)"></i><i class=" btn-danger btn-sm fa fa-trash" title="Delete" (click)="deleteNominationById(nomi.id)"></i></span></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+                                <tr *ngFor="let nomi of nomination">
+                                    <td>{{nomi.emp_id}}</td>
+                                    <td>{{nomi.emp_name}}</td>
+                                    <td>{{nomi.emp_mail_id}}</td>
+                                    <td>{{nomi.grade}}</td>
+                                    <td>{{nomi.skill}}</td>
+                                    <td>{{nomi.current_allocation}}</td>
+                                    <td>{{nomi.project}}</td>
+                                    <td>{{nomi.current_location}}</td>
+                                    <td *ngIf="this.id!=null"><span class="inner"><i class=" btn-info btn-sm fa fa-edit" title="Edit" (click)="setNominationId(nomi.id); openDialog(nominationtemplate)"></i><i class=" btn-danger btn-sm fa fa-trash" title="Delete" (click)="deleteNominationById(nomi.id)"></i></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </form>
-              </div>
+            </div>
             <!-- Main Content Closed -->
         </div>
     </main>
 
     <ng-template #unittemplate>
-      <app-unit-master></app-unit-master>
+        <app-unit-master></app-unit-master>
     </ng-template>
     <ng-template #competencytemplate>
-      <app-competency-master></app-competency-master>
+        <app-competency-master></app-competency-master>
     </ng-template>
     <ng-template #trainingtemplate>
-      <app-training-type-master></app-training-type-master>
+        <app-training-type-master></app-training-type-master>
     </ng-template>
     <ng-template #technologytemplate>
-      <app-technology-master></app-technology-master>
+        <app-technology-master></app-technology-master>
     </ng-template>
     <ng-template #nominationtemplate>
-    <app-nomination-req></app-nomination-req>
-  </ng-template>
+        <app-nomination-req></app-nomination-req>
+    </ng-template>
 
 </div>

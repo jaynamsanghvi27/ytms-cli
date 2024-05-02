@@ -51,6 +51,12 @@ export class TrainingRequestService {
     console.log("on service" + JSON.stringify(trf));
     return this.http.put<any>(this.url + "/register/editTrainingRequestForm", trf);
   }
+
+  changeTrainingStatus(trf: TrainingReqForm) {
+    console.log("on service" + JSON.stringify(trf));
+    return this.http.put<any>(this.url + "/register/changeTrainingStatus", trf);
+  }
+
   updateTraining(trf: TrainingReqForm) {
     console.log("on service" + JSON.stringify(trf));
     return this.http.put<any>(this.url + "/register/updateTrainingRequestForm", trf);
@@ -170,7 +176,7 @@ export class TrainingRequestService {
     console.log("on service" + JSON.stringify(data));
     return this.http.put<any[]>(this.url + "/register/trainerAttendance/updateAttendanceStatus/" + tariningid, data);
   }
-  createAattendanceRecord(data: any) {
+  createAattendanceRecord(data: any):Observable<string> {
     console.log("on createAattendanceRecord" + JSON.stringify(data));
     return this.http.post<any>(this.url + "/register/attendance/create/" + data, "");
   }
