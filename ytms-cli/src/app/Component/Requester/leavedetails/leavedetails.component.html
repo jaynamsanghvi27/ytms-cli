@@ -4,15 +4,43 @@
 
     <main>
         <app-requester-sidebar [sideNavStatus]="sideNavStatus" [ngClass]="{'app-side-nav-open':sideNavStatus}" class="black-border"> </app-requester-sidebar>
+
         <div class="display-area p-3" [ngClass]="{'display-area-shrink':sideNavStatus}">
             <!-- Main Content    -->
-            <div class="training-request-form">
+            <div claapprovePendingLeavess="training-request-form">
                 <form>
                     <div class="form-header">
-                        <h5 class="heading-color">Leave Deatils</h5>
+                        <h5 class="heading-color">Trainer Leave Details</h5>
                     </div>
-                   
-                    
+                    <button type="submit" (click)="exportToExcel()" style="margin-right: 10px;" class="btn btn-primary btn-block btn-m">
+                        ExportToExcel
+                        </button>
+                    <!-- <p class="fs-1 fw-bold fst-italic text-center" style="background-color: #005ba3;">List of Requesters</p> -->
+                    <div>
+                        <table style="width:100%">
+                            <tr>
+                                <th>Trainer Name</th>
+                                <th>Training Name</th>
+                                <th>Leave Start Date</th>
+                                <th>Leave End Date</th>
+                                <th>Status</th>
+                            </tr>
+
+                            <tbody *ngFor="let leave of approvedLeaves">
+                                <tr>
+                                    <td>{{ leave.tranier_mail_id }}</td>
+                                    <td>{{ leave.tranining_name }}</td>
+                                    <td>{{ leave.leave_Start_date }}</td>
+                                    <td>{{ leave.leave_End_date }}</td>
+                                    <td>
+                                        {{leave.leave_status}}
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+
 
                 </form>
             </div>

@@ -13,7 +13,7 @@ export class TrainerAttendance {
 
   attendance_date?: string;
 
-  leave_Start_date?: string;
+  leave_Start_date?: Date;
 
   leave_End_date?:string;
 
