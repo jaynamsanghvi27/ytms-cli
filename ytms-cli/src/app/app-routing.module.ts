@@ -27,6 +27,7 @@ import { ManageAssociateComponent } from './Component/Requester/manage-associate
 import { ExcludeTrainerGuard } from './Core/guard/exclude-trainer.guard';
 import { AboutUsComponent } from './Component/about-us/about-us.component';
 import { ViewTrainerFormComponent } from './Component/Trainer/view-trainer-form/view-trainer-form.component';
+import { LeavedetailsComponent } from './Component/Requester/leavedetails/leavedetails.component';
 
 const routes: Routes = [
   {
@@ -172,6 +173,11 @@ const routes: Routes = [
     path: "tm-associate-management",
     canActivate: [ExcludeTrainerGuard],
     component: AssociateManagementComponent
+  },
+  {
+    path: "tm-leave-details",
+    canActivate: [ExcludeTrainerGuard],
+    component: LeavedetailsComponent
   },
   {
     path: "tm-manage-associate",

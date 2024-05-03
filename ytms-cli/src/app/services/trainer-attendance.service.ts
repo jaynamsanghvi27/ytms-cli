@@ -19,4 +19,8 @@ export class TrainerAttendanceService {
   approvePendingLeave(trainerAttendance: TrainerAttendance) {
     return this.http.post<TrainerAttendance>(this.url + "/register/trainerAttendance/approvePendingLeave",trainerAttendance );
   }
+
+  approvedLeaves():Observable<TrainerAttendance[]> {
+    return this.http.get<TrainerAttendance[]>(this.url + "/register/trainerAttendance/approvedLeaves" );
+  }
 }
