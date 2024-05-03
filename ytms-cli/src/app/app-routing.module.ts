@@ -91,6 +91,17 @@ const routes: Routes = [
   },
   {
     path: "change-password",
+    canActivate: [TrainerGuard],
+    component: ChangePasswordComponent
+  },
+  {
+    path: "re-change-password",
+    canActivate: [AuthGuard],
+    component: ChangePasswordComponent
+  },
+  {
+    path: "tm-change-password",
+    canActivate: [AdminGuard],
     component: ChangePasswordComponent
   },
 

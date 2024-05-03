@@ -17,8 +17,8 @@
     </button>
     <ul class="dropdown-menu dropdown-menu-dark">
       <!-- <li><a href="#" class="dropdown-item">SignUp</a></li>
-      <li><a href="#" class="dropdown-item">LogIn</a></li>
-      <li><a href="#" class="dropdown-item">Your Profile</a></li> -->
+      <li><a href="#" class="dropdown-item">LogIn</a></li>-->
+      <li><a href="/ytmscli/change-password" class="dropdown-item">Change Password</a></li> 
       <li *ngIf="authService.isAuthenticated()"><a (click)="logout()" [routerLink]="['']" class="dropdown-item">Logout</a></li>
     </ul>
   </div>
