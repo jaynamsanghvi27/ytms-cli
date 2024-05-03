@@ -18,8 +18,8 @@
 
     <ul class="dropdown-menu dropdown-menu-dark">
       <!-- <li><a href="#" class="dropdown-item">SignUp</a></li>
-      <li><a href="#" class="dropdown-item">LogIn</a></li>
-      <li><a href="#" class="dropdown-item">Your Profile</a></li> -->
+      <li><a href="#" class="dropdown-item">LogIn</a></li>-->
+      <li><a href="/ytmscli/tm-change-password" class="dropdown-item">Change Password</a></li> 
       <li *ngIf="authService.isAuthenticated()"><a (click)="logout()" class="dropdown-item" href="#">Logout</a></li>
     </ul>
   </div>
