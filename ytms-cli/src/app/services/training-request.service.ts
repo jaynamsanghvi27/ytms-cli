@@ -237,4 +237,8 @@ export class TrainingRequestService {
   getTrainerAttendanceData(): Observable<any[]> {
     return this.http.get<any[]>(this.url + "/register/attendance/getTraninerAttendaceData");
   }
+
+  getTrainers(trainingReqForm:TrainingReqForm): Observable<TrainingReqForm[]> {
+    return this.http.post<TrainingReqForm[]>(this.url + "/trainer/getTrainers",trainingReqForm);
+  }
 }
