@@ -11,10 +11,11 @@
 
         <tbody *ngFor="let leave of pendingLeaves">
             <tr>
-                <td>{{ leave.tranier_mail_id }}</td>
+                <td (click)="getTrainers(leave)">{{ leave.tranier_mail_id }}</td>
                 <td>{{ leave.tranining_name }}</td>
                 <td>{{ leave.leave_Start_date }}</td>
                 <td>{{ leave.leave_End_date }}</td>
+
                 <td>
                     <button (click)="approve(leave)" class="btn btn-primary btn-sn" id="submitbtn" name="submit" style="margin-left: 10px;">Approve
             </button>
