@@ -71,4 +71,8 @@ export class UsersService {
   public getAllRoles(){
     return this.http.get<any>(environment.baseUrl + environment.contextUrl + this.usersUrl + '/roles');
   }
+
+  public getAllActiveUsers(){
+    return this.http.get<any>(environment.baseUrl + environment.contextUrl + this.usersUrl + '/active');
+  }
 }

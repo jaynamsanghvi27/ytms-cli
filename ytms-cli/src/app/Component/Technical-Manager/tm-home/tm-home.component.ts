@@ -17,16 +17,20 @@ export class TmHomeComponent {
 
   sideNavStatus: boolean = false;
   userDetails: any = [];
+  activeUserDetails: any = [];
   status: boolean = false;
-  listOfRequester: boolean = true;
-  requesterTable: boolean = false;
   roles:any=[];
   selectedRoleType: any;
   userRole:any;
   listOfRequestersCount: number = 0;
   listOfTrainingsCount: number = 0;
   listOfPendingLeavesCount: number = 0;
+  listOfActiveUserCount: number=0;
   listOfPendingLeaves: boolean = false;
+  listOfRequester: boolean = true;
+  requesterTable: boolean = false;
+  listOfActiveUser: boolean = false;
+  
 
   constructor(private usersService: UsersService,private trainingRequestService:TrainingRequestService,private trainerAttendanceService:TrainerAttendanceService,
               private router: Router,private auth: AuthService, private jwtServ: JwtService) {
@@ -39,6 +43,7 @@ export class TmHomeComponent {
     this.getUpcomingTrainings();
     this.getAllRoles();
     this.loadPendingLeaves();
+    this.getAllActiveUsers();
   }
 
   getAllRoles(){
@@ -53,6 +58,15 @@ export class TmHomeComponent {
       this.listOfRequestersCount = this.userDetails.length; 
       for(let i=0;i<this.userDetails.length;i++){
         this.userDetails[i]['roleType']="";
+      }
+    })
+  }
+  getAllActiveUsers(){
+    this.usersService.getAllActiveUsers().subscribe(res => {
+      this.activeUserDetails = res;
+      this.listOfActiveUserCount = this.activeUserDetails.length; 
+      for(let i=0;i<this.activeUserDetails.length;i++){
+        this.activeUserDetails[i]['roleType']="";
       }
     })
   }
@@ -99,22 +113,26 @@ export class TmHomeComponent {
     if ("requesterList" == val) {
       this.listOfRequester = true;
       this.requesterTable = true;
-    }
-    else {
-      this.listOfRequester = false;
+      this.listOfActiveUser=false;
       this.listOfPendingLeaves =false;
     }
-  }
-
-  openPendingLeaves(val: any) {
-    if ("pendingLeaveList" == val) {
+    else if ("pendingLeaveList" == val) {
       this.listOfRequester = false;
       this.requesterTable = false;
       this.listOfPendingLeaves =true;
+      this.listOfActiveUser=false;
+    }
+    else if ("activeUserList" == val){
+      this.listOfRequester = false;
+      this.listOfPendingLeaves =false;
+      this.requesterTable = false;
+      this.listOfActiveUser=true;
     }
     else {
-      this.listOfRequester = true;
+      this.listOfRequester = false;
       this.listOfPendingLeaves =false;
+      this.listOfActiveUser=false;
+      this.requesterTable = true;
     }
   }
 }
