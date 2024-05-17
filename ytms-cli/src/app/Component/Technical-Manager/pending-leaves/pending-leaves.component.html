@@ -1,17 +1,17 @@
 <!-- <p class="fs-1 fw-bold fst-italic text-center" style="background-color: #005ba3;">List of Requesters</p> -->
 <div>
-    <table style="width:100%">
+    <table class="table table-striped custab">
         <tr>
-            <th>Trainer Name</th>
-            <th>Training Name</th>
-            <th>Leave Start Date</th>
-            <th>Leave End Date</th>
-            <th>Actions</th>
+            <th scope="col">Trainer Name</th>
+            <th scope="col">Training Name</th>
+            <th scope="col">Leave Start Date</th>
+            <th scope="col">Leave End Date</th>
+            <th scope="col">Actions</th>
         </tr>
 
         <tbody *ngFor="let leave of pendingLeaves">
             <tr>
-                <td (click)="getTrainers(leave)">{{ leave.tranier_mail_id }}</td>
+                <td scope="row" (click)="getTrainers(leave)">{{ leave.tranier_mail_id }}</td>
                 <td>{{ leave.tranining_name }}</td>
                 <td>{{ leave.leave_Start_date }}</td>
                 <td>{{ leave.leave_End_date }}</td>

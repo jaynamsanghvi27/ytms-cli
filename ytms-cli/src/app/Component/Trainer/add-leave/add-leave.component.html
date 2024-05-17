@@ -45,7 +45,7 @@ color: #fff;text-align: center;background: #005ba3;">Apply Leave</h2>
         </div>
         <div class="col-5" style="padding-left: 38px;">
             <span *ngIf="waringObject.length > 0">
-            <span style="color: red;">Leave Alreday Apply For blow Tranning </span>
+            <span style="color: red;">Leave Already Apply For below Date </span>
             <br>
             <span *ngFor="let warn of waringObject">
               <span style="font-weight: bold">{{warn.id + ":" + warn.date +","}}</span>
