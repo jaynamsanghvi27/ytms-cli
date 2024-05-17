@@ -31,12 +31,13 @@ export class PendingLeavesComponent {
   loadPendingLeaves() {
     this.trainerAttendanceService.getAllTranierAttendData().subscribe((response: TrainerAttendance[]) => {
       this.pendingLeaves = response;
+      console.log(JSON.stringify(response));
     })
   }
 
 
   submitResult(trainerAttendance: TrainerAttendance) {
-   
+  
     Swal.fire({
         title: 'Approve',
         text: "Are you sure you want approve the leave ?  training end date will get extended few more days",
@@ -49,15 +50,18 @@ export class PendingLeavesComponent {
         if (result.isConfirmed) {
           trainerAttendance.leave_status = 'APPROVED';
           this.trainerAttendanceService.approvePendingLeave(trainerAttendance).subscribe(res => {
-            this.postLeaveData(trainerAttendance.leave_Start_date, trainerAttendance.leave_End_date, trainerAttendance.training_id);
+            if(trainerAttendance.leave_impact_on_traning=="Yes"){
+              this.postLeaveData(trainerAttendance.leave_Start_date, trainerAttendance.leave_End_date, trainerAttendance.training_id);
+            }
             this.loadPendingLeaves();
           })
             Swal.fire(
                 'Approved!',
                 'Leave has been approved.',
                 'success'
-            )
-         
+            ).then((result) => {
+            window.location.reload();
+            })
         }
     })
 }

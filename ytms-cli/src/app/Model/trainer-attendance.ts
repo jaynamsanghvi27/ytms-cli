@@ -22,4 +22,6 @@ export class TrainerAttendance {
   leave_End_time?:string;
 
   leave_status?: string;
+  
+  leave_impact_on_traning?:string;
 }
