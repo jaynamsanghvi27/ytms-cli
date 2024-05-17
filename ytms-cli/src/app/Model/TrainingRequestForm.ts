@@ -9,6 +9,7 @@ export class TrainingReqForm{
     monthAndYear!: String;
     trainingName!: String;
     trainer!: String;
+    trainerEmail!: String;
     startDate!: Date;
     endDate!: Date;
     trainingDescription!: String;

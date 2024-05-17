@@ -45,9 +45,9 @@
                                 <td><a (click)="openNominationData(training.id)">{{training.noOfActualParticipant}}</a></td>
                                 <td>{{training.trainer}}</td>
                                 <!-- <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' " style="text-align: center;"> -->
-                    
-                    <td *ngIf="userRole != 'ROLE_COMPETENCY_MANAGER'" style="text-align: center;">
-                    <span class="inner">             
+
+                                <td *ngIf="userRole != 'ROLE_COMPETENCY_MANAGER'" style="text-align: center;">
+                                    <span class="inner">             
                     <i title="Edit" *ngIf="training.status!='APPROVED' || userRole == 'ROLE_TECHNICAL_MANAGER'" class=" btn-info btn-sm fa fa-edit" (click)="editTrf(training.id)"></i>
                     <i title="Approve" *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' && training.actualStartDate == null && training.status!='DECLINED'" class=" btn-success btn-sm fa fa-check-square-o" (click)="openDialog(template);setId(training.id)"></i>
                     <i title="Decline" *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER' && training.actualStartDate == null && training.status!='DECLINED'" class=" btn-danger btn-sm  fa fa-close" (click)="declineDialog(template1);setId(training.id)"></i>
@@ -102,8 +102,8 @@
                                 <!-- <select #teams class="request-drop-down" formControlName="trainer"> -->
                                 <select multiple class="request-drop-down" formControlName="trainer">
                                     <option [ngValue]="0" disabled >-- Select --</option>
-                                    <option *ngFor="let trainer of trainers" value="{{trainer.fullName}}">
-                                    {{trainer.fullName}}
+                                    <option *ngFor="let trainer1 of trainers" value="{{trainer1.fullName}}">
+                                    {{trainer1.fullName}}
                                     </option>
                                 </select>
                             </div>
@@ -161,8 +161,8 @@
                         <button type="submit" *ngIf="!this.isLoading" class="btn btn-primary btn-block btn-lg">
               Submit
             </button>
-            <mat-spinner *ngIf="this.isLoading" class="spinner"></mat-spinner>
-        </div>
+                        <mat-spinner *ngIf="this.isLoading" class="spinner"></mat-spinner>
+                    </div>
                 </form>
             </ng-template>
             <ng-template #template1>
