@@ -13,17 +13,19 @@
             </div>
             <!-- <p class="fs-1 fw-bold fst-italic text-center" style="background-color: #005ba3;">List of Requesters</p> -->
             <div *ngIf="listOfRequester">
-                <table style="width:100%" *ngIf="requesterTable">
-                    <tr>
-                        <th>Full Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th>Actions</th>
+                <table class="table table-striped custab"*ngIf="requesterTable">
+                    <thead>
+                        <tr>
+                        <th scope="col">Full Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Role</th>
+                        <th >Actions</th>
                     </tr>
+                    </thead>
 
                     <tbody *ngFor="let user of userDetails">
                         <tr>
-                            <td>{{ user.fullName }}</td>
+                            <th scope="row">{{ user.fullName }}</th>
                             <td>{{ user.emailAdd }}</td>
                             <td> <select [(ngModel)]="user.roleType">
                                 <option *ngFor="let role of roles" [value]="role.roleTypes">
