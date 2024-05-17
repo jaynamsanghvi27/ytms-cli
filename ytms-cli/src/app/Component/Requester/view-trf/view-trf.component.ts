@@ -32,6 +32,8 @@ export class ViewTrfComponent {
   files?: any[];
   trainers?: any[];
 
+  trainerEmail: string = "";
+
   selectedFiles?: FileList;
   enableUploadButton = false;
   currentFile?: File;
@@ -60,6 +62,7 @@ export class ViewTrfComponent {
       actualEndDate: ['', [Validators.required]],
       fileName: ['', [Validators.required]],
       trainer: ['', [Validators.required]],
+      trainerEmail: [''],
       actualStartTime: ['', [Validators.required]],
       actualEndTime: ['', [Validators.required]],
       noOfDays: [],
@@ -124,9 +127,14 @@ isLoading:boolean=false;
     if (this.trainingReqForm.valid) {
       this.isLoading=true;
       console.log("befor service " + JSON.stringify(this.trainingReqForm.value));
+     
       this.trainingReqForm.get('trainer')?.setValue(this.trainingReqForm.value.trainer + "");
+      const  trm=this.trainers?.find(tr=> tr.fullName === this.trainingReqForm.get('trainer')?.value);
+      this.trainingReqForm.get('trainerEmail')?.setValue(trm.emailAdd+"");
+     
       let obj: any = this.trainingReqForm.value;
-      this.ser.updateTraining(obj).subscribe((resp: any) => {
+      console.log(JSON.stringify(obj));
+     this.ser.updateTraining(obj).subscribe((resp: any) => {
         if(resp?.status === 'Success'){
           Swal.fire('Success', 'Training Approved', 'success');
           this.isLoading=false;
@@ -264,4 +272,5 @@ isLoading:boolean=false;
       
     }
   }
+
 }
