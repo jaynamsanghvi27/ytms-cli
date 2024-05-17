@@ -13,3 +13,12 @@ table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
     }
+button{
+    float: right;
+    color: white;
+    background-color: #005ba3;;
+    margin-bottom: 5px;
+}
+button:hover{
+    background-color: #005ba3;;
+}
