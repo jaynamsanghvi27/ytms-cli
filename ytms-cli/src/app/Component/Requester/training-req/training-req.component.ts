@@ -105,7 +105,7 @@ export class TrainingReqComponent {
         unit: ['', [Validators.required,Validators.pattern(this.upattern)]],
         upgradedSkills: ['', [Validators.required]],
         competency: ['', [Validators.required,Validators.pattern(this.upattern)]],
-        trainingType: ['', [Validators.required,Validators.pattern(this.upattern)]],
+        trainingType: ['', [Validators.required]],
         monthAndYear: ['', [Validators.required]],
         trainingName: ['', [Validators.required]],
         startDate: ['', [Validators.required]],
