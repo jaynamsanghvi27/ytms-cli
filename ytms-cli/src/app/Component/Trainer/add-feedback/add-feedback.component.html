@@ -29,10 +29,10 @@ color: #fff;text-align: center;background: #005ba3;" *ngIf="role === 'ROLE_TRAIN
     </table>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <div class="row">
-        <div style="text-align: left;margin-right: 10px;" class="btn btn-block btn-m"><a href="../../../../assets/excel/FeedBack.xlsx" download="SampleBulkUploadFile..xlsx">Click Here To Download Sample Format</a></div>
+    <div class="row" *ngIf="role === 'ROLE_TRAINER'">
+        <div *ngIf="role === 'ROLE_TRAINER'" style="text-align: left;margin-right: 10px;" class="btn btn-block btn-m"><a href="../../../../assets/excel/FeedBack.xlsx" download="SampleBulkUploadFile..xlsx">Click Here To Download Sample Format</a></div>
     </div>
-    <div class="custom-file-button">
+    <div class="custom-file-button" *ngIf="role === 'ROLE_TRAINER'">
         <input type="file" accept=".xlsx" (change)="onFileChange($event)">
         <label>Upload FeedBack</label>
     </div>&nbsp;
@@ -40,7 +40,7 @@ color: #fff;text-align: center;background: #005ba3;" *ngIf="role === 'ROLE_TRAIN
         ExportToExcel
         </button>
     <button mat-button mat-dialog-close class="btn btn-primary btn-block btn-m" style="margin-right: 10px;">Cancel</button>
-    <button type="submit" (click)="submit()" class="btn btn-primary btn-block btn-m" [disabled]="role !== 'ROLE_TRAINER'">
+    <button type="submit" (click)="submit()" class="btn btn-primary btn-block btn-m" *ngIf="role === 'ROLE_TRAINER'">
         Submit
         </button>
 </mat-dialog-actions>
