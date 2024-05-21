@@ -30,6 +30,7 @@ export class TmHomeComponent {
   listOfRequester: boolean = true;
   requesterTable: boolean = false;
   listOfActiveUser: boolean = false;
+  pendingRequestCount:number=0;
   
 
   constructor(private usersService: UsersService,private trainingRequestService:TrainingRequestService,private trainerAttendanceService:TrainerAttendanceService,
@@ -44,6 +45,14 @@ export class TmHomeComponent {
     this.getAllRoles();
     this.loadPendingLeaves();
     this.getAllActiveUsers();
+    this.getPendingRequestCount('Pending');
+  }
+
+  getPendingRequestCount(status:String){
+    this.trainingRequestService.getTrainingByStatus(status).subscribe(res => {
+      console.log(JSON.stringify(res));
+      this.pendingRequestCount=res.length;
+    })
   }
 
   getAllRoles(){
@@ -127,6 +136,9 @@ export class TmHomeComponent {
       this.listOfPendingLeaves =false;
       this.requesterTable = false;
       this.listOfActiveUser=true;
+    }
+    else if("pendingRequestList"==val){
+      this.router.navigate(['/tm-view-trf']);
     }
     else {
       this.listOfRequester = false;

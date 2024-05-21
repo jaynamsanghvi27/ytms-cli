@@ -241,4 +241,7 @@ export class TrainingRequestService {
   getTrainers(trainingReqForm:TrainingReqForm): Observable<TrainingReqForm[]> {
     return this.http.post<TrainingReqForm[]>(this.url + "/trainer/getTrainers",trainingReqForm);
   }
+  getTrainingByStatus(status:String): Observable<any[]> {
+    return this.http.get<TrainingReqForm[]>(this.url + "/register/getTrainingRequestByStatus/"+status);
+  }
 }
