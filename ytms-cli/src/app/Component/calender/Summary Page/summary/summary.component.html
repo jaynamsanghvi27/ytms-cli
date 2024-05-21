@@ -1,15 +1,14 @@
 <div class="container-fluid g-0">
-    <app-requester-header (sideNavToggled)="sideNavStatus=$event;" >
+    <app-requester-header (sideNavToggled)="sideNavStatus=$event;">
     </app-requester-header>
-  
+
     <main>
-      <app-requester-sidebar [sideNavStatus]="sideNavStatus" 
-        [ngClass]="{'app-side-nav-open':sideNavStatus}" class="black-border"> </app-requester-sidebar>
-      <div class="display-area" [ngClass]="{'display-area-shrink':sideNavStatus}">
-        <div class="training-request-form">
-          <br>
-          <div *ngIf="searchFilter" class="manager-Select">  
-            <span class="flex"> <p> Trainer: 
+        <app-requester-sidebar [sideNavStatus]="sideNavStatus" [ngClass]="{'app-side-nav-open':sideNavStatus}" class="black-border"> </app-requester-sidebar>
+        <div class="display-area" [ngClass]="{'display-area-shrink':sideNavStatus}">
+            <div class="training-request-form">
+                <br>
+                <div *ngIf="searchFilter" class="manager-Select">
+                    <span class="flex"> <p> Trainer: 
             <mat-select (selectionChange)="switchUser($event)" class="select" placeholder="All">
               <mat-option [value]="'All'">All</mat-option>
               <mat-option *ngFor="let user of users" [value]="user.emailAdd">
@@ -20,55 +19,55 @@
             <button  class="btn btn-primary"  [routerLink]="'/book-calendar'">Calendar</button>
           
           </span>
-          <span class="download-manager"><button  class="btn btn-primary"  (click)="exportExcel()">Download Summary</button></span>
-          &nbsp;
-        
-          
+                    <span class="download-manager"><button  class="btn btn-primary"  (click)="exportExcel()">Download Summary</button></span> &nbsp;
+
+
+                </div>
+                &nbsp;
+                <div class="trainer-action" style="display: flex;">
+                    <button class="btn btn-primary" *ngIf="!searchFilter" [routerLink]="'/trainer/trainer-calendar'">Calendar</button>&nbsp;
+                    <button *ngIf="!searchFilter" class="btn btn-primary" (click)="exportExcel()">Download Summary</button>
+                </div>
+                <br>
+                <table mat-table [dataSource]="this.datasource" class="mat-elevation-z8">
+                    <ng-container matColumnDef="user">
+                        <th mat-header-cell *matHeaderCellDef> Trainer </th>
+                        <td mat-cell *matCellDef="let element"> {{element.scheduleUser.fullName }} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="task">
+                        <th mat-header-cell *matHeaderCellDef>Tasks:- {{this.totalTasks}}</th>
+                        <td mat-cell *matCellDef="let element" style="display: flex; flex-direction: row; width:100%; border: 1px solid gray">
+                            <div style="width: 60%; border: 0;">
+                                <span style="font-weight: 500; padding-bottom: 30px;">Task Name</span><br>
+                                <ng-container *ngFor="let titlePart of element.title.split('@') ; index as i">
+                                    {{ i + 1 }}. {{ titlePart }}<br>
+                                </ng-container>
+                            </div>
+                            <div style="width:20% ; border: 0"> <span style="font-weight: 500; padding-bottom: 30px;">Duration</span><br>
+                                <ng-container *ngFor="let titlePart of element.currentRangeDuration.split('@')">
+                                    {{ titlePart }}<br></ng-container>
+                            </div>
+                            <div style="width:20%; border: 0"> <span style="font-weight: 500;  padding-bottom: 30px;">No. of Task</span>
+                                <br>{{ (element.title || '').split('@').length }}
+                            </div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="date-range">
+                        <th mat-header-cell *matHeaderCellDef> Dates </th>
+                        <td mat-cell *matCellDef="let element"> {{element.start_date | date:'dd MMM yyyy'}}&nbsp;<span *ngIf="element.end_date"> - &nbsp;{{element.end_date | date:'dd MMM yyyy'}}</span> </td>
+                    </ng-container>
+                    <ng-container matColumnDef="TotalDays">
+                        <th mat-header-cell *matHeaderCellDef>TotalDays </th>
+                        <td mat-cell *matCellDef="let element"> <span *ngIf="element.end_date">{{this.diffDays(element.end_date,element.start_date)}}</span><span *ngIf="!element.end_date">1</span> </td>
+                    </ng-container>
+                    <ng-container matColumnDef="freeHours">
+                        <th mat-header-cell *matHeaderCellDef> Free Hours </th>
+                        <td mat-cell *matCellDef="let element"> {{element.freeHours}} hrs</td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </div>
         </div>
-          &nbsp;   
-           <div class="trainer-action" style="display: flex;">
-            <button  class="btn btn-primary" *ngIf="!searchFilter" [routerLink]="'/trainer/trainer-calendar'">Calendar</button>&nbsp;
-            <button  *ngIf="!searchFilter" class="btn btn-primary"  (click)="exportExcel()">Download Summary</button>
-          </div>  
-          <br> 
-            <table mat-table [dataSource]="this.datasource" class="mat-elevation-z8">
-                <ng-container matColumnDef="user">
-                    <th mat-header-cell *matHeaderCellDef> Trainer </th>
-                    <td mat-cell *matCellDef="let element"> {{element.scheduleUser.fullName }} </td>
-                </ng-container>
-                  <ng-container matColumnDef="task">
-                    <th mat-header-cell *matHeaderCellDef>Tasks:- {{this.totalTasks}}</th>
-                    <td mat-cell *matCellDef="let element" style="display: flex; flex-direction: row; width:100%; border: 1px solid gray"> 
-                      <div style="width: 60%; border: 0;" >
-                        <span style="font-weight: 500; padding-bottom: 30px;">Task Name</span><br>
-                        <ng-container *ngFor="let titlePart of element.title.split(',') ; index as i">
-                          {{ i + 1 }}. {{ titlePart }}<br>
-                        </ng-container>
-                      </div>
-                           <div style="width:20% ; border: 0"> <span style="font-weight: 500; padding-bottom: 30px;">Duration</span><br>
-                            <ng-container *ngFor="let titlePart of element.currentRangeDuration.split(',')">
-                            {{ titlePart }}<br></ng-container></div>
-                           <div style="width:20%; border: 0"> <span style="font-weight: 500;  padding-bottom: 30px;">No. of Task</span>
-                            <br>{{ (element.title || '').split(',').length }}
-                          </div>
-                    </td>
-                  </ng-container>
-                  <ng-container matColumnDef="date-range">
-                    <th mat-header-cell *matHeaderCellDef> Dates </th>
-                    <td mat-cell *matCellDef="let element"> {{element.start_date | date:'dd MMM yyyy'}}&nbsp;<span *ngIf="element.end_date"> - &nbsp;{{element.end_date | date:'dd MMM yyyy'}}</span> </td>
-                  </ng-container>
-                  <ng-container matColumnDef="TotalDays">
-                    <th mat-header-cell *matHeaderCellDef>TotalDays </th>
-                    <td mat-cell *matCellDef="let element"> <span *ngIf="element.end_date">{{this.diffDays(element.end_date,element.start_date)}}</span><span *ngIf="!element.end_date">1</span> </td>
-                  </ng-container>
-                  <ng-container matColumnDef="freeHours">
-                    <th mat-header-cell *matHeaderCellDef> Free Hours </th>
-                    <td mat-cell *matCellDef="let element"> {{element.freeHours}} hrs</td>
-                  </ng-container>
-                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-        </div>
-    </div>
     </main>
-    </div>
+</div>

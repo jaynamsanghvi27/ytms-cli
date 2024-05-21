@@ -17,4 +17,6 @@ export class AssociateManagement {
     feedback?:string;
     finalScore?:string;
     trainer?:string;
+    attendancePercentage?:Number;
+
   }
