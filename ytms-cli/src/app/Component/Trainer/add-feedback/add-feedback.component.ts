@@ -8,6 +8,7 @@ import { ViewAttendanceComponent } from '../view-attendance/view-attendance.comp
 import * as ExcelJS from 'exceljs';
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
+import { th } from 'date-fns/locale';
 
 @Component({
   selector: 'app-add-feedback',
@@ -15,6 +16,10 @@ import * as XLSX from 'xlsx';
   styleUrls: ['./add-feedback.component.css']
 })
 export class AddFeedbackComponent {
+
+  values = [
+    1,2,3,4,5
+  ]
 
   role:string = 'ROLE_TRAINER';
   trainingId:any;
@@ -80,6 +85,11 @@ export class AddFeedbackComponent {
        { header: 'Employee Id', key: 'Employee Id', width: 10 },
        { header: 'Employee Email', key: 'Employee Email', width: 10 },
        { header: 'Employee Name', key: 'Employee Name', width: 10 },
+       { header: 'Technical Skills', key: 'Technical Skills', width: 15 },
+       { header: 'Attitude', key: 'Attitude', width: 15 },
+       { header: 'Common Skills', key: 'Common Skills', width: 15 },
+       { header: 'Work Quality', key: 'Work Quality', width: 15 },
+       { header: 'Overall Rating', key: 'Overall Rating', width: 15 },
        { header: 'FeedBack', key: 'FeedBack', width: 10 }
      ];
  
@@ -97,8 +107,13 @@ export class AddFeedbackComponent {
   modifiedData(nominee: Nomination[]):any[]{
     return nominee.map(nomination => (
       { 'Employee Id': nomination.emp_id,
-       'Employee Email': nomination.emp_name,
+       'Employee Email': nomination.emp_mail_id,
         'Employee Name':nomination.emp_name,
+        'Technical Skills':nomination.technicalSkills,
+        'Attitude':nomination.attitude,
+        'Common Skills':nomination.commSkills,
+        'Work Quality':nomination.workQuality,
+        'Overall Rating':nomination.overAllRating,
         'FeedBack':nomination.feedback,
       })
       );
@@ -124,6 +139,7 @@ export class AddFeedbackComponent {
     if(trainingId != null && trainingId >0)
     this.ser.getNominationListByTrainingId(trainingId).subscribe(resp => {
       this.employees = this.processEmployeeData(resp);
+      console.log(this.employees);
     });
   }
 
