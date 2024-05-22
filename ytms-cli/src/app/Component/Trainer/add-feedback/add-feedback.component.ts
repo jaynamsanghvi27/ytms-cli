@@ -63,12 +63,12 @@ export class AddFeedbackComponent {
         console.log("Matching Score for EMPID:", employee.emp_mail_id, matchingScore);
         if (matchingScore) {
           employee.feedback = matchingScore.FeedBack;
-          employee.overAllRating = matchingScore.overAllRating;
-          employee.technicalSkills = matchingScore.technicalSkills;
-          employee.overAllRating = matchingScore.overAllRating;
-          employee.attitude = matchingScore.attitude;
-          employee.commSkills = matchingScore.commSkills;
-          employee.workQuality = matchingScore.workQuality;
+          employee.overAllRating = matchingScore['Overall Rating'];
+          employee.technicalSkills = matchingScore['Technical Skills'];
+          employee.overAllRating = matchingScore['Overall Rating'];
+          employee.attitude = matchingScore['Attitude'];
+          employee.commSkills = matchingScore['Communication Skills'];
+          employee.workQuality = matchingScore['Work Quality'];
         }
       }
       console.log(this.employees);
@@ -94,7 +94,7 @@ export class AddFeedbackComponent {
        { header: 'Employee Name', key: 'Employee Name', width: 10 },
        { header: 'Technical Skills', key: 'Technical Skills', width: 15 },
        { header: 'Attitude', key: 'Attitude', width: 15 },
-       { header: 'Common Skills', key: 'Common Skills', width: 15 },
+       { header: 'Communication Skills', key: 'Common Skills', width: 15 },
        { header: 'Work Quality', key: 'Work Quality', width: 15 },
        { header: 'Overall Rating', key: 'Overall Rating', width: 15 },
        { header: 'FeedBack', key: 'FeedBack', width: 10 }
