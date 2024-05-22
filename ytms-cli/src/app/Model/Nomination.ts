@@ -13,4 +13,9 @@ export class Nomination {
     finalScore!:number;
     feedback!: string;
     disableFeedback?: boolean;
+    technicalSkills!:string;
+    attitude!:string;
+    commSkills!:string;
+    workQuality!:string;
+    overAllRating!:string;
 }
