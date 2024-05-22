@@ -63,9 +63,16 @@ export class AddFeedbackComponent {
         console.log("Matching Score for EMPID:", employee.emp_mail_id, matchingScore);
         if (matchingScore) {
           employee.feedback = matchingScore.FeedBack;
+          employee.overAllRating = matchingScore.overAllRating;
+          employee.technicalSkills = matchingScore.technicalSkills;
+          employee.overAllRating = matchingScore.overAllRating;
+          employee.attitude = matchingScore.attitude;
+          employee.commSkills = matchingScore.commSkills;
+          employee.workQuality = matchingScore.workQuality;
         }
       }
       console.log(this.employees);
+      this.submit();
     };
   }
 
