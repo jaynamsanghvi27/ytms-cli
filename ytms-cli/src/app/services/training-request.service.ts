@@ -244,4 +244,8 @@ export class TrainingRequestService {
   getTrainingByStatus(status:String): Observable<any[]> {
     return this.http.get<TrainingReqForm[]>(this.url + "/register/getTrainingRequestByStatus/"+status);
   }
+
+  getAbsentData(tarningId: any,emailId:any): Observable<any[]> {
+    return this.http.get<any[]>(this.url + "/register/attendance/attendViewData/" + tarningId+"/"+emailId);
+  }
 }

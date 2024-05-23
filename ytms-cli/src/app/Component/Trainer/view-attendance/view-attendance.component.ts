@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TrainingRequestService } from 'src/app/services/training-request.service';
+import { AbsentDeatilsComponent } from '../absent-deatils/absent-deatils.component';
 
 @Component({
   selector: 'app-view-attendance',
@@ -35,5 +36,21 @@ export class ViewAttendanceComponent {
 
 
    }
+
+   
+
+   viewAbsentDeatils(empidId:any,empName:any){
+    const dialogRef =this.dialog.open(AbsentDeatilsComponent,{
+      data:{'empidId':empidId,'traningId':this.trainingId ,'empName':empName},
+      width: '100%',
+      height: '90%'
+    } );
+    
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The viewAttendance dialog was closed');
+     // this.getTrainerTrainingList();
+    });
+  }
+  
 
 }

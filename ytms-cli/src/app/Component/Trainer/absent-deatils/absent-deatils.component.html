@@ -1,0 +1,23 @@
+<h2 mat-dialog-title style="border-bottom: 1px solid #eee;
+color: #fff;text-align: center;background: #005ba3;">View Absent Details ({{employeeId}} : {{employeeName}})</h2>
+<mat-dialog-content class="mat-typography" style="height: calc(100% - 96px);">
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Reason For Leave</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of absentDetailsData">
+                <td>{{data.absentDate}}</td>
+                <td>{{data.leaveReason}}</td>                
+            </tr>
+        </tbody>
+    </table>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close class="btn btn-primary btn-block btn-m" style="margin-right: 15px;">Cancel</button>
+
+</mat-dialog-actions>
