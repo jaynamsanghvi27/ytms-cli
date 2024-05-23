@@ -18,7 +18,7 @@ import { th } from 'date-fns/locale';
 export class AddFeedbackComponent {
 
   values = [
-    1,2,3,4,5
+    0,1,2,3,4,5
   ]
 
   role:string = 'ROLE_TRAINER';
