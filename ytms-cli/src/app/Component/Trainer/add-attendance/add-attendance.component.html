@@ -63,6 +63,7 @@ color: #fff;text-align: center;background: #005ba3;">Attendance Details</h2>
               <th><input style="margin-right: 10px;" [(ngModel)]="isChecked"
                 type="checkbox"
                 (change)="clickHeaderCheckBox($event,true)"/>Attendance </th>
+                <th>Reason For Leave</th>
               
           </tr>
         </thead>
@@ -78,6 +79,7 @@ color: #fff;text-align: center;background: #005ba3;">Attendance Details</h2>
                   type="checkbox" [(ngModel)]="training.attendance_status" name="element_name"
                   [checked]="training.attendance_status"
                   (change)="clickRowCheckBox()"/></td>
+                  <td><textarea type="text" [(ngModel)]="training.reasonForLeave" [disabled]="training.attendance_status" name="reasonForLeave" rows="2" ></textarea></td>
               
           </tr>
         </tbody>
