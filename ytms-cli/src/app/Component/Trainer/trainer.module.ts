@@ -28,6 +28,7 @@ import { NominationReqComponent } from './nomination-req/nomination-req.componen
 import { AddFeedbackComponent } from './add-feedback/add-feedback.component';
 import { AddScoreComponent } from './add-score/add-score.component';
 import { AddLeaveComponent } from './add-leave/add-leave.component';
+import { AbsentDeatilsComponent } from './absent-deatils/absent-deatils.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { AddLeaveComponent } from './add-leave/add-leave.component';
     NominationReqComponent,
     AddFeedbackComponent,
     AddScoreComponent,
-    AddLeaveComponent
+    AddLeaveComponent,
+    AbsentDeatilsComponent
   ],
   imports: [
     CommonModule,
