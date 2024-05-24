@@ -25,12 +25,16 @@ export class ViewTrainerFormComponent {
   sideNavStatus: boolean = false;
   trainingReqForms : any[]=[];
   role: string = '';
+  searchText = '';
   constructor(private authService:AuthService,
     private jwtService:JwtService,
     private ser:TrainingRequestService,private downloadService: DownloadService,
     private router: Router,public dialog: MatDialog){
   //this.loadList();
   this.getTrainerTrainingList();
+}
+search() {
+  console.log("--->"+this.searchText)
 }
 
 ngOnInit(): void {
