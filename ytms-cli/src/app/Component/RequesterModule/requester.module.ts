@@ -19,7 +19,7 @@ import {RouterLink, RouterOutlet} from "@angular/router";
   imports: [
     CommonModule,
     RouterOutlet,
-    RouterLink
+    RouterLink,
   ]
 })
 export class RequesterModule {

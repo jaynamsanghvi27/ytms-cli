@@ -14,7 +14,6 @@ import { AuthService } from 'src/app/Core/services/auth.service';
 import { JwtService } from 'src/app/Core/services/jwt.service';
 import { DownloadService } from 'src/app/Core/services/download.service';
 import { AddLeaveComponent } from '../add-leave/add-leave.component';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @Component({
   selector: 'app-view-trainer-form',

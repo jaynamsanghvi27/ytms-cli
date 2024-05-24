@@ -12,6 +12,15 @@
                         <a style="float: left; color: white;" (click)="backClicked()">Back</a><span>
             <h5 class="heading-color">Training Request List</h5></span>
                     </div>
+                    <div class="container h-100">
+                        <div class="d-flex justify-content-center h-100">
+                            <div class="searchbar">
+                                <input type="text" class="search_input" name="search" placeholder="Search..."
+                                [(ngModel)]="searchText">
+                                <i class="fa fa-search"></i>
+                            </div>
+                        </div>
+                    </div>
                     <table>
                         <thead>
                             <tr>
@@ -31,7 +40,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let training of trainingReqForms">
+                            <tr *ngFor="let training of trainingReqForms  |filter:searchText">
                                 <td>{{training.id}}</td>
                                 <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER'">{{training.userName}}</td>
                                 <td>{{training.trainingName}}</td>

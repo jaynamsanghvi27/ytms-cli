@@ -31,17 +31,15 @@ export class ViewTrfComponent {
   document: Document | undefined;
   files?: any[];
   trainers?: any[];
-
   trainerEmail: string = "";
-
   selectedFiles?: FileList;
   enableUploadButton = false;
   currentFile?: File;
   progress = 0;
   message = '';
   holiday: any[] = [];
-
   fileInfos?: Observable<any>;
+  searchText = '';
 
 
   constructor(private ser: TrainingRequestService, private auth: AuthService,
