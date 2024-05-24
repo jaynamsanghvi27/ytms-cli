@@ -12,9 +12,21 @@
                     <div class="form-header">
                         <h5 class="heading-color">Trainer Leave Details</h5>
                     </div>
-                    <button type="submit" (click)="exportToExcel()" style="margin-right: 10px;" class="btn btn-primary btn-block btn-m">
-                        ExportToExcel
+                    <div>
+                        <div class="container h-100">
+                            <div style="background-color: white !important;" class="d-flex justify-content-center h-100">
+                                <div style="background-color: white !important;" class="searchbar">
+                                    <input style="background-color: white !important;" type="text" class="search_input" name="search" placeholder="Search..."
+                                    [(ngModel)]="searchText">
+                                    <i class="fa fa-search"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" (click)="exportToExcel()" style="margin-right: 10px;" class="btn btn-primary btn-block btn-m">
+                            ExportToExcel
                         </button>
+                    </div>
+                    
                     <!-- <p class="fs-1 fw-bold fst-italic text-center" style="background-color: #005ba3;">List of Requesters</p> -->
                     <div>
                         <table style="width:100%">
@@ -26,7 +38,7 @@
                                 <th>Status</th>
                             </tr>
 
-                            <tbody *ngFor="let leave of approvedLeaves">
+                            <tbody *ngFor="let leave of approvedLeaves |filter:searchText">
                                 <tr>
                                     <td>{{ leave.tranier_mail_id }}</td>
                                     <td>{{ leave.tranining_name }}</td>
