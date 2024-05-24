@@ -10,6 +10,7 @@ color: #fff;text-align: center;background: #005ba3;">View Attendance Details</h2
                 <th>Traning Days</th>
                 <th>Present Days</th>
                 <th>Percentange</th>
+                <th>Absent Details</th>
 
             </tr>
         </thead>
@@ -24,7 +25,9 @@ color: #fff;text-align: center;background: #005ba3;">View Attendance Details</h2
 
                 </td>
                 <td>{{checkNumber(training.attendeace.attendance_percentage)}}</td>
-
+                <td>
+                    <span style="margin-left: 10px;" (click)="viewAbsentDeatils(training.attendeace.emp_id,training.attendeace.emp_name)"><i class="fa-regular fa-eye"></i></span>
+                </td>
             </tr>
         </tbody>
     </table>
