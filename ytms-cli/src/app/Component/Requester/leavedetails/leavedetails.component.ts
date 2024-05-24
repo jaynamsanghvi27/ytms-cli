@@ -11,6 +11,7 @@ import * as ExcelJS from 'exceljs';
 })
 export class LeavedetailsComponent {
   sideNavStatus: boolean = false; 
+  searchText = '';
   approvedLeaves: TrainerAttendance[]=[];
   constructor(private trainerAttendanceService: TrainerAttendanceService) {
              this.approvedRejectedLeaves();
