@@ -17,17 +17,18 @@
                         <span title="Apply Leave" (click)="applyLeave()" style="display: inline-block;float: right;"><i
                                 class="fa-solid fa-calendar-days"></i></span>
                     </div>
-                    <div align="right" mat-raised-button *ngIf="role === 'ROLE_TECHNICAL_MANAGER'">
-                        <button class="xlsx btn btn-primary" (click)="downloadAssociates()">Export to Excel</button>
-                    </div>
                     <div class="container h-100">
                         <div class="d-flex justify-content-center h-100">
                             <div class="searchbar">
                                 <input type="text" class="search_input" name="search" placeholder="Search..."
-                                    [(ngModel)]="searchText">
+                                    [(ngModel)]="searchText" (keyup)="search()">
                                 <i class="fa fa-search"></i>
                             </div>
                         </div>
+                    </div>
+                    <div style="max-width: 1800px;padding: 3px;" align="left" mat-raised-button *ngIf="role === 'ROLE_TECHNICAL_MANAGER'">
+                        <button class="xlsx btn btn-primary" (click)="downloadAssociates()">Export to
+                            Excel</button>
                     </div>
                     <table>
                         <thead>
