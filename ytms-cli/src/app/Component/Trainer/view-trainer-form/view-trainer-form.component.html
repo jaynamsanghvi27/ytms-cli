@@ -8,8 +8,6 @@
             <!-- Main Content    -->
             <div class="vt-training-request-form">
                 <!-- Main Content    -->
-
-
                 <form>
                     <div class="vt-form-header">
                         <span style="display: inline-block;"> <h5 class="heading-color">All Training Summary</h5></span>
@@ -18,7 +16,14 @@
                     <div align="right" mat-raised-button *ngIf="role === 'ROLE_TECHNICAL_MANAGER'">
                         <button class="xlsx btn btn-primary" (click)="downloadAssociates()">Export to Excel</button>
                     </div>
-                    <br>
+                    <div class="container h-100">
+                        <div class="d-flex justify-content-center h-100">
+                    <div class="searchbar">
+                        <input type="text" class="search_input" name="search" placeholder="Search..." [(ngModel)]="searchText" (keyup)="search()">
+                        <i class="fa fa-search"></i>
+                    </div>
+                        </div>
+                    </div>
                     <table>
                         <thead>
                             <tr>
@@ -37,7 +42,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let training of trainingReqForms">
+                            <tr *ngFor="let training of trainingReqForms |filter:searchText">
                                 <td>{{training.id}}</td>
                                 <td>{{training.trainingName}}</td>
 

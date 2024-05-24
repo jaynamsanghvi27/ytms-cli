@@ -14,6 +14,7 @@ import { AuthService } from 'src/app/Core/services/auth.service';
 import { JwtService } from 'src/app/Core/services/jwt.service';
 import { DownloadService } from 'src/app/Core/services/download.service';
 import { AddLeaveComponent } from '../add-leave/add-leave.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @Component({
   selector: 'app-view-trainer-form',
@@ -25,12 +26,16 @@ export class ViewTrainerFormComponent {
   sideNavStatus: boolean = false;
   trainingReqForms : any[]=[];
   role: string = '';
+  searchText = '';
   constructor(private authService:AuthService,
     private jwtService:JwtService,
     private ser:TrainingRequestService,private downloadService: DownloadService,
     private router: Router,public dialog: MatDialog){
   //this.loadList();
   this.getTrainerTrainingList();
+}
+search() {
+  console.log("--->"+this.searchText)
 }
 
 ngOnInit(): void {

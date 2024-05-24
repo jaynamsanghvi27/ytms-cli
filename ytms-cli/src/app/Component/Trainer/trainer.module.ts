@@ -28,6 +28,7 @@ import { NominationReqComponent } from './nomination-req/nomination-req.componen
 import { AddFeedbackComponent } from './add-feedback/add-feedback.component';
 import { AddScoreComponent } from './add-score/add-score.component';
 import { AddLeaveComponent } from './add-leave/add-leave.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { AddLeaveComponent } from './add-leave/add-leave.component';
     MatInputModule,
     MatFormFieldModule, MatInputModule, MatDatepickerModule,
     MatTooltipModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    Ng2SearchPipeModule
   ],
   providers:[]
 })

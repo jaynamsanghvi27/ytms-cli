@@ -63,7 +63,6 @@ import {MatBadgeModule} from '@angular/material/badge';
 import { PendingLeavesComponent } from './Component/Technical-Manager/pending-leaves/pending-leaves.component';
 import { LeavedetailsComponent } from './Component/Requester/leavedetails/leavedetails.component';
 import { ApprovedUserDetailComponent } from './Component/Technical-Manager/approved-user-detail/approved-user-detail.component';
-
 @NgModule({
   entryComponents: [DayComponentComponent, EventFormComponent, UpdateEventFormComponent, DeleteComponent,OptionalHolidayComponent],
   declarations: [
@@ -126,7 +125,7 @@ import { ApprovedUserDetailComponent } from './Component/Technical-Manager/appro
     AgGridModule,
     MatTooltipModule,
     MatBadgeModule, 
-    MatButtonModule
+    MatButtonModule,
   ],
   providers: [
     authInterceptorProviders,
