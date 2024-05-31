@@ -8,6 +8,7 @@ import { th } from 'date-fns/locale';
 import { AuthService } from 'src/app/Core/services/auth.service';
 import { JwtService } from 'src/app/Core/services/jwt.service';
 import { TrainingRequestService } from 'src/app/services/training-request.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-leave',
@@ -171,7 +172,7 @@ ngOnInit(): void {
   submitLeave() {
     this.isLoading = true;
     this.isSubmitbuttonDisable = true;
-    console.log("submitLeave")
+    
     let start = this.range.get("start")?.value;
     let end = this.range.get("end")?.value;
     let convertedStartdate = this.convert(start);
@@ -224,7 +225,7 @@ ngOnInit(): void {
       }
     }
 
-    console.log("submitLeave2")
+    
 
     if (this.waringObject.length == 0) {
 
@@ -234,7 +235,7 @@ ngOnInit(): void {
           console.log(resp);
           this.isSubmitbuttonDisable = true;
           this.isLoading = false;
-       
+          Swal.fire('Success', 'Leave Applied successfully !', 'success');
 
       })
     }
