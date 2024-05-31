@@ -34,22 +34,36 @@
                         <th mat-header-cell *matHeaderCellDef> Trainer </th>
                         <td mat-cell *matCellDef="let element"> {{element.scheduleUser.fullName }} </td>
                     </ng-container>
-                    <ng-container matColumnDef="task">
-                        <th mat-header-cell *matHeaderCellDef>Tasks:- {{this.totalTasks}}</th>
-                        <td mat-cell *matCellDef="let element" style="display: flex; flex-direction: row; width:100%; border: 1px solid gray">
-                            <div style="width: 60%; border: 0;">
-                                <span style="font-weight: 500; padding-bottom: 30px;">Task Name</span><br>
-                                <ng-container *ngFor="let titlePart of element.title.split('@') ; index as i">
-                                    {{ i + 1 }}. {{ titlePart }}<br>
-                                </ng-container>
-                            </div>
-                            <div style="width:20% ; border: 0"> <span style="font-weight: 500; padding-bottom: 30px;">Duration</span><br>
-                                <ng-container *ngFor="let titlePart of element.currentRangeDuration.split('@')">
-                                    {{ titlePart }}<br></ng-container>
-                            </div>
-                            <div style="width:20%; border: 0"> <span style="font-weight: 500;  padding-bottom: 30px;">No. of Task</span>
-                                <br>{{ (element.title || '').split('@').length }}
-                            </div>
+                    <ng-container matColumnDef="taskNames">
+                        <th mat-header-cell *matHeaderCellDef>Task Name</th>
+                        <td mat-cell *matCellDef="let element">
+
+
+                            <ng-container *ngFor="let titlePart of element.title.split('@') ; index as i">
+                                {{ i + 1 }}. {{ titlePart }}<br>
+                            </ng-container>
+
+
+                        </td>
+
+                    </ng-container>
+                    <ng-container matColumnDef="taskDuration">
+                        <th mat-header-cell *matHeaderCellDef>Duration</th>
+                        <td mat-cell *matCellDef="let element">
+
+                            <ng-container *ngFor="let titlePart of element.currentRangeDuration.split(',')">
+                                {{ titlePart }}<br>
+                            </ng-container>
+
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="taskDays">
+                        <th mat-header-cell *matHeaderCellDef>No. of Task</th>
+                        <td mat-cell *matCellDef="let element">
+
+
+                            {{ (element.title || '').split('@').length }}
+
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="date-range">

@@ -11,7 +11,6 @@ export class JwtService {
 
   decodeToken(token: string): any {
     try {
-      console.log(jwtDecode(token));
       return jwtDecode(token);
     } catch (error) {
       console.log("Error while decoding the token")

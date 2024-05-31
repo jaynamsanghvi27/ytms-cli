@@ -133,7 +133,14 @@ const sideNavForTrainer: MenuItem[] =[
       name: 'View My Trainings',
       icon: 'fa fa-eye',
       routing: '/trainer/view-trainer-form'
-    }
+    },
+    {
+      number: 6,
+      name: 'Apply Leave',
+      icon: 'fa-solid fa-calendar-days',
+      routing: '/trainer/apply-leave'
+
+    },
   ]
 
 const sideNavForRequester: MenuItem[] = [
