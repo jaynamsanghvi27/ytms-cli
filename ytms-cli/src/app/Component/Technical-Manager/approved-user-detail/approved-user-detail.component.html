@@ -9,17 +9,21 @@
         <thead>
           <tr>
             <th scope="col">Name</th>
-            <th scope="col">Email-ID</th>
+            <!-- <th scope="col">Email-ID</th> -->
             <th scope="col">Role</th>
             <th scope="col">Unit</th>
+            <th scope="col">Competency</th>
+            <th scope="col">Grade</th>
           </tr>
         </thead>
         <tbody *ngFor="let user of activeUserDetails">
             <tr>
-                <th scope="row">{{ user.fullName }}</th>
-                <td>{{ user.emailAdd }}</td>
+                <th scope="row">{{ user.fullName | titlecase}}</th>
+                <!-- <td>{{ user.emailAdd }}</td> -->
                 <td>{{ user.userRole.roleTypes }}</td>
                 <td>{{ user.unit?.name }}</td>
+                <td>{{ user.competency?.name }}</td>
+                <td>{{ user.grade?.name }}</td>
             </tr>
         </tbody>
       </table>

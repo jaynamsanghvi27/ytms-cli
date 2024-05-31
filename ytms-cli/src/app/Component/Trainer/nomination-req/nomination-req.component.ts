@@ -22,6 +22,7 @@ export class NominationReqComponent {
   nominationId:any;
   locations:any;
   grades:any;
+  competencies:any;
   id:any;
 
     ngOnInit(): void {
@@ -32,6 +33,7 @@ export class NominationReqComponent {
         emp_name: ['', [Validators.required]],
         emp_mail_id: ['', [Validators.required]],
         grade: ['', [Validators.required]],
+        competency: ['', [Validators.required]],
         skill: ['', [Validators.required]],
         current_allocation: ['', [Validators.required]],
         project: ['', [Validators.required]],
@@ -41,7 +43,8 @@ export class NominationReqComponent {
 
       this.nominationReqForm.controls['current_location'].setValue(0, { onlySelf: true });
       this.nominationReqForm.controls['grade'].setValue(0, { onlySelf: true });
-
+      this.nominationReqForm.controls['competency'].setValue(0, { onlySelf: true });
+      
   }
   public constructor(@Inject(MAT_DIALOG_DATA) public data:any,private formBuilder: FormBuilder, private ser: TrainingRequestService, private trf: TrainingReqComponent, public dialog: MatDialog,private activatedRoute: ActivatedRoute) {
     // this.nominationReqForm.controls['trainingName']?.patchValue(this.service.trainingName$.subscribe());
@@ -52,6 +55,7 @@ export class NominationReqComponent {
     }
     this.loadLocation();
     this.loadGrade();
+    this.loadCompetency();
     this.ser.nominationId$.subscribe((resp: any) => {
       this.nominationId=resp;
     });
@@ -70,6 +74,9 @@ export class NominationReqComponent {
   }
   loadGrade() {
     this.ser.getGradeMasterList().subscribe((resp: any) => { this.grades = resp });
+  }
+  loadCompetency() {
+    this.ser.getCompetencyMasterList().subscribe((resp: any) => { this.competencies = resp });
   }
   submit(): void {
     let trainingId: any = this.activatedRoute.snapshot.paramMap.get('id');

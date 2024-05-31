@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {LoginService} from "../../Core/services/login.service";
 import Swal from "sweetalert2";
 import { TrainingRequestService } from 'src/app/services/training-request.service';
+import { TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-registration',
@@ -12,11 +13,15 @@ import { TrainingRequestService } from 'src/app/services/training-request.servic
 })
 export class RegistrationComponent {
   units?: any[];
+  competencies?: any[];
+  grades?: any[];
   signUpForm: FormGroup = this.formBuilder.group(
     {
       fullName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]],
       emailAdd: ['', [Validators.required, Validators.pattern(/^[^\s@]+@yash\.com$/)]],
       unit: ['', [Validators.required]],
+      competency: ['', [Validators.required]],
+      grade: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.pattern(
         /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{8,}/
       )]],
@@ -26,19 +31,23 @@ export class RegistrationComponent {
   constructor(private formBuilder: FormBuilder,
               private loginService: LoginService,
               private ser: TrainingRequestService,
-              private router: Router) {
+              private router: Router, private titleCasePipe:TitleCasePipe) {
   }
 
   ngOnInit(): void {
     this.loadUnit();
+    this.loadCompetencies();
+    this.loadGrades();
   }
 
   submit(): void {
     if (this.signUpForm.valid) {
       let user = {
-        fullName: this.signUpForm.value.fullName,
+        fullName: this.titleCasePipe.transform(this.signUpForm.value.fullName),
         emailAdd: this.signUpForm.value.emailAdd,
         unit: { id: this.signUpForm.value.unit },
+        competency: { id: this.signUpForm.value.competency },
+        grade: { id: this.signUpForm.value.grade },
         password: this.signUpForm.value.password,
         confirmPassword: this.signUpForm.value.confirmPassword,
       }
@@ -57,6 +66,12 @@ export class RegistrationComponent {
 
   loadUnit() {
     this.ser.getUnitMasterList().subscribe((resp: any) => { this.units = resp });
+  }
+  loadCompetencies() {
+    this.ser.getCompetencyMasterList().subscribe((resp: any) => { this.competencies = resp });
+  }
+  loadGrades(){
+    this.ser.getGradeMasterList().subscribe((resp: any) => { this.grades = resp });
   }
   pushUnit(unit:any) {
     this.units?.push(unit);

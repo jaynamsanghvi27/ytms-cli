@@ -29,4 +29,6 @@ export class TrainingReqForm{
     actualStartTime!:Time;
     actualEndTime!:Time;
     requestor!:string;
+    requestedBy!:string;
+    grade!:string;
 }
