@@ -38,6 +38,8 @@
                                 <th>Status</th>
                                 <th>Trainer Name</th>
                                 <th>Requester Name</th>
+                                <th>Competency</th>
+                                <th>Grade</th>
                                 <th>Number of Participants</th>
                                 <th>Attendance</th>
                                 <th>FeedBack</th>
@@ -55,7 +57,9 @@
                                 <td>{{training.trainingStatus}}</td>
 
                                 <td>{{training.trainer}}</td>
-                                <td>{{training.userName}}</td>
+                                <td>{{training.requestedBy}}</td>
+                                <td>{{training.competency}}</td>
+                                <td>{{training.grade}}</td>
                                 <td><a (click)="openDialog(training.id)">{{training.noOfActualParticipant}}</a></td>
                                 <td>
                                     <span *ngIf="role === 'ROLE_TRAINER'"

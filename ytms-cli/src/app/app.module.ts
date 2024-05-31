@@ -24,7 +24,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { DateFormatPipe } from './pipes/date-format.pipe';
-import { DatePipe } from '@angular/common';
+import { DatePipe, TitleCasePipe } from '@angular/common';
 import { TrainingReqComponent } from './Component/Requester/training-req/training-req.component';
 import { NominationReqComponent } from './Component/Requester/nomination-req/nomination-req.component';
 import { ViewTrfComponent } from './Component/Requester/view-trf/view-trf.component';
@@ -136,7 +136,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
       useValue: 'en-GB',
     }, MatDatepickerModule,
     DatePipe,
-    TrainingReqComponent
+    TrainingReqComponent,
+    TitleCasePipe
   ],
   bootstrap: [AppComponent]
 })

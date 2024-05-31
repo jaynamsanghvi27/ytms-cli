@@ -6,8 +6,8 @@
   <div class="container-fluid h-custom">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-md-9 col-lg-6 col-xl-5">
-        <img alt="Sample image"
-             class="img-fluid" src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp">
+        <img alt="Sample image" class="img-fluid"
+          src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp">
       </div>
       <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
         <form [formGroup]="signUpForm" (ngSubmit)="submit()">
@@ -15,127 +15,116 @@
             <p><strong>WELCOME TO YASH TECHNOLOGIES !!!</strong></p>
           </div>
           <br>
-          <div><p>Sign up with your organizational account</p></div>
+          <div>
+            <p>Sign up with your organizational account</p>
+          </div>
 
           <div class="form-group form-outline mb-4">
             <label>Full Name</label>
-            <input
-              class="form-control form-control-lg"
-              formControlName="fullName"
-              type="text"
-            />
-            <div
-              *ngIf="
+            <input class="form-control form-control-lg" formControlName="fullName" type="text" />
+            <div *ngIf="
             signUpForm.controls['fullName'].touched &&
             signUpForm.controls['fullName'].invalid
-            "
-              style="color: red;font-size: small;"
-            >
-    <span *ngIf="signUpForm.controls['fullName'].hasError('required')"
-    >Name is required</span
-    >
-              <span *ngIf="signUpForm.controls['fullName'].hasError('pattern')"
-              >Name is not valid</span
-              >
+            " style="color: red;font-size: small;">
+              <span *ngIf="signUpForm.controls['fullName'].hasError('required')">Name is required</span>
+              <span *ngIf="signUpForm.controls['fullName'].hasError('pattern')">Name is not valid</span>
             </div>
           </div>
 
           <div class="form-group form-outline mb-4">
             <label>Email Address</label>
-            <input
-              class="form-control form-control-lg"
-              formControlName="emailAdd"
-              type="email"
-            />
-            <div
-              *ngIf="
+            <input class="form-control form-control-lg" formControlName="emailAdd" type="email" />
+            <div *ngIf="
                 signUpForm.controls['emailAdd'].touched &&
                 signUpForm.controls['emailAdd'].invalid
-                "
-              style="color: red;font-size: small;"
-            >
-        <span *ngIf="signUpForm.controls['emailAdd'].hasError('required')"
-        >Email ID is required</span
-        >
-              <span *ngIf="signUpForm.controls['emailAdd'].hasError('pattern')"
-              >Email ID is not valid</span
-              >
+                " style="color: red;font-size: small;">
+              <span *ngIf="signUpForm.controls['emailAdd'].hasError('required')">Email ID is required</span>
+              <span *ngIf="signUpForm.controls['emailAdd'].hasError('pattern')">Email ID is not valid</span>
             </div>
           </div>
 
           <div class="form-group form-outline mb-4">
             <label>Unit</label>
-        
-            <select  class="form-control form-control-lg request-drop-down" formControlName="unit">
+
+            <select class="form-control form-control-lg request-drop-down" formControlName="unit">
               <option [ngValue]="0" disabled>-- Select --</option>
               <option *ngFor="let unit of units" value="{{unit.id}}">
                 {{unit.name}}
               </option>
             </select>
-            <div
-              *ngIf="
+            <div *ngIf="
             signUpForm.controls['unit'].touched &&
             signUpForm.controls['unit'].invalid
-            "
-              style="color: red;font-size: small;"
-            >
-    <span *ngIf="signUpForm.controls['unit'].hasError('required')"
-    >Unit is required</span
-    >
-              
+            " style="color: red;font-size: small;">
+              <span *ngIf="signUpForm.controls['unit'].hasError('required')">Unit is required</span>
             </div>
-           
+          </div>
 
+          <div class="form-group form-outline mb-4">
+            <label>Competency</label>
+
+            <select class="form-control form-control-lg request-drop-down" formControlName="competency">
+              <option [ngValue]="0" disabled>-- Select --</option>
+              <option *ngFor="let competency of competencies" value="{{competency.id}}">
+                {{competency.name}}
+              </option>
+            </select>
+            <div *ngIf="
+            signUpForm.controls['competency'].touched &&
+            signUpForm.controls['competency'].invalid
+            " style="color: red;font-size: small;">
+              <span *ngIf="signUpForm.controls['competency'].hasError('required')">Competency is required</span>
+            </div>
+          </div>
+
+          <div class="form-group form-outline mb-4">
+            <label>Grade</label>
+
+            <select class="form-control form-control-lg request-drop-down" formControlName="grade">
+              <option [ngValue]="0" disabled>-- Select --</option>
+              <option *ngFor="let grade of grades" value="{{grade.id}}">
+                {{grade.name}}
+              </option>
+            </select>
+            <div *ngIf="
+            signUpForm.controls['grade'].touched &&
+            signUpForm.controls['grade'].invalid
+            " style="color: red;font-size: small;">
+              <span *ngIf="signUpForm.controls['grade'].hasError('required')">Grade is required</span>
+            </div>
           </div>
 
 
           <div class="form-group form-outline mb-4">
             <label>Password</label>
-            <input
-              class="form-control form-control-lg"
-              formControlName="password"
-              type="password"
-            />
+            <input class="form-control form-control-lg" formControlName="password" type="password" />
 
-            <div
-              *ngIf="
+            <div *ngIf="
                     signUpForm.controls['password'].touched &&
                     signUpForm.controls['password'].invalid
-                    "
-              style="color: red;font-size: small;"
-            >
-            <span *ngIf="signUpForm.controls['password'].hasError('required')"
-            >Password is required</span
-            >
-            <span *ngIf="signUpForm.controls['password'].hasError('pattern')"
-              >Password must contain at least one number, one uppercase and a
-  lowercase letter and at least 8 characters<br/>Password cannot
-  contain whitespace</span
-              >
+                    " style="color: red;font-size: small;">
+              <span *ngIf="signUpForm.controls['password'].hasError('required')">Password is required</span>
+              <span *ngIf="signUpForm.controls['password'].hasError('pattern')">Password must contain at least one
+                number, one uppercase and a
+                lowercase letter and at least 8 characters<br />Password cannot
+                contain whitespace</span>
             </div>
           </div>
 
 
           <div class="form-group form-outline mb-3">
             <label>Confirm Password</label>
-            <input
-              class="form-control form-control-lg"
-              formControlName="confirmPassword"
-              type="password"
-            />
-            <div
-              *ngIf="
+            <input class="form-control form-control-lg" formControlName="confirmPassword" type="password" />
+            <div *ngIf="
             signUpForm.controls['confirmPassword'].touched &&
             signUpForm.controls['confirmPassword'].invalid
-            "
-              style="color: red;font-size: small;"
-            >
-    <span *ngIf="signUpForm.controls['confirmPassword'].hasError('required')"
-    >Confirm password is required</span
-    >
+            " style="color: red;font-size: small;">
+              <span *ngIf="signUpForm.controls['confirmPassword'].hasError('required')">Confirm password is
+                required</span>
             </div>
-            <span *ngIf="validateSubmit() && !(signUpForm.controls['confirmPassword'].invalid)" style="color: red;font-size: small;">
-        Password and confirm password didn't match </span>
+            <span *ngIf="validateSubmit() && !(signUpForm.controls['confirmPassword'].invalid)"
+              style="color: red;font-size: small;">
+              Password and confirm password didn't match </span>
           </div>
 
           <div class="d-flex justify-content-between align-items-center">
@@ -145,7 +134,7 @@
           </div>
           <div class="text-center text-lg-start mt-4 pt-2">
 
-            <button  class="button" type="submit">Sign up</button>
+            <button class="button" type="submit">Sign up</button>
 
           </div>
         </form>
@@ -153,4 +142,3 @@
     </div>
   </div>
 </section>
-

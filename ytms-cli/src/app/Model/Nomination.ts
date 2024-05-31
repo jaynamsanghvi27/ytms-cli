@@ -18,4 +18,5 @@ export class Nomination {
     commSkills!:string;
     workQuality!:string;
     overAllRating!:string;
+    competency!:string;
 }

@@ -26,6 +26,8 @@
                             <tr>
                                 <td><b>Training Id</b></td>
                                 <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER'"><b>Training Requested by</b></td>
+                                <td><b>Competency</b></td>
+                                <td><b>Grade</b></td>
                                 <td><b>Training Name</b></td>
                                 <td><b>Training Status(For declined,Click)</b></td>
                                 <td><b>Training Created At</b></td>
@@ -42,7 +44,9 @@
                         <tbody>
                             <tr *ngFor="let training of trainingReqForms  |filter:searchText">
                                 <td>{{training.id}}</td>
-                                <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER'">{{training.userName}}</td>
+                                <td *ngIf="userRole == 'ROLE_TECHNICAL_MANAGER'">{{training.requestedBy}}</td>
+                                <td>{{training.competency}}</td>
+                                <td>{{training.grade}}</td>
                                 <td>{{training.trainingName}}</td>
                                 <td> <a *ngIf="training.status=='DECLINED'" (click)="showMessage(training.declinedMessage)">
                     {{training.status}}</a> {{training.status!='DECLINED'?training.status:''}}</td>

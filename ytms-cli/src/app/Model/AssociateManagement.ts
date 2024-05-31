@@ -3,6 +3,7 @@ export class AssociateManagement {
     emp_name!: string
     emp_mail_id!: string
     grade!: string
+    competency!: string
     trainingName!: string
     trainingDescription!: string
     noOfDays!: number

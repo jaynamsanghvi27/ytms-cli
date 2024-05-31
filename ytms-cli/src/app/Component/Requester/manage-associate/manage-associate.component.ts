@@ -39,6 +39,7 @@ export class ManageAssociateComponent implements OnInit {
     { field: "emp_name" ,quickFilter:true,filter: true,sortable: true,suppressSizeToFit: true,width: 150,pinned: 'left'},
     { field: "emp_mail_id",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
     { field: "grade",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
+    { field: "competency",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
     { field: "trainingName",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
     { field: "noOfDays",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},
     { field: "actualStartDate",quickFilter:true,filter: true ,sortable: true,suppressSizeToFit: true},

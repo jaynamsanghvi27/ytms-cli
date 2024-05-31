@@ -18,7 +18,9 @@
                     <thead>
                         <tr>
                         <th scope="col">Full Name</th>
-                        <th scope="col">Email</th>
+                        <!-- <th scope="col">Email</th> -->
+                        <th scope="col">Competency</th>
+                        <th scope="col">Grade</th>
                         <th scope="col">Role</th>
                         <th >Actions</th>
                     </tr>
@@ -27,7 +29,9 @@
                     <tbody *ngFor="let user of userDetails">
                         <tr>
                             <th scope="row">{{ user.fullName }}</th>
-                            <td>{{ user.emailAdd }}</td>
+                            <!-- <td>{{ user.emailAdd }}</td> -->
+                            <td>{{ user.competency?.name }}</td>
+                            <td>{{ user.grade?.name }}</td>
                             <td> <select [(ngModel)]="user.roleType">
                                 <option *ngFor="let role of roles" [value]="role.roleTypes">
                                   {{ role.roleTypes }}

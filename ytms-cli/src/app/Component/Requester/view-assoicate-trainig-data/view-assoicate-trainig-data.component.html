@@ -13,6 +13,8 @@
                             <tr>
                                 <!-- <th>ID</th> -->
                                 <th>Training Name</th>
+                                <th>Grade</th>
+                                <th>Competency</th>
                                 <th>Start Date</th>
                                 <th>End Date</th>
                                 <!-- <th>Requester Name</th> -->
@@ -28,6 +30,8 @@
                             <tr *ngFor="let training of associateTrainingData">
                                 <!-- <td>{{training.id}}</td> -->
                                 <td>{{training.trainingName}}</td>
+                                <td>{{training.grade}}</td>
+                                <td>{{training.competency}}</td>
                                 <td>{{training.actualStartDate}}</td>
                                 <td>{{training.actualEndDate}}</td>
                                 <!-- <td>{{training.userName}}</td> -->
