@@ -1,94 +1,102 @@
-<div class="container-fluid g-0">
-    <app-trainer-header (sideNavToggled)="sideNavStatus=$event;" *ngIf="role === 'ROLE_TRAINER'">
-    </app-trainer-header>
-    <main>
-        <app-trainer-sidebar [ngClass]="{'app-side-nav-open':sideNavStatus}" *ngIf="role === 'ROLE_TRAINER'" [sideNavStatus]="sideNavStatus" class="black-border"></app-trainer-sidebar>
+<h2 mat-dialog-title style="border-bottom: 1px solid #eee;
+color: #fff;text-align: center;background: #005ba3;">Apply Leave</h2>
+<mat-dialog-content class="mat-typography" style="height: calc(100% - 96px);">
 
-        <div class="display-area p-3" [ngClass]="{'display-area-shrink':sideNavStatus}">
-            <!-- Main Content    -->
-            <div class="vt-training-request-form">
-                <!-- Main Content    -->
-                <div class="row" style="    padding-bottom: 10px;
-                padding-top: 10px;">
-
-                    <div class="col-3">
-                        <span>
-                        
-                        
-                        <mat-form-field>
-                            <mat-label>Choose a date</mat-label>
-                            <!-- <input  (dateChange)="onDateChange($event)"  [min]="todayDate" [matDatepickerFilter]="myFilter" matInput [matDatepicker]="picker"> -->
-                            <mat-date-range-input [formGroup]="range"   [rangePicker]="picker" >
-                                <input matStartDate formControlName="start" placeholder="Start date" #dateRangeStart required>
-                                <input matEndDate formControlName="end" placeholder="End date" (dateChange)="dateRangeChange(dateRangeStart, dateRangeEnd)" #dateRangeEnd required>
-                              </mat-date-range-input>
-                            <mat-hint style="display: flex;">
-                                MM/DD/YYYY – MM/DD/YYYY
-                              <p style="margin-left: 20px;color:antiquewhite ;font-size: -webkit-xxx-large;" title="Holiday/optinalHoliday"> &bull;</p>
-                            </mat-hint>
-                          
-                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-date-range-picker [dateClass]="dateClass" #picker></mat-date-range-picker>
-                          </mat-form-field>        
-                          
-                         
-                        </span>
-                    </div>
-                    <div class="col-5" style="padding-left: 38px;">
-                        <span *ngIf="waringObject.length > 0">
-                        <span style="color: red;">Leave Already Apply For below Date </span>
-                        <br>
-                        <span *ngFor="let warn of waringObject">
-                          <span style="font-weight: bold">{{warn.id + ":" + warn.date +","}}</span>
-                        </span>
-                        </span>
-                    </div>
-
-
-                </div>
-
-
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Training Name</th>
-                            <th>Actual Start Date</th>
-                            <th>Actual End Date</th>
-
-                            <th><input style="margin-right: 10px;" [(ngModel)]="isChecked" type="checkbox" (change)="clickHeaderCheckBox($event,true)" />Apply Leave </th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let training of traninglist">
-                            <td>{{training.id}}</td>
-                            <td>{{training.trainingName}}</td>
-                            <td>{{training.actualStartDate}}</td>
-                            <td>{{training.actualEndDate}}</td>
-                            <td><input type="checkbox" [(ngModel)]="training.isApplyleave" name="element_name" [checked]="training.isApplyleave" (change)="clickRowCheckBox()" /></td>
-
-
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div style="width: 40%;" *ngIf="isLoading">
-                    <mat-spinner strokeWidth="3" [diameter]="50"></mat-spinner>
-                </div>
-                <span>
-                    <div style="padding-top:10px;float: right;" >
-                    <button mat-button mat-dialog-close  style="margin-right: 15px;" class="btn btn-primary btn-block btn-m" >Cancel</button>
-                    <button type="button"  [disabled]="range.invalid" (click)="submitLeave()"  class="btn btn-primary btn-block btn-m" >
-                          Submit
-                    </button>
-                  </div>
-               </span>
-
-                <!-- Main Content Closed -->
-
-            </div>
-
+    <div class="row" style="    padding-bottom: 10px;
+    padding-top: 10px;">
+        <!-- <div class="col-2" style="font-weight: bold;">Training Dates :</div>
+        <div class="col-3" >
+           <select  class="form-control down-arrow" (change)='onOptionsSelectedFromDateDropDown($event)'>
+              <option value="">Select</option>
+              <option *ngFor="let trainingDate of trainingDatesValue" [ngValue]="trainingDate"  >
+                {{trainingDate}}
+                </option>
+           </select>
+        </div> -->
+        <div class="col-3">
+            <span>
+            
+            
+            <mat-form-field>
+                <mat-label>Choose a date</mat-label>
+                <!-- <input  (dateChange)="onDateChange($event)"  [min]="todayDate" [matDatepickerFilter]="myFilter" matInput [matDatepicker]="picker"> -->
+                <mat-date-range-input [formGroup]="range"   [rangePicker]="picker" >
+                    <input matStartDate formControlName="start" placeholder="Start date" #dateRangeStart required>
+                    <input matEndDate formControlName="end" placeholder="End date" (dateChange)="dateRangeChange(dateRangeStart, dateRangeEnd)" #dateRangeEnd required>
+                  </mat-date-range-input>
+                <mat-hint style="display: flex;">
+                    MM/DD/YYYY – MM/DD/YYYY
+                  <p style="margin-left: 20px;color:antiquewhite ;font-size: -webkit-xxx-large;" title="Holiday/optinalHoliday"> &bull;</p>
+                </mat-hint>
+                <!-- <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker [dateClass]="dateClass" #picker></mat-datepicker> -->
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker [dateClass]="dateClass" #picker></mat-date-range-picker>
+              </mat-form-field>        
+              
+              <!-- <mat-form-field class="example-full-width">
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="picker">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker [dateClass]="dateClass" #picker></mat-datepicker>
+              </mat-form-field> -->
+            </span>
         </div>
-    </main>
-</div>
+        <div class="col-5" style="padding-left: 38px;">
+            <span *ngIf="waringObject.length > 0">
+            <span style="color: red;">Leave Already Apply For below Date </span>
+            <br>
+            <span *ngFor="let warn of waringObject">
+              <span style="font-weight: bold">{{warn.id + ":" + warn.date +","}}</span>
+            </span>
+            </span>
+        </div>
+
+        <!-- <div class="col-2" style="text-align: end;"><button type="submit" (click)="submit()" style="margin-right: 20px;" class="btn btn-primary btn-block btn-sm">
+            Submit
+            </button>
+        </div> -->
+    </div>
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Training Name</th>
+                <th>Actual Start Date</th>
+                <th>Actual End Date</th>
+
+                <th><input style="margin-right: 10px;" [(ngModel)]="isChecked" type="checkbox" (change)="clickHeaderCheckBox($event,true)" />Apply Leave </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let training of traninglist">
+                <td>{{training.id}}</td>
+                <td>{{training.trainingName}}</td>
+                <td>{{training.actualStartDate}}</td>
+                <td>{{training.actualEndDate}}</td>
+                <td><input type="checkbox" [(ngModel)]="training.isApplyleave" name="element_name" [checked]="training.isApplyleave" (change)="clickRowCheckBox()" /></td>
+
+
+            </tr>
+        </tbody>
+    </table>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+
+    <div style="width: 40%;" *ngIf="isLoading">
+        <mat-spinner strokeWidth="3" [diameter]="50"></mat-spinner>
+    </div>
+    <span>
+    <button mat-button mat-dialog-close  class="btn btn-primary btn-block btn-m" style="margin-right: 15px;">Cancel</button>
+    <button type="button"  [disabled]="range.invalid" (click)="submitLeave()"  class="btn btn-primary btn-block btn-m">
+      Submit
+      </button>
+   </span>
+
+
+
+</mat-dialog-actions>
