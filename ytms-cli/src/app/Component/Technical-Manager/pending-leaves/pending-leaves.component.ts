@@ -35,6 +35,16 @@ export class PendingLeavesComponent {
     })
   }
 
+  onNativeChange(e:any,leave:any) { // here e is a native event
+    console.log(e.target.checked)
+    if(e.target.checked){
+      leave.leave_impact_on_traning="No"
+    }
+    else{
+      leave.leave_impact_on_traning="Yes"
+    }
+  }
+
 
   submitResult(trainerAttendance: TrainerAttendance) {
   

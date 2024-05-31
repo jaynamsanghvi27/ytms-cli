@@ -7,6 +7,7 @@
             <th scope="col">Leave Start Date</th>
             <th scope="col">Leave End Date</th>
             <th scope="col">Actions</th>
+            <th scope="col">Training should not impact </th>
         </tr>
 
         <tbody *ngFor="let leave of pendingLeaves">
@@ -15,13 +16,16 @@
                 <td>{{ leave.tranining_name }}</td>
                 <td>{{ leave.leave_Start_date }}</td>
                 <td>{{ leave.leave_End_date }}</td>
-
+                
                 <td>
-                    <button (click)="approve(leave)" class="btn btn-primary btn-sn" id="submitbtn" name="submit" style="margin-left: 10px;">Approve
+                    <button (click)="approve(leave)" class="btn btn-primary btn-sm" id="submitbtn" name="submit" style="margin-left: 10px;">Approve
             </button>
-                    <button (click)="decline(leave)" class="btn btn-primary btn-sn" id="submitbtn" name="submit" style="margin-left: 10px;">Decline
+                    <button (click)="decline(leave)" class="btn btn-primary btn-sm" id="submitbtn" name="submit" style="margin-left: 10px;">Decline
             </button>
                 </td>
+                <td><input  (change)="onNativeChange($event,leave)"
+                    type="checkbox"
+                    /></td>
             </tr>
         </tbody>
 
