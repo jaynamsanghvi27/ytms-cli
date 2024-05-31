@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 import { MatCalendarCellClassFunction, MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { th } from 'date-fns/locale';
+import { AuthService } from 'src/app/Core/services/auth.service';
+import { JwtService } from 'src/app/Core/services/jwt.service';
 import { TrainingRequestService } from 'src/app/services/training-request.service';
 
 @Component({
@@ -13,7 +15,9 @@ import { TrainingRequestService } from 'src/app/services/training-request.servic
   styleUrls: ['./add-leave.component.css']
 })
 export class AddLeaveComponent {
-
+  @Output() sideNavToggled = new EventEmitter<boolean>();
+  sideNavStatus: boolean = false;
+  role: string = '';
   isSubmitbuttonDisable = true;
   todayDate: Date = new Date();
   holidayAndOptionalHoliday: any;
@@ -28,7 +32,8 @@ export class AddLeaveComponent {
   waringObject: any[] = [];;
   isTraningImpact: boolean = false;
 
-  constructor(public dialogRef: MatDialogRef<AddLeaveComponent>, private dateAdapter: DateAdapter<Date>, private ser: TrainingRequestService, private router: Router, public dialog: MatDialog) {
+  constructor( private dateAdapter: DateAdapter<Date>, private ser: TrainingRequestService, private router: Router, public dialog: MatDialog,private authService:AuthService,
+    private jwtService:JwtService,) {
     this.getTraninerAttendacedate();
     this.loadOptionaHoliday();
     // this.getTrainerTrainingList();
@@ -39,6 +44,11 @@ export class AddLeaveComponent {
       end: new FormControl<'' | null>(null),
     });
   }
+  
+ngOnInit(): void {
+  const token = this.authService.getToken();
+  this.role = this.jwtService.getRoleFromToken(token);
+}
 
   getTrainerTrainingList(leavStarDate: any, leaveEndDate: any) {
     this.ser.getTrainerTrainingList().subscribe((resp: any) => {
@@ -224,7 +234,6 @@ export class AddLeaveComponent {
           console.log(resp);
           this.isSubmitbuttonDisable = true;
           this.isLoading = false;
-          this.dialogRef.close();
        
 
       })

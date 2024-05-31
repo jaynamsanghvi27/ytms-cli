@@ -17,7 +17,7 @@ import { ViewTraninerComponent } from './view-traniner/view-traniner.component';
 import { EditNominationComponent } from './edit-nomination/edit-nomination.component';
 import { AddAttendanceComponent } from './add-attendance/add-attendance.component';
 import { AgGridModule } from 'ag-grid-angular';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ViewAttendanceComponent } from './view-attendance/view-attendance.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -59,6 +59,7 @@ import { AbsentDeatilsComponent } from './absent-deatils/absent-deatils.componen
     FlatpickrModule.forRoot(),
     NgbModule, NgbModalModule,
     AgGridModule,
+    
     MatDialogModule,
     MatDatepickerModule,
     MatFormFieldModule,
