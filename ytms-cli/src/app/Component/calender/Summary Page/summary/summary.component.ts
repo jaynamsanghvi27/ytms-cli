@@ -19,7 +19,7 @@ export class SummaryComponent implements OnInit {
   SEPERATOR= "@"
   datasource: any[] = [];
   dateRange: any[] = [];
-  displayedColumns = ['user', 'task', 'date-range', "TotalDays", 'freeHours'];
+  displayedColumns = ['user', 'taskNames','taskDuration','taskDays', 'date-range', "TotalDays", 'freeHours'];
   events: any[] = [];
   searchFilter: boolean = false;
   userRole: String = '';
@@ -30,7 +30,7 @@ export class SummaryComponent implements OnInit {
   constructor(private calendarService: CalendarService, private authService: AuthService, private jwtService: JwtService, private userService: UsersService) { };
   getAllEvents(): any {
     this.calendarService.getALLEvents().subscribe((data: any[]) => {
-      console.log(data),
+      
       this.events = data.map(event => ({
         id: event.id,
         title: event.title,
@@ -39,16 +39,14 @@ export class SummaryComponent implements OnInit {
         scheduleUser: event.scheduleUser,
         number_of_week_days: event.number_of_week_days
       })), 
-      console.log(this.datasource), 
+      
       this.datasource = this.calculateDuration(this.transformDateRange(this.transformData(data))), 
-      console.log("his.datasource"), 
-      console.log(this.datasource), 
       this.totalTasks = this.getUniqueTitles(this.datasource)
     });
   }
   getEventByTrainer(email: any) {
     this.calendarService.getEventsByTrainer(email).subscribe((data: any[]) => {
-      console.log(data),
+      
       this.events = data.map(event => ({
         id: event.id,
         title: event.title,
@@ -65,9 +63,6 @@ export class SummaryComponent implements OnInit {
 
 
   getUniqueTitles(data: any) {
-    console.log("===");
-    console.log(data);
-    console.log("+++++");
     const titleSet = new Set(); // Set to store unique titles
     for (const item of data) {
       titleSet.add(item.title.split(this.SEPERATOR).join(' ')); // Combine titles, remove commas, and add to set
@@ -240,7 +235,6 @@ export class SummaryComponent implements OnInit {
           existingEvent.end_date === currentRange.end_date
         ) {
           existingEvent.title += this.SEPERATOR +`${title}` ;
-          console.log(existingEvent.title);
           existingEvent.currentRangeDuration += `,${startTime}-${endTime}`
           events.splice(events.indexOf(currentRange), 1);
 
@@ -303,7 +297,7 @@ export class SummaryComponent implements OnInit {
     const role = this.jwtService.getRoleFromToken(token);
     const email = this.jwtService.getUserNameFromToken(token);
     this.userRole = role;
-    console.log(role, email);
+   
     if (role === 'ROLE_TECHNICAL_MANAGER' || role === 'ROLE_COMPETENCY_MANAGER') {
       this.getAllEvents();
       this.searchFilter = true;

@@ -28,6 +28,7 @@ import { ExcludeTrainerGuard } from './Core/guard/exclude-trainer.guard';
 import { AboutUsComponent } from './Component/about-us/about-us.component';
 import { ViewTrainerFormComponent } from './Component/Trainer/view-trainer-form/view-trainer-form.component';
 import { LeavedetailsComponent } from './Component/Requester/leavedetails/leavedetails.component';
+import { AddLeaveComponent } from './Component/Trainer/add-leave/add-leave.component';
 
 const routes: Routes = [
   {
@@ -239,6 +240,10 @@ const routes: Routes = [
   {
     path:'trainer/view-trainer-form',
     component: ViewTrainerFormComponent
+  },
+  {
+    path:'trainer/apply-leave',
+    component: AddLeaveComponent
   }
   /*{
     path: '**',
