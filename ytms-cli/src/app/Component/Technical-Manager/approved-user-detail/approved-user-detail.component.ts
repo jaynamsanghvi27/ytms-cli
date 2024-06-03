@@ -42,7 +42,9 @@ export class ApprovedUserDetailComponent {
        { header: 'Name', key: 'Name', width: 10 },
        { header: 'Email ID', key: 'Email ID', width: 10 },
        { header: 'Role', key: 'Role', width: 10 },
-       { header: 'Unit', key: 'Unit', width: 10 }
+       { header: 'Unit', key: 'Unit', width: 10 },
+       { header: 'Competency', key: 'Competency', width: 10 },
+       { header: 'Grade', key: 'Grade', width: 10 }
      ];
  
      data.forEach(item => {
@@ -63,6 +65,8 @@ export class ApprovedUserDetailComponent {
        'Email ID': user.emailAdd,
         'Role':user.userRole.roleTypes,
         'Unit':user.unit?.name,
+        'Competency':user.competency?.name,
+        'Grade':user.grade?.name
       })
       );
   }
