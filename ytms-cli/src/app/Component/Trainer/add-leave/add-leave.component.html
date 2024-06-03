@@ -40,10 +40,10 @@
                         </div>
                         <div class="col-5" style="padding-left: 38px;">
                             <span *ngIf="waringObject.length > 0">
-                        <span style="color: red;">Leave Already Apply For below Date </span>
+                        <span style="color: red;">Leave already applied for below date </span>
                             <br>
                             <span *ngFor="let warn of waringObject">
-                          <span style="font-weight: bold">{{warn.id + ":" + warn.date +","}}</span>
+                          <span style="font-weight: bold;color: red;">{{warn.date +" "}}</span>
                             </span>
                             </span>
                         </div>
@@ -82,8 +82,8 @@
                     </div>
                     <span>
                     <div style="padding-top:10px;float: right;" >
-                    <button mat-button mat-dialog-close  style="margin-right: 15px;" class="btn btn-primary btn-block btn-m" >Cancel</button>
-                    <button type="button"  [disabled]="range.invalid" (click)="submitLeave()"  class="btn btn-primary btn-block btn-m" >
+                    <!-- <button mat-button mat-dialog-close  style="margin-right: 15px;" class="btn btn-primary btn-block btn-m" >Cancel</button>-->
+                    <button type="button"  [disabled]="range.invalid || traninglist.length===0" (click)="submitLeave()"  class="btn btn-primary btn-block btn-m" >
                           Submit
                     </button>
                   </div>
