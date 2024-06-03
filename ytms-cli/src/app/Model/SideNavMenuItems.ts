@@ -137,7 +137,7 @@ const sideNavForTrainer: MenuItem[] =[
     {
       number: 6,
       name: 'Apply Leave',
-      icon: 'fa-solid fa-calendar-days',
+      icon: 'fa-solid fa-sleigh',
       routing: '/trainer/apply-leave'
 
     },
