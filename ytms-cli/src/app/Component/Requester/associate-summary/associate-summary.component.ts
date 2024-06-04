@@ -10,6 +10,7 @@ import { UploadExcelService } from 'src/app/services/upload-excel.service';
 import { AgGridAngular } from 'ag-grid-angular';
 import { GridApi } from 'ag-grid-community';
 import { DownloadService } from 'src/app/Core/services/download.service';
+import { AssociateManagementService } from 'src/app/services/associate-management.service';
 
 
 @Component({
@@ -18,7 +19,7 @@ import { DownloadService } from 'src/app/Core/services/download.service';
   styleUrls: ['./associate-summary.component.css']
 })
 export class AssociateSummaryComponent implements OnInit {
-
+  public title: string = 'Details from ';
   sideNavStatus: boolean = false;
   pagination = true;
   paginationPageSize = 100;
@@ -42,7 +43,7 @@ export class AssociateSummaryComponent implements OnInit {
 
   constructor(private ser: TrainingRequestService, private auth: AuthService,
     private jwtServ: JwtService, public dialog: MatDialog, private formBuilder: FormBuilder, private router: Router
-    , private uploadService: UploadExcelService, private downloadService: DownloadService, private form: FormsModule
+    , private associateManagementService: AssociateManagementService, private downloadService: DownloadService, private form: FormsModule
   ) {
   }
   ngOnInit(): void {
@@ -88,7 +89,9 @@ isLoading:boolean=false;
 
   getAllAssociateData() {
     this.ser.getAssociateData().subscribe(resp => {
-      this.associatesData=resp;
+      this.associatesData=resp.list;
+      this.title = this.title + this.associateManagementService.getOldestDate(resp.actualStartDate);
+
     });
   }
 

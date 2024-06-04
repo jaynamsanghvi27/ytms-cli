@@ -7,6 +7,7 @@ import { environment } from '../Core/application_constant/environment';
 import { AssociateSummaryModel } from '../Model/AssociateSummary';
 import { AssociateTrainingDataModel } from '../Model/AssociateTrainingDataModel';
 import { AssociateManagement } from '../Model/AssociateManagement';
+import { AssociateSummaryResponseModel } from '../Model/AssociateSummaryResponse';
 
 
 @Injectable({
@@ -181,8 +182,8 @@ export class TrainingRequestService {
     return this.http.post<any>(this.url + "/register/attendance/create/" + data, "");
   }
 
-  getAssociateData(): Observable<AssociateSummaryModel[]> {
-    return this.http.get<any[]>(this.url + "/register/getAllNominations");
+  getAssociateData(): Observable<AssociateSummaryResponseModel> {
+    return this.http.get<any>(this.url + "/register/getAllNominations");
   }
   getTrainerTrainingList(): Observable<any[]> {
     return this.http.get<any[]>(this.url + "/register/getTrainerTrainingList");
