@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
-import { MatCalendarCellClassFunction, MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { DateFilterFn, MatCalendarCellClassFunction, MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { th } from 'date-fns/locale';
@@ -103,6 +103,17 @@ ngOnInit(): void {
     return day !== 0 && day !== 6;
   };
 
+  dateFilter: DateFilterFn<Date> = (date: Date | null) => {
+    if (date === null) {
+      // Allow null dates, which means no date is selected
+      return true;
+    }
+
+    const day = date.getDay();
+    // Prevent Saturday and Sunday from being selected
+    return day !== 0 && day !== 6;
+  }
+  
   dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
     // Only highligh dates inside the month view.
     if (view === 'month') {

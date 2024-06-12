@@ -28,7 +28,7 @@ body {
 }
 
 .vt-training-request-form {
-    width: 130%;
+    width: fit-content;
     position: relative;
     right: auto !important;
 }
